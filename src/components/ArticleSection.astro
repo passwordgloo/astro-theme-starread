@@ -1,0 +1,37 @@
+---
+interface Props {
+  title: string;
+  articles: Array<{
+    title: string;
+    author: string;
+    date: string;
+  }>;
+}
+
+const { title, articles } = Astro.props;
+---
+
+<div class="bg-white rounded-lg shadow-sm overflow-hidden">
+  <div class="px-4 py-3 border-b border-gray-100 flex justify-between items-center">
+    <h2 class="font-bold text-lg text-dark">{title}</h2>
+    <a href="#" class="text-sm text-primary hover:text-primary/80 transition-colors">更多</a>
+  </div>
+  
+  <div class="p-4 space-y-4">
+    {articles.map((article, index) => (
+      <div key={index} class="flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-md transition-colors">
+        <div class="flex-shrink-0 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 text-sm font-medium">
+          {index + 1}
+        </div>
+        <div class="flex-1 min-w-0">
+          <a href="#" class="text-gray-900 hover:text-primary transition-colors line-clamp-1">{article.title}</a>
+          <div class="flex items-center mt-1 text-xs text-gray-500 space-x-2">
+            <span>{article.author}</span>
+            <span>·</span>
+            <span>{article.date}</span>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>

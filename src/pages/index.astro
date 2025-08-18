@@ -1,11 +1,64 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from '../layouts/home.astro';
+import Carousel from '../components/Carousel.astro';
+import ArticleSection from '../components/ArticleSection.astro';
+import LatestArticles from '../components/LatestArticles.astro';
 ---
 
 <Layout>
-	<Welcome />
+	<!-- 头部横幅 -->
+	<div class="relative bg-gradient-to-r from-blue-600 to-indigo-700 rounded-lg overflow-hidden shadow-md mb-6">
+		<div class="absolute inset-0 opacity-20 bg-[url('https://picsum.photos/1200/300')] bg-cover bg-center"></div>
+		<div class="relative px-6 py-12 md:px-12 text-center text-white">
+			<h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">CorePress主题重构升级版</h1>
+			<div class="flex flex-wrap justify-center gap-4 mt-6">
+				<div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+					<span class="font-medium">基于Vue+Element</span> 混合开发
+				</div>
+				<div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+					<span class="font-medium">不影响SEO</span> 拥抱新前端
+				</div>
+				<div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
+					<span class="font-medium">模块化自定义</span> 快速搭建
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- 轮播卡片 -->
+	<Carousel />
+
+	<!-- 文章分类区域 -->
+	<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+		<ArticleSection
+		title="JS"
+		articles={[
+		  { title: 'JavaScript实现网页截图导出方案', author: 'applek', date: '2022-06-05' },
+		  { title: '前端提交POST，防止刷新问题', author: 'applek', date: '2021-12-07' },
+		  { title: 'Fancybox和lazyload同时存在的问题', author: 'applek', date: '2021-11-23' },
+		  { title: 'TypeScript学习笔记', author: 'applek', date: '2020-10-15' }
+		]}
+	/>
+
+	<ArticleSection
+		title="汇编逆向"
+		articles={[
+		  { title: '一些逆向心得分享', author: 'applek', date: '2019-07-15' },
+		  { title: '利用Fiddler调试微信网页js', author: 'applek', date: '2020-10-09' },
+		  { title: 'mplus翻译文件编译和修改', author: 'applek', date: '2019-07-21' },
+		  { title: 'Windows 注册表SID不一样如何写入', author: 'applek', date: '2019-07-15' }
+		]}
+		/>
+	</div>
+
+	<!-- 最新文章 -->
+	<LatestArticles
+		articles={[
+			{ title: '【WordPress优化插件】WPOPT v2.4.7', author: 'applek', date: '2025-05-20', category: 'WordPress' },
+			{ title: 'CoreNext正式版1.7.4发布', author: 'applek', date: '2025-05-17', category: '主题开发' },
+			{ title: '粒子导航 - 一款独立的导航源码 1.4.95', author: 'applek', date: '2025-01-22', category: '前端开发' },
+			{ title: 'Core AI Power 1.1.0 - WordPress AI增强插件', author: 'applek', date: '2024-05-26', category: 'WordPress' },
+			{ title: 'NodeJS使用copy-dir快速复制内容', author: 'applek', date: '2024-03-15', category: 'NodeJS' }
+		]}
+	/>
 </Layout>

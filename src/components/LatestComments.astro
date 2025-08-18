@@ -1,0 +1,55 @@
+---
+// 最新评论组件
+const comments = [
+  {
+    id: 1,
+    user: '4o Image Gen',
+    avatar: 'https://picsum.photos/40/40?random=1',
+    content: '这是一个很棒的节日插件！感谢部分分享此内容并将其保持在2023年的更新。我特别感谢简单的方法和简单的解释，使我的新一年里的网站更加喜庆。谢谢你这是一个简单的插件，我很欣赏。简单就是美。',
+    date: '8月13日',
+    article: 'WordPress兔年灯笼挂件'
+  },
+  {
+    id: 2,
+    user: 'AI技术探索',
+    avatar: 'https://picsum.photos/40/40?random=2',
+    content: '这个AI模型真的很强大，感谢分享这么棒的技术文章！期待后续更多关于AI应用的分享。',
+    date: '8月12日',
+    article: '深入理解GPT模型原理'
+  },
+  {
+    id: 3,
+    user: 'Web前端开发者',
+    avatar: 'https://picsum.photos/40/40?random=3',
+    content: '文章中提到的性能优化技巧非常实用，已经在我的项目中应用，效果显著。',
+    date: '8月10日',
+    article: '2023年前端性能优化指南'
+  }
+];
+---
+
+<div class="bg-white rounded-lg shadow-sm overflow-hidden mb-6">
+  <div class="px-4 py-3 border-b border-gray-100 flex justify-between items-center">
+    <h2 class="font-bold text-lg text-dark">最新评论</h2>
+  </div>
+  
+  <div class="p-4 space-y-4">
+    {comments.map(comment => (
+      <div key={comment.id} class="flex space-x-3 p-2 hover:bg-gray-50 rounded-md transition-colors">
+        <div class="flex-shrink-0">
+          <img src={comment.avatar} alt={comment.user} class="w-10 h-10 rounded-full object-cover" />
+        </div>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center justify-between mb-1">
+            <h4 class="font-medium text-gray-900 text-sm">{comment.user}</h4>
+            <span class="text-xs text-gray-500">{comment.date}</span>
+          </div>
+          <p class="text-sm text-gray-600 mb-2 line-clamp-2">{comment.content}</p>
+          <a href="#" class="text-xs text-primary hover:text-primary/80 transition-colors">
+            评论于 {comment.article}
+          </a>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
