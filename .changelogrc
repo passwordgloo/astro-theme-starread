@@ -1,0 +1,36 @@
+{
+  "types": [
+    {
+      "type": "docs",
+      "description": "📝 文档变更",
+      "emoji": "📝"
+    },
+    {
+      "type": "fix",
+      "description": "🐛 修复bug",
+      "emoji": "🐛"
+    },
+    {
+      "type": "feat",
+      "description": "✨ 新功能",
+      "emoji": "✨"
+    },
+    {
+      "type": "style",
+      "description": "🎨 代码风格",
+      "emoji": "🎨"
+    },
+    {
+      "type": "chore",
+      "description": "🔧 构建/工程变更",
+      "emoji": "🔧"
+    },
+    {
+      "type": "build",
+      "description": "🚀 构建系统",
+      "emoji": "🚀"
+    }
+  ],
+  "template": "${emoji} ${type}: ${subject}",
+  "outputFile": "CHANGELOG.md"
+}

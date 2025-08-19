@@ -1,25 +1,36 @@
 ---
 const { title } = Astro.props;
+import { themeConfig } from '../content/config';
 ---
 
 <header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
   <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-    <div class="flex items-center space-x-1 nav-content">
-      <span class="text-primary font-bold text-xl">Love</span>
-      <span class="text-accent font-bold text-xl">stu</span>
-    </div>
+    <div class="flex items-center space-x-2 nav-content">
+	  {themeConfig.site.logo.image ? (
+	    <img src={themeConfig.site.logo.image} alt={themeConfig.site.logo.alt} class="h-8 w-auto" />
+	  ) : (
+	    <span class="font-bold text-xl text-gray-800">{themeConfig.site.logo.text}</span>
+	  )}
+	</div>
     <div class="article-title text-lg font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full md:w-auto text-center md:text-left">
-      { title || 'Lovestu - 代码路上雾茫茫' }
+      { title || themeConfig.site.title }
     </div>
 
     <!-- 导航菜单 -->
     <nav class="hidden md:flex items-center space-x-6">
-      <a href="/" class="text-gray-700 hover:text-primary transition-colors">主页</a>
-      <a href="#" class="text-gray-700 hover:text-primary transition-colors">软件资源</a>
-      <a href="#" class="text-gray-700 hover:text-primary transition-colors">软件使用</a>
-      <a href="#" class="text-gray-700 hover:text-primary transition-colors">代码编程</a>
-      <a href="#" class="text-gray-700 hover:text-primary transition-colors">汇编逆向</a>
-      <a href="#" class="text-gray-700 hover:text-primary transition-colors">运维</a>
+      {themeConfig.nav.map((item) => (
+        <a href={item.href} class="text-gray-700 hover:text-primary transition-colors flex items-center space-x-2.5">
+          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            {item.icon === 'home' && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />}
+            {item.icon === 'database' && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />}
+            {item.icon === 'book' && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />}
+            {item.icon === 'code' && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />}
+            {item.icon === 'lock' && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />}
+            {item.icon === 'server' && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />}
+          </svg>
+          {item.name}
+        </a>
+      ))}
     </nav>
 
     <!-- 搜索和登录 -->
