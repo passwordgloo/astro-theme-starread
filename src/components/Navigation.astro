@@ -3,13 +3,21 @@ const { title } = Astro.props;
 import { themeConfig } from '../content/config';
 ---
 
-<header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+<header class="bg-white dark:bg-dark shadow-sm sticky top-0 z-50 transition-all duration-300">
+  <!-- 确保深色模式切换按钮在移动设备上可见 -->
+  <div class="md:hidden absolute right-4 top-3 z-10">
+    <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 nav-mobile-icon fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+      </svg>
+    </button>
+  </div>
   <div class="container mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex items-center space-x-2 nav-content">
 	  {themeConfig.site.logo.image ? (
 	    <img src={themeConfig.site.logo.image} alt={themeConfig.site.logo.alt} class="h-8 w-auto" />
 	  ) : (
-	    <span class="font-bold text-xl text-gray-800">{themeConfig.site.logo.text}</span>
+	    <span class="font-bold text-xl nav-logo-text">{themeConfig.site.logo.text}</span>
 	  )}
 	</div>
     <div class="article-title text-lg font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full md:w-auto text-center md:text-left">
@@ -17,10 +25,10 @@ import { themeConfig } from '../content/config';
     </div>
 
     <!-- 导航菜单 -->
-    <nav class="hidden md:flex items-center space-x-6">
+    <nav class="bg-white dark:bg-dark hidden md:flex items-center space-x-6">
       {themeConfig.nav.map((item) => (
-        <a href={item.href} class="text-gray-700 hover:text-primary transition-colors flex items-center space-x-2.5">
-          <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <a href={item.href} class="nav-link transition-colors flex items-center space-x-2.5">
+            <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             {item.icon === 'home' && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />}
             {item.icon === 'database' && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4" />}
             {item.icon === 'book' && <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />}
@@ -35,14 +43,16 @@ import { themeConfig } from '../content/config';
 
     <!-- 搜索和登录 -->
     <div class="flex items-center space-x-4">
-      <button class="p-2 rounded-full hover:bg-gray-100 transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 nav-theme-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor" id="theme-icon">
+  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+</svg>
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
       </button>
-      <button class="hidden md:block px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors">登录</button>
+      <button class="hidden md:block px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/90 dark:bg-secondary dark:hover:bg-secondary/90 transition-colors">登录</button>
       <button class="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 nav-menu-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
@@ -85,5 +95,44 @@ import { themeConfig } from '../content/config';
 
       lastScrollTop = scrollTop;
     });
+
+    // 深色模式切换
+    const htmlElement = document.documentElement;
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // 检查用户偏好或系统设置
+    const updateTheme = () => {
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && mediaQuery.matches)) {
+        htmlElement.classList.add('dark');
+        if (themeIcon) {
+          themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />';
+        }
+      } else {
+        htmlElement.classList.remove('dark');
+        if (themeIcon) {
+          themeIcon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />';
+        }
+      }
+    };
+
+    // 初始化主题
+    updateTheme();
+
+    // 切换主题的函数
+    const toggleTheme = () => {
+      htmlElement.classList.toggle('dark');
+      localStorage.theme = htmlElement.classList.contains('dark') ? 'dark' : 'light';
+      updateTheme(); // 更新图标
+    };
+
+    // 为两个按钮添加点击事件
+    themeToggle.addEventListener('click', toggleTheme);
+    mobileThemeToggle.addEventListener('click', toggleTheme);
+
+    // 监听系统主题变化
+    mediaQuery.addEventListener('change', updateTheme);
   });
 </script>

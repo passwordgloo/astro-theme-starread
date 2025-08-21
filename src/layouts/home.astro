@@ -17,7 +17,7 @@ import { themeConfig } from '../content/config';
 		<meta name="generator" content={Astro.generator} />
 		<title>{ Astro.props.title || themeConfig.site.title }</title>
 	</head>
-	<body class="bg-gray-50 font-sans text-dark">
+	<body class="bg-gray-50 dark:bg-dark font-sans text-dark dark:text-white">
 		<!-- 顶部导航 -->
 		<Navigation title={Astro.props.title} />
 
@@ -38,7 +38,7 @@ import { themeConfig } from '../content/config';
 		</main>
 
 		<!-- 页脚 -->
-		<footer class="bg-white shadow-inner mt-10 py-6">
+		<footer class="bg-white dark:bg-dark shadow-inner mt-10 py-6">
 			<div class="container mx-auto px-4 text-center text-gray-600 text-sm">
 				<p>© 2025 预见 - 代码路上雾茫茫</p>
 			</div>
