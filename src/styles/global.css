@@ -1,4 +1,7 @@
 @import "tailwindcss";
+@plugin "@iconify/tailwind4" {
+  prefixes: lucide;
+}
 
 :root {
   --color-primary: #1E40AF;

@@ -4,7 +4,7 @@ import { defineCollection, z, type CollectionEntry } from 'astro:content';
 export const themeConfig = {
   // 网站配置
   site: {
-    title: 'Star-read 星阅主题',
+    title: '星阅主题',
     favicon: '/favicon.svg',
     logo: {
       image: '/logo.svg',
@@ -16,12 +16,12 @@ export const themeConfig = {
 
   // 作者信息
   author: {
-    name: 'Lovestu站长',
-    description: '喜欢代码，喜欢编程',
+    name: '风雅中华',
+    description: '阳光明媚，微笑前行',
     avatar: 'https://picsum.photos/40/40?random=4',
     social: {
-      bilibili: '@果核剥壳',
-      qq: '1247079966',
+      bilibili: '@伏案听潮',
+      qq: 'XXXXXXX',
     },
   },
 
@@ -33,20 +33,55 @@ export const themeConfig = {
     link: 'https://example.com',
   },
 
-  // 导航菜单配置
+  // 导航菜单配置 - 支持嵌套结构
   nav: [
-    { name: '主页', href: '/', icon: 'home' },
-    { name: '软件资源', href: '#', icon: 'database' },
-    { name: '软件使用', href: '#', icon: 'book' },
-    { name: '代码编程', href: '#', icon: 'code' },
-    { name: '汇编逆向', href: '#', icon: 'lock' },
-    { name: '运维', href: '#', icon: 'server' },
+    { name: '主页', href: '/', icon: 'icon-[mdi-light--home]' },
+    {
+      name: '软件资源',
+      icon: 'icon-[lucide--database]',
+      items: [
+        {
+          items: [
+            { text: 'Windows工具', link: '#', icon: 'icon-[lucide--database]' },
+            { text: 'Mac工具', link: '#', icon: 'icon-[lucide--database]' }
+          ]
+        },
+        {
+          items: [
+            { text: 'Linux工具', link: '#', icon: 'icon-[lucide--database]' },
+            { text: '移动工具', link: '#', icon: 'icon-[lucide--database]' }
+          ]
+        }
+      ]
+    },
+    {
+      name: '教程指南',
+      icon: 'icon-[lucide--book]',
+      items: [
+        {
+          text: '开发教程',
+          items: [
+            { text: '前端开发', link: '#', icon: 'icon-[lucide--code]' },
+            { text: '后端开发', link: '#', icon: 'icon-[lucide--server]' }
+          ]
+        },
+        {
+          text: '技巧分享',
+          items: [
+            { text: '效率工具', link: '#', icon: 'icon-[lucide--circle-help]' },
+            { text: '实用脚本', link: '#', icon: 'icon-[lucide--code]' }
+          ]
+        }
+      ]
+    },
+    { name: '代码编程', href: '#', icon: 'icon-[lucide--code]' },
+    { name: '汇编逆向', href: '#', icon: 'icon-[lucide--lock]' },
   ],
 
   // 文章分类配置
   categories: [
-    { name: 'JS', title: 'JavaScript' },
-    { name: '汇编逆向', title: '汇编逆向' },
+    { name: '支持', title: '支持' },
+    { name: '帮助', title: '帮助' },
   ],
 
   // 侧边栏组件显示控制
@@ -67,7 +102,7 @@ export const themeConfig = {
 
   // 底部文字配置
   footer: {
-    text: '© 2025 预见 - 代码路上雾茫茫',
+    text: '© 2025 风雅中华 - 阳光明媚，微笑前行',
   },
 };
 

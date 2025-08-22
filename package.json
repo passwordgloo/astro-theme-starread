@@ -17,7 +17,7 @@
   },
   "devDependencies": {
     "@iconify/json": "^2.2.376",
-    "@iconify/tailwind": "^1.2.0",
+    "@iconify/tailwind4": "^1.0.6",
     "conventional-changelog-cli": "^4.1.0",
     "standard-version": "^9.5.0"
   }

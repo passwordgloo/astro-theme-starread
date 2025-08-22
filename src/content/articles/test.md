@@ -1,15 +1,15 @@
 ---
-title: 样例
-categories: [支持]
+title: 文章标题示例
+categories: [技术, 前端]
 tags: [vue, react, javascript]
 cover: https://picsum.photos/800/400?random=1
 description: 这是一篇示例文章，展示了如何使用frontmatter配置文章属性。
 date: 2024-05-20 14:30:00
 ---
 
-# 样例
+# 这是文章标题
 
-这是一篇精心准备的样例文章，旨在向读者展示文章的基本结构与内容呈现方式。通过这篇文章，大家可以了解到如何组织段落、表达观点，同时也能体会到整体的行文风格。无论是初次接触相关内容的新手，还是寻求写作灵感的老手，都能从这篇样例文章中有所收获。
+如果用户没有在frontmatter中设置title，系统将使用文章的第一句话作为标题。
 
 ## 章节一
 

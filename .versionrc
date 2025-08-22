@@ -1,4 +1,7 @@
 {
+  "updaters": [
+    "changelog-updater.js"
+  ],
   "types": [
     {
       "type": "feat",
@@ -26,7 +29,7 @@
       "hidden": false
     }
   ],
-  "commitUrlFormat": "https://github.com/yourusername/star-read/commit/{{hash}}",
-  "compareUrlFormat": "https://github.com/yourusername/star-read/compare/{{previousTag}}...{{currentTag}}",
-  "issueUrlFormat": "https://github.com/yourusername/star-read/issues/{{id}}"
+  "commitUrlFormat": "https://gitee.com/passwordgloo/star-read/commit/{{hash}}",
+  "compareUrlFormat": "https://gitee.com/passwordgloo/star-read/compare/{{previousTag}}...{{currentTag}}",
+  "issueUrlFormat": "https://gitee.com/passwordgloo/star-read/issues/{{id}}"
 }
