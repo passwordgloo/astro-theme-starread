@@ -9,6 +9,8 @@
   --color-accent: #202020;
   --color-dark: #151515;
   --color-light: #F8FAFC;
+  --color-hover-light: #E5E7EB;
+  --color-hover-dark: #374151;
   --font-sans: 'Inter', system-ui, sans-serif;
 }
 
@@ -22,6 +24,8 @@
 .dark .bg-white {
   background-color: var(--color-accent);
 }
+
+
 
 .dark .bg-gray-50 {
   background-color: var(--color-dark);
