@@ -62,7 +62,7 @@
 }
 
 .nav-link {
-  color: #ef4444; /* text-red-500 */
+  color:var(--text-dark) /* text-red-500 */
 }
 
 .dark .nav-link {

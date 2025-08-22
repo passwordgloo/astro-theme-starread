@@ -1,20 +1,4 @@
-# CHANGELOG
+## <small>0.0.1 (2025-08-22)</small>
 
-## [0.0.1] - 2024-05-21
-
-Initial release of star-read project.
-
-### 📝 文档变更
-- 添加项目基本文档
-
-### 🚀 构建系统
-- 初始化项目结构
-- 配置Astro和Tailwind CSS
-
-### ✨ 新功能
-- 实现文章展示功能
-- 实现文章列表功能
-
-### 🔧 构建/工程变更
-- 添加必要依赖
-- 配置开发环境
+* feat: 添加深色模式支持 ([e9bc507](https://iglooblog.top:8090/foresee/star-read/commits/e9bc507))
+* feat(ui): 添加新组件并优化浅色模式样式 ([6a1799f](https://iglooblog.top:8090/foresee/star-read/commits/6a1799f))

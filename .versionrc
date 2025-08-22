@@ -1,0 +1,32 @@
+{
+  "types": [
+    {
+      "type": "feat",
+      "section": "✨ Features",
+      "hidden": false
+    },
+    {
+      "type": "fix",
+      "section": "🐛 Bug Fixes",
+      "hidden": false
+    },
+    {
+      "type": "chore",
+      "section": "🔧 Chores",
+      "hidden": false
+    },
+    {
+      "type": "build",
+      "section": "📦 Build",
+      "hidden": false
+    },
+    {
+      "type": "style",
+      "section": "🎨 Style",
+      "hidden": false
+    }
+  ],
+  "commitUrlFormat": "https://github.com/yourusername/star-read/commit/{{hash}}",
+  "compareUrlFormat": "https://github.com/yourusername/star-read/compare/{{previousTag}}...{{currentTag}}",
+  "issueUrlFormat": "https://github.com/yourusername/star-read/issues/{{id}}"
+}
