@@ -3,8 +3,8 @@
 :root {
   --color-primary: #1E40AF;
   --color-secondary: #3B82F6;
-  --color-accent: #F97316;
-  --color-dark: #1E293B;
+  --color-accent: #202020;
+  --color-dark: #151515;
   --color-light: #F8FAFC;
   --font-sans: 'Inter', system-ui, sans-serif;
 }
@@ -17,6 +17,10 @@
 }
 
 .dark .bg-white {
+  background-color: var(--color-accent);
+}
+
+.dark .bg-gray-50 {
   background-color: var(--color-dark);
 }
 
