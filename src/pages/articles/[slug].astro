@@ -37,13 +37,42 @@ if (article.data.cover !== undefined) {
   }
 }
 
-// date: 如果用户未提供，使用当前日期；如果用户提供了但值为空，则不使用
-let date = new Date().toISOString().replace('T', ' ').slice(0, 19);
+// date: 如果用户未提供，使用文件创建时间；如果用户提供了但值为空，则不使用
+let date = null;
+
+// 检查用户是否提供了日期
 if (article.data.date !== undefined) {
   if (article.data.date) {
-    date = article.data.date;
-  } else {
-    date = null;
+    // 用户提供了日期，确保格式为 yyyy-mm-dd
+    const userDate = new Date(article.data.date);
+    if (!isNaN(userDate.getTime())) {
+      date = userDate.toISOString().slice(0, 10); // 格式化为 yyyy-mm-dd
+    }
+  }
+}
+
+// 如果用户未提供有效日期，使用文件创建时间
+if (!date) {
+  // 注意：获取文件创建时间的方式可能需要根据项目实际情况调整
+  // 以下代码假设文章文件存储在 src/content/articles 目录下
+  try {
+    // 引入 Node.js 模块
+    const fs = require('fs');
+    const path = require('path');
+    
+    // 获取文件路径
+    const filePath = path.join(process.cwd(), 'src', 'content', 'articles', `${article.slug}.md`);
+    
+    // 获取文件状态
+    const stats = fs.statSync(filePath);
+    
+    // 获取创建时间
+    const createDate = new Date(stats.birthtime);
+    date = createDate.toISOString().slice(0, 10); // 格式化为 yyyy-mm-dd
+  } catch (error) {
+    console.error('Failed to get file creation time:', error);
+    // 如果无法获取文件创建时间，使用当前日期作为备用
+    date = new Date().toISOString().slice(0, 10); // 格式化为 yyyy-mm-dd
   }
 }
 
@@ -73,10 +102,10 @@ if (article.data.description !== undefined) {
 ---
 
 <Layout title={title}>
-  <div class="container mx-auto px-4 py-8">
-    <div class="flex flex-col lg:flex-row gap-8">
+  <div class="container mx-auto">
+    <div>
       <!-- 主要内容区域 -->
-      <div class="lg:w-2/3">
+      <div>
         <article class="bg-white rounded-lg shadow-sm overflow-hidden">
           <!-- 文章封面 -->
           {cover && (
@@ -131,9 +160,6 @@ if (article.data.description !== undefined) {
           </div>
         </article>
       </div>
-
-     
-
       </div>
     </div>
   </div>
