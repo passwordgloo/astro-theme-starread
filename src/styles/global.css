@@ -17,50 +17,20 @@
 /* 深色模式样式 */
 .dark {
   --tw-bg-opacity: 1;
-  background-color: var(--color-dark);
+  background-color: var(--color-accent);
   color: var(--color-light);
 }
 
-.dark .bg-white {
+/* .dark .bg-white {
   background-color: var(--color-accent);
-}
+} */
 
-
-
-.dark .bg-gray-50 {
+.dark body {
   background-color: var(--color-dark);
 }
 
 .dark .text-gray-800 {
   color: var(--color-light);
-}
-
-.dark .text-gray-700 {
-  color: rgba(226, 232, 240, 1);
-}
-
-.dark .text-gray-600 {
-  color: rgba(203, 213, 225, 1);
-}
-
-.dark .text-gray-500 {
-  color: rgba(156, 163, 175, 1);
-}
-
-.dark .text-gray-400 {
-  color: rgba(156, 163, 175, 1);
-}
-
-.dark .text-gray-300 {
-  color: rgba(209, 213, 219, 1);
-}
-
-.dark .text-gray-200 {
-  color: rgba(191, 219, 254, 1);
-}
-
-.dark .text-gray-100 {
-  color: rgba(248, 250, 252, 1);
 }
 
 /* 导航栏样式 */

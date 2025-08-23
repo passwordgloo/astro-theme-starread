@@ -9,3 +9,5 @@ date: 2024-05-20
 # 关于
 
 这是关于我们的页面。
+
+<h3 class="text-gray-900 dark:text-white">测试</h3>
