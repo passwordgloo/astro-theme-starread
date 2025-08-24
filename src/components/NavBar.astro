@@ -1,9 +1,9 @@
 ---
 const { title } = Astro.props;
+import ThemeToggle from "./ThemeToggle.astro";
 import { themeConfig } from '../content/config';
 ---
-
-<header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
+<header class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md">
   <!-- 确保深色模式切换按钮在移动设备上可见 -->
   <div class="md:hidden absolute right-4 top-3 z-10">
     <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
@@ -59,7 +59,7 @@ import { themeConfig } from '../content/config';
 
           {/* 下拉菜单内容 */}
           {item.items && (
-            <div class="absolute right-0 mt-2 w-48 bg-white dark:bg-dark shadow-lg rounded-md z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 origin-top-right">
+            <div class="absolute right-0 mt-2 w-48 bg-white dark:bg-cyan-950 shadow-lg rounded-md z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 origin-top-right">
               {item.items.map((subItem) => (
                 <div key={subItem.text || subItem.items?.[0]?.text} class="py-1 first:pt-2 last:pb-2">
                   {subItem.text && (
@@ -98,10 +98,10 @@ import { themeConfig } from '../content/config';
     </nav>
     <!-- 搜索和登录 -->
     <div class="flex items-center space-x-4">
-      <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-        <span class="icon-[lucide--moon] h-5 w-5 nav-theme-icon" id="theme-icon"></span>
-      </button>
-      <button class="hidden md:block px-4 py-2 bg-primary rounded-md hover:bg-primary/90 dark:bg-secondary dark:hover:bg-secondary/90 transition-colors">登录</button>
+      <ThemeToggle />
+      <button class="md:block rounded-lg bg-sky-600 text-white hover:bg-sky-700 active:bg-sky-800
+                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400 dark:active:bg-sky-300
+                   dark:focus-visible:ring-sky-300/50 px-4 py-2 rounded-md transition-colors">登录</button>
       <button class="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors">
         <span class="icon-[lucide--menu] h-6 w-6 nav-menu-icon"></span>
       </button>
@@ -143,100 +143,3 @@ import { themeConfig } from '../content/config';
   }
 </style>
 
-<script>
-  // 添加滚动监听事件，实现导航栏样式切换
-  document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('header');
-    let lastScrollTop = 0;
-
-    // 初始化logo根据当前主题
-    const logoImage = document.querySelector('.logo-image');
-    const htmlElement = document.documentElement;
-    if (logoImage) {
-      const isDarkMode = htmlElement.classList.contains('dark');
-      logoImage.src = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
-    }
-
-    // 主题切换时更新logo
-    const themeToggle = document.getElementById('theme-toggle');
-    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-
-    const updateLogo = () => {
-      const logoImage = document.querySelector('.logo-image');
-      if (logoImage) {
-        const isDarkMode = htmlElement.classList.contains('dark');
-        logoImage.src = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
-      }
-    };
-
-    if (themeToggle) {
-      themeToggle.addEventListener('click', updateLogo);
-    }
-
-    if (mobileThemeToggle) {
-      mobileThemeToggle.addEventListener('click', updateLogo);
-    }
-
-    window.addEventListener('scroll', () => {
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-      if (scrollTop > 100) {
-        header.classList.add('show-title');
-      } else {
-        header.classList.remove('show-title');
-      }
-
-      lastScrollTop = scrollTop;
-    });
-
-    // 深色模式切换
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-    // 检查用户偏好或系统设置
-    const updateTheme = () => {
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && mediaQuery.matches)) {
-        htmlElement.classList.add('dark');
-        if (themeIcon) {
-          themeIcon.className = 'icon-[lucide--sun] h-5 w-5 nav-theme-icon';
-        }
-      } else {
-        htmlElement.classList.remove('dark');
-        if (themeIcon) {
-          themeIcon.className = 'icon-[lucide--moon] h-5 w-5 nav-theme-icon';
-        }
-      }
-    };
-
-    // 初始化主题
-    updateTheme();
-
-    // 监听主题切换事件
-    if (themeToggleBtn) {
-      themeToggleBtn.addEventListener('click', () => {
-        if (htmlElement.classList.contains('dark')) {
-          localStorage.theme = 'light';
-        } else {
-          localStorage.theme = 'dark';
-        }
-        updateTheme();
-      });
-    }
-
-    if (mobileThemeToggleBtn) {
-      mobileThemeToggleBtn.addEventListener('click', () => {
-        if (htmlElement.classList.contains('dark')) {
-          localStorage.theme = 'light';
-        } else {
-          localStorage.theme = 'dark';
-        }
-        updateTheme();
-      });
-    }
-
-    // 监听系统主题变化
-    mediaQuery.addEventListener('change', updateTheme);
-  });
-</script>

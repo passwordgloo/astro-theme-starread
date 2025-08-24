@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-
+import { themeConfig } from '../content/config';
 interface Props {
   title: string;
   articles: CollectionEntry<'articles'>[];
@@ -9,8 +9,8 @@ interface Props {
 const { title, articles } = Astro.props;
 ---
 
-<div class="bg-white rounded-lg shadow-sm overflow-hidden">
-  <div class="px-4 py-3 border-b border-gray-100 flex justify-between items-center">
+<div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
+  <div class="px-4 py-3 border-b border-gray-200 dark:border-white/10 flex justify-between items-center">
     <div class="flex items-center space-x-2">
       <span class="icon-[lucide--file-text] w-5 h-5 text-primary"></span>
       <h2 class="font-bold text-lg text-dark">{title}</h2>
@@ -21,14 +21,14 @@ const { title, articles } = Astro.props;
   <div class="p-4 space-y-4">
     {articles.length > 0 ? (
       articles.map((article, index) => (
-        <div key={article.slug} class="flex items-start space-x-3 p-2 hover:bg-gray-50 rounded-md transition-colors">
-          <div class="flex-shrink-0 w-8 h-8 bg-gray-100 rounded-full flex items-center justify-center text-gray-500 text-sm font-medium">
+        <div key={article.slug} class="flex items-start space-x-3 p-2 hover:bg-gray-50 dark:hover:bg-white/5 rounded-md transition-colors">
+          <div class="flex-shrink-0 w-8 h-8 bg-sky-600 text-white hover:bg-sky-700 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400 rounded-full flex items-center justify-center text-gray-500 text-sm font-medium">
             {index + 1}
           </div>
           <div class="flex-1 min-w-0">
-            <a href={`/articles/${article.slug}`} class="text-gray-900 hover:text-primary transition-colors line-clamp-1">{article.data.title}</a>
+            <a href={`/articles/${article.slug}`} class="text-gray-900 dark:text-slate-100 hover:text-primary transition-colors line-clamp-1">{article.data.title}</a>
             <div class="flex items-center mt-1 text-xs text-gray-500 space-x-2">
-              <span>{article.data.author || 'applek'}</span>
+              <span>{article.data.author || themeConfig.author.name}</span>
               <span>·</span>
               <span>{typeof article.data.date === 'string' ? article.data.date.split(' ')[0] : article.data.date?.toISOString().split('T')[0]}</span>
             </div>

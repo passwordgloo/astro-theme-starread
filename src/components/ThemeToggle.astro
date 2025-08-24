@@ -1,0 +1,113 @@
+<button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+  <span class="icon-[lucide--moon] h-5 w-5 nav-theme-icon" id="theme-icon"></span>
+</button>
+
+<style>
+  /* Iconify 图标样式 */
+  [class^="icon-"] {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+</style>
+
+<script>
+  // 添加滚动监听事件，实现导航栏样式切换
+  document.addEventListener('DOMContentLoaded', () => {
+    const header = document.querySelector('header');
+    let lastScrollTop = 0;
+
+    // 初始化logo根据当前主题
+    const logoImage = document.querySelector('.logo-image');
+    const htmlElement = document.documentElement;
+    if (logoImage) {
+      const isDarkMode = htmlElement.classList.contains('dark');
+      logoImage.src = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
+    }
+
+    // 主题切换时更新logo
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
+    const updateLogo = () => {
+      const logoImage = document.querySelector('.logo-image');
+      if (logoImage) {
+        const isDarkMode = htmlElement.classList.contains('dark');
+        logoImage.src = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
+      }
+    };
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', updateLogo);
+    }
+
+    if (mobileThemeToggle) {
+      mobileThemeToggle.addEventListener('click', updateLogo);
+    }
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (scrollTop > 100) {
+        header.classList.add('show-title');
+      } else {
+        header.classList.remove('show-title');
+      }
+
+      lastScrollTop = scrollTop;
+    });
+
+    // 深色模式切换
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
+    const themeIcon = document.getElementById('theme-icon');
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // 检查用户偏好或系统设置
+    const updateTheme = () => {
+      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && mediaQuery.matches)) {
+        htmlElement.classList.add('dark');
+        if (themeIcon) {
+          themeIcon.className = 'icon-[lucide--sun] h-5 w-5 nav-theme-icon';
+        }
+      } else {
+        htmlElement.classList.remove('dark');
+        if (themeIcon) {
+          themeIcon.className = 'icon-[lucide--moon] h-5 w-5 nav-theme-icon';
+        }
+      }
+    };
+
+    // 初始化主题
+    updateTheme();
+
+    // 监听主题切换事件
+    if (themeToggleBtn) {
+      themeToggleBtn.addEventListener('click', () => {
+        if (htmlElement.classList.contains('dark')) {
+          localStorage.theme = 'light';
+        } else {
+          localStorage.theme = 'dark';
+        }
+        updateTheme();
+      });
+    }
+
+    if (mobileThemeToggleBtn) {
+      mobileThemeToggleBtn.addEventListener('click', () => {
+        if (htmlElement.classList.contains('dark')) {
+          localStorage.theme = 'light';
+        } else {
+          localStorage.theme = 'dark';
+        }
+        updateTheme();
+      });
+    }
+
+    // 监听系统主题变化
+    mediaQuery.addEventListener('change', updateTheme);
+  });
+</script>

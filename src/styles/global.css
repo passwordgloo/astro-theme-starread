@@ -1,75 +1,10 @@
-@import "tailwindcss";
+@import "tailwindcss";           /* Tailwind v4 入口 */
 @plugin "@iconify/tailwind4" {
   prefixes: lucide;
 }
+@plugin "@tailwindcss/typography";
 
-:root {
-  --color-primary: #1E40AF;
-  --color-secondary: #3B82F6;
-  --color-accent: #202020;
-  --color-dark: #151515;
-  --color-light: #F8FAFC;
-  --color-hover-light: #E5E7EB;
-  --color-hover-dark: #374151;
-  --font-sans: 'Inter', system-ui, sans-serif;
+@custom-variant dark (&:where(.dark, .dark *)); /* 用 .dark 触发深色 */
+@theme {
+  --color-brand: #4f46e5;
 }
-
-/* 深色模式样式 */
-.dark {
-  --tw-bg-opacity: 1;
-  background-color: var(--color-accent);
-  color: var(--color-light);
-}
-
-/* .dark .bg-white {
-  background-color: var(--color-accent);
-} */
-
-.dark body {
-  background-color: var(--color-dark);
-}
-
-.dark .text-gray-800 {
-  color: var(--color-light);
-}
-
-/* 导航栏样式 */
-.nav-logo-text {
-  color: var(--color-dark);
-}
-
-.dark .nav-logo-text {
-  color: var(--color-light);
-}
-
-.nav-link {
-  color:var(--text-dark) /* text-red-500 */
-}
-
-.dark .nav-link {
-  color: var(--color-light);
-}
-
-.nav-link:hover {
-  color: var(--color-primary);
-}
-
-.dark .nav-link:hover {
-  color: var(--color-secondary);
-}
-
-.nav-mobile-icon,
-.nav-theme-icon,
-.nav-menu-icon {
-  color: var(--color-dark);
-}
-
-.dark .nav-theme-icon {
-  color: rgba(156, 163, 175, 1); /* text-gray-400 */
-}
-
-.dark .nav-menu-icon {
-  color: rgba(209, 213, 219, 1); /* text-gray-300 */
-}
-
-@import "./markdown-styles.css";

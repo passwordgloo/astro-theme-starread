@@ -1,37 +1,43 @@
-# star-read
+# Astro Starter Kit: Minimal
 
-#### 介绍
-既有星光般的璀璨，又不失简洁和高端感。它传达了一种资源精选、精致且丰富的氛围，仿佛在浩瀚的星空中挑选最亮眼的星辰。StarRead 整体给人一种独特、具有探索精神的印象，在这里能发现并享受高质量的内容，仿佛每一篇文章或资源都是一颗闪耀的星星。
+```sh
+pnpm create astro@latest -- --template minimal
+```
 
-#### 软件架构
-软件架构说明
+> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
 
+## 🚀 Project Structure
 
-#### 安装教程
+Inside of your Astro project, you'll see the following folders and files:
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+```text
+/
+├── public/
+├── src/
+│   └── pages/
+│       └── index.astro
+└── package.json
+```
 
-#### 使用说明
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
-#### 参与贡献
+Any static assets, like images, can be placed in the `public/` directory.
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+## 🧞 Commands
 
+All commands are run from the root of the project, from a terminal:
 
-#### 特技
+| Command                   | Action                                           |
+| :------------------------ | :----------------------------------------------- |
+| `pnpm install`             | Installs dependencies                            |
+| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
+| `pnpm build`           | Build your production site to `./dist/`          |
+| `pnpm preview`         | Preview your build locally, before deploying     |
+| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `pnpm astro -- --help` | Get help using the Astro CLI                     |
 
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
+## 👀 Want to learn more?
+
+Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).

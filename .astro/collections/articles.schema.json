@@ -7,13 +7,26 @@
         "title": {
           "type": "string"
         },
-        "categories": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "description": {
+          "type": "string"
         },
-        "tags": {
+        "date": {
+          "anyOf": [
+            {
+              "type": "string",
+              "format": "date-time"
+            },
+            {
+              "type": "string",
+              "format": "date"
+            },
+            {
+              "type": "integer",
+              "format": "unix-time"
+            }
+          ]
+        },
+        "categories": {
           "type": "array",
           "items": {
             "type": "string"
@@ -22,70 +35,19 @@
         "cover": {
           "type": "string"
         },
-        "description": {
-          "type": "string"
-        },
-        "date": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "anyOf": [
-                {
-                  "type": "string",
-                  "format": "date-time"
-                },
-                {
-                  "type": "string",
-                  "format": "date"
-                },
-                {
-                  "type": "integer",
-                  "format": "unix-time"
-                }
-              ]
-            }
-          ]
-        },
-        "next": {
-          "anyOf": [
-            {
-              "anyOf": [
-                {
-                  "not": {}
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "prev": {
-          "anyOf": [
-            {
-              "anyOf": [
-                {
-                  "not": {}
-                },
-                {
-                  "type": "string"
-                }
-              ]
-            },
-            {
-              "type": "null"
-            }
-          ]
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "$schema": {
           "type": "string"
         }
       },
+      "required": [
+        "title"
+      ],
       "additionalProperties": false
     }
   },

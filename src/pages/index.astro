@@ -1,72 +1,17 @@
 ---
-import Layout from '../layouts/home.astro';
-import Carousel from '../components/Carousel.astro';
-import ArticleSection from '../components/ArticleSection.astro';
-import LatestArticles from '../components/LatestArticles.astro';
-import { getCollection } from 'astro:content';
+import BaseLayout from "../layouts/home.astro";
 import { themeConfig } from '../content/config';
-
-// 获取所有文章
-const allArticles = await getCollection('articles');
-
-// 按分类筛选文章
-const categoryArticles = {};
-
-themeConfig.categories.forEach(category => {
-  categoryArticles[category.name] = allArticles.filter(article => 
-    article.data.categories?.includes(category.name) || 
-    article.data.tags?.includes(category.name)
-  );
-});
-
-// 最新文章（按日期排序）
-const latestArticles = [...allArticles]
-  .sort((a, b) => new Date(b.data.date || 0) - new Date(a.data.date || 0))
-  .slice(0, 5);
-
-// 轮播文章（取前4篇有封面图的文章）
-const carouselArticles = allArticles
-  .filter(article => article.data.cover)
-  .slice(0, 4);
 ---
 
-<Layout>
-	<!-- 头部横幅 -->
-	<div class="relative bg-gradient-to-r from-blue-600 to-indigo-700 rounded-lg overflow-hidden shadow-md mb-6">
-		<div class="absolute inset-0 opacity-20 bg-[url('https://picsum.photos/1200/300')] bg-cover bg-center"></div>
-		<div class="relative px-6 py-12 md:px-12 text-center text-white">
-			<h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">Star read 星阅主题</h1>
-			<div class="flex flex-wrap justify-center gap-4 mt-6">
-				<div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
-					<span class="font-medium">基于Vite+Tailwindcss</span> 混合开发
-				</div>
-				<div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
-					<span class="font-medium">不影响SEO</span> 拥抱新前端
-				</div>
-				<div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
-					<span class="font-medium">模块化组件</span> 快速搭建
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- 轮播卡片 -->
-	<Carousel articles={carouselArticles.length > 0 ? carouselArticles : []} />
-
-	<!-- 文章分类区域 -->
-	<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-		{themeConfig.categories.map((category) => (
-			<ArticleSection
-				title={category.title}
-				articles={categoryArticles[category.name]?.length > 0 ? categoryArticles[category.name] : []}
-				key={category.name}
-			/>
-		))}
-	</div>
-
-	<!-- 最新文章 -->
-	<LatestArticles
-		articles={latestArticles.length > 0 ? latestArticles : []}
-		className="latest-articles-custom"
-	/>
-</Layout>
+<html lang="zh-CN" class="min-h-full antialiased">
+  <head>
+   	<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="{themeConfig.site.favicon}" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{ Astro.props.title || themeConfig.site.title }</title>
+  </head>
+  <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-slate-900 dark:text-neutral-100 transition-colors">
+      <BaseLayout title="首页"></BaseLayout>
+  </body>
+</html>

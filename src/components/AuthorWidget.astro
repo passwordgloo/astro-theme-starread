@@ -2,7 +2,7 @@
 import { themeConfig } from '../content/config';
 ---
 
-<div class="bg-white rounded-lg shadow-sm p-4">
+<div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4">
   <div class="flex items-center space-x-3 mb-4">
     <img src={themeConfig.author.avatar} alt={themeConfig.author.name} class="w-10 h-10 rounded-full object-cover" />
     <div>
@@ -10,10 +10,10 @@ import { themeConfig } from '../content/config';
         <span class="icon-[lucide--user] w-4 h-4 text-primary"></span>
         <h3 class="font-medium">{themeConfig.author.name}</h3>
       </div>
-      <p class="text-sm text-gray-500">{themeConfig.author.description}</p>
+      <p class="text-sm text-slate-600 dark:text-cyan-300/80">{themeConfig.author.description}</p>
     </div>
   </div>
-  <div class="space-y-2 text-sm text-gray-600">
+  <div class="space-y-2 text-sm text-gray-600 dark:text-slate-500">
     <p>B站: {themeConfig.author.social.bilibili}</p>
     <p>QQ: {themeConfig.author.social.qq}</p>
   </div>
