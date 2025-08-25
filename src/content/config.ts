@@ -102,13 +102,15 @@ export const themeConfig = {
       statsWidget: true,
       authorWidget: true,
       adWidget: true,
+      tag: true,
       recommendedArticles: true,
     },
     // 文章页侧边栏组件
     article: {
       authorWidget: true,
-      // tableOfContents(简称toc) 文章目录
-      toc: true,
+      tag: true,
+      // tableOfContents(简称toc) 文章目
+      toc: true
     },
   },
 
