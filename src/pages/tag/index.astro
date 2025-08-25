@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import TagLayout from '../../layouts/tag.astro';
+
+// 获取所有文章
+const articles = await getCollection('articles');
+
+// 计算所有标签的计数
+const tagCounts: Record<string, number> = {};
+articles.forEach(article => {
+  article.data.tags?.forEach(tag => {
+    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+  });
+});
+
+// 将标签按数量排序
+const sortedTags = Object.entries(tagCounts).sort(([, a], [, b]) => b - a);
+const pageTitle = '所有标签';
+---
+
+<TagLayout 
+  title={pageTitle} 
+  tagName="所有标签" 
+  articles={[]} 
+  allTags={Object.fromEntries(sortedTags)} 
+/>

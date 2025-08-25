@@ -1,6 +1,6 @@
 ---
 title: 帮助文档
-categories: [支持]
+categories: [测试]
 tags: [vue, react, javascript]
 cover: https://picsum.photos/800/400?random=1
 ---
