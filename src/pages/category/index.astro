@@ -1,0 +1,26 @@
+---
+import { getCollection } from 'astro:content';
+import CategoryLayout from '../../layouts/category.astro';
+
+// 获取所有文章
+const articles = await getCollection('articles');
+
+// 获取所有分类并计算文章数量
+const categoryCounts: Record<string, number> = {};
+articles.forEach(article => {
+  article.data.categories?.forEach(category => {
+    categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+  });
+});
+
+// 按文章数量排序分类
+const sortedCategories = Object.entries(categoryCounts).sort(([, a], [_, b]) => b - a);
+const pageTitle = '所有分类';
+---
+
+<CategoryLayout
+  title={pageTitle}
+  categoryName="所有分类"
+  articles={[]}
+  allCategories={Object.fromEntries(sortedCategories)}
+/>
