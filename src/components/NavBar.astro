@@ -18,8 +18,8 @@ import { themeConfig } from '../content/config';
             src={themeConfig.site.logo.image} 
             alt={themeConfig.site.logo.alt} 
             class="h-8 w-auto logo-image" 
-            data-light-src={themeConfig.site.logo.image} 
-            data-dark-src={themeConfig.site.logo.darkImage || themeConfig.site.logo.image} 
+            data-light-src={themeConfig.site.logo.darkImage} 
+            data-dark-src={themeConfig.site.logo.image} 
           /> 
         ) : (
           <span class="font-bold text-xl nav-logo-text">{themeConfig.site.logo.text}</span>

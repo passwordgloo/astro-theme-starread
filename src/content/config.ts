@@ -1,5 +1,7 @@
 import { defineCollection, z } from 'astro:content';
 
+const defaultCover = '/defaultCover.jpg';
+
 const articles = defineCollection({
   type: 'content',
   schema: z.object({
@@ -7,7 +9,7 @@ const articles = defineCollection({
     description: z.string().optional(),
     date: z.date().optional(),
     categories: z.array(z.string()).optional(),
-    cover: z.string().optional(),
+    cover: z.string().default(defaultCover),
     tags: z.array(z.string()).optional(),
   }),
 });
@@ -21,6 +23,8 @@ export const themeConfig = {
   site: {
     title: '星阅主题',
     favicon: '/favicon.svg',
+    defaultCover: defaultCover,
+    
     logo: {
       image: '/logo.svg',
       darkImage: '/logo-dark.svg',

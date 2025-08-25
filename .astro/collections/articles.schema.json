@@ -33,7 +33,8 @@
           }
         },
         "cover": {
-          "type": "string"
+          "type": "string",
+          "default": "/defaultCover.jpg"
         },
         "tags": {
           "type": "array",
