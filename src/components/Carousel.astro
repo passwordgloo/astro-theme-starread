@@ -24,7 +24,7 @@ import { themeConfig } from '../content/config';
     <div id="carousel-track" class="flex transition-transform duration-500 ease-out space-x-4">
       {articles.length > 0 ? (
         articles.map((article, index) => (
-          <a href="/articles/{article.slug}" class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
+          <a href={`/articles/${encodeURIComponent(article.slug)}`} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
               <div class="h-40 bg-gray-200 overflow-hidden">
                 <img src={article.data.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
               </div>

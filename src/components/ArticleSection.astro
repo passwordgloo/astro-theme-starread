@@ -1,12 +1,14 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { themeConfig } from '../content/config';
+const categories = themeConfig.categories;
 interface Props {
   title: string;
   articles: CollectionEntry<'articles'>[];
+  category: string;
 }
 
-const { title, articles } = Astro.props;
+const { title, articles, category } = Astro.props;
 ---
 
 <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
@@ -15,7 +17,7 @@ const { title, articles } = Astro.props;
       <span class="icon-[lucide--file-text] w-5 h-5 text-primary"></span>
       <h2 class="font-bold text-lg text-dark">{title}</h2>
     </div>
-    <a href="#" class="text-sm text-primary hover:text-primary/80 transition-colors">更多</a>
+    <a href={`/category/${encodeURIComponent(category)}`} class="text-sm text-primary hover:text-primary/80 transition-colors">更多</a>
   </div>
   
   <div class="p-4 space-y-4">

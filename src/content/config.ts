@@ -122,4 +122,12 @@ export const themeConfig = {
   footer: {
     text: '© 2025 风雅中华 - 阳光明媚，微笑前行',
   },
+
+  // 文章加载配置
+  articleLoad: {
+    type: 'button', // 'button' 或 'auto'
+    defaultLimit: 20, // 默认最大加载数量
+    initialLoad: 8, // 初始加载数量
+    loadMore: 4 // 每次加载数量
+  },
 };
