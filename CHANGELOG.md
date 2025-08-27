@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://gitee.com/passwordgloo/star-read/compare/v0.0.4...v0.0.5) (2025-08-27)
+
+
+### ✨ Features
+
+* **搜索:** 添加搜索功能及相关配置 ([f39b468](https://gitee.com/passwordgloo/star-read/commit/f39b4687270a1e4a7a542252e3dc1a7345822622))
+* 替换Algolia搜索为Pagefind实现本地搜索功能 ([5f3de0e](https://gitee.com/passwordgloo/star-read/commit/5f3de0e81137f2aac2c292dc707e83d22e0ba7e6))
+* **文章:** 添加最新文章组件和文章加载配置 ([88a7083](https://gitee.com/passwordgloo/star-read/commit/88a70835530fbbafe43e4f166665aa873b241f3d))
+
+
+### 🎨 Style
+
+* **NavBar:** 优化搜索组件样式并移除冗余代码 ([e4ee914](https://gitee.com/passwordgloo/star-read/commit/e4ee914435a32f8ae68e59559e13602acc0491ca))
+
 ### [0.0.4](https://gitee.com/passwordgloo/star-read/compare/v0.0.3...v0.0.4) (2025-08-25)
 
 
