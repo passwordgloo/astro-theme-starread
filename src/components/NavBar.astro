@@ -105,11 +105,11 @@ import { themeConfig } from '../content/config';
         <span class="icon-[lucide--search] h-5 w-5 text-gray-700 dark:text-gray-300"></span>
       </button>
       
-      <div id="pagefind-search-container" class="absolute right-0 mt-2 w-80 md:w-96 bg-white dark:text-red-400 shadow-lg rounded-md z-50 overflow-hidden transform origin-top-right scale-95 opacity-0 invisible transition-all duration-200">
+      <div id="pagefind-search-container" class="absolute right-0 px-2 w-80 bg-white shadow-lg rounded-md z-50 overflow-hidden transform origin-top-right scale-95 transition-all duration-200">
         <Search id="search" class="pagefind-ui" uiOptions={{ 
           showImages: false,
           placeholder: "搜索文章...",
-          resetStyles: true,
+          resetStyles: false,
           debug: false
         }} />
       </div>
@@ -157,166 +157,8 @@ import { themeConfig } from '../content/config';
     background-repeat: no-repeat;
     background-position: center;
   }
-
-  /* 美化搜索组件样式 */
-  .search-container {
-    position: relative;
-  }
-
-  .pagefind-ui {
-    position: relative;
-  }
-
-  .pagefind-ui__search-input {
-    padding-left: 2.5rem !important;
-    padding-right: 2.5rem !important;
-    border-radius: 0.375rem !important;
-    border: 1px solid #e5e7eb !important;
-    transition: all 0.2s ease-in-out !important;
-  }
-
-  .pagefind-ui__search-input:focus {
-    outline: none !important;
-    ring: 2px !important;
-    ring-color: #3b82f6 !important;
-    ring-opacity: 0.6 !important;
-    border-color: #3b82f6 !important;
-  }
-
-  .dark .pagefind-ui__search-input {
-    background-color: #111827 !important;
-    color: white !important;
-    border-color: #374151 !important;
-  }
-
-  .dark .pagefind-ui__search-input:focus {
-    border-color: #3b82f6 !important;
-  }
-
-  .pagefind-ui__search-clear {
-    right: 0.75rem !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-    p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors;
-  }
-
-  .pagefind-ui__search-results {
-    position: absolute !important;
-    right: 0 !important;
-    top: 100% !important;
-    margin-top: 0.5rem !important;
-    width: 20rem !important;
-    max-height: 24rem !important;
-    background-color: white !important;
-    border-radius: 0.375rem !important;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
-    z-index: 50 !important;
-    overflow: hidden !important;
-    transform-origin: top right !important;
-    animation: pagefind-fade-in 0.2s ease-out !important;
-  }
-
-  .dark .pagefind-ui__search-results {
-    background-color: #030712 !important;
-    border: 1px solid rgba(8, 145, 178, 0.2) !important;
-  }
-
-  .pagefind-ui__result {
-    padding: 0.75rem !important;
-    border-bottom: 1px solid #f3f4f6 !important;
-    transition: background-color 0.2s ease-in-out !important;
-  }
-
-  .pagefind-ui__result:hover {
-    background-color: #f9fafb !important;
-  }
-
-  .dark .pagefind-ui__result {
-    border-bottom-color: #1f2937 !important;
-  }
-
-  .dark .pagefind-ui__result:hover {
-    background-color: #1f2937 !important;
-  }
-
-  @keyframes pagefind-fade-in {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-
-    /* 页面搜索组件的基本样式 - 在重置样式后确保功能正常 */
-    #search .pagefind-ui__search-input {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.375rem;
-      background-color: white;
-      color: #374151;
-      font-size: 0.875rem;
-    }
-
-    .dark #search .pagefind-ui__search-input {
-      background-color: #030712;
-      color: white;
-      border-color: #374151;
-    }
-
-    #search .pagefind-ui__search-input:focus {
-      outline: none;
-      ring: 2px solid #3b82f6;
-      ring-opacity: 0.6;
-      border-color: #3b82f6;
-    }
-
-    #search .pagefind-ui__search-results {
-      max-height: 24rem;
-      overflow-y: auto;
-      margin-top: 0.25rem;
-    }
-
-    #search .pagefind-ui__result {
-      padding: 0.75rem;
-      border-bottom: 1px solid #f3f4f6;
-      transition: background-color 0.2s;
-    }
-
-    #search .pagefind-ui__result:hover {
-      background-color: #f9fafb;
-    }
-
-    .dark #search .pagefind-ui__result {
-      border-bottom-color: #1f2937;
-    }
-
-    .dark #search .pagefind-ui__result:hover {
-      background-color: #1f2937;
-    }
-
-    #search .pagefind-ui__result-title {
-      font-weight: 500;
-      color: #111827;
-    }
-
-    .dark #search .pagefind-ui__result-title {
-      color: #f9fafb;
-    }
-
-    #search .pagefind-ui__result-excerpt {
-      color: #6b7280;
-      font-size: 0.875rem;
-      margin-top: 0.25rem;
-    }
-
-    .dark #search .pagefind-ui__result-excerpt {
-      color: #9ca3af;
-    }
-  </style>
+  
+</style>
 
   <script>
     document.addEventListener('DOMContentLoaded', () => {
