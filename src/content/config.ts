@@ -130,4 +130,39 @@ export const themeConfig = {
     initialLoad: 8, // 初始加载数量
     loadMore: 4 // 每次加载数量
   },
+
+  // 搜索配置
+  search: {
+    // 默认搜索类型: 'local', 'algolia', 'meilisearch'
+    default: 'local',
+    
+    // 本地搜索配置 (SQLite)
+    local: {
+      enabled: true,
+      // SQLite数据库路径，可通过环境变量覆盖
+      dbPath: process.env.LOCAL_SEARCH_DB_PATH || './search.db'
+    },
+    
+    // Algolia搜索配置
+    algolia: {
+      enabled: false,
+      // Algolia应用ID
+      appId: process.env.ALGOLIA_APP_ID || '',
+      // Algolia搜索密钥
+      searchKey: process.env.ALGOLIA_SEARCH_KEY || '',
+      // Algolia索引名称
+      indexName: process.env.ALGOLIA_INDEX_NAME || 'articles'
+    },
+    
+    // Meilisearch搜索配置
+    meilisearch: {
+      enabled: false,
+      // Meilisearch服务器URL
+      host: process.env.MEILISEARCH_HOST || 'http://localhost:7700',
+      // Meilisearch搜索密钥
+      apiKey: process.env.MEILISEARCH_API_KEY || '',
+      // Meilisearch索引名称
+      indexName: process.env.MEILISEARCH_INDEX_NAME || 'articles'
+    }
+  }
 };

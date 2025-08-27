@@ -1,0 +1,73 @@
+---
+// Meilisearch搜索API
+import { themeConfig } from '../../content/config';
+
+// 获取查询参数
+const q = Astro.url.searchParams.get('q') || '';
+
+// 如果查询为空，直接返回空结果
+if (!q.trim()) {
+  Astro.response.headers.set('Content-Type', 'application/json');
+  return JSON.stringify([]);
+}
+
+// 获取Meilisearch配置
+const meilisearchConfig = themeConfig.search?.meilisearch;
+
+// 检查Meilisearch配置是否完整
+if (!meilisearchConfig?.enabled || !meilisearchConfig?.host || !meilisearchConfig?.indexName) {
+  console.warn('Meilisearch配置不完整，无法执行搜索');
+  Astro.response.headers.set('Content-Type', 'application/json');
+  return JSON.stringify([]);
+}
+
+try {
+  // 构建API请求URL
+  const url = `${meilisearchConfig.host}/indexes/${encodeURIComponent(meilisearchConfig.indexName)}/search`;
+  
+  // 设置请求头
+  const headers = {
+    'Content-Type': 'application/json'
+  };
+  
+  // 如果提供了API密钥，添加到请求头
+  if (meilisearchConfig.apiKey) {
+    headers['Authorization'] = `Bearer ${meilisearchConfig.apiKey}`;
+  }
+  
+  // 执行搜索请求
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: headers,
+    body: JSON.stringify({
+      q: q,
+      limit: 20,
+      attributesToRetrieve: ['id', 'slug', 'title', 'description', 'categories', 'tags']
+    })
+  });
+  
+  if (!response.ok) {
+    throw new Error(`Meilisearch API请求失败: ${response.status}`);
+  }
+  
+  const data = await response.json();
+  
+  // 格式化搜索结果
+  const formattedResults = data.hits.map(hit => ({
+    id: hit.id,
+    slug: hit.slug,
+    title: hit.title,
+    snippet: hit.description || '',
+  }));
+  
+  // 返回JSON结果
+  Astro.response.headers.set('Content-Type', 'application/json');
+  return JSON.stringify(formattedResults);
+} catch (error) {
+  console.error('Meilisearch搜索失败:', error);
+  
+  // 返回空结果
+  Astro.response.headers.set('Content-Type', 'application/json');
+  return JSON.stringify([]);
+}
+---
