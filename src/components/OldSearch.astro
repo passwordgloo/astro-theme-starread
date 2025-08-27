@@ -173,27 +173,6 @@ const ref = Astro.props.ref || null;
         return [];
       }
     }
-    
-    // Algolia搜索函数
-    async function searchAlgolia(query) {
-      try {
-        const response = await fetch(`/search/algolia?q=${encodeURIComponent(query)}`);
-        return await response.json();
-      } catch (error) {
-        console.error('Algolia搜索失败:', error);
-        return [];
-      }
-    }
-    
-    // Meilisearch搜索函数
-    async function searchMeilisearch(query) {
-      try {
-        const response = await fetch(`/search/meilisearch?q=${encodeURIComponent(query)}`);
-        return await response.json();
-      } catch (error) {
-        console.error('Meilisearch搜索失败:', error);
-        return [];
-      }
-    }
+  
   });
 </script>

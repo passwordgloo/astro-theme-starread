@@ -41,17 +41,17 @@ const carouselArticles = allArticles
     <main class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
     <div class="w-full md:w-2/3 space-y-6">
       <Banner />
-      <Carousel articles={carouselArticles.length > 0 ? carouselArticles : []} />
+      <Carousel articles={carouselArticles.length > 0 ? carouselArticles : []}  client:load />
 
       <!-- 文章分类区域 -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         {themeConfig.categories.map((category) => (
           <ArticleSection
-  title={category.title}
-  articles={categoryArticles[category.name]?.length > 0 ? categoryArticles[category.name] : []}
-  category={category.name}
-  key={category.name}
-/>
+            title={category.title}
+            articles={categoryArticles[category.name]?.length > 0 ? categoryArticles[category.name] : []}
+            category={category.name}
+            key={category.name}
+          />
         ))}
       </div>
     <LatestArticle articles={allArticles} />
