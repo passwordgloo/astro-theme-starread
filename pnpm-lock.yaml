@@ -24,15 +24,12 @@ importers:
       '@tailwindcss/vite':
         specifier: ^4.1.12
         version: 4.1.12(vite@6.3.5(@types/node@24.3.0)(jiti@2.5.1)(lightningcss@1.30.1))
-      algoliasearch:
-        specifier: ^5.36.0
-        version: 5.36.0
+      astro-pagefind:
+        specifier: ^1.8.3
+        version: 1.8.3(astro@5.13.3(@types/node@24.3.0)(encoding@0.1.13)(jiti@2.5.1)(lightningcss@1.30.1)(rollup@4.48.0)(typescript@5.9.2))
       conventional-changelog-cli:
         specifier: ^4.1.0
         version: 4.1.0
-      gray-matter:
-        specifier: ^4.0.3
-        version: 4.0.3
       standard-version:
         specifier: ^9.5.0
         version: 9.5.0
@@ -41,62 +38,6 @@ importers:
         version: 4.1.12
 
 packages:
-
-  '@algolia/abtesting@1.2.0':
-    resolution: {integrity: sha512-Z6Liq7US5CpdHExZLfPMBPxQHHUObV587kGvCLniLr1UTx0fGFIeGNWd005WIqQXqEda9GyAi7T2e7DUupVv0g==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/client-abtesting@5.36.0':
-    resolution: {integrity: sha512-uGr57O1UqDDeZHYXr1VnUomtdgQMxb6fS8yC/LXCMOn5ucN4k6FlcCRqXQnUyiiFZNG/rVK3zpRiyomq4JWXdQ==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/client-analytics@5.36.0':
-    resolution: {integrity: sha512-/zrf0NMxcvBBQ4r9lIqM7rMt7oI7gY7bZ+bNcgpZAQMvzXbKJVla3MqKGuPC/bfOthKvAcAr0mCZ8/7GwBmkVw==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/client-common@5.36.0':
-    resolution: {integrity: sha512-fDsg9w6xXWQyNkm/VfiWF2D9wnpTPv0fRVei7lWtz7cXJewhOmP1kKE2GaDTI4QDxVxgDkoPJ1+3UVMIzTcjjQ==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/client-insights@5.36.0':
-    resolution: {integrity: sha512-x6ZICyIN3BZjja47lqlMLG+AZwfx9wrYWttd6Daxp+wX/fFGxha6gdqxeoi5J44BmFqK8CUU4u8vpwHqGOCl4g==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/client-personalization@5.36.0':
-    resolution: {integrity: sha512-gnH9VHrC+/9OuaumbgxNXzzEq1AY2j3tm00ymNXNz35T7RQ2AK/x4T5b2UnjOUJejuXaSJ88gFyPk3nM5OhJZQ==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/client-query-suggestions@5.36.0':
-    resolution: {integrity: sha512-GkWIS+cAMoxsNPHEp3j7iywO9JJMVHVCWHzPPHFXIe0iNIOfsnZy5MqC1T9sifjqoU9b0GGbzzdxB3TEdwfiFA==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/client-search@5.36.0':
-    resolution: {integrity: sha512-MLx32nSeDSNxfx28IfvwfHEfeo3AYe9JgEj0rLeYtJGmt0W30K6tCNokxhWGUUKrggQTH6H1lnohWsoj2OC2bw==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/ingestion@1.36.0':
-    resolution: {integrity: sha512-6zmlPLCsyzShOsfs1G1uqxwLTojte3NLyukwyUmJFfa46DSq3wkIOE9hFtqAoV951dXp4sZd2KCFYJmgRjcYbA==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/monitoring@1.36.0':
-    resolution: {integrity: sha512-SjJeDqlzAKJiWhquqfDWLEu5X/PIM+5KvUH65c4LBvt8T+USOVJbijtzA9UHZ1eUIfFSDBmbzEH0YvlS6Di2mg==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/recommend@5.36.0':
-    resolution: {integrity: sha512-FalJm3h9fwoZZpkkMpA0r4Grcvjk32FzmC4CXvlpyF/gBvu6pXE01yygjJBU20zGVLGsXU+Ad8nYPf+oGD7Zkg==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/requester-browser-xhr@5.36.0':
-    resolution: {integrity: sha512-weE9SImWIDmQrfGLb1pSPEfP3mioKQ84GaQRpUmjFxlxG/4nW2bSsmkV+kNp1s+iomL2gnxFknSmcQuuAy+kPA==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/requester-fetch@5.36.0':
-    resolution: {integrity: sha512-zGPI2sgzvOwCHTVMmDvc301iirOKCtJ+Egh+HQB/+DG0zTGUT1DpdwQVT25A7Yin/twnO8CkFpI/S+74FVYNjg==}
-    engines: {node: '>= 14.0.0'}
-
-  '@algolia/requester-node-http@5.36.0':
-    resolution: {integrity: sha512-dNbBGE/O6VG/6vFhv3CFm5za4rubAVrhQf/ef0YWiDqPMmalPxGEzIijw4xV1mU1JmX2ffyp/x8Kdtz24sDkOQ==}
-    engines: {node: '>= 14.0.0'}
 
   '@antfu/install-pkg@1.1.0':
     resolution: {integrity: sha512-MGQsmw10ZyI+EJo45CdSER4zEb+p31LpDAFp2Z3gkSd1yqVZGi0Ebx++YTEMonJy4oChEMLsxZ64j8FH6sSqtQ==}
@@ -454,6 +395,37 @@ packages:
   '@oslojs/encoding@1.1.0':
     resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
 
+  '@pagefind/darwin-arm64@1.3.0':
+    resolution: {integrity: sha512-365BEGl6ChOsauRjyVpBjXybflXAOvoMROw3TucAROHIcdBvXk9/2AmEvGFU0r75+vdQI4LJdJdpH4Y6Yqaj4A==}
+    cpu: [arm64]
+    os: [darwin]
+
+  '@pagefind/darwin-x64@1.3.0':
+    resolution: {integrity: sha512-zlGHA23uuXmS8z3XxEGmbHpWDxXfPZ47QS06tGUq0HDcZjXjXHeLG+cboOy828QIV5FXsm9MjfkP5e4ZNbOkow==}
+    cpu: [x64]
+    os: [darwin]
+
+  '@pagefind/default-ui@1.3.0':
+    resolution: {integrity: sha512-CGKT9ccd3+oRK6STXGgfH+m0DbOKayX6QGlq38TfE1ZfUcPc5+ulTuzDbZUnMo+bubsEOIypm4Pl2iEyzZ1cNg==}
+
+  '@pagefind/linux-arm64@1.3.0':
+    resolution: {integrity: sha512-8lsxNAiBRUk72JvetSBXs4WRpYrQrVJXjlRRnOL6UCdBN9Nlsz0t7hWstRk36+JqHpGWOKYiuHLzGYqYAqoOnQ==}
+    cpu: [arm64]
+    os: [linux]
+
+  '@pagefind/linux-x64@1.3.0':
+    resolution: {integrity: sha512-hAvqdPJv7A20Ucb6FQGE6jhjqy+vZ6pf+s2tFMNtMBG+fzcdc91uTw7aP/1Vo5plD0dAOHwdxfkyw0ugal4kcQ==}
+    cpu: [x64]
+    os: [linux]
+
+  '@pagefind/windows-x64@1.3.0':
+    resolution: {integrity: sha512-BR1bIRWOMqkf8IoU576YDhij1Wd/Zf2kX/kCI0b2qzCKC8wcc2GQJaaRMCpzvCCrmliO4vtJ6RITp/AnoYUUmQ==}
+    cpu: [x64]
+    os: [win32]
+
+  '@polka/url@1.0.0-next.29':
+    resolution: {integrity: sha512-wwQAWhWSuHaag8c4q/KN/vCoeOJYshAIvMQwD4GpSb3OiZklFfvAgmj0VCBBImRpuF/aFgIRzllXlVX93Jevww==}
+
   '@rollup/pluginutils@5.2.0':
     resolution: {integrity: sha512-qWJ2ZTbmumwiLFomfzTyt5Kng4hwPi9rwCYN4SHb6eaRU1KNO4ccxINHr/VhH4GgPlt1XfSTLX2LBTme8ne4Zw==}
     engines: {node: '>=14.0.0'}
@@ -730,10 +702,6 @@ packages:
   add-stream@1.0.0:
     resolution: {integrity: sha512-qQLMr+8o0WC4FZGQTcJiKBVC59JylcPSrTtk6usvmIDFUOCKegapy1VHQwRbFMOFyb/inzUVqHs+eMYKDM1YeQ==}
 
-  algoliasearch@5.36.0:
-    resolution: {integrity: sha512-FpwQ+p4x4RIsWnPj2z9idOC70T90ga7Oeh8BURSFKpqp5lITRsgkIj/bwYj2bY5xbyD7uBuP9AZRnM5EV20WOw==}
-    engines: {node: '>= 14.0.0'}
-
   ansi-align@3.0.1:
     resolution: {integrity: sha512-IOfwwBF5iczOjp/WeY4YxyjqAFMQoZufdQWDd19SEExbVLNXqvpzSJ/M7Za4/sCPmQ0+GRquoA7bGcINcxew6w==}
 
@@ -761,9 +729,6 @@ packages:
     resolution: {integrity: sha512-KMReFUr0B4t+D+OBkjR3KYqvocp2XaSzO55UcB6mgQMd3KbcE+mWTyvVV7D/zsdEbNnV6acZUutkiHQXvTr1Rw==}
     engines: {node: '>= 8'}
 
-  argparse@1.0.10:
-    resolution: {integrity: sha512-o5Roy6tNG4SL/FOkCAN6RzjiakZS25RLYFrcMttJqbdd8BWrnA+fGz57iN5Pb06pvBGvl5gQ0B48dJlslXvoTg==}
-
   argparse@2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
@@ -780,6 +745,11 @@ packages:
   arrify@1.0.1:
     resolution: {integrity: sha512-3CYzex9M9FGQjCGMGyi6/31c8GJbgb0qGyrx5HWxPd0aCwh4cB2YjMb2Xf9UuoogrMrlO9cTqnB5rI5GHZTcUA==}
     engines: {node: '>=0.10.0'}
+
+  astro-pagefind@1.8.3:
+    resolution: {integrity: sha512-Nfo1TdlEHdkXTiI0KpimLqX6awK3qWTil7IOJvk5Q8x+0VBTpIEp9QvGgoAxXDe3upAHLVsg4y7U1uUPm7GC9w==}
+    peerDependencies:
+      astro: ^2.0.4 || ^3 || ^4 || ^5
 
   astro@5.13.3:
     resolution: {integrity: sha512-V0mUOUK70UZ7xqXp5Noqse/SREU0P756KgFufBEluq5LkmBejzC2GENMUA2Na+PFwUjemElJtRlpKyrnKpFhSQ==}
@@ -1206,11 +1176,6 @@ packages:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
 
-  esprima@4.0.1:
-    resolution: {integrity: sha512-eGuFFw7Upda+g4p+QHvnW0RyTX/SVeJBDM/gCtMARO0cLuT2HcEKnTPvhjV6aGeqrCB/sbNop0Kszm0jsaWU4A==}
-    engines: {node: '>=4'}
-    hasBin: true
-
   estree-walker@2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
 
@@ -1222,10 +1187,6 @@ packages:
 
   exsolve@1.0.7:
     resolution: {integrity: sha512-VO5fQUzZtI6C+vx4w/4BWJpg3s/5l+6pRQEHzFRM8WFi4XffSP1Z+4qi7GbjWbvRQEbdIco5mIMq+zX4rPuLrw==}
-
-  extend-shallow@2.0.1:
-    resolution: {integrity: sha512-zCnTtlxNoAiDc3gqY2aYAWFx7XWWiasuF2K8Me5WbN8otHKTUKBwjPtNpRs/rbUZm7KxWAaNj7P1a/p52GbVug==}
-    engines: {node: '>=0.10.0'}
 
   extend@3.0.2:
     resolution: {integrity: sha512-fjquC59cD7CyW6urNXK0FBufkZcoiGG80wTuPujX590cB5Ttln20E2UB4S/WARVqhXffZl2LNgS+gQdPIIim/g==}
@@ -1334,10 +1295,6 @@ packages:
   graceful-fs@4.2.11:
     resolution: {integrity: sha512-RbJ5/jmFcNNCcDV5o9eTnBLJ/HszWV0P73bc+Ff4nS/rJj+YaS6IGyiOL0VoBYX+l1Wrl3k63h/KrH+nhJ0XvQ==}
 
-  gray-matter@4.0.3:
-    resolution: {integrity: sha512-5v6yZd4JK3eMI3FqqCouswVqwugaA9r4dNZB1wwcmrD02QkV5H0y7XBQW8QwQqEaZY1pM9aqORSORhJRdNK44Q==}
-    engines: {node: '>=6.0'}
-
   h3@1.15.4:
     resolution: {integrity: sha512-z5cFQWDffyOe4vQ9xIqNfCZdV4p//vy6fBnr8Q1AWnVZ0teurKMG66rLj++TKwKPUP3u7iMUvrvKaEUiQw2QWQ==}
 
@@ -1443,10 +1400,6 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     hasBin: true
 
-  is-extendable@0.1.1:
-    resolution: {integrity: sha512-5BMULNob1vgFX6EjQw5izWDxrecWK9AM72rugNr0TFldMOi0fj6Jk+zeKIt0xGj4cEfQIJth4w3OKWOJ4f+AFw==}
-    engines: {node: '>=0.10.0'}
-
   is-fullwidth-code-point@3.0.0:
     resolution: {integrity: sha512-zymm5+u+sCsSWyD9qNaejV3DFvhCKclKdizYaJUuHA83RLjb7nSuGnddCHGv0hk+KY7BMAlsWeK4Ueg6EV6XQg==}
     engines: {node: '>=8'}
@@ -1489,10 +1442,6 @@ packages:
 
   js-tokens@4.0.0:
     resolution: {integrity: sha512-RdJUflcE3cUzKiMqQgsCu06FPu9UdIJO0beYbPhHN4k6apgJtifcoCtT9bcxOpYBtpD2kCM6Sbzg4CausW/PKQ==}
-
-  js-yaml@3.14.1:
-    resolution: {integrity: sha512-okMH7OXXJ7YrN9Ok3/SXrnu4iX9yOk+25nqX4imS2npuvTYDmo/QEZoqwZkYaIDk3jVvBOTOIEgEhaLOynBS9g==}
-    hasBin: true
 
   js-yaml@4.1.0:
     resolution: {integrity: sha512-wpxZs9NoxZaJESJGIZTyDEaYpl0FKSA+FB9aJiyemKhMwkxQg63h4T1KJgUGHpTqPDNRcmmYLugrRjJlBtWvRA==}
@@ -1962,6 +1911,10 @@ packages:
   package-manager-detector@1.3.0:
     resolution: {integrity: sha512-ZsEbbZORsyHuO00lY1kV3/t72yp6Ysay6Pd17ZAlNGuGwmWDLCJxFpRs0IzfXfj1o4icJOkUEioexFHzyPurSQ==}
 
+  pagefind@1.3.0:
+    resolution: {integrity: sha512-8KPLGT5g9s+olKMRTU9LFekLizkVIu9tes90O1/aigJ0T5LmyPqTzGJrETnSw3meSYg58YH7JTzhTTW/3z6VAw==}
+    hasBin: true
+
   pako@0.2.9:
     resolution: {integrity: sha512-NUcwaKxUxWrZLpDG+z/xZaCgQITkA/Dv4V/T6bw7VON6l1Xz/VnrBqrYjZQ12TamKHzITTfOEIYUj48y2KXImA==}
 
@@ -2190,10 +2143,6 @@ packages:
   safer-buffer@2.1.2:
     resolution: {integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==}
 
-  section-matter@1.0.0:
-    resolution: {integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==}
-    engines: {node: '>=4'}
-
   semver@5.7.2:
     resolution: {integrity: sha512-cBznnQ9KjJqU67B52RMC65CMarK2600WFnbkcaiwWq3xy/5haFJlshgnpjovMVJ+Hff49d8GEn0b87C5pDQ10g==}
     hasBin: true
@@ -2216,6 +2165,10 @@ packages:
 
   simple-swizzle@0.2.2:
     resolution: {integrity: sha512-JA//kQgZtbuY83m+xT+tXJkmJncGMTFT+C+g2h2R9uxkYIrE2yy9sgmcLhCnw57/WSD+Eh3J97FPEDFnbXnDUg==}
+
+  sirv@3.0.1:
+    resolution: {integrity: sha512-FoqMu0NCGBLCcAkS1qA+XJIQTR6/JHfQXl+uGteNCQ76T91DMUjPa9xfmeqMY3z80nLSg9yQmNjK0Px6RWsH/A==}
+    engines: {node: '>=18'}
 
   sisteransi@1.0.5:
     resolution: {integrity: sha512-bLGGlR1QxBcynn2d5YmDX4MGjlZvy2MRBDRNHLJ8VI6l6+9FUiyTFNJ0IveOSP0bcXgVDPRcfGqA0pjaqUpfVg==}
@@ -2257,9 +2210,6 @@ packages:
   split@1.0.1:
     resolution: {integrity: sha512-mTyOoPbrivtXnwnIxZRFYRrPNtEFKlpB2fvjSnCQUiAA6qAZzqwna5envK4uk6OIeP17CsdF3rSBGYVBsU0Tkg==}
 
-  sprintf-js@1.0.3:
-    resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
-
   standard-version@9.5.0:
     resolution: {integrity: sha512-3zWJ/mmZQsOaO+fOlsa0+QK90pwhNd042qEcw6hKFNoLFs7peGyvPffpEBbK/DSGPbyOvli0mUIFv5A4qTjh2Q==}
     engines: {node: '>=10'}
@@ -2293,10 +2243,6 @@ packages:
   strip-ansi@7.1.0:
     resolution: {integrity: sha512-iq6eVVI64nQQTRYq2KtEg2d2uU7LElhTJwsH4YzIHZshxlgZms/wIc4VoDQTlG/IvVIrBKG06CrZnp0qv7hkcQ==}
     engines: {node: '>=12'}
-
-  strip-bom-string@1.0.0:
-    resolution: {integrity: sha512-uCC2VHvQRYu+lMh4My/sFNmF2klFymLX1wHJeXnbEJERpV/ZsVuonzerjfrGpIGF7LBVa1O7i9kjiWvJiFck8g==}
-    engines: {node: '>=0.10.0'}
 
   strip-bom@3.0.0:
     resolution: {integrity: sha512-vavAMRXOgBVNF6nyEEmL3DBK19iRpDcoIwW+swQ+CbGiu7lju6t+JklA1MHweoWtadgt4ISVUsXLyDq34ddcwA==}
@@ -2362,6 +2308,10 @@ packages:
   tinyglobby@0.2.14:
     resolution: {integrity: sha512-tX5e7OM1HnYr2+a2C/4V0htOcSQcoSTH9KgJnVvNm5zm/cyEWKJ7j7YutsH9CxMdtOkkLFy2AHrMci9IM8IPZQ==}
     engines: {node: '>=12.0.0'}
+
+  totalist@3.0.1:
+    resolution: {integrity: sha512-sf4i37nQ2LBx4m3wB74y+ubopq6W/dIzXg0FDGjsYnZHVa1Da8FH853wlL2gtUhg+xJXjfk3kUZS3BRoQeoQBQ==}
+    engines: {node: '>=6'}
 
   tr46@0.0.3:
     resolution: {integrity: sha512-N3WMsuqV66lT30CrXNbEjx4GEwlow3v6rr4mCcv6prnfwhS01rkgyFdjPNBYd9br7LpXV1+Emh01fHnq2Gdgrw==}
@@ -2691,90 +2641,6 @@ packages:
 
 snapshots:
 
-  '@algolia/abtesting@1.2.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-      '@algolia/requester-browser-xhr': 5.36.0
-      '@algolia/requester-fetch': 5.36.0
-      '@algolia/requester-node-http': 5.36.0
-
-  '@algolia/client-abtesting@5.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-      '@algolia/requester-browser-xhr': 5.36.0
-      '@algolia/requester-fetch': 5.36.0
-      '@algolia/requester-node-http': 5.36.0
-
-  '@algolia/client-analytics@5.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-      '@algolia/requester-browser-xhr': 5.36.0
-      '@algolia/requester-fetch': 5.36.0
-      '@algolia/requester-node-http': 5.36.0
-
-  '@algolia/client-common@5.36.0': {}
-
-  '@algolia/client-insights@5.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-      '@algolia/requester-browser-xhr': 5.36.0
-      '@algolia/requester-fetch': 5.36.0
-      '@algolia/requester-node-http': 5.36.0
-
-  '@algolia/client-personalization@5.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-      '@algolia/requester-browser-xhr': 5.36.0
-      '@algolia/requester-fetch': 5.36.0
-      '@algolia/requester-node-http': 5.36.0
-
-  '@algolia/client-query-suggestions@5.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-      '@algolia/requester-browser-xhr': 5.36.0
-      '@algolia/requester-fetch': 5.36.0
-      '@algolia/requester-node-http': 5.36.0
-
-  '@algolia/client-search@5.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-      '@algolia/requester-browser-xhr': 5.36.0
-      '@algolia/requester-fetch': 5.36.0
-      '@algolia/requester-node-http': 5.36.0
-
-  '@algolia/ingestion@1.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-      '@algolia/requester-browser-xhr': 5.36.0
-      '@algolia/requester-fetch': 5.36.0
-      '@algolia/requester-node-http': 5.36.0
-
-  '@algolia/monitoring@1.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-      '@algolia/requester-browser-xhr': 5.36.0
-      '@algolia/requester-fetch': 5.36.0
-      '@algolia/requester-node-http': 5.36.0
-
-  '@algolia/recommend@5.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-      '@algolia/requester-browser-xhr': 5.36.0
-      '@algolia/requester-fetch': 5.36.0
-      '@algolia/requester-node-http': 5.36.0
-
-  '@algolia/requester-browser-xhr@5.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-
-  '@algolia/requester-fetch@5.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-
-  '@algolia/requester-node-http@5.36.0':
-    dependencies:
-      '@algolia/client-common': 5.36.0
-
   '@antfu/install-pkg@1.1.0':
     dependencies:
       package-manager-detector: 1.3.0
@@ -3070,6 +2936,25 @@ snapshots:
 
   '@oslojs/encoding@1.1.0': {}
 
+  '@pagefind/darwin-arm64@1.3.0':
+    optional: true
+
+  '@pagefind/darwin-x64@1.3.0':
+    optional: true
+
+  '@pagefind/default-ui@1.3.0': {}
+
+  '@pagefind/linux-arm64@1.3.0':
+    optional: true
+
+  '@pagefind/linux-x64@1.3.0':
+    optional: true
+
+  '@pagefind/windows-x64@1.3.0':
+    optional: true
+
+  '@polka/url@1.0.0-next.29': {}
+
   '@rollup/pluginutils@5.2.0(rollup@4.48.0)':
     dependencies:
       '@types/estree': 1.0.8
@@ -3299,23 +3184,6 @@ snapshots:
 
   add-stream@1.0.0: {}
 
-  algoliasearch@5.36.0:
-    dependencies:
-      '@algolia/abtesting': 1.2.0
-      '@algolia/client-abtesting': 5.36.0
-      '@algolia/client-analytics': 5.36.0
-      '@algolia/client-common': 5.36.0
-      '@algolia/client-insights': 5.36.0
-      '@algolia/client-personalization': 5.36.0
-      '@algolia/client-query-suggestions': 5.36.0
-      '@algolia/client-search': 5.36.0
-      '@algolia/ingestion': 1.36.0
-      '@algolia/monitoring': 1.36.0
-      '@algolia/recommend': 5.36.0
-      '@algolia/requester-browser-xhr': 5.36.0
-      '@algolia/requester-fetch': 5.36.0
-      '@algolia/requester-node-http': 5.36.0
-
   ansi-align@3.0.1:
     dependencies:
       string-width: 4.2.3
@@ -3339,10 +3207,6 @@ snapshots:
       normalize-path: 3.0.0
       picomatch: 2.3.1
 
-  argparse@1.0.10:
-    dependencies:
-      sprintf-js: 1.0.3
-
   argparse@2.0.1: {}
 
   aria-query@5.3.2: {}
@@ -3352,6 +3216,13 @@ snapshots:
   array-iterate@2.0.1: {}
 
   arrify@1.0.1: {}
+
+  astro-pagefind@1.8.3(astro@5.13.3(@types/node@24.3.0)(encoding@0.1.13)(jiti@2.5.1)(lightningcss@1.30.1)(rollup@4.48.0)(typescript@5.9.2)):
+    dependencies:
+      '@pagefind/default-ui': 1.3.0
+      astro: 5.13.3(@types/node@24.3.0)(encoding@0.1.13)(jiti@2.5.1)(lightningcss@1.30.1)(rollup@4.48.0)(typescript@5.9.2)
+      pagefind: 1.3.0
+      sirv: 3.0.1
 
   astro@5.13.3(@types/node@24.3.0)(encoding@0.1.13)(jiti@2.5.1)(lightningcss@1.30.1)(rollup@4.48.0)(typescript@5.9.2):
     dependencies:
@@ -3911,8 +3782,6 @@ snapshots:
 
   escape-string-regexp@5.0.0: {}
 
-  esprima@4.0.1: {}
-
   estree-walker@2.0.2: {}
 
   estree-walker@3.0.3:
@@ -3922,10 +3791,6 @@ snapshots:
   eventemitter3@5.0.1: {}
 
   exsolve@1.0.7: {}
-
-  extend-shallow@2.0.1:
-    dependencies:
-      is-extendable: 0.1.1
 
   extend@3.0.2: {}
 
@@ -4035,13 +3900,6 @@ snapshots:
   globals@15.15.0: {}
 
   graceful-fs@4.2.11: {}
-
-  gray-matter@4.0.3:
-    dependencies:
-      js-yaml: 3.14.1
-      kind-of: 6.0.3
-      section-matter: 1.0.0
-      strip-bom-string: 1.0.0
 
   h3@1.15.4:
     dependencies:
@@ -4201,8 +4059,6 @@ snapshots:
 
   is-docker@3.0.0: {}
 
-  is-extendable@0.1.1: {}
-
   is-fullwidth-code-point@3.0.0: {}
 
   is-inside-container@1.0.0:
@@ -4232,11 +4088,6 @@ snapshots:
   jiti@2.5.1: {}
 
   js-tokens@4.0.0: {}
-
-  js-yaml@3.14.1:
-    dependencies:
-      argparse: 1.0.10
-      esprima: 4.0.1
 
   js-yaml@4.1.0:
     dependencies:
@@ -4853,6 +4704,14 @@ snapshots:
 
   package-manager-detector@1.3.0: {}
 
+  pagefind@1.3.0:
+    optionalDependencies:
+      '@pagefind/darwin-arm64': 1.3.0
+      '@pagefind/darwin-x64': 1.3.0
+      '@pagefind/linux-arm64': 1.3.0
+      '@pagefind/linux-x64': 1.3.0
+      '@pagefind/windows-x64': 1.3.0
+
   pako@0.2.9: {}
 
   parse-json@4.0.0:
@@ -5162,11 +5021,6 @@ snapshots:
   safer-buffer@2.1.2:
     optional: true
 
-  section-matter@1.0.0:
-    dependencies:
-      extend-shallow: 2.0.1
-      kind-of: 6.0.3
-
   semver@5.7.2: {}
 
   semver@6.3.1: {}
@@ -5216,6 +5070,12 @@ snapshots:
       is-arrayish: 0.3.2
     optional: true
 
+  sirv@3.0.1:
+    dependencies:
+      '@polka/url': 1.0.0-next.29
+      mrmime: 2.0.1
+      totalist: 3.0.1
+
   sisteransi@1.0.5: {}
 
   smol-toml@1.4.2: {}
@@ -5249,8 +5109,6 @@ snapshots:
   split@1.0.1:
     dependencies:
       through: 2.3.8
-
-  sprintf-js@1.0.3: {}
 
   standard-version@9.5.0:
     dependencies:
@@ -5303,8 +5161,6 @@ snapshots:
   strip-ansi@7.1.0:
     dependencies:
       ansi-regex: 6.2.0
-
-  strip-bom-string@1.0.0: {}
 
   strip-bom@3.0.0: {}
 
@@ -5362,6 +5218,8 @@ snapshots:
     dependencies:
       fdir: 6.5.0(picomatch@4.0.3)
       picomatch: 4.0.3
+
+  totalist@3.0.1: {}
 
   tr46@0.0.3: {}
 

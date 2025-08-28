@@ -47,11 +47,11 @@ const carouselArticles = allArticles
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         {themeConfig.categories.map((category) => (
           <ArticleSection
-  title={category.title}
-  articles={categoryArticles[category.name]?.length > 0 ? categoryArticles[category.name] : []}
-  category={category.name}
-  key={category.name}
-/>
+            title={category.title}
+            articles={categoryArticles[category.name]?.length > 0 ? categoryArticles[category.name] : []}
+            category={category.name}
+            key={category.name}
+          />
         ))}
       </div>
     <LatestArticle articles={allArticles} />
