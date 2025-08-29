@@ -1,6 +1,7 @@
 ---
 // 轮播卡片文章组件
 const { articles = [] } = Astro.props;
+import { Image } from 'astro:assets';
 import { themeConfig } from '../content/config';
 ---
 
@@ -26,7 +27,7 @@ import { themeConfig } from '../content/config';
         articles.map((article, index) => (
           <a href={`/articles/${encodeURIComponent(article.slug)}`} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
               <div class="h-40 bg-gray-200 overflow-hidden">
-                <img src={article.data.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                <Image src={article.data.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={160} />
               </div>
               <div class="p-3 flex-1 flex flex-col">
                 <div class="mb-2">
