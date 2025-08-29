@@ -123,6 +123,86 @@ const bundlePath = `${import.meta.env.BASE_URL}pagefind/`;
 <script>
   document.addEventListener('DOMContentLoaded', () => {
     const searchToggle = document.getElementById('search-toggle');
+    const searchContainer = document.getElementById('pagefind-search-container');
+    
+    if (searchToggle && searchContainer) {
+      // 切换搜索框显示/隐藏
+      searchToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (searchContainer.classList.contains('invisible')) {
+          // 显示搜索框
+          searchContainer.classList.remove('invisible', 'opacity-0', 'scale-95');
+          searchContainer.classList.add('opacity-100', 'scale-100');
+          // 聚焦到搜索输入框
+          const searchInput = searchContainer.querySelector('.pagefind-ui__search-input');
+          if (searchInput) {
+            searchInput.focus();
+          }
+        } else {
+          // 隐藏搜索框
+          searchContainer.classList.add('invisible', 'opacity-0', 'scale-95');
+          searchContainer.classList.remove('opacity-100', 'scale-100');
+        }
+      });
+      
+      // 点击页面其他地方关闭搜索框
+      document.addEventListener('click', (e) => {
+        if (!searchToggle.contains(e.target) && !searchContainer.contains(e.target)) {
+          searchContainer.classList.add('invisible', 'opacity-0', 'scale-95');
+          searchContainer.classList.remove('opacity-100', 'scale-100');
+        }
+      });
+      
+      // ESC键关闭搜索框
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !searchContainer.classList.contains('invisible')) {
+          searchContainer.classList.add('invisible', 'opacity-0', 'scale-95');
+          searchContainer.classList.remove('opacity-100', 'scale-100');
+        }
+      });
+    }
+
+    // 导航栏滚动逻辑
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    function handleScroll() {
+      const navbar = document.getElementById('navbar');
+      if (!navbar) return;
+
+      const currentScrollY = window.scrollY;
+      
+      // 向下滚动时显示标题
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        navbar.classList.add('show-title');
+        navbar.classList.remove('hide-nav');
+      } 
+      // 向上滚动时显示完整导航栏
+      else if (currentScrollY < lastScrollY) {
+        navbar.classList.remove('show-title');
+        navbar.classList.remove('hide-nav');
+      }
+      
+      // 滚动到顶部时重置
+      if (currentScrollY <= 10) {
+        navbar.classList.remove('show-title');
+        navbar.classList.remove('hide-nav');
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    });
+  });
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchToggle = document.getElementById('search-toggle');
     const searchDropdown = document.getElementById('search-dropdown');
     const searchClose = document.getElementById('search-close');
     const pagefindContainer = document.getElementById('pagefind-ui-container');

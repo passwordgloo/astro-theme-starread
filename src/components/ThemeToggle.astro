@@ -1,97 +1,116 @@
+<button id="theme-toggle" class="hidden md:block p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" title="切换主题">
+  <span class="icon-[lucide--moon] h-5 w-5 nav-theme-icon"></span>
+</button>
+
 <script>
-  // 添加滚动监听事件，实现导航栏样式切换
+  // 主题切换和logo同步脚本
   document.addEventListener('DOMContentLoaded', () => {
-    const header = document.querySelector('header');
-    let lastScrollTop = 0;
+    const htmlElement = document.documentElement;
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
     // 初始化logo根据当前主题
-    const logoImage = document.querySelector('.logo-image');
-    const htmlElement = document.documentElement;
-    if (logoImage) {
-      const isDarkMode = htmlElement.classList.contains('dark');
-      logoImage.src = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
-    }
-
-    // 主题切换时更新logo
-    const themeToggle = document.getElementById('theme-toggle');
-    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
-
     const updateLogo = () => {
-      const logoImage = document.querySelector('.logo-image');
-      if (logoImage) {
-        const isDarkMode = htmlElement.classList.contains('dark');
-        logoImage.src = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
-      }
+      const logoImages = document.querySelectorAll('.logo-image');
+      const isDarkMode = htmlElement.classList.contains('dark');
+      
+      logoImages.forEach(logoImage => {
+        if (logoImage && logoImage.dataset.darkSrc && logoImage.dataset.lightSrc) {
+          const newSrc = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
+          // 使用requestAnimationFrame确保DOM更新完成
+          requestAnimationFrame(() => {
+            if (logoImage.src !== newSrc) {
+              logoImage.src = newSrc;
+            }
+          });
+        }
+      });
     };
 
-    if (themeToggle) {
-      themeToggle.addEventListener('click', updateLogo);
-    }
+    // 更新主题图标
+    const updateThemeIcon = () => {
+      const themeIcons = document.querySelectorAll('.nav-theme-icon');
+      const isDarkMode = htmlElement.classList.contains('dark');
+      const iconClass = isDarkMode ? 'icon-[lucide--sun]' : 'icon-[lucide--moon]';
+      
+      themeIcons.forEach(icon => {
+        if (icon) {
+          icon.className = `${iconClass} h-5 w-5 nav-theme-icon`;
+        }
+      });
+    };
 
-    if (mobileThemeToggle) {
-      mobileThemeToggle.addEventListener('click', updateLogo);
-    }
+    // 完整的主题更新
+    const updateTheme = () => {
+      const isDark = localStorage.theme === 'dark' || 
+                   (!('theme' in localStorage) && mediaQuery.matches);
+      
+      if (isDark) {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+      
+      updateThemeIcon();
+      updateLogo();
+    };
+
+    // 监听主题变化
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          updateLogo();
+          updateThemeIcon();
+        }
+      });
+    });
+
+    observer.observe(htmlElement, { 
+      attributes: true, 
+      attributeFilter: ['class'] 
+    });
+
+    // 主题切换处理
+    const handleThemeToggle = () => {
+      const isDark = htmlElement.classList.contains('dark');
+      localStorage.theme = isDark ? 'light' : 'dark';
+      updateTheme();
+    };
+
+    // 设置主题切换按钮
+    const setupThemeButtons = () => {
+      const themeToggle = document.getElementById('theme-toggle');
+      const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+      
+      [themeToggle, mobileThemeToggle].forEach(btn => {
+        if (btn) {
+          btn.addEventListener('click', handleThemeToggle);
+        }
+      });
+    };
+
+    // 初始化
+    updateTheme();
+    setupThemeButtons();
+
+    // 监听系统主题变化
+    mediaQuery.addEventListener('change', updateTheme);
+
+    // 导航栏滚动效果
+    const header = document.querySelector('header');
+    let lastScrollTop = 0;
 
     window.addEventListener('scroll', () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
-      if (scrollTop > 100) {
-        header.classList.add('show-title');
-      } else {
-        header.classList.remove('show-title');
+      if (header) {
+        if (scrollTop > 100) {
+          header.classList.add('show-title');
+        } else {
+          header.classList.remove('show-title');
+        }
       }
 
       lastScrollTop = scrollTop;
     });
-
-    // 深色模式切换
-    const themeToggleBtn = document.getElementById('theme-toggle');
-    const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
-    const themeIcon = document.getElementById('theme-icon');
-    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-
-    // 检查用户偏好或系统设置
-    const updateTheme = () => {
-      if (localStorage.theme === 'dark' || (!('theme' in localStorage) && mediaQuery.matches)) {
-        htmlElement.classList.add('dark');
-        if (themeIcon) {
-          themeIcon.className = 'icon-[lucide--sun] h-5 w-5 nav-theme-icon';
-        }
-      } else {
-        htmlElement.classList.remove('dark');
-        if (themeIcon) {
-          themeIcon.className = 'icon-[lucide--moon] h-5 w-5 nav-theme-icon';
-        }
-      }
-    };
-
-    // 初始化主题
-    updateTheme();
-
-    // 监听主题切换事件
-    if (themeToggleBtn) {
-      themeToggleBtn.addEventListener('click', () => {
-        if (htmlElement.classList.contains('dark')) {
-          localStorage.theme = 'light';
-        } else {
-          localStorage.theme = 'dark';
-        }
-        updateTheme();
-      });
-    }
-
-    if (mobileThemeToggleBtn) {
-      mobileThemeToggleBtn.addEventListener('click', () => {
-        if (htmlElement.classList.contains('dark')) {
-          localStorage.theme = 'light';
-        } else {
-          localStorage.theme = 'dark';
-        }
-        updateTheme();
-      });
-    }
-
-    // 监听系统主题变化
-    mediaQuery.addEventListener('change', updateTheme);
   });
 </script>

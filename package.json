@@ -14,10 +14,12 @@
     "astro": "^5.13.3"
   },
   "devDependencies": {
+    "@algolia/client-search": "^5.20.4",
     "@iconify/json": "^2.2.377",
     "@iconify/tailwind4": "^1.0.6",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.12",
+    "algoliasearch": "^5.36.0",
     "astro-pagefind": "^1.8.3",
     "conventional-changelog-cli": "^4.1.0",
     "standard-version": "^9.5.0",

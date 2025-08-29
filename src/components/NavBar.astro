@@ -2,7 +2,11 @@
 const { title } = Astro.props;
 import ThemeToggle from "./ThemeToggle.astro";
 import LocalSearch from "../pages/search/LocalSearch.astro";
+import AlgoliaSearch from "../pages/search/AlgoliaSearch.astro";
 import { themeConfig } from '../content/config';
+
+// 根据配置选择搜索组件
+const SearchComponent = themeConfig.search.provider === 'algolia' ? AlgoliaSearch : LocalSearch;
 ---
 <header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md">
   <!-- 确保深色模式切换按钮在移动设备上可见 -->
@@ -19,8 +23,8 @@ import { themeConfig } from '../content/config';
             src={themeConfig.site.logo.image} 
             alt={themeConfig.site.logo.alt} 
             class="h-8 w-auto logo-image" 
-            data-light-src={themeConfig.site.logo.darkImage} 
-            data-dark-src={themeConfig.site.logo.image} 
+            data-light-src={themeConfig.site.logo.image} 
+            data-dark-src={themeConfig.site.logo.darkImage} 
           /> 
         ) : (
           <span class="font-bold text-xl nav-logo-text">{themeConfig.site.logo.text}</span>
@@ -99,20 +103,61 @@ import { themeConfig } from '../content/config';
     </nav>
     <!-- 搜索和登录 -->
     <div class="flex items-center space-x-2">
-      <LocalSearch />
-      <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-        <span class="icon-[lucide--moon] h-5 w-5 nav-theme-icon" id="theme-icon"></span>
-      </button>
+      <SearchComponent />
       <ThemeToggle />
       <button class="hidden md:block rounded-lg bg-sky-600 text-white hover:bg-sky-700 active:bg-sky-800
                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400 dark:active:bg-sky-300
                    dark:focus-visible:ring-sky-300/50 px-4 py-2 rounded-md transition-colors">登录</button>
-      <button class="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors">
+      <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
         <span class="icon-[lucide--menu] h-5 w-5 nav-menu-icon"></span>
       </button>
     </div>
   </div>
 </header>
+
+<!-- 移动端侧边栏 -->
+<div id="mobile-sidebar" class="fixed inset-0 z-50 hidden md:hidden">
+  <div class="fixed inset-0 bg-black/10 backdrop-blur-sm" id="mobile-sidebar-overlay"></div>
+  <div class="fixed right-0 top-0 h-full w-64 bg-white dark:bg-gray-900 shadow-xl transform translate-x-full transition-transform duration-300 ease-in-out" id="mobile-sidebar-content">
+    <div class="p-4 border-b dark:border-gray-700">
+      <div class="flex items-center justify-between">
+        <h3 class="font-semibold text-lg">菜单</h3>
+        <button id="mobile-sidebar-close" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800">
+          <span class="icon-[lucide--x] h-5 w-5"></span>
+        </button>
+      </div>
+    </div>
+    <nav class="p-4 space-y-2">
+      {themeConfig.nav.map((item) => (
+        <div key={item.name}>
+          {item.href ? (
+            <a href={item.href} class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+              {item.icon && <span class={`${item.icon} h-5 w-5`}></span>}
+              <span>{item.name}</span>
+            </a>
+          ) : (
+            <div class="p-3">
+              <div class="flex items-center space-x-3 mb-2">
+                {item.icon && <span class={`${item.icon} h-5 w-5`}></span>}
+                <span class="font-medium">{item.name}</span>
+              </div>
+              {item.items && item.items.map((subItem) => (
+                <div key={subItem.text} class="ml-8 space-y-1">
+                  {subItem.text && <div class="text-sm text-gray-600 dark:text-gray-400 py-1">{subItem.text}</div>}
+                  {subItem.items && subItem.items.map((subSubItem) => (
+                    <a key={subSubItem.text} href={subSubItem.link} class="block py-1 text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                      {subSubItem.text}
+                    </a>
+                  ))}
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+      ))}
+    </nav>
+  </div>
+</div>
 
 <style>
   /* 导航栏滚动效果样式 */
@@ -231,5 +276,50 @@ import { themeConfig } from '../content/config';
         ticking = true;
       }
     });
+
+    // 移动端侧边栏交互
+    const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+    const mobileSidebar = document.getElementById('mobile-sidebar');
+    const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
+    const mobileSidebarClose = document.getElementById('mobile-sidebar-close');
+    const mobileSidebarContent = document.getElementById('mobile-sidebar-content');
+
+    if (mobileMenuToggle && mobileSidebar) {
+      // 打开侧边栏
+      mobileMenuToggle.addEventListener('click', () => {
+        mobileSidebar.classList.remove('hidden');
+        setTimeout(() => {
+          mobileSidebarOverlay.classList.add('opacity-100');
+          mobileSidebarContent.classList.remove('translate-x-full');
+        }, 10);
+        document.body.classList.add('overflow-hidden');
+      });
+
+      // 关闭侧边栏
+      const closeSidebar = () => {
+        mobileSidebarContent.classList.add('translate-x-full');
+        mobileSidebarOverlay.classList.remove('opacity-100');
+        setTimeout(() => {
+          mobileSidebar.classList.add('hidden');
+          document.body.classList.remove('overflow-hidden');
+        }, 300);
+      };
+
+      if (mobileSidebarClose) mobileSidebarClose.addEventListener('click', closeSidebar);
+      if (mobileSidebarOverlay) mobileSidebarOverlay.addEventListener('click', closeSidebar);
+
+      // ESC键关闭侧边栏
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !mobileSidebar.classList.contains('hidden')) {
+          closeSidebar();
+        }
+      });
+
+      // 侧边栏链接点击后关闭
+      const sidebarLinks = mobileSidebar.querySelectorAll('a');
+      sidebarLinks.forEach(link => {
+        link.addEventListener('click', closeSidebar);
+      });
+    }
   });
 </script>
