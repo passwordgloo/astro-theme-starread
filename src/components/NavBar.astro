@@ -8,10 +8,10 @@ import { themeConfig } from '../content/config';
 // 根据配置选择搜索组件
 const SearchComponent = themeConfig.search.provider === 'algolia' ? AlgoliaSearch : LocalSearch;
 ---
-<header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md">
+<header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md" client:load>
   <!-- 确保深色模式切换按钮在移动设备上可见 -->
   <div class="md:hidden absolute right-4 top-3 z-10">
-    <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
+    <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors" client:load>
       <span class="icon-[lucide--moon] h-5 w-5 nav-mobile-icon"></span>
     </button>
   </div>
