@@ -1,10 +1,11 @@
 ---
 // 轮播卡片文章组件
 const { articles = [] } = Astro.props;
+import { Image } from 'astro:assets';
 import { themeConfig } from '../content/config';
 ---
 
-<div class="relative bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
+<div class="relative bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden" client:load>
   <div class="px-4 py-3 border-b border-gray-200 dark:border-white/10 flex justify-between items-center">
     <div class="flex items-center space-x-2">
       <span class="icon-[lucide--grid] w-5 h-5 text-primary"></span>
@@ -26,7 +27,7 @@ import { themeConfig } from '../content/config';
         articles.map((article, index) => (
           <a href={`/articles/${encodeURIComponent(article.slug)}`} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
               <div class="h-40 bg-gray-200 overflow-hidden">
-                <img src={article.data.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                <Image src={article.data.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={160} />
               </div>
               <div class="p-3 flex-1 flex flex-col">
                 <div class="mb-2">
