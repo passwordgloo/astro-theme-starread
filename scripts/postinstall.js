@@ -3,8 +3,8 @@ const fs = require('fs');
 const path = require('path');
 
 // 配置文件路径
-const targetConfigPath = path.resolve(__dirname, '../src/starread.config.ts');
-const packageJsonPath = path.resolve(__dirname, '../package.json');
+const targetConfigPath = path.resolve(process.cwd(), 'src/starread.config.ts');
+const packageJsonPath = path.resolve(process.cwd(), 'package.json');
 
 // 1. 生成主题配置文件
 function generateConfigFile() {
@@ -72,6 +72,7 @@ export const themeConfig: starreadthemeconfig = {
 };
 `;
 
+  fs.mkdirSync(path.dirname(targetConfigPath), { recursive: true });
   fs.writeFileSync(targetConfigPath, defaultConfig, 'utf8');
   console.log(`✅ 主题配置文件已生成: ${targetConfigPath}`);
 }
@@ -81,11 +82,27 @@ function updatePackageJson() {
   const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
   // 添加或更新脚本
+  // 确保dependencies字段存在
+  if (!packageJson.dependencies) {
+    packageJson.dependencies = {};
+  }
+
+  packageJson.dependencies = {
+    ...packageJson.dependencies,
+    "astro": "^5.13.3"
+  };
+
   packageJson.scripts = {
     ...packageJson.scripts,
     "dev": "astro dev",
-    "build": "astro build"
+    "build": "astro build",
+    "postinstall": "node scripts/postinstall.js"
   };
+
+  // 确保package.json格式正确
+  if (!packageJson.devDependencies) {
+    packageJson.devDependencies = {};
+  }
 
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2), 'utf8');
   console.log(`✅ package.json脚本已配置`);
@@ -100,11 +117,53 @@ function showWelcomeMessage() {
   console.log(`✨ 开始使用吧！如有问题，请查看文档或提交issue。\n`);
 }
 
+// 4. 复制模板文件到项目
+function copyTemplateFiles() {
+  try {
+    // 复制src目录
+    const packageSrcDir = path.resolve(__dirname, '../src');
+    const userSrcDir = path.resolve(process.cwd(), 'src');
+    
+    if (!fs.existsSync(userSrcDir)) {
+      fs.mkdirSync(userSrcDir, { recursive: true });
+      fs.cpSync(packageSrcDir, userSrcDir, { recursive: true });
+      console.log(`✅ 已复制src目录到项目: ${userSrcDir}`);
+    }
+    
+    // 复制scripts目录
+    const packageScriptsDir = path.resolve(__dirname, '../scripts');
+    const userScriptsDir = path.resolve(process.cwd(), 'scripts');
+
+    if (!fs.existsSync(userScriptsDir)) {
+      fs.mkdirSync(userScriptsDir, { recursive: true });
+      fs.cpSync(packageScriptsDir, userScriptsDir, { recursive: true });
+      console.log(`✅ 已复制scripts目录到项目: ${userScriptsDir}`);
+    }
+
+    // 复制根目录配置文件
+    const rootFiles = ['astro.config.mjs', 'tsconfig.json'];
+    const packageRootDir = path.resolve(__dirname, '..');
+
+    rootFiles.forEach(file => {
+      const srcPath = path.join(packageRootDir, file);
+      const destPath = path.join(process.cwd(), file);
+
+      if (fs.existsSync(srcPath) && !fs.existsSync(destPath)) {
+        fs.copyFileSync(srcPath, destPath);
+        console.log(`✅ 已复制配置文件: ${file}`);
+      }
+    });
+  } catch (error) {
+    console.error('❌ 复制模板文件时出错:', error.message);
+  }
+}
+
 // 主执行流程
 async function main() {
   try {
     generateConfigFile();
     updatePackageJson();
+    copyTemplateFiles();
     showWelcomeMessage();
   } catch (error) {
     console.error('❌ 初始化过程中出错:', error.message);

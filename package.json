@@ -1,14 +1,15 @@
 {
   "name": "astro-theme-starread",
   "type": "module",
-  "version": "1.6.0",
-  "description": "既有星光般的璀璨，又不失简洁和高端感的Astro主题",
-  "keywords": [
-    "astro",
-    "theme",
-    "blog",
-    "star-read"
-  ],
+    "version": "1.6.2",
+    "files": ["src", "scripts", "public", "astro.config.mjs", "tsconfig.json"],
+    "description": "既有星光般的璀璨，又不失简洁和高端感的Astro主题",
+    "keywords": [
+      "astro",
+      "astro-theme",
+      "blog-theme",
+      "astro-blog"
+    ],
   "author": "passwordgloo",
   "license": "CC-BY-SA-4.0",
   "homepage": "https://github.com/passwordgloo/astro-theme-starread#readme",
@@ -26,12 +27,25 @@
     "astro": "astro",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "release": "standard-version",
-    "publish": "npm publish --registry=https://registry.npmjs.org"
+    "publish": "npm publish --registry=https://registry.npmjs.org",
+    "prepublishOnly": "npm run build"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
-    "astro": "^5.13.3",
     "typescript": "^5.9.2"
+  },
+  "peerDependencies": {
+    "astro": "^5.0.0 || ^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "astro": {
+      "optional": false
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0",
+    "pnpm": ">=7.0.0"
   },
   "devDependencies": {
     "@algolia/client-search": "^5.20.4",
