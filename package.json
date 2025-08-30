@@ -11,13 +11,13 @@
   ],
   "author": "passwordgloo",
   "license": "CC-BY-SA-4.0",
-  "homepage": "https://github.com/passwordgloo/star-read#readme",
+  "homepage": "https://github.com/passwordgloo/astro-theme-starread#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/passwordgloo/star-read.git"
+    "url": "https://github.com/passwordgloo/astro-theme-starread.git"
   },
   "bugs": {
-    "url": "https://github.com/passwordgloo/star-read/issues"
+    "url": "https://github.com/passwordgloo/astro-theme-starread/issues"
   },
   "scripts": {
     "dev": "astro dev",
