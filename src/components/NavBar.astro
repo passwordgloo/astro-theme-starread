@@ -8,11 +8,8 @@ import { themeConfig } from '../content/config';
 // 根据配置选择搜索组件
 const SearchComponent = themeConfig.search.provider === 'algolia' ? AlgoliaSearch : LocalSearch;
 ---
-<<<<<<< HEAD
-<header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md">
-=======
+
 <header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md" client:load>
->>>>>>> dev
   <!-- 确保深色模式切换按钮在移动设备上可见 -->
   <div class="md:hidden absolute right-4 top-3 z-10">
     <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors" client:load>
@@ -107,23 +104,12 @@ const SearchComponent = themeConfig.search.provider === 'algolia' ? AlgoliaSearc
     </nav>
     <!-- 搜索和登录 -->
     <div class="flex items-center space-x-2">
-<<<<<<< HEAD
-      <Search />
-      <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
-        <span class="icon-[lucide--moon] h-5 w-5 nav-theme-icon" id="theme-icon"></span>
-      </button>
-=======
       <SearchComponent />
->>>>>>> dev
       <ThemeToggle />
       <button class="hidden md:block rounded-lg bg-sky-600 text-white hover:bg-sky-700 active:bg-sky-800
                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400 dark:active:bg-sky-300
                    dark:focus-visible:ring-sky-300/50 px-4 py-2 rounded-md transition-colors">登录</button>
-<<<<<<< HEAD
-      <button class="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors">
-=======
       <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
->>>>>>> dev
         <span class="icon-[lucide--menu] h-5 w-5 nav-menu-icon"></span>
       </button>
     </div>
@@ -291,8 +277,6 @@ const SearchComponent = themeConfig.search.provider === 'algolia' ? AlgoliaSearc
         ticking = true;
       }
     });
-<<<<<<< HEAD
-=======
 
     // 移动端侧边栏交互
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
@@ -338,6 +322,5 @@ const SearchComponent = themeConfig.search.provider === 'algolia' ? AlgoliaSearc
         link.addEventListener('click', closeSidebar);
       });
     }
->>>>>>> dev
   });
 </script>
