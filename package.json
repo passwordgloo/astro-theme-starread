@@ -26,22 +26,12 @@
     "astro": "astro",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "release": "standard-version",
-    "publish:npm": "npm publish --registry=https://registry.npmjs.org",
-    "publish:gh": "npm publish --registry=https://npm.pkg.github.com",
-    "publish:both": "npm run publish:npm && npm run publish:gh"
-  },
-  "publishConfig": {
-    "npmjs": {
-      "registry": "https://registry.npmjs.org",
-      "name": "astro-theme-starread"
-    },
-    "github": {
-      "registry": "https://npm.pkg.github.com",
-      "name": "@passwordgloo/astro-theme-starread" 
-    }
+    "publish": "npm publish --registry=https://registry.npmjs.org"
   },
   "dependencies": {
-    "astro": "^5.13.3"
+    "@astrojs/check": "^0.9.4",
+    "astro": "^5.13.3",
+    "typescript": "^5.9.2"
   },
   "devDependencies": {
     "@algolia/client-search": "^5.20.4",

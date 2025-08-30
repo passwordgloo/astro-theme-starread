@@ -1,29 +1,13 @@
-import { defineCollection, z } from 'astro:content';
+import type { starreadthemeconfig } from '../scripts/config';
 
-const defaultCover = '/defaultCover.jpg';
+// 默认封面图路径
 
-const articles = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    date: z.date().optional(),
-    categories: z.array(z.string()).optional(),
-    cover: z.string().default(defaultCover),
-    tags: z.array(z.string()).optional(),
-  }),
-});
-
-export const collections = {
-  articles,
-};
-
-export const themeConfig = {
+export const themeConfig: starreadthemeconfig = {
   // 网站配置
   site: {
     title: '星阅主题',
     favicon: '/favicon.svg',
-    defaultCover: defaultCover,
+    defaultCover: '/defaultCover.jpg',
     
     logo: {
       image: '/logo.svg',
@@ -125,7 +109,7 @@ export const themeConfig = {
 
   // 文章加载配置
   articleLoad: {
-    type: 'button', // 'button' 或 'auto'
+    type: 'auto', // 'button' 或 'auto'
     defaultLimit: 20, // 默认最大加载数量
     initialLoad: 8, // 初始加载数量
     loadMore: 4 // 每次加载数量
