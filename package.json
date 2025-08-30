@@ -1,5 +1,5 @@
 {
-  "name": "@passwordgloo/astro-theme-starread",
+  "name": "astro-theme-starread",
   "type": "module",
   "version": "1.6.0",
   "description": "既有星光般的璀璨，又不失简洁和高端感的Astro主题",
@@ -26,7 +26,9 @@
     "astro": "astro",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
     "release": "standard-version",
-    "publish": "npm publish --registry=https://registry.npmjs.org && npm publish --registry=https://npm.pkg.github.com"
+    "publish:npm": "npm publish --registry=https://registry.npmjs.org",
+    "publish:gh": "npm publish --registry=https://npm.pkg.github.com",
+    "publish:both": "npm run publish:npm && npm run publish:gh"
   },
   "publishConfig": {
     "npmjs": {
