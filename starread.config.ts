@@ -122,11 +122,13 @@ export const themeConfig: starreadthemeconfig = {
     algolia: {
       enabled: true,
       // Algolia应用ID
-      appId: process.env.PUBLIC_ALGOLIA_APP_ID || process.env.ALGOLIA_APP_ID || '',
+      appId: process.env.APP_ID || '',
       // Algolia搜索密钥
-      searchKey: process.env.PUBLIC_ALGOLIA_SEARCH_KEY || process.env.ALGOLIA_SEARCH_KEY || '',
+      searchKey: process.env.SEARCH_KEY || '',
       // Algolia索引名称
-      indexName: process.env.PUBLIC_ALGOLIA_INDEX_NAME || process.env.ALGOLIA_INDEX_NAME || 'articles'
+      indexName: process.env.INDEX_NAME || 'articles',
+      // Algolia管理员API密钥
+      writeApiKey: process.env.WRITE_API_KEY || '',
     }
   }
 };

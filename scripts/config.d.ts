@@ -69,6 +69,7 @@ export interface starreadthemeconfig {
       appId: string;
       searchKey: string;
       indexName: string;
+      writeApiKey: string;
     };
   };
 }
