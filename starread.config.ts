@@ -1,29 +1,11 @@
-import { defineCollection, z } from 'astro:content';
+import type { starreadthemeconfig } from './scripts/config';
 
-const defaultCover = '/defaultCover.jpg';
-
-const articles = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    description: z.string().optional(),
-    date: z.date().optional(),
-    categories: z.array(z.string()).optional(),
-    cover: z.string().default(defaultCover),
-    tags: z.array(z.string()).optional(),
-  }),
-});
-
-export const collections = {
-  articles,
-};
-
-export const themeConfig = {
+export const themeConfig: starreadthemeconfig = {
   // 网站配置
   site: {
     title: '星阅主题',
     favicon: '/favicon.svg',
-    defaultCover: defaultCover,
+    defaultCover: '/defaultCover.jpg',
     
     logo: {
       image: '/logo.svg',
@@ -52,7 +34,7 @@ export const themeConfig = {
     link: 'https://example.com',
   },
 
-  // 导航菜单配置 - 支持嵌套结构
+  // 导航菜单配置 - 支持嵌套结构，修改图标集合名请一定要在global.css中添加
   nav: [
     { name: '主页', href: '/', icon: 'icon-[mdi-light--home]' },
     {
@@ -125,7 +107,7 @@ export const themeConfig = {
 
   // 文章加载配置
   articleLoad: {
-    type: 'button', // 'button' 或 'auto'
+    type: 'auto', // 'button' 或 'auto'
     defaultLimit: 20, // 默认最大加载数量
     initialLoad: 8, // 初始加载数量
     loadMore: 4 // 每次加载数量
@@ -140,11 +122,13 @@ export const themeConfig = {
     algolia: {
       enabled: true,
       // Algolia应用ID
-      appId: process.env.PUBLIC_ALGOLIA_APP_ID || process.env.ALGOLIA_APP_ID || '',
+      appId: process.env.APP_ID || '',
       // Algolia搜索密钥
-      searchKey: process.env.PUBLIC_ALGOLIA_SEARCH_KEY || process.env.ALGOLIA_SEARCH_KEY || '',
+      searchKey: process.env.SEARCH_KEY || '',
       // Algolia索引名称
-      indexName: process.env.PUBLIC_ALGOLIA_INDEX_NAME || process.env.ALGOLIA_INDEX_NAME || 'articles'
+      indexName: process.env.INDEX_NAME || 'articles',
+      // Algolia管理员API密钥
+      writeApiKey: process.env.WRITE_API_KEY || '',
     }
   }
 };

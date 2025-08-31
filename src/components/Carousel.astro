@@ -2,7 +2,7 @@
 // 轮播卡片文章组件
 const { articles = [] } = Astro.props;
 import { Image } from 'astro:assets';
-import { themeConfig } from '../content/config';
+import { themeConfig } from '../../starread.config';
 ---
 
 <div class="relative bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden" client:load>
