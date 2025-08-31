@@ -1,8 +1,8 @@
 {
   "name": "astro-theme-starread",
   "type": "module",
-    "version": "1.6.2",
-    "files": ["src", "scripts", "public", "astro.config.mjs", "tsconfig.json"],
+    "version": "1.7.2",
+    "files": ["src", "scripts", "public", "astro.config.mjs", "tsconfig.json","starread.config.ts"],
     "description": "既有星光般的璀璨，又不失简洁和高端感的Astro主题",
     "keywords": [
       "astro",
@@ -26,9 +26,7 @@
     "preview": "astro preview",
     "astro": "astro",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "standard-version",
-    "publish": "npm version patch && npm publish --registry=https://registry.npmjs.org",  
-    "prepublishOnly": "npm run build"
+    "release": "standard-version"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -61,6 +59,6 @@
     "tailwindcss": "^4.1.12"
   },
   "bin": {
-    "astro-theme-starread": "scripts/init.js"
+    "astro-theme-starread": "scripts/init.cjs"
   }
 }
