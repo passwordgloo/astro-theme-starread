@@ -1,8 +1,4 @@
 ---
-
-import { themeConfig } from '../../../starread.config.ts';
-
-const { appId, searchKey, indexName } = themeConfig.search.algolia;
 const ref = Astro.props.ref || null;
 ---
 
@@ -52,7 +48,6 @@ const ref = Astro.props.ref || null;
 
 <!-- 前端交互脚本 -->
 <script is:inline>
-    // 使用本地模拟数据进行测试
   const fetchMockData = async () => {
     const response = await fetch('/data.json');
     return response.json();
@@ -95,7 +90,7 @@ const ref = Astro.props.ref || null;
 
       // 渲染搜索结果
       searchResults.innerHTML = hits.map(hit => `
-        <a href="/articles/${hit.slug}" class="block p-4 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">
+        <a href="/${hit.slug}" class="block p-4 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">
           <h3 class="font-medium text-gray-900 dark:text-white">${hit.title}</h3>
           <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${hit.content.substring(0, 100)}...</p>
 
