@@ -1,6 +1,6 @@
 {
   "updaters": [
-    "changelog-updater.js"
+    "scripts/changelog-updater.js"
   ],
   "types": [
     {

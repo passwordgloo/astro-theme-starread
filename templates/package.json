@@ -59,8 +59,5 @@
     "conventional-changelog-cli": "^4.1.0",
     "standard-version": "^9.5.0",
     "tailwindcss": "^4.1.12"
-  },
-  "bin": {
-    "astro-theme-starread": "scripts/init.js"
   }
 }

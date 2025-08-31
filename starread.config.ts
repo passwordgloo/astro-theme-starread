@@ -1,6 +1,4 @@
-import type { starreadthemeconfig } from '../scripts/config';
-
-// 默认封面图路径
+import type { starreadthemeconfig } from './scripts/config';
 
 export const themeConfig: starreadthemeconfig = {
   // 网站配置
@@ -36,7 +34,7 @@ export const themeConfig: starreadthemeconfig = {
     link: 'https://example.com',
   },
 
-  // 导航菜单配置 - 支持嵌套结构
+  // 导航菜单配置 - 支持嵌套结构，修改图标集合名请一定要在global.css中添加
   nav: [
     { name: '主页', href: '/', icon: 'icon-[mdi-light--home]' },
     {
