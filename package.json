@@ -37,23 +37,11 @@
     "algolia": "tsc scripts/algolia.ts && node scripts/algolia.js"
   },
   "dependencies": {
-    "@astrojs/check": "^0.9.4",
+    "astro": "^5.13.3",
     "typescript": "^5.9.2"
   },
-  "peerDependencies": {
-    "astro": "^5.0.0 || ^6.0.0"
-  },
-  "peerDependenciesMeta": {
-    "astro": {
-      "optional": false
-    }
-  },
-  "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0",
-    "pnpm": ">=7.0.0"
-  },
   "devDependencies": {
+    "@astrojs/check": "^0.9.4",
     "@iconify/json": "^2.2.377",
     "@iconify/tailwind4": "^1.0.6",
     "@tailwindcss/typography": "^0.5.16",
