@@ -1,19 +1,24 @@
 ---
-
-import { themeConfig } from '../../../starread.config.ts';
-
-const { appId, searchKey, indexName } = themeConfig.search.algolia;
+import { themeConfig } from '../../starread.config';
 const ref = Astro.props.ref || null;
 ---
 
 <div class="search-container relative" ref={ref}>
-  <button 
-    id="search-toggle" 
-    class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
-    aria-label="搜索"
-  >
-    <span class="icon-[lucide--search] h-5 w-5 text-gray-700 dark:text-gray-300"></span>
-  </button>
+  {themeConfig.search.provider === 'algolia' ? (
+    <a href="/search" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+      aria-label="搜索"
+    >
+      <span class="icon-[lucide--search] h-5 w-5 text-gray-700 dark:text-gray-300"></span>
+    </a>
+  ) : (
+    <button 
+      id="search-toggle" 
+      class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+      aria-label="搜索"
+    >
+      <span class="icon-[lucide--search] h-5 w-5 text-gray-700 dark:text-gray-300"></span>
+    </button>
+  )}
   <!-- 搜索框容器 -->
   <div 
     id="search-dropdown" 
@@ -52,7 +57,6 @@ const ref = Astro.props.ref || null;
 
 <!-- 前端交互脚本 -->
 <script is:inline>
-    // 使用本地模拟数据进行测试
   const fetchMockData = async () => {
     const response = await fetch('/data.json');
     return response.json();

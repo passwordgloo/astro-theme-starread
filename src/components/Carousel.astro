@@ -1,4 +1,6 @@
 ---
+import { themeConfig } from '../../starread.config';
+
 // 轮播卡片文章组件
 const { articles = [] } = Astro.props;
 import { Image } from 'astro:assets';
@@ -9,7 +11,7 @@ import { themeConfig } from '../../starread.config';
   <div class="px-4 py-3 border-b border-gray-200 dark:border-white/10 flex justify-between items-center">
     <div class="flex items-center space-x-2">
       <span class="icon-[lucide--grid] w-5 h-5 text-primary"></span>
-      <h2 class="font-bold text-lg text-dark">轮播卡片文章演示</h2>
+      <h2 class="font-bold text-lg text-dark">{themeConfig.carousel.title}</h2>
     </div>
     <div class="flex space-x-2">
       <button id="prev-btn" class="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-white/15" aria-label="上一张">
