@@ -124,10 +124,9 @@ export const themeConfig: starreadthemeconfig = {
       
       // Algolia搜索配置
       algolia: {
-        enabled: true,
-        appId: 'PBX37K0XRJ',
-        searchKey: '0095a884a16316f72612b5ab84090fcd',
-        indexName: 'hive',
+        appId: '',
+        searchKey: '',
+        indexName: '',
         writeApiKey: ''
       }
     }

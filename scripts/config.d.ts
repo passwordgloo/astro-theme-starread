@@ -65,7 +65,6 @@ export interface starreadthemeconfig {
   search: {
     provider: 'local' | 'algolia';
     algolia: {
-      enabled: boolean;
       appId: string;
       searchKey: string;
       indexName: string;
