@@ -1,40 +1,31 @@
 ---
 title: 关于
-categories: [帮助]
-tags: [你好]
-cover: https://picsum.photos/800/400?random=1
-description: 这是一篇示例文章，展示了如何使用frontmatter配置文章属性。
-date: 2025-10-01
+categories: [支持]
+tags: [vue, javascript]
+description: 介绍 astro-theme-starread 主题项目，涵盖项目概述、设计理念、核心功能及使用指南等内容，帮助用户快速了解和上手该项目。
+date: 2024-05-20
 ---
 
-这是关于我们的页面。
+# 项目介绍
 
-<h3 class="text-gray-900 dark:text-white">测试</h3>
+本项目 `astro-theme-starread` 是一个主题项目，下面将为您详细介绍该项目的相关内容，帮助您快速了解项目的基本结构、功能和使用方式。无论是刚接触此项目的新手，还是希望深入探索的开发者，都能从中获取有价值的信息。
 
-**任务列表**
+## 项目概述
 
-- [x] 支持 task list
-- [ ] 还没完成
+这里将对 `astro-theme-starread` 项目进行整体介绍，阐述项目的核心目标、应用场景以及在同类项目中的优势。
 
+### 设计理念
 
+详细说明项目设计时所遵循的理念，这些理念如何影响项目的架构和功能实现。
 
-**表格**
+## 核心功能
 
-| 字段 | 值 |
-| --- | --- |
-| 版本 | Tailwind v4 |
-| 插件 | @tailwindcss/typography |
+介绍 `astro-theme-starread` 项目的主要功能模块，每个功能模块如何为用户提供服务。
 
-**删除线**：~~被删除的文本~~
+### 功能模块一
 
-**脚注**：这里有脚注[^1]。
+具体讲解第一个核心功能模块的用途、特点和使用方法。
 
-> 引用块也 OK。
+## 使用指南
 
-
->[!note]
-> 这是一个注意事项
-
-```js
-console.log(' fenced code 支持高亮按你的主题来 ');
-```
+这部分内容会指导您如何快速上手使用 `astro-theme-starread` 项目，从安装到配置，再到运行项目的完整流程。
