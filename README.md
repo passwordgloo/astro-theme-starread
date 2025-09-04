@@ -59,38 +59,44 @@ pnpm dev
 - 📊 文章统计和作者信息展示
 
 ## 🔍 搜索
-您可以通过以下两种方式配置Algolia搜索服务：
 
-### 方法一：使用环境变量（推荐）
+### 本地搜索
 
-创建并编辑 `.env`文件
-```env
-# Algolia配置
-APP_ID=您的Algolia应用ID
-SEARCH_KEY=您的Algolia搜索密钥
-INDEX_NAME=您的索引名称
-ADMIN_API_KEY=您的管理员API密钥（用于索引上传）
-```
+默认使用本地搜索，首次使用请运行`pnpm local` 建立本地索引
 
-### 方法二：直接编辑配置文件
+### Algolia搜索
 
 >[!important]
-> 生产环境中建议使用环境变量方式配置，避免敏感信息暴露在代码中。
+>生产环境中建议使用环境变量方式配置，避免敏感信息暴露在代码中。
 
-编辑 `starread.config.ts`文件：
-```typescript
-search: {
-  provider: 'algolia',
-  algolia: {
-    enabled: true,
-    appId: '您的Algolia应用ID',
-    searchKey: '您的Algolia搜索密钥',
-    indexName: '您的索引名称',
-    adminApiKey: '您的管理员API密钥'
-  }
+1. 编辑`starread.config.ts` 选择Algolia搜索
+```ts
+export const themeConfig: starreadthemeconfig = {
+  search: {
+    // 搜索服务提供商: 'local', 'algolia'
+      provider: 'algolia',
+    }
 }
 ```
 
+2. 根目录创建并编辑 `.env`文件
+
+>[!note]
+>Algolia搜索需要您的Algolia应用ID、搜索密钥、索引名称和管理员API密钥。
+
+>[!tip]
+>如果您没有Algolia账号，需要先注册并创建一个应用。
+
+```env
+PUBLIC_ALGOLIA_APP_ID=您的Algolia应用ID
+PUBLIC_ALGOLIA_SEARCH_KEY=您的Algolia搜索密钥
+PUBLIC_ALGOLIA_INDEX_NAME=您的索引名称
+ALGOLIA_WRITE_API_KEY=您的管理员API密钥（用于索引上传）
+```
+
+3. 推送索引到Algolia
+
+运行`pnpm algolia` 推送本地索引到Algolia
 
 ## ⚙️ 自定义配置
 
@@ -118,8 +124,8 @@ nav: [
 | :----------------------- | :--------------------------------------------- |
 | `pnpm install`           | 安装依赖                                       |
 | `pnpm dev`               | 启动本地开发服务器 `localhost:4321`            |
-| `pnpm build`             | 构建生产站点到 `./dist/` 并生成搜索索引        |
 | `pnpm preview`           | 本地预览构建结果                               |
+| `pnpm local`             | 运行自动索引脚本并构建生产站点                 |
+| `pnpm algolia`           | 推送数据到Algolia搜索                          |
 | `pnpm changelog`         | 生成更新日志                                   |
 | `pnpm release`           | 版本管理（更新版本号、生成提交等）             |
-| `pnpm astro`             | 运行Astro CLI命令                              |

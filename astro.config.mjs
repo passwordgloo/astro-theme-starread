@@ -1,13 +1,16 @@
 import { defineConfig } from "astro/config";
-import pagefind from "astro-pagefind";
 import tailwindcss from "@tailwindcss/vite";
+import react from "@astrojs/react";
 
 export default defineConfig({
-  integrations: [pagefind(),],
+  site: "https://star.iglooblog.top",
   vite: {
     plugins: [tailwindcss()],
   },
+
   markdown: {
     gfm:true
   },
+
+  integrations: [react()],
 });
