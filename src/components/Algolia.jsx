@@ -96,23 +96,26 @@ export default function AlgoliaSearch() {
     <div className="p-5">
       <InstantSearch
         searchClient={searchClient}
-        indexName="star"
+        indexName={import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME}
         future={{ preserveSharedStateOnUnmount: true }}
       >
         {/* 搜索框 */}
         <div className="relative w-full h-10 text-sm leading-5 mb-6">
-          <div className="before:content-[''] before:absolute before:left-4 before:top-1/2 before:-translate-y-1/2 before:w-4 before:h-4 before:bg-no-repeat before:bg-[url('data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2024%2024%22%20fill%3D%22none%22%20stroke%3D%22%235a5e9a%22%20stroke-width%3D%222%22%20stroke-linecap%3D%22round%22%20stroke-linejoin%3D%22round%22%3E%3Ccircle%20cx%3D%2211%22%20cy%3D%2211%22%20r%3D%228%22%3E%3C%2Fcircle%3E%3Cline%20x1%3D%2221%22%20y1%3D%2221%22%20x2%3D%2216.65%22%20y2%3D%2216.65%22%3E%3C%2Fline%3E%3C%2Fsvg%3E')]">
-            <SearchBox
-              placeholder="搜索文章..."
-              classNames={{
-                root: 'w-full',
-                form: 'flex bg-white/60 backdrop-blur-lg dark:bg-white/5 dark:border-white/10 text-sm h-10 leading-5 relative w-full',
-                input: 'appearance-none bg-gray-50  dark:bg-white/5  border border-gray-300 rounded shadow-inner pl-10 pr-4 py-2 flex-1 text-gray-800 caret-blue-600 placeholder-blue-400 focus:border-blue-500 focus:shadow-none focus:outline-none',
-                submitIcon: 'hidden',
-                resetIcon: 'hidden',
-              }}
-            />
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
+            <span className="icon-[lucide--search] h-5 w-5 bg-gray-700 dark:bg-gray-300 "></span>
           </div>
+
+          <SearchBox
+            placeholder="搜索文章..."
+            classNames={{
+              root: 'w-full',
+              form: 'flex bg-white/60 backdrop-blur-lg dark:bg-white/5 dark:border-white/10 text-sm h-10 leading-5 relative w-full',
+              input:
+                'appearance-none bg-gray-50 dark:bg-white/5 border border-gray-300 rounded shadow-inner pl-10 pr-4 py-2 flex-1 text-gray-800 caret-blue-600 placeholder-blue-400 focus:border-blue-500 focus:shadow-none focus:outline-none',
+              submitIcon: 'hidden',
+              resetIcon: 'hidden',
+            }}
+          />
         </div>
 
         <div className="flex mt-5 gap-5">
