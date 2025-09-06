@@ -3,7 +3,17 @@
   "type": "module",
   "main": "index.js",
   "types": "index.d.ts",
-  "version": "1.7.7",
+  "version": "1.7.8",
+  "exports": {
+    ".": {
+      "types": "./index.d.ts",
+      "default": "./index.js"
+    },
+    "./config": {
+      "types": "./scripts/defineConfig.d.ts",
+      "default": "./scripts/defineConfig.js"
+    }
+  },
   "files": [
     "src",
     "scripts",
