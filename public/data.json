@@ -43,5 +43,20 @@
     "date": "2025-10-01T00:00:00.000Z",
     "content": "<h3 class=\"text-gray-900 dark:text-white\">测试</h3>\n\n**任务列表**\n\n- [x] 支持 task list\n- [ ] 还没完成\n\n**表格**\n\n| 字段 | 值 |\n| --- | --- |\n| 版本 | Tailwind v4 |\n| 插件 | @tailwindcss/typography |\n\n**删除线**：~~被删除的文本~~\n\n**脚注**：这里有脚注[^1]。\n\n> 引用块也 OK。\n\n>[!note]\n> 这是一个注意事项\n\n```js\nconsole.log(' fenced code 支持高亮按你的主题来 ');\n```",
     "slug": "articles/gfm"
+  },
+  {
+    "title": "关于",
+    "description": "介绍 astro-theme-starread 主题项目，涵盖项目概述、设计理念、核心功能及使用指南等内容，帮助用户快速了解和上手该项目。",
+    "cover": "https://star.iglooblog.top/test.jpg",
+    "categories": [
+      "支持"
+    ],
+    "tags": [
+      "vue",
+      "javascript"
+    ],
+    "date": "",
+    "content": "",
+    "slug": "articles/test"
   }
 ]
