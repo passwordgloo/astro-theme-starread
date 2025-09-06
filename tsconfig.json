@@ -8,6 +8,10 @@
     "dist"
   ],
   "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "starread.config": ["./starread.config.ts"]
+    },
     "jsx": "react-jsx",
     "jsxImportSource": "react"
   }

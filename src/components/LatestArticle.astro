@@ -1,14 +1,14 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
-import { themeConfig } from '../../starread.config';
+import config from 'starread.config';
 
 interface Props {
   articles: CollectionEntry<'articles'>[];
 }
 
 const { articles } = Astro.props;
-const { articleLoad } = themeConfig;
+const { articleLoad } = config;
 const { type: loadType, initialLoad, loadMore, defaultLimit } = articleLoad;
 
 // 处理日期格式和验证

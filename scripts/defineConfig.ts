@@ -5,6 +5,6 @@ import type { starreadthemeconfig } from './config';
  * @param config 传入的主题配置
  * @returns 返回原样配置（带类型检查和提示）
  */
-export function defineThemeConfig(config: starreadthemeconfig): starreadthemeconfig {
+export function StarReadThemeConfig(config: starreadthemeconfig): starreadthemeconfig {
   return config;
 }

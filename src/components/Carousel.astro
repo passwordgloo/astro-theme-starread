@@ -1,17 +1,16 @@
 ---
-import { themeConfig } from '../../starread.config';
+import config from 'starread.config';
 
 // 轮播卡片文章组件
 const { articles = [] } = Astro.props;
 import { Image } from 'astro:assets';
-import { themeConfig } from '../../starread.config';
 ---
 
 <div class="relative bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden" client:load>
   <div class="px-4 py-3 border-b border-gray-200 dark:border-white/10 flex justify-between items-center">
     <div class="flex items-center space-x-2">
       <span class="icon-[lucide--grid] w-5 h-5 text-primary"></span>
-      <h2 class="font-bold text-lg text-dark">{themeConfig.carousel.title}</h2>
+      <h2 class="font-bold text-lg text-dark">{config.carousel.title}</h2>
     </div>
     <div class="flex space-x-2">
       <button id="prev-btn" class="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-white/15" aria-label="上一张">
@@ -37,7 +36,7 @@ import { themeConfig } from '../../starread.config';
                 </div>
                 <h3 class="font-medium text-slate-900 dark:text-slate-100 mb-2 line-clamp-2 h-12 group-hover:text-blue-600 transition-colors duration-200">{article.data.title}</h3>
                 <div class="mt-auto flex items-center text-xs text-gray-500">
-                  <span>{article.data.author?.name || themeConfig.author.name}</span>
+                  <span>{article.data.author?.name || config.author.name}</span>
                   <span class="mx-1">·</span>
                   <span>{typeof article.data.date === 'string' ? article.data.date.split(' ')[0] : article.data.date?.toISOString().split('T')[0]}</span>
                 </div>
