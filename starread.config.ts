@@ -1,4 +1,4 @@
-import { StarReadThemeConfig } from 'astro-theme-starread/config'; // 主题包提供的 defineThemeConfig
+import { StarReadThemeConfig } from 'astro-theme-starread/config';
 
 export default StarReadThemeConfig({
   carousel: {

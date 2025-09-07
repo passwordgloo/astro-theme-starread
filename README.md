@@ -4,17 +4,18 @@
 
 既有星光般的璀璨，又不失简洁和高端感的Astro主题
 
+## 🚀 特性
+
+- 🎨 现代化UI设计
+- 🔍 支持本地搜索和Algolia搜索
+- 📱 响应式设计
+- 🌙 深色/浅色主题切换
+- 🏷️ 标签和分类支持
+- 📊 文章统计和作者信息展示
+
 ## 📦 安装
 
-### 方法一：使用`astro`模版安装
-
-| 包管理器       | 命令                                        |
-|----------------|---------------------------------------------|
-| pnpm           | `pnpm create astro@latest --template passwordgloo/astro-theme-starread` |
-| npm            | `npm create astro@latest -- --template passwordgloo/astro-theme-starread` |
-| yarn           | `yarn create astro --template passwordgloo/astro-theme-starread` |
-
-### 方法二：通过CLI工具初始化
+### 方法一：通过CLI工具初始化
 
 | 包管理器       | 建议命令                                  |
 |----------------|-------------------------------------------|
@@ -22,7 +23,34 @@
 | npm (npx)      | `npx astro-theme-starread init`           |
 | Yarn           | `yarn dlx astro-theme-starread init`（需 Yarn v2+） |
 
+>[!tip]
+>当然也可以使用 `create`命令，my-blog 为项目名称可换成`.`(本目录)、`../blog`（上级目录中的文件夹blog）
+
+| 包管理器 | 推荐命令                                   |
+| -------- | ------------------------------------------ |
+| **pnpm** | `pnpm create astro-theme-starread my-blog` |
+| **npm**  | `npx create-astro-theme-starread my-blog`  |
+| **yarn** | `yarn create astro-theme-starread my-blog` |
+| **cnpm** | `cnpm init astro-theme-starread my-blog`   |
+
+### 方法二：使用`astro`模版安装
+
+> [!warning]
+>
+> 此方法需要访问Github
+
+| 包管理器       | 命令                                        |
+|----------------|---------------------------------------------|
+| pnpm           | `pnpm create astro@latest --template passwordgloo/astro-theme-starread` |
+| npm            | `npm create astro@latest -- --template passwordgloo/astro-theme-starread` |
+| yarn           | `yarn create astro --template passwordgloo/astro-theme-starread` |
+
 ### 方法三：源码安装
+
+> [!warning]
+>
+> 此方法需要访问GitHub
+
 ```bash
 git clone https://github.com/passwordgloo/astro-theme-starread
 cd astro-theme-starread
@@ -41,22 +69,13 @@ pnpm dev
 /
 ├── src/
 │   ├── components/     # 组件文件
-│   ├── content/        # 内容配置
+│   ├── content/        # 内容配置(请写到article里)
 │   ├── layouts/        # 布局模板
 │   ├── pages/          # 页面路由
 │   └── styles/         # 样式文件
 ├── public/             # 静态资源
 └── dist/               # 构建输出
 ```
-
-## 🚀 特性
-
-- 🎨 现代化UI设计
-- 🔍 支持本地搜索（Pagefind）和Algolia搜索
-- 📱 响应式设计
-- 🌙 深色/浅色主题切换
-- 🏷️ 标签和分类支持
-- 📊 文章统计和作者信息展示
 
 ## 🔍 搜索
 
@@ -81,12 +100,6 @@ export const themeConfig: starreadthemeconfig = {
 
 2. 根目录创建并编辑 `.env`文件
 
->[!note]
->Algolia搜索需要您的Algolia应用ID、搜索密钥、索引名称和管理员API密钥。
-
->[!tip]
->如果您没有Algolia账号，需要先注册并创建一个应用。
-
 ```env
 PUBLIC_ALGOLIA_APP_ID=您的Algolia应用ID
 PUBLIC_ALGOLIA_SEARCH_KEY=您的Algolia搜索密钥
@@ -94,9 +107,17 @@ PUBLIC_ALGOLIA_INDEX_NAME=您的索引名称
 ALGOLIA_WRITE_API_KEY=您的管理员API密钥（用于索引上传）
 ```
 
+>[!note]
+>Algolia搜索需要您的Algolia应用ID、搜索密钥、索引名称和管理员API密钥。
+
+>[!tip]
+>如果您没有Algolia账号，需要先注册并创建一个应用。
+
+
+
 3. 推送索引到Algolia
 
-运行`pnpm algolia` 推送本地索引到Algolia
+运行 `pnpm algolia` 推送本地索引到Algolia
 
 ## ⚙️ 自定义配置
 

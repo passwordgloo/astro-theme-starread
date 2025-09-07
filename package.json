@@ -3,7 +3,7 @@
   "type": "module",
   "main": "index.js",
   "types": "index.d.ts",
-  "version": "1.8.0",
+  "version": "1.8.1",
   "exports": {
     ".": {
       "types": "./index.d.ts",
@@ -73,6 +73,7 @@
     "typescript": "^5.9.2"
   },
   "bin": {
-    "astro-theme-starread": "scripts/init.cjs"
+    "astro-theme-starread": "scripts/init.cjs",
+    "create-astro-theme-starread": "scripts/init.cjs"
   }
 }
