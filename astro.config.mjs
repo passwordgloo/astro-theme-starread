@@ -6,11 +6,11 @@ export default defineConfig({
   vite: {
     resolve: {
       alias: {
-        'starread.config': '/Users/igloo/astro-theme-starread/starread.config.ts'
+        'starread.config': 'starread.config.ts'
       }
     }
   },
-  site: "https://star.iglooblog.top",
+  site: "https://www.example.com",
   vite: {
     plugins: [tailwindcss()],
   },

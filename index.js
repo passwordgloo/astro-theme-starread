@@ -1,7 +1,5 @@
 import { fileURLToPath, pathToFileURL } from "node:url";
 import { dirname, join } from "node:path";
-import tailwindcss from "@tailwindcss/vite";
-import react from "@astrojs/react";
 
 export default function starreadTheme(options = {}) {
   const themeDir = dirname(fileURLToPath(import.meta.url));
@@ -24,9 +22,7 @@ export default function starreadTheme(options = {}) {
         console.log("加载到的主题配置：", configData);
 
         updateConfig({
-          integrations: [react()],
           vite: {
-            plugins: [tailwindcss()],
             resolve: {
               alias: {
                 "@theme": join(themeDir, "src")
@@ -40,9 +36,6 @@ export default function starreadTheme(options = {}) {
                 "@iconify/tailwind4"
               ]
             }
-          },
-          markdown: {
-            gfm: true
           }
         });
       }
