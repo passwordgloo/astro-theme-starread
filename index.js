@@ -1,8 +1,12 @@
 #!/usr/bin/env node
-const fs = require('fs');
-const path = require('path');
-const { execSync } = require('child_process');
-const readline = require('readline');
+import fs from "node:fs";
+import path from "node:path";
+import { createRequire } from "node:module";
+import readline from "node:readline";
+import { execSync } from "node:child_process";
+
+// 创建 require（用于解析 CJS 依赖）
+const require = createRequire(import.meta.url);
 
 // ========================
 //   STARREAD LOGO
@@ -16,87 +20,99 @@ console.log(`
 ╚══════╝   ╚═╝   ╚═╝  ╚═╝ ╚═╝  ╚═╝     ╚═╝  ╚═╝╚══════╝╚═╝  ╚═╝╚═════╝
 `);
 
-// 递归拷贝
-function copyRecursive(src, dest) {
-  if (fs.lstatSync(src).isDirectory()) {
+// ========== 工具函数 ==========
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+const ask = (q) => new Promise((res) => rl.question(q, (a) => res(a)));
+
+// 递归复制（跳过 node_modules/.git）
+function copyRecursive(src, dest, mode = "overwrite") {
+  const stats = fs.statSync(src);
+  if (stats.isDirectory()) {
     if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
-    fs.readdirSync(src).forEach(file => {
-      copyRecursive(path.join(src, file), path.join(dest, file));
-    });
+    for (const file of fs.readdirSync(src)) {
+      if (file === "node_modules" || file === ".git") continue;
+      copyRecursive(path.join(src, file), path.join(dest, file), mode);
+    }
   } else {
+    if (fs.existsSync(dest)) {
+      if (mode === "skip") return; // 跳过已有文件
+    } else {
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+    }
     fs.copyFileSync(src, dest);
   }
 }
 
-// 初始化流程
-(function init() {
-  // 支持 pnpm create astro-theme-starread my-blog
-  const targetDir = process.argv[2] || '.'; // 没传参数就在当前目录
-  const targetPath = path.resolve(process.cwd(), targetDir);
+// 找到 astro-theme-starread 包目录
+function resolveTemplateDir() {
+  try {
+    const entryFile = require.resolve("astro-theme-starread");
+    return path.dirname(entryFile);
+  } catch (err) {
+    console.error("❌ 无法找到 `astro-theme-starread`，请确保它已发布到 npm 或在本地依赖中存在。");
+    process.exit(1);
+  }
+}
 
-  // 如果目录不存在则创建
-  if (!fs.existsSync(targetPath)) {
+// ========== 主流程 ==========
+(async function main() {
+  const targetDirInput = process.argv[2] || "my-blog";
+  const targetPath = path.resolve(process.cwd(), targetDirInput);
+  const templateDir = resolveTemplateDir();
+
+  // 检查目标目录
+  let copyMode = "overwrite";
+  if (fs.existsSync(targetPath)) {
+    const files = fs.readdirSync(targetPath);
+    if (files.length > 0) {
+      const ans = (await ask(`⚠️  目录 "${targetDirInput}" 已存在且非空。覆盖 (y) / 跳过已有 (s) / 取消 (n) [默认 n]: `))
+        .trim()
+        .toLowerCase();
+      if (ans === "y") copyMode = "overwrite";
+      else if (ans === "s") copyMode = "skip";
+      else {
+        console.log("❌ 操作已取消。");
+        rl.close();
+        process.exit(0);
+      }
+    }
+  } else {
     fs.mkdirSync(targetPath, { recursive: true });
   }
 
-  const packageDir = path.join(__dirname, '..'); 
-  const filesToCopy = [
-    'astro.config.mjs',
-    'starread.config.ts',
-    'package.json',
-    'tsconfig.json',
-    'index.js',
-    'index.d.ts',
-    'README.md',
-    'LICENSE',
-    'public',
-    'src'
-  ];
+  console.log(`\n🚀 正在创建项目到: ${targetPath} （模式: ${copyMode}）`);
+  copyRecursive(templateDir, targetPath, copyMode);
+  console.log("✅ 模板复制完成！");
 
-  filesToCopy.forEach(name => {
-    const srcPath = path.join(packageDir, name);
-    const destPath = path.join(targetPath, name);
+  // 安装依赖
+  const installAns = (await ask("👉 是否要立即安装依赖？ (y/n，默认 y): ")).trim().toLowerCase();
+  if (!(installAns === "" || installAns === "y")) {
+    console.log("\nℹ️  你选择了不安装依赖，可以稍后手动运行：");
+    console.log(`   cd ${targetDirInput}`);
+    console.log("   npm install / pnpm install / yarn install / cnpm install");
+    rl.close();
+    process.exit(0);
+  }
 
-    console.log(`📂 正在复制 ${name} ...`);
-    copyRecursive(srcPath, destPath);
-  });
+  // 选择包管理器
+  let pm = (await ask("👉 请选择包管理器 (pnpm / cnpm / npm / yarn，默认 npm): ")).trim();
+  if (!pm) pm = "npm";
+  const validPMs = ["pnpm", "cnpm", "npm", "yarn"];
+  if (!validPMs.includes(pm)) {
+    console.log("\n❌ 无效的包管理器，退出。");
+    rl.close();
+    process.exit(1);
+  }
 
-  console.log('✅ 所有文件已复制到你的项目目录！');
+  console.log(`\n📦 使用 ${pm} 安装依赖...`);
+  try {
+    execSync(`${pm} install`, { cwd: targetPath, stdio: "inherit" });
+    console.log("\n🎉 项目初始化完成，运行以下命令启动：");
+    console.log(`   cd ${targetDirInput}`);
+    console.log(`   ${pm} run dev 🚀`);
+  } catch {
+    console.error("\n❌ 依赖安装失败，请手动安装后再运行。");
+  }
 
-  // 交互式依赖安装
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-
-  rl.question('👉 是否要立即安装依赖？ (y/n，默认 y): ', (answer) => {
-    const installNow = answer.trim() === '' || answer.toLowerCase() === 'y';
-    if (!installNow) {
-      console.log('\nℹ️  你选择了不安装依赖。稍后可以手动运行安装命令：');
-      console.log(`   cd ${targetDir} && npm install 或 pnpm install / yarn install / cnpm install\n`);
-      rl.close();
-      return;
-    }
-
-    rl.question('👉 请选择包管理器 (pnpm / cnpm / npm / yarn，默认 npm): ', (pm) => {
-      pm = pm.trim() === '' ? 'npm' : pm;  // 默认 npm
-      const validPMs = ['pnpm', 'cnpm', 'npm', 'yarn'];
-      if (!validPMs.includes(pm)) {
-        console.log('\n❌ 无效的选择，请手动安装依赖。\n');
-        rl.close();
-        return;
-      }
-
-      console.log(`\n📦 使用 ${pm} 安装依赖中...\n`);
-      try {
-        execSync(`${pm} install`, { cwd: targetPath, stdio: 'inherit' });
-        console.log('\n🎉 初始化完成！你可以运行以下命令启动项目：');
-        console.log(`   cd ${targetDir}`);
-        console.log(`   ${pm} run dev 🚀\n`);
-      } catch (err) {
-        console.error('\n❌ 依赖安装失败，请手动运行安装命令\n');
-      }
-      rl.close();
-    });
-  });
+  rl.close();
 })();

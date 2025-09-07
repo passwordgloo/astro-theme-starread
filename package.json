@@ -1,79 +1,16 @@
 {
-  "name": "astro-theme-starread",
-  "type": "module",
-  "main": "index.js",
-  "types": "index.d.ts",
-  "version": "1.8.2",
-  "exports": {
-    ".": {
-      "types": "./index.d.ts",
-      "default": "./index.js"
-    },
-    "./config": {
-      "types": "./scripts/defineConfig.d.ts",
-      "default": "./scripts/defineConfig.js"
-    }
+  "name": "create-astro-theme-starread",
+  "version": "0.0.4",
+  "bin": {
+    "create-astro-theme-starread": "index.js"
   },
-  "files": [
-    "src",
-    "scripts",
-    "public",
-    "index.js",
-    "index.d.ts",
-    "astro.config.mjs",
-    "tsconfig.json",
-    "starread.config.ts"
-  ],
-  "description": "既有星光般的璀璨，又不失简洁和高端感的Astro主题",
   "keywords": [
     "astro",
-    "astro-theme",
-    "blog-theme",
-    "astro-blog"
+    "theme",
+    "starread"
   ],
-  "author": "passwordgloo",
-  "license": "CC-BY-SA-4.0",
-  "homepage": "https://github.com/passwordgloo/astro-theme-starread#readme",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/passwordgloo/astro-theme-starread.git"
-  },
-  "bugs": {
-    "url": "https://github.com/passwordgloo/astro-theme-starread/issues"
-  },
-  "scripts": {
-    "dev": "astro dev",
-    "preview": "astro preview",
-    "local": "node scripts/autoindex.js && astro build",
-    "algolia": "node scripts/pushAlgolia.js",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -r 0 -s"
-  },
-    "dependencies": {
-    "algoliasearch": "^5.36.0",
-    "astro": "^5.13.3",
-    "dotenv": "^17.2.2"
-  },
-  "devDependencies": {
-    "@iconify/json": "^2.2.377",
-    "@iconify/tailwind4": "^1.0.6",
-    "conventional-changelog-cli": "^4.1.0",
-    "gray-matter": "^4.0.3",
-    "standard-version": "^9.5.0"
-  },
-  "peerDependencies": {
-    "@astrojs/react": "^4.3.0",
-    "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.9",
-    "tailwindcss": "^4.1.12",
-    "@tailwindcss/typography": "^0.5.16",
-    "@tailwindcss/vite": "^4.1.12",
-    "react": "^19.1.1",
-    "react-dom": "^19.1.1",
-    "react-instantsearch": "^7.16.2",
-    "typescript": "^5.9.2"
-  },
-  "bin": {
-    "astro-theme-starread": "scripts/init.cjs",
-    "create-astro-theme-starread": "scripts/init.cjs"
+  "description": "Astro Starread 主题安装器",
+  "dependencies": {
+    "astro-theme-starread": "^1.8.2"
   }
 }
