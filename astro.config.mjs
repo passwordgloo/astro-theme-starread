@@ -1,6 +1,7 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
+import starreadTheme from "astro-theme-starread";
 
 export default defineConfig({
   vite: {
@@ -12,7 +13,7 @@ export default defineConfig({
   },
   site: "https://www.example.com",
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [tailwindcss(), starreadTheme()],
   },
 
   markdown: {

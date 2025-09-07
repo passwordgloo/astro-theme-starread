@@ -48,9 +48,10 @@
     "algolia": "node scripts/pushAlgolia.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -r 0 -s"
   },
-    "dependencies": {
+  "dependencies": {
     "algoliasearch": "^5.36.0",
     "astro": "^5.13.3",
+    "astro-theme-starread": "^1.8.2",
     "dotenv": "^17.2.2"
   },
   "devDependencies": {
@@ -62,14 +63,14 @@
   },
   "peerDependencies": {
     "@astrojs/react": "^4.3.0",
-    "@types/react": "^19.1.12",
-    "@types/react-dom": "^19.1.9",
-    "tailwindcss": "^4.1.12",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.12",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-instantsearch": "^7.16.2",
+    "tailwindcss": "^4.1.12",
     "typescript": "^5.9.2"
   },
   "bin": {
