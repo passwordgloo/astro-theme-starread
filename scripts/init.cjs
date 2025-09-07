@@ -41,6 +41,7 @@ function copyRecursive(src, dest) {
     'README.md',
     'LICENSE',
     'public',
+    'scripts',
     'src'
   ];
 
