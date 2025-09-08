@@ -1,6 +1,6 @@
 {
   "name": "create-astro-theme-starread",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "bin": {
     "create-astro-theme-starread": "index.js"
   },
@@ -11,6 +11,6 @@
   ],
   "description": "Astro Starread 主题安装器",
   "dependencies": {
-    "astro-theme-starread": "^1.8.5"
+    "astro-theme-starread": "^1.8.6"
   }
 }
