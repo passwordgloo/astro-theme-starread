@@ -12,16 +12,22 @@ const { articleLoad } = themeConfig;
 const { type: loadType, initialLoad, loadMore, defaultLimit } = articleLoad;
 
 // 处理日期格式和验证
-const formatDate = (dateString?: string): string => {
+const formatDate = (dateString?: string | Date): string => {
   let date: Date;
 
-  if (!dateString || typeof dateString !== 'string') {
-    // 如果没有提供日期或日期不是字符串类型，使用当前系统时间
+  if (!dateString) {
+    // 如果没有提供日期，使用当前系统时间
     date = new Date();
+  } else if (typeof dateString === 'string') {
+    // 直接取日期部分，与Carousel保持一致
+    const datePart = dateString.split(' ')[0] || dateString.split('T')[0];
+    date = new Date(datePart);
+  } else if (dateString instanceof Date) {
+    // 如果是Date对象，直接使用
+    date = dateString;
   } else {
-      // 解析日期字符串
-      const [year, month, day] = dateString.split('-').map(Number);
-      date = new Date(year, month - 1, day);
+    // 其他情况使用当前时间
+    date = new Date();
   }
 
   // 格式化日期为yyyy-mm-dd
