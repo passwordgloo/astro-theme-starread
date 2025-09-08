@@ -5,7 +5,6 @@ import { createRequire } from "node:module";
 import readline from "node:readline";
 import { execSync } from "node:child_process";
 
-// 创建 require（用于解析 CJS 依赖）
 const require = createRequire(import.meta.url);
 
 // ========================
@@ -24,7 +23,6 @@ console.log(`
 const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 const ask = (q) => new Promise((res) => rl.question(q, (a) => res(a)));
 
-// 递归复制（跳过 node_modules/.git）
 function copyRecursive(src, dest, mode = "overwrite") {
   const stats = fs.statSync(src);
   if (stats.isDirectory()) {
@@ -43,13 +41,21 @@ function copyRecursive(src, dest, mode = "overwrite") {
   }
 }
 
-// 找到 astro-theme-starread 包目录
+// 找到 astro-theme-starread 包根目录
 function resolveTemplateDir() {
   try {
-    const entryFile = require.resolve("astro-theme-starread");
-    return path.dirname(entryFile);
+    // 直接找 package.json 来定位包根目录（兼容无 index.js 的包）
+    const pkgJsonPath = require.resolve("astro-theme-starread/package.json");
+    return path.dirname(pkgJsonPath);
   } catch (err) {
-    console.error("❌ 无法找到 `astro-theme-starread`，请确保它已发布到 npm 或在本地依赖中存在。");
+    console.error("❌ 无法找到 `astro-theme-starread` 包。");
+    console.error("   如果你的包开启了 exports 限制，请在 astro-theme-starread/package.json 中添加：");
+    console.error(`
+"exports": {
+  "./package.json": "./package.json"
+}
+    `);
+    console.error("错误详情:", err.message);
     process.exit(1);
   }
 }
@@ -60,7 +66,6 @@ function resolveTemplateDir() {
   const targetPath = path.resolve(process.cwd(), targetDirInput);
   const templateDir = resolveTemplateDir();
 
-  // 检查目标目录
   let copyMode = "overwrite";
   if (fs.existsSync(targetPath)) {
     const files = fs.readdirSync(targetPath);
@@ -84,7 +89,6 @@ function resolveTemplateDir() {
   copyRecursive(templateDir, targetPath, copyMode);
   console.log("✅ 模板复制完成！");
 
-  // 安装依赖
   const installAns = (await ask("👉 是否要立即安装依赖？ (y/n，默认 y): ")).trim().toLowerCase();
   if (!(installAns === "" || installAns === "y")) {
     console.log("\nℹ️  你选择了不安装依赖，可以稍后手动运行：");
@@ -94,7 +98,6 @@ function resolveTemplateDir() {
     process.exit(0);
   }
 
-  // 选择包管理器
   let pm = (await ask("👉 请选择包管理器 (pnpm / cnpm / npm / yarn，默认 npm): ")).trim();
   if (!pm) pm = "npm";
   const validPMs = ["pnpm", "cnpm", "npm", "yarn"];
