@@ -4,7 +4,7 @@ import NavBar from "../components/NavBar.astro";
 import AuthorWidget from "../components/AuthorWidget.astro";
 import AdWidget from "../components/AdWidget.astro";
 import TagCloud from "../components/TagCloud.astro";
-import config from 'starread.config';
+import { themeConfig } from '../../starread.config';
 
 interface Props {
   title: string;
@@ -21,9 +21,9 @@ const { title, categoryName, currentCategory, articles, allCategories } = Astro.
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="{config.site.favicon}" />
+    <link rel="icon" type="image/svg+xml" href="{themeConfig.site.favicon}" />
     <meta name="generator" content={Astro.generator} />
-    <title>{ title || config.site.title }</title>
+    <title>{ title || themeConfig.site.title }</title>
   </head>
   <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-gray-950 dark:text-neutral-100 transition-colors">
     <NavBar title={title} />
@@ -69,7 +69,7 @@ const { title, categoryName, currentCategory, articles, allCategories } = Astro.
                   <div class="flex-grow min-w-0">
                     <a href={`/articles/${article.slug}`} class="text-lg font-medium hover:text-primary transition-colors line-clamp-1">{article.data.title}</a>
                     <div class="flex items-center mt-1 text-sm text-gray-500 space-x-3">
-                      <span>{article.data.author || config.author.name}</span>
+                      <span>{article.data.author || themeConfig.author.name}</span>
                       <span>·</span>
                       <span>{typeof article.data.date === 'string' ? article.data.date.split(' ')[0] : article.data.date?.toISOString().split('T')[0]}</span>
                     </div>
@@ -91,15 +91,15 @@ const { title, categoryName, currentCategory, articles, allCategories } = Astro.
 
       <!-- 右侧边栏 -->
       <aside class="w-full md:w-1/3 space-y-6">
-        {config.sidebar.home.authorWidget && <AuthorWidget />}
-        {config.sidebar.home.adWidget && <AdWidget />}
-        {config.sidebar.home.tag && <TagCloud />}
+        {themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
+        {themeConfig.sidebar.home.adWidget && <AdWidget />}
+        {themeConfig.sidebar.home.tag && <TagCloud />}
       </aside>
     </main>
 
     <footer class="bg-white/70 dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-inner mt-10 py-6">
       <div class="container mx-auto px-4 text-center text-gray-600 text-sm">
-        <p>{config.footer.text}</p>
+        <p>{themeConfig.footer.text}</p>
       </div>
     </footer>
   </body>

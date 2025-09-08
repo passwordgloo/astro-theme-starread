@@ -1,7 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import config from 'starread.config';
-const categories = config.categories;
+import { themeConfig } from '../../starread.config';
+const categories = themeConfig.categories;
 interface Props {
   title: string;
   articles: CollectionEntry<'articles'>[];
@@ -30,7 +30,7 @@ const { title, articles, category } = Astro.props;
           <div class="flex-1 min-w-0">
             <a href={`/articles/${article.slug}`} class="text-gray-900 dark:text-slate-100 hover:text-primary transition-colors line-clamp-1">{article.data.title}</a>
             <div class="flex items-center mt-1 text-xs text-gray-500 space-x-2">
-              <span>{article.data.author || config.author.name}</span>
+              <span>{article.data.author || themeConfig.author.name}</span>
               <span>·</span>
               <span>{typeof article.data.date === 'string' ? article.data.date.split(' ')[0] : article.data.date?.toISOString().split('T')[0]}</span>
             </div>

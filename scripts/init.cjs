@@ -36,9 +36,12 @@ function copyRecursive(src, dest) {
     'starread.config.ts',
     'package.json',
     'tsconfig.json',
+    'index.js',
+    'index.d.ts',
     'README.md',
     'LICENSE',
     'public',
+    'scripts',
     'src'
   ];
 

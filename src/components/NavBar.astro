@@ -3,10 +3,10 @@ const { title } = Astro.props;
 import ThemeToggle from "./ThemeToggle.astro";
 import LocalSearch from "./SwitchLocalSearch.astro";
 import AlgoliaSearch from "./SwitchAlgoliaSearch.astro";
-import config from 'starread.config';
+import { themeConfig } from '../../starread.config';
 
 // 根据配置选择搜索组件
-const SearchComponent = config.search.provider === 'algolia' ? AlgoliaSearch : LocalSearch;
+const SearchComponent = themeConfig.search.provider === 'algolia' ? AlgoliaSearch : LocalSearch;
 ---
 
 <header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md" client:load>
@@ -19,26 +19,26 @@ const SearchComponent = config.search.provider === 'algolia' ? AlgoliaSearch : L
   <div class="container mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex items-center space-x-2 nav-content">
       <div id="logo-container">
-        {config.site.logo.image ? (
+        {themeConfig.site.logo.image ? (
           <img 
-            src={config.site.logo.image} 
-            alt={config.site.logo.alt} 
+            src={themeConfig.site.logo.image} 
+            alt={themeConfig.site.logo.alt} 
             class="h-8 w-auto logo-image" 
-            data-light-src={config.site.logo.image} 
-            data-dark-src={config.site.logo.darkImage} 
+            data-light-src={themeConfig.site.logo.image} 
+            data-dark-src={themeConfig.site.logo.darkImage} 
           /> 
         ) : (
-          <span class="font-bold text-xl nav-logo-text">{config.site.logo.text}</span>
+          <span class="font-bold text-xl nav-logo-text">{themeConfig.site.logo.text}</span>
         )}
       </div>
     </div>
     <div class="article-title text-lg font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full md:w-auto text-center md:text-left">
-      { title || config.site.title }
+      { title || themeConfig.site.title }
     </div>
 
     <!-- 导航菜单 -->
     <nav class="hidden md:flex items-center space-x-6">
-      {config.nav.map((item) => (
+      {themeConfig.nav.map((item) => (
         <div class="relative group" key={item.text || item.name}>
           {item.items ? (
             // 下拉菜单
@@ -129,7 +129,7 @@ const SearchComponent = config.search.provider === 'algolia' ? AlgoliaSearch : L
       </div>
     </div>
     <nav class="p-4 space-y-2">
-      {config.nav.map((item) => (
+      {themeConfig.nav.map((item) => (
         <div key={item.name}>
           {item.href ? (
             <a href={item.href} class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
