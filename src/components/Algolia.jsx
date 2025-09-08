@@ -7,6 +7,7 @@ import {
   Highlight,
   Snippet,
   Pagination,
+  RefinementList,
   useInstantSearch,
 } from 'react-instantsearch';
 
