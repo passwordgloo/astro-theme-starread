@@ -1,6 +1,5 @@
 // 自定义CHANGELOG更新器，将版本标题从三级改为二级
-module.exports = function (updaterConfig) {
-  
+export default function changelogUpdater(updaterConfig) {
   return {
     detectBreakingChanges: true,
     breakingPrefix: 'BREAKING CHANGE: ',
@@ -16,4 +15,4 @@ All notable changes to this project were written by foresee.
       return changelog.replace(/### \[/g, '## [');
     }
   };
-};
+}

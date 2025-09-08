@@ -8,7 +8,7 @@ export const themeConfig: starreadthemeconfig = {
   // 网站配置
   site: {
     title: '星阅主题',
-    favicon: '/favicon.svg',
+    favicon: '/favicon.png',
     defaultCover: '/defaultCover.jpg',
     
     logo: {
@@ -25,7 +25,7 @@ export const themeConfig: starreadthemeconfig = {
     description: '阳光明媚，微笑前行',
     avatar: 'https://picsum.photos/40/40?random=4',
     social: {
-      bilibili: '@伏案听潮',
+      bilibili: 'XXXXXX',
       qq: 'XXXXXXX',
     },
   },
