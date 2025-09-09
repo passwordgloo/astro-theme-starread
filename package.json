@@ -11,6 +11,6 @@
   ],
   "description": "Astro Starread 主题安装器",
   "dependencies": {
-    "astro-theme-starread": "^1.8.6"
+    "astro-theme-starread": "^1.8.7"
   }
 }
