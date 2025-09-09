@@ -14,21 +14,21 @@ const { title, articles, category } = Astro.props;
 <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
   <div class="px-4 py-3 border-b border-gray-200 dark:border-white/10 flex justify-between items-center">
     <div class="flex items-center space-x-2">
-      <span class="icon-[lucide--file-text] w-5 h-5 text-primary"></span>
+      <span class="icon-[lucide--file-text] w-5 h-5"></span>
       <h2 class="font-bold text-lg text-dark">{title}</h2>
     </div>
-    <a href={`/category/${encodeURIComponent(category)}`} class="text-sm text-primary hover:text-primary/80 transition-colors">更多</a>
+    <a href={`/category/${encodeURIComponent(category)}`} class="text-sm hover:text-primary dark:hover:text-secondary transition-colors">更多</a>
   </div>
   
   <div class="p-4 space-y-4">
     {articles.length > 0 ? (
       articles.map((article, index) => (
         <div key={article.slug} class="flex items-start space-x-3 p-2 hover:bg-gray-50 dark:hover:bg-white/5 rounded-md transition-colors">
-          <div class="flex-shrink-0 w-8 h-8 bg-sky-600 text-white hover:bg-sky-700 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400 rounded-full flex items-center justify-center text-gray-500 text-sm font-medium">
+          <div class="flex-shrink-0 w-8 h-8 bg-primary text-white hover:bg-primary/80 dark:bg-secondary dark:text-slate-950 dark:hover:bg-sky-400 rounded-full flex items-center justify-center text-gray-500 text-sm font-medium">
             {index + 1}
           </div>
           <div class="flex-1 min-w-0">
-            <a href={`/articles/${article.slug}`} class="text-gray-900 dark:text-slate-100 hover:text-primary transition-colors line-clamp-1">{article.data.title}</a>
+            <a href={`/articles/${article.slug}`} class="hover:text-primary dark:hover:text-secondary transition-colors line-clamp-1">{article.data.title}</a>
             <div class="flex items-center mt-1 text-xs text-gray-500 space-x-2">
               <span>{article.data.author || themeConfig.author.name}</span>
               <span>·</span>

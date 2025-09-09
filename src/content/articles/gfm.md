@@ -2,7 +2,7 @@
 title: GFM语法
 categories: [帮助]
 tags: [你好]
-cover: https://picsum.photos/800/400?random=1
+cover: https://www.dmoe.cc/random.php
 description: 这是一篇示例文章，展示了如何使用frontmatter配置文章属性。
 date: 2025-10-01
 ---
