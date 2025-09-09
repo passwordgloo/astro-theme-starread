@@ -1,6 +1,21 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const ArticleInfo = ({ title, cover, date, tags = [], categories = [] }) => {
+  useEffect(() => {
+    // 动态加载本地busuanzi脚本
+    const script = document.createElement('script');
+    script.src = '/scripts/busuanzi.min.js';
+    script.defer = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      // 清理脚本
+      const existingScript = document.querySelector('script[src="/scripts/busuanzi.min.js"]');
+      if (existingScript) {
+        document.body.removeChild(existingScript);
+      }
+    };
+  }, []);
   return (
     <div className="relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700">
       {/* 背景图片 */}
@@ -40,11 +55,22 @@ const ArticleInfo = ({ title, cover, date, tags = [], categories = [] }) => {
             {title}
           </h1>
           
-          <div className="flex items-center text-white/90 text-sm">
-            <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-            </svg>
-            <span className="font-medium">{date}</span>
+          <div className="flex items-center text-white/90 text-sm space-x-6">
+            <div className="flex items-center">
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              <span className="font-medium">{date}</span>
+            </div>
+            <div className="flex items-center">
+              <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+              </svg>
+              <span className="font-medium">
+                <span id="busuanzi_page_pv">加载中...</span> 次阅读
+              </span>
+            </div>
           </div>
         </div>
       </div>

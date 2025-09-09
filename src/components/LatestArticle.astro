@@ -20,10 +20,12 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
 ---
 
 <div class="relative" client:load>
+  <!-- 不蒜子统计脚本 -->
+  <script src="/scripts/busuanzi.min.js" defer></script>
   <!-- 顶部标题栏 -->
   <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4 mb-6">
     <div class="flex items-center space-x-2">
-      <span class="icon-[lucide--newspaper] w-5 h-5 text-accent"></span>
+      <span class="icon-[lucide--newspaper] w-5 h-5"></span>
       <h2 class="text-accent font-bold text-lg">最新文章</h2>
     </div>
     <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
@@ -69,7 +71,7 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
               <span>{article.processed.date}</span>
               <span class="flex items-center">
                 <span class="icon-[lucide--eye] mr-1 w-3 h-3"></span>
-                {article.processed.views}
+                <span id="busuanzi_page_pv">加载中...</span>
               </span>
             </div>
           </div>
@@ -114,7 +116,6 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
     const cover = article.data.cover || '/defaultCover.jpg';
     const categories = article.data.categories || [];
     const tags = article.data.tags || [];
-    const views = article.data.views || 0;
     
     return {
       ...article,
@@ -122,8 +123,7 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
         date: date.toISOString().split('T')[0],
         cover,
         categories,
-        tags,
-        views
+        tags
       }
     };
   }
@@ -154,7 +154,7 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
             <span>${processed.processed.date}</span>
             <span class="flex items-center">
               <span class="icon-[lucide--eye] mr-1 w-3 h-3"></span>
-              ${processed.processed.views}
+              <span id="busuanzi_page_pv">加载中...</span>
             </span>
           </div>
         </div>
