@@ -1,9 +1,9 @@
-<div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-6 sticky top-6">
-  <div class="flex items-center space-x-2 mb-4 pb-2 border-b border-gray-200 dark:border-white/10">
-    <span class="icon-[lucide--list] w-5 h-5 text-accent"></span>
-    <h3 class="font-bold text-lg m-0">文章目录</h3>
+<div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4">
+  <div class="flex items-center space-x-2 mb-4 pb-3 border-b border-gray-100 dark:border-slate-700/50">
+    <span class="icon-[lucide--list] w-5 h-5 dark:text-blue-400 transition-colors duration-300"></span>
+    <h3 class="font-bold text-lg m-0 text-gray-800 dark:text-gray-100 transition-colors duration-300">文章目录</h3>
   </div>
-  <nav id="table-of-contents" class="text-sm space-y-1.5">
+  <nav id="table-of-contents" class="text-sm space-y-1">
     <!-- 目录将通过JavaScript动态生成 -->
   </nav>
 </div>
@@ -16,98 +16,194 @@ document.addEventListener('DOMContentLoaded', () => {
     const headings = content.querySelectorAll('h2, h3, h4');
 
     if (headings.length === 0) {
-    toc.innerHTML = '<p class="text-gray-500 italic">本文没有目录</p>';
-    return;
+        toc.innerHTML = '<div class="text-center py-8"><div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-slate-800 mb-3"><span class="icon-[lucide--file-text] w-6 h-6 text-gray-400 dark:text-slate-500"></span></div><p class="text-gray-500 dark:text-slate-400 italic">暂无目录</p></div>';
+        return;
     }
 
     let tocHTML = '';
-    headings.forEach((heading) => {
-    const id = heading.id || heading.textContent.toLowerCase().replace(/\s+/g, '-');
-    heading.id = id;
-    const level = heading.tagName.toLowerCase();
-    const indent = level === 'h3' ? ' border-gray-100' : '';
+    headings.forEach((heading, index) => {
+        const id = heading.id || heading.textContent.toLowerCase().replace(/\s+/g, '-').replace(/[^\w-]/g, '');
+        heading.id = id;
+        const level = heading.tagName.toLowerCase();
 
-    // 根据标题级别设置不同样式
-    let levelStyles = '';
-    if (level === 'h2') {
-      levelStyles = 'font-bold text-gray-800 dark:text-gray-100';
-    } else if (level === 'h3') {
-      levelStyles = 'text-gray-700 dark:text-gray-200';
-    } else if (level === 'h4') {
-      levelStyles = 'text-gray-600 dark:text-gray-300 italic';
-    }
+        // 根据标题级别设置不同样式
+        let levelStyles = '';
+        let hoverStyles = '';
+        let activeStyles = '';
+        let indentStyle = '';
+        let dotIndicator = '';
 
-    // 设置不同级别的缩进
-    let indentStyle = '';
-    if (level === 'h3') {
-      indentStyle = 'pl-4 border-l-2 border-gray-200 dark:border-gray-700';
-    } else if (level === 'h4') {
-      indentStyle = 'pl-8 border-l-2 border-gray-200 dark:border-gray-700';
-    }
+        if (level === 'h2') {
+            levelStyles = 'font-semibold text-gray-700 dark:text-gray-200';
+            hoverStyles = 'hover:text-blue-600 dark:hover:text-blue-400';
+            activeStyles = 'text-blue-600 dark:text-blue-400 bg-blue-100/90 dark:bg-blue-900/30';
+            indentStyle = 'pl-0';
+            dotIndicator = 'w-2 h-2 bg-blue-500 dark:bg-blue-400 rounded-full';
+        } else if (level === 'h3') {
+            levelStyles = 'font-medium text-gray-600 dark:text-gray-300';
+            hoverStyles = 'hover:text-blue-500 dark:hover:text-blue-300';
+            activeStyles = 'text-blue-500 dark:text-blue-300 bg-blue-50/80 dark:bg-blue-900/20';
+            indentStyle = 'pl-4';
+            dotIndicator = 'w-1.5 h-1.5 bg-gray-400 dark:bg-gray-500 rounded-full';
+        } else if (level === 'h4') {
+            levelStyles = 'text-sm text-gray-500 dark:text-gray-400';
+            hoverStyles = 'hover:text-blue-400 dark:hover:text-blue-300';
+            activeStyles = 'text-blue-400 dark:text-blue-300 bg-gray-100/70 dark:bg-slate-800/40';
+            indentStyle = 'pl-8';
+            dotIndicator = 'w-1 h-1 bg-gray-300 dark:bg-gray-600 rounded-full';
+        }
 
-    tocHTML += `
-        <a href="#${id}" class="block py-1.5 ${indentStyle} ${levelStyles} hover:text-blue-600 transition-all" data-level="${level}">
-        ${heading.textContent}
-        </a>
-    `;
+        const itemClasses = `group relative flex items-center py-2.5 px-3 rounded-lg transition-all duration-200 ${indentStyle} ${levelStyles} ${hoverStyles}`;
+
+        tocHTML += `
+            <div class="relative">
+                <a href="#${id}" class="${itemClasses}" data-level="${level}" data-index="${index}">
+                    <div class="absolute left-0 top-1/2 -translate-y-1/2 flex items-center">
+                        <div class="${dotIndicator} transition-all duration-200 group-hover:scale-125"></div>
+                    </div>
+                    <span class="ml-6 line-clamp-2">${heading.textContent}</span>
+                </a>
+            </div>
+        `;
     });
 
     toc.innerHTML = tocHTML;
 
-    // 平滑滚动
+    // 平滑滚动和交互效果
     document.querySelectorAll('#table-of-contents a').forEach((anchor) => {
-    anchor.addEventListener('click', (e) => {
-        e.preventDefault();
-        const targetId = anchor.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
+        anchor.addEventListener('click', (e) => {
+            e.preventDefault();
+            const targetId = anchor.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
 
-        if (targetElement) {
-        window.scrollTo({
-            top: targetElement.offsetTop - 80,
-            behavior: 'smooth'
+            if (targetElement) {
+                // 添加点击动画效果
+                anchor.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    anchor.style.transform = 'scale(1)';
+                }, 150);
+
+                window.scrollTo({
+                    top: targetElement.offsetTop - 100,
+                    behavior: 'smooth'
+                });
+            }
         });
-        }
-    });
     });
 
     // 滚动时高亮当前章节
+    function updateActiveSection() {
+        let currentSectionIndex = -1;
+        const scrollPosition = window.scrollY + 120;
+
+        headings.forEach((heading, index) => {
+            const sectionTop = heading.offsetTop;
+            const sectionBottom = sectionTop + heading.offsetHeight;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                currentSectionIndex = index;
+            }
+        });
+
+        // 如果滚动到底部，选择最后一个章节
+        if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight - 100) {
+            currentSectionIndex = headings.length - 1;
+        }
+
+        document.querySelectorAll('#table-of-contents a').forEach((link, index) => {
+            const isActive = index === currentSectionIndex;
+            const level = link.getAttribute('data-level');
+            
+            let activeClasses = '';
+            if (level === 'h2') {
+                activeClasses = 'text-blue-600 dark:text-blue-400 bg-blue-100/90 dark:bg-blue-900/30';
+            } else if (level === 'h3') {
+                activeClasses = 'text-blue-500 dark:text-blue-300 bg-blue-50/80 dark:bg-blue-900/20';
+            } else {
+                activeClasses = 'text-blue-400 dark:text-blue-300 bg-gray-100/70 dark:bg-slate-800/40';
+            }
+
+            if (isActive) {
+                link.classList.add(...activeClasses.split(' '));
+                link.classList.add('font-semibold');
+                
+                // 确保活跃项可见
+                const tocContainer = link.closest('#table-of-contents');
+                const linkRect = link.getBoundingClientRect();
+                const containerRect = tocContainer.getBoundingClientRect();
+                
+                if (linkRect.top < containerRect.top || linkRect.bottom > containerRect.bottom) {
+                    link.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                }
+            } else {
+                link.classList.remove(...activeClasses.split(' '));
+                link.classList.remove('font-semibold');
+            }
+        });
+    }
+
+    // 防抖滚动处理
+    let scrollTimeout;
     window.addEventListener('scroll', () => {
-    let currentSectionId = '';
-    headings.forEach((heading) => {
-        const sectionTop = heading.offsetTop;
-        if (window.scrollY >= sectionTop - 100) {
-        currentSectionId = '#' + heading.id;
-        }
+        clearTimeout(scrollTimeout);
+        scrollTimeout = setTimeout(updateActiveSection, 50);
     });
 
-    document.querySelectorAll('#table-of-contents a').forEach((link) => {
-        if (link.getAttribute('href') === currentSectionId) {
-        link.classList.add('text-blue-600', 'font-medium');
-        } else {
-        link.classList.remove('text-blue-600', 'font-medium');
-        }
-    });
-    });
+    // 初始高亮
+    updateActiveSection();
 
-    // 导航栏滚动效果
-    let lastScrollTop = 0;
-    const header = document.querySelector('header');
-    if (header) {
-    window.addEventListener('scroll', () => {
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollTop > lastScrollTop && scrollTop > 100) {
-        // 向下滚动，显示文章标题
-        header.classList.add('show-title');
-        header.classList.remove('show-nav');
-        } else {
-        // 向上滚动，显示导航
-        header.classList.remove('show-title');
-        header.classList.add('show-nav');
-        }
-
-        lastScrollTop = scrollTop;
-    });
+    // 添加滚动条样式
+    const tocContainer = document.querySelector('#table-of-contents');
+    if (tocContainer) {
+        tocContainer.classList.add('scroll-smooth');
     }
 });
 </script>
+
+<style>
+/* 自定义滚动条样式 */
+#table-of-contents::-webkit-scrollbar {
+    width: 4px;
+}
+
+#table-of-contents::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#table-of-contents::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 2px;
+}
+
+#table-of-contents::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+.dark #table-of-contents::-webkit-scrollbar-thumb {
+    background: #475569;
+}
+
+.dark #table-of-contents::-webkit-scrollbar-thumb:hover {
+    background: #64748b;
+}
+
+/* 动画效果 */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#table-of-contents > div {
+    animation: fadeInUp 0.3s ease-out;
+}
+
+#table-of-contents > div:nth-child(n) {
+    animation-delay: calc(var(--index) * 0.05s);
+}
+</style>
