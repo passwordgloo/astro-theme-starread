@@ -1,6 +1,18 @@
 import type { starreadthemeconfig } from './scripts/config';
 
 export const themeConfig: starreadthemeconfig = {
+
+  // Banner配置
+  banner: {
+    title: "Star read 星阅主题",
+    backgroundImage: "https://picsum.photos/1200/300",
+    tags: [
+      "基于Vite+Tailwindcss",
+      "支持深色模式",
+      "模块化组件"
+    ]
+  },
+  
   carousel: {
     title: "轮播"
   },
