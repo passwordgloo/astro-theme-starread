@@ -23,7 +23,7 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
 
 <div class="relative" client:load>
   <!-- 不蒜子统计脚本 -->
-  <script src="/scripts/busuanzi.min.js" defer></script>
+  <script src="/busuanzi.min.js" defer></script>
   <!-- 顶部标题栏 -->
   <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4 mb-6">
     <div class="flex items-center space-x-2">
@@ -141,7 +141,7 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
       articleCard.innerHTML = `
         ${processed.processed.categories.length ? `<div class="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">${processed.processed.categories[0]}</div>` : ''}
         <div class="relative">
-          <img src="${processed.processed.cover}" alt="${article.data.title}" class="w-full h-48 object-cover" loading="lazy" width="384" height="192">
+          <img src="${processed.processed.cover}" alt="${article.data.title}" class="w-full h-48 object-cover" loading="lazy" width="384" height="${imageHeight}">
         </div>
         <div class="p-4">
           ${processed.processed.tags.length ? `
