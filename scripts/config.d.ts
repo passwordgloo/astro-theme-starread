@@ -334,15 +334,28 @@ export interface starreadthemeconfig {
     loadMore: number;
   };
 
-  /**
-   * 搜索配置
-   * 
-   * @example
-   * search: {
-   *   provider: 'local'  // 'local' 使用本地搜索，'algolia' 使用 Algolia 搜索
-   * }
-   */
-  search: {
+    /**
+     * 封面图片配置
+     * 
+     * @example
+     * coverImage: {
+     *   defaultAspectRatio: '16:9' // 默认宽高比，支持的比例：16:9, 4:3, 3:2
+     * }
+     */
+    coverImage: {
+      /** 默认宽高比，支持的比例：16:9, 4:3, 3:2 */
+      defaultAspectRatio: string;
+    };
+
+    /**
+     * 搜索配置
+     * 
+     * @example
+     * search: {
+     *   provider: 'local'  // 'local' 使用本地搜索，'algolia' 使用 Algolia 搜索
+     * }
+     */
+    search: {
     /** 搜索服务提供商：'local' 本地搜索 或 'algolia' Algolia搜索 */
     provider: 'local' | 'algolia';
   };

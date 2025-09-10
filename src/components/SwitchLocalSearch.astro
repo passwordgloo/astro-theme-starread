@@ -5,7 +5,7 @@ const ref = Astro.props.ref || null;
 
 <div class="search-container relative" ref={ref}>
   {themeConfig.search.provider === 'algolia' ? (
-    <a href="/search" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+    <a href="/search" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
       aria-label="搜索"
     >
       <span class="icon-[lucide--search] h-5 w-5 text-gray-700 dark:text-gray-300"></span>
@@ -13,7 +13,7 @@ const ref = Astro.props.ref || null;
   ) : (
     <button 
       id="search-toggle" 
-      class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+      class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
       aria-label="搜索"
     >
       <span class="icon-[lucide--search] h-5 w-5 text-gray-700 dark:text-gray-300"></span>

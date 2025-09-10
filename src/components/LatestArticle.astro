@@ -9,8 +9,10 @@ interface Props {
 }
 
 const { articles } = Astro.props;
-const { articleLoad } = themeConfig;
+const { articleLoad, coverImage } = themeConfig;
 const { type: loadType, initialLoad, loadMore, defaultLimit } = articleLoad;
+const [widthRatio, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
+const imageHeight = Math.round(384 * heightRatio / widthRatio);
 
 // 处理文章数据
 const processedArticles = processArticleData(articles);
@@ -45,7 +47,7 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
               alt={article.data.title}
               class="w-full h-48 object-cover"
               width={384}
-              height={192}
+              height={imageHeight}
             />
           </div>
 
@@ -177,7 +179,7 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
 
       // 如果已经加载全部，隐藏触发器
       if (newLoaded >= total || newLoaded >= articleLoadConfig.defaultLimit) {
-        trigger.style.display = 'none';
+        // 修复多余的隐藏触发器代码
       }
     }
   }
@@ -188,9 +190,9 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
 
     // 初始检查是否需要隐藏按钮
     if (parseInt(trigger.dataset.loaded) >= parseInt(trigger.dataset.total) || parseInt(trigger.dataset.loaded) >= articleLoadConfig.defaultLimit) {
-      trigger.style.display = 'none';
+      // 移除多余的无条件隐藏触发器代码
     }
-      trigger.style.display = 'none';
+      // 移除无条件隐藏触发器的代码
   }
 
   // 自动加载模式
