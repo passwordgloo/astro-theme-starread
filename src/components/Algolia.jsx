@@ -8,6 +8,7 @@ import {
   Snippet,
   Pagination,
   useInstantSearch,
+  Configure,
 } from 'react-instantsearch';
 
 const searchClient = algoliasearch(
@@ -60,7 +61,7 @@ function Hit({ hit }) {
         <h3 className="mb-2 font-semibold">
           <a
             href={link}
-            className="text-blue-600 hover:underline no-underline"
+            className="text-primary dark:text-secondary hover:underline no-underline"
           >
             <Highlight attribute="title" hit={hit} />
           </a>
@@ -98,10 +99,13 @@ export default function AlgoliaSearch() {
         indexName={import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME}
         future={{ preserveSharedStateOnUnmount: true }}
       >
+        {/* 配置每页显示5条结果 */}
+        <Configure hitsPerPage={5} />
+
         {/* 搜索框 */}
         <div className="relative w-full h-10 text-sm leading-5 mb-6">
-          <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none">
-            <span className="icon-[lucide--search] h-5 w-5 bg-gray-700 dark:bg-gray-300 "></span>
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none flex items-center justify-center">
+            <span className="icon-[lucide--search] h-5 w-5 text-primary dark:text-secondary fill-none"></span>
           </div>
 
           <SearchBox
@@ -110,7 +114,7 @@ export default function AlgoliaSearch() {
               root: 'w-full',
               form: 'flex bg-white/60 backdrop-blur-lg dark:bg-white/5 dark:border-white/10 text-sm h-10 leading-5 relative w-full',
               input:
-                'appearance-none bg-gray-50 dark:bg-white/5 border border-gray-300 rounded shadow-inner pl-10 pr-4 py-2 flex-1 text-gray-800 caret-blue-600 placeholder-blue-400 focus:border-blue-500 focus:shadow-none focus:outline-none',
+                'appearance-none bg-gray-50 dark:bg-white/5 border border-gray-300 rounded shadow-inner pl-10 pr-4 py-2 flex-1 text-gray-800 caret-blue-600 placeholder-primary dark:placeholder-secondary focus:border-blue-500 focus:shadow-none focus:outline-none',
               submitIcon: 'hidden',
               resetIcon: 'hidden',
             }}
@@ -121,6 +125,7 @@ export default function AlgoliaSearch() {
           <main className="flex-1">
             <Hits 
               hitComponent={Hit}
+              hitsPerPage={5}
               classNames={{
                 list: 'list-none m-0 p-0',
               }}
