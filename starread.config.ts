@@ -26,8 +26,8 @@ export const themeConfig: starreadthemeconfig = {
     logo: {
       image: '/logo.svg',
       darkImage: '/logo-dark.svg',
-      text: 'Lovestu',
-      alt: 'Lovestu Logo',
+      text: '星阅主题',
+      alt: '星阅主题 Logo',
     },
   },
 
@@ -123,10 +123,15 @@ export const themeConfig: starreadthemeconfig = {
 
   // 文章加载配置
   articleLoad: {
-    type: 'auto', // 'button' 或 'auto'
+    type: 'button', // 'button' 或 'auto'
     defaultLimit: 20, // 默认最大加载数量
     initialLoad: 8, // 初始加载数量
     loadMore: 4 // 每次加载数量
+  },
+
+  // 封面图片配置
+  coverImage: {
+    defaultAspectRatio: '16:9' // 默认宽高比，支持的比例：16:9, 4:3, 3:2
   },
 
   // 搜索配置
