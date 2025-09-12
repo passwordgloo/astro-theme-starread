@@ -1,21 +1,25 @@
 import React, { useEffect } from 'react';
 
 const ArticleInfo = ({ title, cover, date, tags = [], categories = [] }) => {
-  useEffect(() => {
-    // 动态加载本地busuanzi脚本
-    const script = document.createElement('script');
-    script.src = '/busuanzi.min.js';
-    script.defer = true;
-    document.body.appendChild(script);
-    
-    return () => {
-      // 清理脚本
-      const existingScript = document.querySelector('script[src="/busuanzi.min.js"]');
-      if (existingScript) {
-        document.body.removeChild(existingScript);
-      }
-    };
-  }, []);
+useEffect(() => {
+  const script = document.createElement('script');
+  script.src = '/busuanzi.min.js';
+  script.defer = true;
+  script.onload = () => {
+    if (window.BUSUANZI) {
+      window.BUSUANZI.fetch();
+    }
+  };
+  document.body.appendChild(script);
+
+  return () => {
+    const existingScript = document.querySelector('script[src="/busuanzi.min.js"]');
+    if (existingScript) {
+      document.body.removeChild(existingScript);
+    }
+  };
+}, []);
+
   return (
     <div className="relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg border border-gray-200 dark:border-gray-700">
       {/* 背景图片 */}
