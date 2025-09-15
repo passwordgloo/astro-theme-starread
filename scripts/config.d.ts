@@ -114,6 +114,7 @@ export interface starreadthemeconfig {
    *   title: '星阅主题',
    *   favicon: '/favicon.svg',
    *   defaultCover: '/defaultCover.jpg',
+   *   foundedDate: '2024-01-01',
    *   logo: {
    *     image: '/logo.svg',
    *     darkImage: '/logo-dark.svg',
@@ -129,6 +130,8 @@ export interface starreadthemeconfig {
     favicon: string;
     /** 默认封面图路径，用于没有设置封面的文章 */
     defaultCover: string;
+    /** 建站日期，格式：YYYY-MM-DD，用于计算建站天数 */
+    foundedDate?: string;
     /** Logo 配置 */
     logo: {
       /** 亮色模式下的 logo 路径 */
@@ -286,6 +289,8 @@ export interface starreadthemeconfig {
       tag: boolean;
       /** 是否显示推荐文章 */
       recommendedArticles: boolean;
+      /** 是否显示站点统计 */
+      statistic: boolean;
     };
     /** 文章页侧边栏配置 */
     article: {
