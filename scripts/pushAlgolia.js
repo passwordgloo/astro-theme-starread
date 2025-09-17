@@ -33,23 +33,28 @@ const records = data.map((item, i) => ({
 // ===== 初始化 Algolia 客户端（v5 API）=====
 const client = algoliasearch(APP_ID, ADMIN_API_KEY);
 
-// ===== 推送数据到 Algolia =====
 (async () => {
   try {
-    const [res] = await client.saveObjects({
+    // 推送数据
+    const res = await client.saveObjects({
       indexName: INDEX_NAME,
       objects: records,
-      autoGenerateObjectIDIfNotExist: true, // 如果没有objectID就自动生成
+      autoGenerateObjectIDIfNotExist: true,
     });
 
     console.log(`✅ 推送成功！任务 ID: ${res.taskID}，共 ${records.length} 条数据`);
-
-    // 可选：等待任务完成再退出
-    await client.waitForTask({
-      indexName: INDEX_NAME,
-      taskID: res.taskID,
-    });
     console.log('🎯 数据已写入索引完成！');
+
+    // 设置索引配置（注意 v5 要用 indexSettings）
+    await client.setSettings({
+      indexName: INDEX_NAME,
+      indexSettings: {
+        searchableAttributes: ["title", "content"],
+        attributesToSnippet: ["content:100"], // <== 必须有
+      },
+    });
+
+    console.log("⚙️ 索引配置已更新！");
   } catch (err) {
     console.error('❌ 推送失败:', err);
   }
