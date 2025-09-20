@@ -19,7 +19,7 @@ const allArticles = await getCollection('articles');
 // 按分类筛选文章
 const categoryArticles = {};
 
-themeConfig.categories.forEach(category => {
+themeConfig.widget.categories.forEach(category => {
   categoryArticles[category.name] = allArticles.filter(article => 
     article.data.categories?.includes(category.name) || 
     article.data.tags?.includes(category.name)
@@ -31,10 +31,10 @@ const latestArticles = [...allArticles]
   .sort((a, b) => new Date(b.data.date || 0) - new Date(a.data.date || 0))
   .slice(0, 5);
 
-// 轮播文章（取前4篇有封面图的文章）
+// 轮播文章（取前5篇有封面图的文章）
 const carouselArticles = allArticles
   .filter(article => article.data.cover)
-  .slice(0, 4);
+  .slice(0, 5);
 ---
 
   <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-slate-900 dark:text-neutral-100 transition-colors">
@@ -46,7 +46,7 @@ const carouselArticles = allArticles
 
       <!-- 文章分类区域 -->
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        {themeConfig.categories.map((category) => (
+        {themeConfig.widget.categories.map((category) => (
           <ArticleSection
             title={category.title}
             articles={categoryArticles[category.name]?.length > 0 ? categoryArticles[category.name] : []}
@@ -71,7 +71,7 @@ const carouselArticles = allArticles
     <!-- 移动端底部Tab栏 -->
     <div id="mobile-bottom-tab" class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t dark:border-gray-700 px-2 py-2 z-40">
       <div class="flex items-center justify-around">
-        {themeConfig.nav.map((item) => (
+        {themeConfig.navbar.map((item) => (
           item.href && (
             <a href={item.href} class="flex flex-col items-center space-y-1 text-xs text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex-1 py-2">
               {item.icon && <span class={`${item.icon} h-5 w-5`}></span>}
@@ -84,7 +84,7 @@ const carouselArticles = allArticles
 
     <footer class="bg-white/70 dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-inner mt-10 py-6 mb-16 md:mb-0">
 			<div class="container mx-auto px-4 text-center text-gray-600 text-sm">
-				<p>{themeConfig.footer.text}</p>
+				<p>{themeConfig.site.footer.text}</p>
 			</div>
 		</footer>
   </body>
