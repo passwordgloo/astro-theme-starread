@@ -1,19 +1,20 @@
+---
+title: Star Read Astro博客主题
+categories: [主题说明]
+tags: [vue, javascript]
+description: Star Read是一个出色、简洁且精致的Astro博客主题，提供多种安装方式，项目结构清晰，具备现代UI、搜索支持、响应式设计、主题切换等功能，还提供搜索、主题定制和评论系统的详细配置。
+date: 2025-10-20
+cover: https://t.alcy.cc/pc
+---
+
 <div align="center">
   <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
-  <p>
-    <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
-    <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
-    <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
-    <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
-</p>
    🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
   🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
   🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
   🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
   🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
 </div>
-
-# Star Read - Astro博客主题
 
 >既有星光般的璀璨，又不失简洁和高端感的Astro主题
 

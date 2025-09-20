@@ -1,11 +1,13 @@
+---
+title: Star Read Astro Blog Theme
+categories: [主题说明]
+description: Star Read is a brilliant, clean, and sophisticated Astro blog theme. It offers multiple installation methods, has a well structured project layout, and comes with features like modern UI, search support, responsive design, theme toggling, and more. It also provides detailed configurations for search, theme customization, and comment systems.
+cover: https://picsum.photos/800/400?random=1
+date: 2025-10-20
+---
+
 <div align="center">
   <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
-  <p>
-    <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
-    <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
-    <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
-    <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
-</p>
    🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
   🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
   🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 

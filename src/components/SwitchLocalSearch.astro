@@ -4,7 +4,7 @@ const ref = Astro.props.ref || null;
 ---
 
 <div class="search-container relative" ref={ref}>
-  {themeConfig.search.provider === 'algolia' ? (
+  {themeConfig.plugin.search.provider === 'algolia' ? (
     <a href="/search" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
       aria-label="搜索"
     >

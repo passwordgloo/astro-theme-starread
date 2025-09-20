@@ -4,11 +4,11 @@ import { themeConfig } from '../../starread.config.ts';
 
 <!-- 头部横幅 -->
 <div class="relative bg-gradient-to-r from-blue-600 to-indigo-700 rounded-lg overflow-hidden shadow-md mb-6">
-    <div class="absolute inset-0 opacity-20" style={`background-image: url('${themeConfig.banner.backgroundImage}'); background-size: cover; background-position: center;`}></div>
+    <div class="absolute inset-0 opacity-20" style={`background-image: url('${themeConfig.widget.banner.backgroundImage}'); background-size: cover; background-position: center;`}></div>
     <div class="relative px-6 py-12 md:px-12 text-center text-white">
-        <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">{themeConfig.banner.title}</h1>
+        <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">{themeConfig.widget.banner.title}</h1>
         <div class="flex flex-wrap justify-center gap-4 mt-6">
-            {themeConfig.banner.tags.map((tag: string) => (
+            {themeConfig.widget.banner.tags.map((tag: string) => (
                 <div class="bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full text-sm">
                     <span class="font-medium">{tag}</span>
                 </div>

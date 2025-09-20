@@ -3,7 +3,7 @@
   "include": [
     ".astro/types.d.ts",
     "**/*"
-  ],
+, "public/twikoo.min.js"  ],
   "exclude": [
     "dist"
   ],

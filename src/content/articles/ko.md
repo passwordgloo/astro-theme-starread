@@ -1,11 +1,14 @@
+---
+title: Star ReadAstro 블로그 테마
+categories: [主题说明]
+cover: https://t.alcy.cc/fj
+description: Star Read Astro 블로그 테마의 설치 방법, 특징, 검색, 사용자 정의 구성, 댓글 설정 및 명령어 등에 대한 안내 문서입니다.
+date: 2025-10-01
+---
+
+
 <div align="center">
   <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
-  <p>
-    <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
-    <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
-    <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
-    <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
-</p>
    🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
   🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
   🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 

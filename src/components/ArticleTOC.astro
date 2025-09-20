@@ -1,4 +1,4 @@
-<div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4">
+<div id="article-toc-container" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4 transition-all duration-300">
   <div class="flex items-center space-x-2 mb-4 pb-3 border-b border-gray-100 dark:border-slate-700/50">
     <span class="icon-[lucide--list] w-5 h-5 transition-colors duration-300"></span>
     <h3 class="font-bold text-lg m-0 text-gray-800 dark:text-gray-100 transition-colors duration-300">文章目录</h3>
@@ -13,7 +13,50 @@
 document.addEventListener('DOMContentLoaded', () => {
     const content = document.getElementById('article-content');
     const toc = document.getElementById('table-of-contents');
+    const tocContainer = document.getElementById('article-toc-container');
     const headings = content.querySelectorAll('h2, h3, h4');
+
+    // 初始化粘性固定功能
+    function initStickyTOC() {
+        // 检查文章内容高度是否超过浏览器高度
+        const isContentTallEnough = content.offsetHeight > window.innerHeight;
+        
+        // 如果文章内容不够长，直接返回
+        if (!isContentTallEnough) {
+            tocContainer.classList.remove('sticky-toc');
+            return;
+        }
+        
+        // 添加滚动事件监听器以实现粘性固定
+        const handleScroll = () => {
+            const scrollPosition = window.scrollY;
+            const headerOffset = 100; // 顶部偏移量
+            const containerPosition = content.getBoundingClientRect().top + window.scrollY - headerOffset;
+            const containerBottom = containerPosition + content.offsetHeight;
+            
+            // 当滚动到文章区域且未滚动到底部时，固定目录
+            if (scrollPosition >= containerPosition && scrollPosition < containerBottom - window.innerHeight + 50) {
+                tocContainer.classList.add('sticky-toc');
+            } else {
+                tocContainer.classList.remove('sticky-toc');
+            }
+        };
+        
+        // 初始检查
+        handleScroll();
+        
+        // 添加滚动事件监听
+        window.addEventListener('scroll', handleScroll);
+        
+        // 添加窗口大小变化事件监听
+        window.addEventListener('resize', () => {
+            if (content.offsetHeight <= window.innerHeight) {
+                tocContainer.classList.remove('sticky-toc');
+            } else {
+                handleScroll();
+            }
+        });
+    }
 
     if (headings.length === 0) {
         toc.innerHTML = '<div class="text-center py-8"><div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-slate-800 mb-3"><span class="icon-[lucide--file-text] w-6 h-6 text-gray-400 dark:text-slate-500"></span></div><p class="text-gray-500 dark:text-slate-400 italic">暂无目录</p></div>';
@@ -144,11 +187,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 初始高亮
     updateActiveSection();
+    
+    // 初始化粘性固定功能
+    initStickyTOC();
 
     // 添加滚动条样式
-    const tocContainer = document.querySelector('#table-of-contents');
-    if (tocContainer) {
-        tocContainer.classList.add('scroll-smooth');
+    if (toc) {
+        toc.classList.add('scroll-smooth');
     }
 });
 </script>
@@ -190,6 +235,16 @@ document.addEventListener('DOMContentLoaded', () => {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+/* 粘性目录样式 */
+.sticky-toc {
+    position: sticky;
+    top: 6rem;
+    z-index: 40;
+    max-height: calc(100vh - 8rem);
+    overflow-y: auto;
+    animation: fadeInUp 0.3s ease-out;
 }
 
 #table-of-contents > div {
