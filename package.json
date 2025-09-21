@@ -1,7 +1,7 @@
 {
   "name": "astro-theme-starread",
   "type": "module",
-  "version": "1.9.1",
+  "version": "1.9.0",
   "files": [
     "src",
     "scripts",
@@ -32,8 +32,8 @@
     "preview": "astro preview",
     "build": "astro build",
     "local": "node scripts/autoindex.js && astro build",
-    "algolia": "node scripts/pushAlgolia.js",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --config scripts/changelog-updater.js -r 0"
+    "release": "standard-version",
+    "algolia": "node scripts/pushAlgolia.js"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
@@ -45,6 +45,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-instantsearch": "^7.16.2",
+    "standard-version": "^9.5.0",
     "tailwindcss": "^4.1.12",
     "typescript": "^5.9.2"
   },
@@ -53,7 +54,6 @@
     "@iconify/tailwind4": "^1.0.6",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.12",
-    "conventional-changelog-cli": "^5.0.0",
     "gray-matter": "^4.0.3"
   },
   "bin": {
