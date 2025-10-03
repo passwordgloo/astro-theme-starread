@@ -4,10 +4,8 @@ import react from "@astrojs/react";
 
 export default defineConfig({
   site: "https://example.com",
-  
   vite: {
     plugins: [tailwindcss()],
   },
-
   integrations: [react()],
 });
