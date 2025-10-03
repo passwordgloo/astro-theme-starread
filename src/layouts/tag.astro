@@ -3,6 +3,7 @@ import "../styles/global.css";
 import NavBar from "../components/NavBar.astro";
 import AuthorWidget from "../components/AuthorWidget.astro";
 import { themeConfig } from '../../starread.config';
+import { ClientRouter } from "astro:transitions";
 ---
 <html lang="zh-CN" class="min-h-full antialiased">
   <head>
@@ -11,6 +12,7 @@ import { themeConfig } from '../../starread.config';
 		<link rel="icon" type="image/png" href={themeConfig.site.favicon} />
     <meta name="generator" content={Astro.generator} />
     <title>{ Astro.props.title || themeConfig.site.title }</title>
+    <ClientRouter />
   </head>
   <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-gray-950 dark:text-neutral-100 transition-colors">
     <NavBar title={Astro.props.title} />

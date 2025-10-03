@@ -7,14 +7,16 @@ import TagCloud from "../components/TagCloud.astro";
 import Comment from "../components/Comment.astro";
 import ArticleInfo from '../../components/ArticleInfo.jsx';
 import { themeConfig } from '../../starread.config';
+import { ClientRouter } from "astro:transitions";
 ---
 <html lang="zh-CN" class="min-h-full antialiased">
   <head>
-   	<meta charset="UTF-8" />
+    	<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/png" href={themeConfig.site.favicon} />
     <meta name="generator" content={Astro.generator} />
 		<title>{ Astro.props.title || themeConfig.site.title }</title>
+    <ClientRouter />
   </head>
   <body data-pagefind-body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-gray-950 dark:text-neutral-100 transition-colors">
     <NavBar title={Astro.props.title} />

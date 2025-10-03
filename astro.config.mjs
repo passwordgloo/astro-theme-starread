@@ -9,6 +9,7 @@ export default defineConfig({
   },
 
   markdown: {
+
     gfm:true
   },
 
