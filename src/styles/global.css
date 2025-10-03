@@ -15,9 +15,28 @@
   --color-secondary: #2388f5;
 }
 
+@layer base {
+  code, kbd, samp, pre {
+    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    color:#fff !important;
+    background-color: var(--color-primary);
+    padding: 0.2em 0.4em;
+    border-radius: 0.25rem;
+  }
 
+  .dark code, 
+  .dark kbd, 
+  .dark samp, 
+  .dark pre {
+    background-color: var(--color-secondary);
+  }
 
-
-.test{
-  color: #2388f5;
+    /* 隐藏代码块自动添加的反引号 */
+  :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before,
+  :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
+    content: "" !important;
+  }
 }
+
