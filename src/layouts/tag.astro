@@ -31,7 +31,7 @@ import { ClientRouter } from "astro:transitions";
                   href={`/tag/${encodeURIComponent(tag)}`} 
                   class={`px-3 py-1 rounded-full text-sm transition-colors hover:opacity-90 ${ 
                     tag === Astro.props.currentTag 
-                      ? 'bg-blue-500 text-white' 
+                      ? 'bg-primary dark:bg-secondary text-white' 
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200'
                   }`}
                 >
@@ -47,10 +47,10 @@ import { ClientRouter } from "astro:transitions";
               Astro.props.articles.map((article, index) => (
                 <div key={article.slug} class="flex items-center p-4 border border-gray-100 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
                   <div class="p-3 rounded-md mr-4 flex-shrink-0">
-                    <div class="bg-blue-500 text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">{index + 1}</div>
+                    <div class="bg-primary dark:bg-secondary text-white w-10 h-10 rounded-full flex items-center justify-center font-bold">{index + 1}</div>
                   </div>
                   <div class="flex-grow">
-                    <h3 class="font-medium text-lg"><a href={`/articles/${article.slug}`} class="hover:text-blue-500 transition-colors">{article.data.title}</a></h3>
+                    <h3 class="font-medium text-lg"><a href={`/articles/${article.slug}`} class="hover:text-prmary dark:hover:text-secondary transition-colors">{article.data.title}</a></h3>
                     <p class="text-sm text-gray-500 dark:text-gray-400">#{article.data.categories?.join(', #') || '未分类'}</p>
                   </div>
                 </div>
