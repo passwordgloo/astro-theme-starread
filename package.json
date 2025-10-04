@@ -2,7 +2,9 @@
   "name": "astro-theme-starread",
   "type": "module",
   "version": "1.9.1",
+  "main": "index.js",
   "files": [
+    "index.js",
     "src",
     "scripts",
     "public",

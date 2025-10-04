@@ -35,6 +35,7 @@ function copyRecursive(src, dest) {
     'astro.config.mjs',
     'starread.config.ts',
     'package.json',
+    'index.js',
     'tsconfig.json',
     'README.md',
     'LICENSE',

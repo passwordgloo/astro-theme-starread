@@ -78,8 +78,7 @@ pnpm dev
 ### 方法3：ソースコードからインストール
 
 >[!warning]
->该方式需访问Github仓库，确保网络畅通。
-
+>この方法ではGithubリポジトリへのアクセスが必要です。ネットワーク接続が正常であることを確認してください。
 
 ```bash
 git clone https://github.com/passwordgloo/astro-theme-starread
@@ -91,6 +90,88 @@ pnpm install
 >インストールが完了したら、開発サーバーを実行します：
 ```bash
 pnpm dev
+```
+
+### 方法4：既存の Astro プロジェクトに依存関係としてインストール
+
+テーマを既存の Astro プロジェクトに依存関係としてインストールし、node_modules から直接コンポーネント、レイアウト、ページを使用することができます。
+
+1. **テーマパッケージをインストール**：
+
+```bash
+# pnpm を使用
+pnpm add astro-theme-starread
+
+# npm を使用
+npm install astro-theme-starread
+
+# yarn を使用
+yarn add astro-theme-starread
+```
+
+2. **node_modules から直接コンポーネントをインポートして使用**：
+
+```astro
+---
+// node_modules のテーマからコンポーネントを直接インポート
+import { NavBar, ThemeToggle, ArticleInfo, AuthorWidget, TagCloud } from 'astro-theme-starread';
+---
+
+<html>
+  <head>
+    <title>私の Astro ブログ</title>
+    <!-- テーマのスタイルを使用する場合 -->
+    <link rel="stylesheet" href="node_modules/astro-theme-starread/src/styles/global.css" />
+  </head>
+  <body>
+    <!-- node_modules の NavBar コンポーネントを使用 -->
+    <NavBar />
+    
+    <!-- node_modules の ThemeToggle コンポーネントを使用 -->
+    <ThemeToggle />
+    
+    <article>
+      <!-- 属性を持つ ArticleInfo コンポーネントを使用 -->
+      <ArticleInfo 
+        title="私の記事"
+        date="2024-01-01"
+        author="作者名"
+      />
+      <p>記事の内容...</p>
+    </article>
+    
+    <aside>
+      <!-- サイドバーコンポーネントを使用 -->
+      <AuthorWidget />
+      <TagCloud />
+    </aside>
+  </body>
+</html>
+```
+
+3. **node_modules から直接レイアウトを使用**：
+
+```astro
+---
+// node_modules のテーマからレイアウトを直接インポート
+import { article as ArticleLayout } from 'astro-theme-starread';
+
+// node_modules からのレイアウトを適用
+export const layout = ArticleLayout;
+
+// コンテンツ
+export const content = {
+  title: "私のブログ記事",
+  date: "2024-01-01",
+  author: "作者名",
+  tags: ["技術", "ブログ"]
+};
+---
+
+<!-- このコンテンツは node_modules のレイアウト内でレンダリングされます -->
+<main>
+  <p>これは私のブログ記事の内容です。テーマの記事レイアウト内でレンダリングされます。</p>
+</main>
 ```
 
 ## 📂 プロジェクト構造

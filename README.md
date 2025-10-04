@@ -94,6 +94,94 @@ pnpm install
 pnpm dev
 ```
 
+### Method 4: As a dependency in existing Astro project
+
+You can install the theme as a dependency in your existing Astro project and use its components, layouts, and pages directly from node_modules. This is the recommended way to use the theme in Astro 5 projects.
+
+1. **Install the theme package**:
+
+```bash
+# Using pnpm
+pnpm add astro-theme-starread
+
+# Using npm
+npm install astro-theme-starread
+
+# Using yarn
+yarn add astro-theme-starread
+```
+
+**Direct access to theme components and layouts in node_modules:**
+
+After installation, you can directly import and use components and layouts from the theme package in your Astro files. The components and layouts are accessible through the package's main entry point, making it easy to integrate them into your project.
+
+2. **Import and use components directly from node_modules**:
+
+```astro
+---
+// Import components directly from the theme in node_modules
+import { NavBar, ThemeToggle, ArticleInfo, AuthorWidget, TagCloud } from 'astro-theme-starread';
+---
+
+<html>
+  <head>
+    <title>My Astro Blog</title>
+    <!-- Import theme styles if needed -->
+    <link rel="stylesheet" href="node_modules/astro-theme-starread/src/styles/global.css" />
+  </head>
+  <body>
+    <!-- Use the NavBar component from node_modules -->
+    <NavBar />
+    
+    <!-- Use the ThemeToggle component from node_modules -->
+    <ThemeToggle />
+    
+    <article>
+      <!-- Use the ArticleInfo component with props -->
+      <ArticleInfo 
+        title="My Article"
+        date="2024-01-01"
+        author="Author Name"
+      />
+      <p>Article content here...</p>
+    </article>
+    
+    <aside>
+      <!-- Use sidebar components -->
+      <AuthorWidget />
+      <TagCloud />
+    </aside>
+  </body>
+</html>
+```
+
+3. **Use layouts directly from node_modules**:
+
+```astro
+---
+// Import layout directly from the theme in node_modules
+import { article as ArticleLayout } from 'astro-theme-starread';
+
+// Apply the layout from node_modules
+export const layout = ArticleLayout;
+
+// Your content
+export const content = {
+  title: "My Blog Post",
+  date: "2024-01-01",
+  author: "Author Name",
+  tags: ["tech", "blogging"]
+};
+---
+
+<!-- This content will be rendered inside the layout from node_modules -->
+<main>
+  <p>This is the content of my blog post. It will be rendered inside the article layout from the theme.</p>
+</main>
+```
+
+
+
 ## 📂 Project Structure
 
 ```text
