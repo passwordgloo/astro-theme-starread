@@ -8,7 +8,7 @@ export { default as Algolia } from './Algolia.jsx';
 export { default as ArticleInfo } from './ArticleInfo.jsx';
 export { default as ArticleNav } from './ArticleNav.astro';
 export { default as ArticleSection } from './ArticleSection.astro';
-export { default as ArticleTOC } from './ArticleTOC.astro';
+export { default as ArticleTOC } from './ArticleTOC.tsx';
 export { default as AuthorWidget } from './AuthorWidget.astro';
 export { default as Banner } from './Banner.astro';
 export { default as Carousel } from './Carousel.astro';
