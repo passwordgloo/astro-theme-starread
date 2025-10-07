@@ -19,6 +19,8 @@ const { entry, wordCount, formatDate } = Astro.props;
 		<link rel="icon" type="image/png" href={themeConfig.site.favicon} />
     <meta name="generator" content={Astro.generator} />
 		<title>{ Astro.props.title || themeConfig.site.title }</title>
+    <!--  canonical链接，优先使用永久链接，否则使用slug -->
+    <link rel="canonical" href={entry?.data?.permalink || (Astro.url.pathname)} />
     <ClientRouter />
   </head>
   <body data-pagefind-body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-gray-950 dark:text-neutral-100 transition-colors">
@@ -31,6 +33,7 @@ const { entry, wordCount, formatDate } = Astro.props;
         tags={entry?.data?.tags || Astro.props.tags || []}
         categories={entry?.data?.categories || Astro.props.categories || []}
         wordCount={wordCount || Astro.props.wordCount || 0}
+        permalink={entry?.data?.permalink || Astro.props.permalink}
     />
     <main class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
       <!-- 左侧内容 -->
