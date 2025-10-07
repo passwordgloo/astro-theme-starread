@@ -48,7 +48,7 @@ const ArticleInfo: React.FC<ArticleInfoProps> = ({
   }, []);
 
   return (
-    <div className="relative overflow-hidden  bg-white dark:bg-gray-800 shadow-lg transition-colors duration-300">
+    <div className="relative overflow-hidden  bg-white dark:bg-gray-800 transition-colors duration-300">
       {/* 背景图片 */}
       <div className="absolute inset-0 overflow-hidden">
         <img 
