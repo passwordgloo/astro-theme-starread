@@ -8,46 +8,115 @@ import {
   Snippet,
   Pagination,
   useInstantSearch,
-  Configure,
+  Configure
 } from 'react-instantsearch';
 
-// 🔹 原始 Algolia client，添加错误处理防止环境变量缺失导致构建失败
-let algoliaClient;
-let searchClient;
+// 定义文章Hit类型，确保包含所有必需的属性
+interface ArticleHit {
+  // React InstantSearch必需的属性
+  objectID: string;
+  __position: number;
+  __queryID?: string;
+  _highlightResult?: any;
+  _snippetResult?: any;
+  
+  // 文章相关属性
+  title: string;
+  content?: string;
+  slug: string;
+  cover?: string;
+  tags?: string[] | string;
+  categories?: string[] | string;
+  permalink?: string; // 永久链接
+  collection?: string; // 集合类型 (articles 或 notes)
+  url?: string; // 完整URL
+  route?: string; // 路由路径
+  
+  // 兼容之前的数据结构
+  _collection?: string; // 旧版集合字段
+  
+  // 索引签名以支持其他未知属性
+  [key: string]: any;
+}
+
+// Hit组件的props类型
+interface HitProps {
+  hit: ArticleHit;
+}
+
+// 原始 Algolia client，添加错误处理防止环境变量缺失导致构建失败
+let searchClient: any;
 
 try {
-  algoliaClient = algoliasearch(
+  // 使用命名导入的algoliasearch创建客户端
+  const client = algoliasearch(
     import.meta.env.PUBLIC_ALGOLIA_APP_ID,
     import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY
   );
 
-  // 🔹 包一层，拦截空查询，避免请求 Algolia API
+  // 包一层，拦截空查询，避免请求 Algolia API
   searchClient = {
-    ...algoliaClient,
-    search(requests) {
-      if (requests.every(({ params }) => !params.query)) {
-        return Promise.resolve({
+    ...client,
+    search: async (requests: any) => {
+      if (requests.every(({ params }: any) => !params.query)) {
+        return {
           results: requests.map(() => ({
             hits: [],
             nbHits: 0,
             processingTimeMS: 0,
+            page: 0,
+            hitsPerPage: 0,
+            facets: {},
+            exhaustiveFacetsCount: true,
+            exhaustiveNbHits: true,
+            nbPages: 0,
+            query: '',
+            params: '',
           })),
-        });
+        };
       }
-      return algoliaClient.search(requests);
+      return client.search(requests);
     },
   };
 } catch (error) {
   // 环境变量缺失时提供默认的模拟客户端
   console.warn('Algolia配置缺失，使用模拟客户端');
   searchClient = {
-    search: () => Promise.resolve({
-      results: [{ hits: [], nbHits: 0, processingTimeMS: 0 }]
+    search: async () => ({
+      results: [{
+        hits: [],
+        nbHits: 0,
+        processingTimeMS: 0,
+        page: 0,
+        hitsPerPage: 0,
+        facets: {},
+        exhaustiveFacetsCount: true,
+        exhaustiveNbHits: true,
+        nbPages: 0,
+        query: '',
+        params: '',
+      }]
+    }),
+    // 实现其他必需的方法
+    initIndex: () => ({
+      search: async () => ({
+        hits: [],
+        nbHits: 0,
+        processingTimeMS: 0,
+        page: 0,
+        hitsPerPage: 0,
+        facets: {},
+        exhaustiveFacetsCount: true,
+        exhaustiveNbHits: true,
+        nbPages: 0,
+        query: '',
+        params: '',
+      })
     })
   };
 };
 
-const renderTags = (tags) => {
+const renderTags = (tags?: string[] | string) => {
   if (!tags) return null;
   const tagList = Array.isArray(tags) ? tags : tags.split(',');
   return (
@@ -64,10 +133,26 @@ const renderTags = (tags) => {
   );
 };
 
-function Hit({ hit }) {
+function Hit({ hit }: HitProps) {
   const { indexUiState } = useInstantSearch();
   const hasQuery = indexUiState.query && indexUiState.query.trim().length > 0;
-  const link = `/${hit.slug}`;
+  
+  // 优先使用永久链接，然后是route，最后是基于slug和collection的路径
+  let link = '';
+  
+  // 确定collection类型，优先使用collection字段，兼容旧版_collection字段
+  const collection = hit.collection || hit._collection || 'articles';
+  
+  if (hit.permalink) {
+    // 如果有永久链接，直接使用
+    link = hit.permalink.startsWith('/') ? hit.permalink : `/${hit.permalink}`;
+  } else if (hit.route) {
+    // 如果有route字段，使用它
+    link = hit.route;
+  } else {
+    // 否则使用基于collection和slug的路径
+    link = `/${collection}/${hit.slug}`;
+  }
 
   return (
     <article className="flex items-center shadow-sm border border-gray-100 p-6 text-sm bg-white dark:bg-white/5 dark:backdrop-blur-xl dark:border-white/10 font-normal leading-5 
@@ -94,14 +179,14 @@ function Hit({ hit }) {
             href={link}
             className="text-primary dark:text-secondary hover:underline no-underline"
           >
-            <Highlight attribute="title" hit={hit} />
+            <Highlight attribute="title" hit={hit as any} />
           </a>
         </h3>
 
         {hit.content && (
           <p className="mb-2 text-sm text-gray-600 dark:text-slate-300">
             {hasQuery ? (
-              <Snippet attribute="content" hit={hit} />
+              <Snippet attribute="content" hit={hit as any} />
             ) : (
               hit.content.split('\n').slice(0, 3).join(' ')
             )}
@@ -120,7 +205,7 @@ function Hit({ hit }) {
   );
 }
 
-// 🔹 查询结果：query 为空时不渲染
+// 查询结果：query 为空时不渲染
 function SearchResults() {
   const { indexUiState, results } = useInstantSearch();
   const hasQuery = indexUiState.query && indexUiState.query.trim().length > 0;
@@ -172,9 +257,9 @@ export default function AlgoliaSearch() {
     <div className="p-5">
       <InstantSearch
         searchClient={searchClient}
-        indexName={import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME}
+        indexName={import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME || ''}
         future={{ preserveSharedStateOnUnmount: true }}
-        initialUiState={{ [import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME]: { query: '' } }}
+        initialUiState={{ [import.meta.env.PUBLIC_ALGOLIA_INDEX_NAME || '']: { query: '' } }}
       >
         <Configure hitsPerPage={5} />
 
@@ -185,7 +270,7 @@ export default function AlgoliaSearch() {
           </div>
 
           <SearchBox
-            placeholder="搜索文章..."
+            placeholder="输入文本开始搜索..."
             classNames={{
               root: 'w-full',
               form: 'flex bg-white/60 backdrop-blur-lg dark:bg-white/5 dark:border-white/10 text-sm h-10 leading-5 relative w-full',
@@ -203,7 +288,6 @@ export default function AlgoliaSearch() {
           </main>
         </div>
       </InstantSearch>
-    
     </div>
   );
 }

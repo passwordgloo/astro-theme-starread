@@ -7,7 +7,7 @@ export const themeConfig: starreadthemeconfig = {
     title: '星阅主题',
     favicon: '/favicon.png',
     defaultCover: '/defaultCover.jpg',
-    foundedDate: '2024-01-01',
+    foundedDate: '2025-10-01',
     
     logo: {
       image: '/logo.svg',

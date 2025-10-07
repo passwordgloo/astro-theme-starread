@@ -5,6 +5,8 @@ import AuthorWidget from "../components/AuthorWidget.astro";
 import AdWidget from "../components/AdWidget.astro";
 import TagCloud from "../components/TagCloud.astro";
 import { themeConfig } from '../../starread.config';
+import { ClientRouter } from "astro:transitions";
+
 
 interface Props {
   title: string;
@@ -24,6 +26,7 @@ const { title, categoryName, currentCategory, articles, allCategories } = Astro.
 		<link rel="icon" type="image/png" href={themeConfig.site.favicon} />
     <meta name="generator" content={Astro.generator} />
     <title>{ title || themeConfig.site.title }</title>
+    <ClientRouter />
   </head>
   <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-gray-950 dark:text-neutral-100 transition-colors">
     <NavBar title={title} />
@@ -42,7 +45,7 @@ const { title, categoryName, currentCategory, articles, allCategories } = Astro.
                   href={`/category/${encodeURIComponent(category)}`} 
                   class={`px-3 py-1 rounded-full text-sm transition-colors hover:opacity-90 ${ 
                     category === currentCategory 
-                      ? 'bg-blue-500 text-white' 
+                      ? 'bg-primary dark:bg-secondary text-white' 
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200' 
                   }`}
                 >
@@ -67,7 +70,7 @@ const { title, categoryName, currentCategory, articles, allCategories } = Astro.
                   </div>
                   {/* 文章信息 */}
                   <div class="flex-grow min-w-0">
-                    <a href={`/articles/${article.slug}`} class="text-lg font-medium hover:text-primary transition-colors line-clamp-1">{article.data.title}</a>
+                    <a href={`/${article.collection}/${article.slug}`} class="text-lg font-medium hover:text-primary transition-colors line-clamp-1">{article.data.title}</a>
                     <div class="flex items-center mt-1 text-sm text-gray-500 space-x-3">
                       <span>{article.data.author || themeConfig.widget.author.name}</span>
                       <span>·</span>
@@ -75,14 +78,14 @@ const { title, categoryName, currentCategory, articles, allCategories } = Astro.
                     </div>
                   </div>
                   {/* 序号 */}
-                  <div class="ml-4 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
+                  <div class="ml-4 w-8 h-8 bg-primary dark:bg-secondary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
                     {index + 1}
                   </div>
                 </div>
               ))
             ) : (
               <div class="text-center py-8 text-gray-500">
-                暂无该分类下的文章
+                暂无该分类下的内容
               </div>
             )}
           </div>

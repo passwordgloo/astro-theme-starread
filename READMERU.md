@@ -81,8 +81,7 @@ pnpm dev
 ### Метод 3: Установка из исходного кода
 
 >[!warning]
->该方式需访问Github仓库，确保网络畅通。
-
+>Этот метод требует доступа к репозиторию Github, убедитесь в стабильном интернет-соединении.
 
 ```bash
 git clone https://github.com/passwordgloo/astro-theme-starread
@@ -94,6 +93,88 @@ pnpm install
 >После завершения установки запустите сервер разработки：
 ```bash
 pnpm dev
+```
+
+### Метод 4: Установка в существующий проект Astro в качестве зависимости
+
+Вы можете установить тему в существующий проект Astro в качестве зависимости и напрямую использовать ее компоненты, макеты и страницы из node_modules.
+
+1. **Установка пакета темы**：
+
+```bash
+# С использованием pnpm
+pnpm add astro-theme-starread
+
+# С использованием npm
+npm install astro-theme-starread
+
+# С использованием yarn
+yarn add astro-theme-starread
+```
+
+2. **Прямое импортирование и использование компонентов из node_modules**：
+
+```astro
+---
+// Прямое импортирование компонентов из темы в node_modules
+import { NavBar, ThemeToggle, ArticleInfo, AuthorWidget, TagCloud } from 'astro-theme-starread';
+---
+
+<html>
+  <head>
+    <title>Мой блог Astro</title>
+    <!-- При необходимости использовать стили темы -->
+    <link rel="stylesheet" href="node_modules/astro-theme-starread/src/styles/global.css" />
+  </head>
+  <body>
+    <!-- Использование компонента NavBar из node_modules -->
+    <NavBar />
+    
+    <!-- Использование компонента ThemeToggle из node_modules -->
+    <ThemeToggle />
+    
+    <article>
+      <!-- Использование компонента ArticleInfo с атрибутами -->
+      <ArticleInfo 
+        title="Моя статья"
+        date="2024-01-01"
+        author="Имя автора"
+      />
+      <p>Содержание статьи...</p>
+    </article>
+    
+    <aside>
+      <!-- Использование боковых компонентов -->
+      <AuthorWidget />
+      <TagCloud />
+    </aside>
+  </body>
+</html>
+```
+
+3. **Прямое использование макетов из node_modules**：
+
+```astro
+---
+// Прямое импортирование макета из темы в node_modules
+import { article as ArticleLayout } from 'astro-theme-starread';
+
+// Применение макета из node_modules
+export const layout = ArticleLayout;
+
+// Ваш контент
+export const content = {
+  title: "Моя статья в блоге",
+  date: "2024-01-01",
+  author: "Имя автора",
+  tags: ["технологии", "блог"]
+};
+---
+
+<!-- Этот контент будет отображаться в макете из node_modules -->
+<main>
+  <p>Это содержание моей статьи в блоге. Оно будет отображаться в макете статьи темы.</p>
+</main>
 ```
 
 ## 📂 Структура проекта
@@ -206,7 +287,6 @@ nav: [
 | `pnpm install`           | Установить зависимости                         |
 | `pnpm dev`               | Запустить локальный сервер разработки `localhost:4321` |
 | `pnpm preview`           | Предварительный просмотр результата сборки локально |
-| `pnpm local`             | Запустить автоматический скрипт индексирования и собрать производственный сайт |
 | `pnpm algolia`           | Отправить данные в поиск Algolia                |
 | `pnpm changelog`         | Сгенерировать журнал изменений                  |
 | `pnpm release`           | Управление версиями (обновление номера версии, создание коммитов и т.д.) |

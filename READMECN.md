@@ -80,7 +80,6 @@ pnpm dev
 >[!warning]
 >该方式需访问Github仓库，确保网络畅通。
 
-
 ```bash
 git clone https://github.com/passwordgloo/astro-theme-starread
 cd astro-theme-starread
@@ -91,6 +90,88 @@ pnpm install
 >安装完成后，运行开发服务器：
 ```bash
 pnpm dev
+```
+
+### 方法四：作为依赖安装到现有 Astro 项目
+
+您可以将主题作为依赖安装到现有的 Astro 项目中，并直接从 node_modules 使用其组件、布局和页面。
+
+1. **安装主题包**：
+
+```bash
+# 使用 pnpm
+pnpm add astro-theme-starread
+
+# 使用 npm
+npm install astro-theme-starread
+
+# 使用 yarn
+yarn add astro-theme-starread
+```
+
+2. **直接从 node_modules 导入并使用组件**：
+
+```astro
+---
+// 直接从 node_modules 中的主题导入组件
+import { NavBar, ThemeToggle, ArticleInfo, AuthorWidget, TagCloud } from 'astro-theme-starread';
+---
+
+<html>
+  <head>
+    <title>我的 Astro 博客</title>
+    <!-- 如需使用主题样式 -->
+    <link rel="stylesheet" href="node_modules/astro-theme-starread/src/styles/global.css" />
+  </head>
+  <body>
+    <!-- 使用 node_modules 中的 NavBar 组件 -->
+    <NavBar />
+    
+    <!-- 使用 node_modules 中的 ThemeToggle 组件 -->
+    <ThemeToggle />
+    
+    <article>
+      <!-- 使用带属性的 ArticleInfo 组件 -->
+      <ArticleInfo 
+        title="我的文章"
+        date="2024-01-01"
+        author="作者名称"
+      />
+      <p>文章内容...</p>
+    </article>
+    
+    <aside>
+      <!-- 使用侧边栏组件 -->
+      <AuthorWidget />
+      <TagCloud />
+    </aside>
+  </body>
+</html>
+```
+
+3. **直接从 node_modules 使用布局**：
+
+```astro
+---
+// 直接从 node_modules 中的主题导入布局
+import { article as ArticleLayout } from 'astro-theme-starread';
+
+// 应用来自 node_modules 的布局
+export const layout = ArticleLayout;
+
+// 您的内容
+export const content = {
+  title: "我的博客文章",
+  date: "2024-01-01",
+  author: "作者名称",
+  tags: ["技术", "博客"]
+};
+---
+
+<!-- 此内容将在 node_modules 的布局中渲染 -->
+<main>
+  <p>这是我博客文章的内容。它将在主题的文章布局中渲染。</p>
+</main>
 ```
 
 ## 📂 项目结构
@@ -203,7 +284,6 @@ nav: [
 | `pnpm install`           | 安装依赖                                       |
 | `pnpm dev`               | 启动本地开发服务器 `localhost:4321`            |
 | `pnpm preview`           | 本地预览构建结果                               |
-| `pnpm local`             | 运行自动索引脚本并构建生产站点                 |
 | `pnpm algolia`           | 推送数据到Algolia搜索                          |
 | `pnpm changelog`         | 生成更新日志                                   |
 | `pnpm release`           | 版本管理（更新版本号、生成提交等）             |

@@ -1,9 +1,8 @@
 ---
 import { themeConfig } from '../../starread.config';
-const ref = Astro.props.ref || null;
 ---
 
-<div class="search-container relative" ref={ref}>
+<div class="search-container relative">
   {themeConfig.plugin.search.provider === 'algolia' ? (
     <a href="/search" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
       aria-label="搜索"
@@ -22,7 +21,7 @@ const ref = Astro.props.ref || null;
   <!-- 搜索框容器 -->
   <div 
     id="search-dropdown" 
-    class="absolute right-0 mt-2 w-80 md:w-96 bg-white dark:bg-cyan-950 shadow-lg rounded-md z-50 overflow-hidden transform origin-top-right scale-100 transition-all duration-200"
+    class="absolute right-0 mt-2 w-80 md:w-96 bg-white dark:bg-cyan-950 shadow-lg rounded-md z-50 overflow-hidden transform origin-top-right scale-100 transition-all duration-200 hidden"
   >
     <div class="relative">
       <!-- 输入框 -->
@@ -98,13 +97,20 @@ const ref = Astro.props.ref || null;
       }
 
       // 渲染搜索结果
-      searchResults.innerHTML = hits.map(hit => `
-        <a href="/${hit.slug}" class="block p-4 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">
-          <h3 class="font-medium text-gray-900 dark:text-white">${hit.title}</h3>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${hit.content.substring(0, 100)}...</p>
-
-        </a>
-      `).join('');
+      searchResults.innerHTML = hits.map(hit => {
+        // 优先使用永久链接，然后是基于slug的路径
+        let link = hit.permalink || `/${hit.collection || 'articles'}/${hit.slug}`;
+        // 确保链接以斜杠开头
+        if (!link.startsWith('/')) {
+          link = `/${link}`;
+        }
+        return `
+          <a href="${link}" class="block p-4 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">
+            <h3 class="font-medium text-gray-900 dark:text-white">${hit.title}</h3>
+            <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${hit.content.substring(0, 100)}...</p>
+          </a>
+        `;
+      }).join('');
     } catch (error) {
       console.error('Algolia搜索错误:', error);
       searchResults.innerHTML = '<div class="text-center py-8 text-red-500 dark:text-red-400">搜索出错，请稍后重试</div>';
@@ -118,15 +124,19 @@ const ref = Astro.props.ref || null;
     searchTimeout = setTimeout(() => handleSearch(query), 300);
   });
   
-  // 初始化时自动聚焦搜索框
-    setTimeout(() => searchInput.focus(), 300);
+  // 移除初始自动聚焦，改为点击搜索按钮时聚焦
 
   // 搜索框显示/隐藏切换
   const searchToggle = document.getElementById('search-toggle');
-
-  searchToggle.addEventListener('click', () => {
-    searchDropdown.classList.toggle('hidden');
-  });
+  if (searchToggle) {
+    searchToggle.addEventListener('click', () => {
+      searchDropdown.classList.toggle('hidden');
+      if (!searchDropdown.classList.contains('hidden')) {
+        // 显示时聚焦搜索框
+        setTimeout(() => searchInput.focus(), 100);
+      }
+    });
+  }
 
   // 点击页面其他区域关闭搜索框
   document.addEventListener('click', (e) => {
