@@ -27,6 +27,13 @@ interface ArticleHit {
   cover?: string;
   tags?: string[] | string;
   categories?: string[] | string;
+  permalink?: string; // 永久链接
+  collection?: string; // 集合类型 (articles 或 notes)
+  url?: string; // 完整URL
+  route?: string; // 路由路径
+  
+  // 兼容之前的数据结构
+  _collection?: string; // 旧版集合字段
   
   // 索引签名以支持其他未知属性
   [key: string]: any;
@@ -129,7 +136,23 @@ const renderTags = (tags?: string[] | string) => {
 function Hit({ hit }: HitProps) {
   const { indexUiState } = useInstantSearch();
   const hasQuery = indexUiState.query && indexUiState.query.trim().length > 0;
-  const link = `/${hit.slug}`;
+  
+  // 优先使用永久链接，然后是route，最后是基于slug和collection的路径
+  let link = '';
+  
+  // 确定collection类型，优先使用collection字段，兼容旧版_collection字段
+  const collection = hit.collection || hit._collection || 'articles';
+  
+  if (hit.permalink) {
+    // 如果有永久链接，直接使用
+    link = hit.permalink.startsWith('/') ? hit.permalink : `/${hit.permalink}`;
+  } else if (hit.route) {
+    // 如果有route字段，使用它
+    link = hit.route;
+  } else {
+    // 否则使用基于collection和slug的路径
+    link = `/${collection}/${hit.slug}`;
+  }
 
   return (
     <article className="flex items-center shadow-sm border border-gray-100 p-6 text-sm bg-white dark:bg-white/5 dark:backdrop-blur-xl dark:border-white/10 font-normal leading-5 
