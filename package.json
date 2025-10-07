@@ -31,7 +31,7 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "build": "astro build",
-    "algolia": "node scripts/pushAlgolia.js",
+    "algolia": "node scripts/pushAlgolia.js"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
