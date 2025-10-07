@@ -284,7 +284,6 @@ Twikooコメントシステムを有効にするには、`src/components/Comment
 | `pnpm install`           | 依存関係をインストール                           |
 | `pnpm dev`               | ローカル開発サーバー `localhost:4321` を起動する |
 | `pnpm preview`           | ローカルでビルド結果をプレビューする               |
-| `pnpm local`             | 自動インデックススクリプトを実行して本番サイトを構築する |
 | `pnpm algolia`           | データをAlgolia検索にプッシュする                  |
 | `pnpm changelog`         | 変更ログを生成する                              |
 | `pnpm release`           | バージョン管理（バージョン番号の更新、コミットの生成など） |
