@@ -8,7 +8,8 @@
     "public",
     "astro.config.mjs",
     "tsconfig.json",
-    "starread.config.ts"
+    "starread.config.ts",
+    "index.js"
   ],
   "description": "既有星光般的璀璨，又不失简洁和高端感的Astro主题",
   "keywords": [
