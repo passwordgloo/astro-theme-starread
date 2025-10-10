@@ -44,6 +44,7 @@
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-instantsearch": "^7.16.2",
+    "remark-github-blockquote-alert": "^2.0.0",
     "tailwindcss": "^4.1.12",
     "typescript": "^5.9.2"
   },
