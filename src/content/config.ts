@@ -1,5 +1,75 @@
 import { defineCollection, z, type CollectionEntry } from 'astro:content';
 
+// 主题配置
+export const themeConfig = {
+  // 网站配置
+  site: {
+    title: 'Lovestu - 代码路上雾茫茫',
+    favicon: '/favicon.svg',
+    logo: {
+      image: '/logo.svg',
+      text: 'Lovestu',
+      alt: 'Lovestu Logo',
+    },
+  },
+
+  // 作者信息
+  author: {
+    name: 'Lovestu站长',
+    description: '喜欢代码，喜欢编程',
+    avatar: 'https://picsum.photos/40/40?random=4',
+    social: {
+      bilibili: '@果核剥壳',
+      qq: '1247079966',
+    },
+  },
+
+  // 广告配置
+  ad: {
+    title: '黑曜石博客',
+    description: '支持评论弹幕、粒子动画效果、分类',
+    buttonText: '了解详情',
+    link: 'https://example.com',
+  },
+
+  // 导航菜单配置
+  nav: [
+    { name: '主页', href: '/', icon: 'home' },
+    { name: '软件资源', href: '#', icon: 'database' },
+    { name: '软件使用', href: '#', icon: 'book' },
+    { name: '代码编程', href: '#', icon: 'code' },
+    { name: '汇编逆向', href: '#', icon: 'lock' },
+    { name: '运维', href: '#', icon: 'server' },
+  ],
+
+  // 文章分类配置
+  categories: [
+    { name: 'JS', title: 'JavaScript' },
+    { name: '汇编逆向', title: '汇编逆向' },
+  ],
+
+  // 侧边栏组件显示控制
+  sidebar: {
+    // 首页侧边栏组件
+    home: {
+      statsWidget: true,
+      authorWidget: true,
+      adWidget: true,
+      recommendedArticles: true,
+    },
+    // 文章页侧边栏组件
+    article: {
+      authorWidget: true,
+      tableOfContents: true,
+    },
+  },
+
+  // 底部文字配置
+  footer: {
+    text: '© 2025 预见 - 代码路上雾茫茫',
+  },
+};
+
 // 定义文章集合
 const articlesCollection = defineCollection({
   type: 'content',
