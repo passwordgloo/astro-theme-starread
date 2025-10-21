@@ -1,47 +1,69 @@
 ---
-import '../styles/global.css';
-import Navigation from '../components/Navigation.astro';
+import "../styles/global.css";
+import NavBar from "../components/NavBar.astro";
+import Banner from "../components/Banner.astro";
+import Carousel from '../components/Carousel.astro';
 import StatsWidget from '../components/StatsWidget.astro';
 import AuthorWidget from '../components/AuthorWidget.astro';
-import RecommendedArticles from '../components/RecommendedArticles.astro';
 import AdWidget from '../components/AdWidget.astro';
+import ArticleSection from '../components/ArticleSection.astro';
 import { themeConfig } from '../content/config';
+import { getCollection } from 'astro:content';
+
+// 获取所有文章
+const allArticles = await getCollection('articles');
+
+// 按分类筛选文章
+const categoryArticles = {};
+
+themeConfig.categories.forEach(category => {
+  categoryArticles[category.name] = allArticles.filter(article => 
+    article.data.categories?.includes(category.name) || 
+    article.data.tags?.includes(category.name)
+  );
+});
+
+// 最新文章（按日期排序）
+const latestArticles = [...allArticles]
+  .sort((a, b) => new Date(b.data.date || 0) - new Date(a.data.date || 0))
+  .slice(0, 5);
+
+// 轮播文章（取前4篇有封面图的文章）
+const carouselArticles = allArticles
+  .filter(article => article.data.cover)
+  .slice(0, 4);
 ---
 
-<!doctype html>
-<html lang="zh-CN">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="{themeConfig.site.favicon}" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{ Astro.props.title || themeConfig.site.title }</title>
-	</head>
-	<body class="bg-gray-50 font-sans">
-		<!-- 顶部导航 -->
-		<Navigation title={Astro.props.title} />
+  <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-slate-900 dark:text-neutral-100 transition-colors">
+    <NavBar title={Astro.props.title} />
+    <main class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
+    <div class="w-full md:w-2/3 space-y-6">
+      <Banner />
+      <Carousel articles={carouselArticles.length > 0 ? carouselArticles : []} />
 
-		<!-- 主要内容区域 -->
-		<main class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
-			<!-- 左侧主内容 -->
-			<div class="w-full md:w-2/3 space-y-6">
-				<slot />
-			</div>
-
-			<!-- 右侧边栏 -->
+      <!-- 文章分类区域 -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        {themeConfig.categories.map((category) => (
+          <ArticleSection
+            title={category.title}
+            articles={categoryArticles[category.name]?.length > 0 ? categoryArticles[category.name] : []}
+            key={category.name}
+          />
+        ))}
+      </div>
+    </div>
+    <!-- 右侧边栏 -->
 			<aside class="w-full md:w-1/3 space-y-6">
-			    {themeConfig.sidebar.home.statsWidget && <StatsWidget />}
-				{themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
-				{themeConfig.sidebar.home.adWidget && <AdWidget />}
-				{themeConfig.sidebar.home.recommendedArticles && <RecommendedArticles />}
-			</aside>
-		</main>
+         {themeConfig.sidebar.home.statsWidget && <StatsWidget />}
+         {themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
+         {themeConfig.sidebar.home.adWidget && <AdWidget />}
+      </aside>
+    </main>
 
-		<!-- 页脚 -->
-		<footer class="bg-white dark:bg-dark shadow-inner mt-10 py-6">
+    	<footer class="bg-white/70 dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-inner mt-10 py-6">
 			<div class="container mx-auto px-4 text-center text-gray-600 text-sm">
-				<p>星阅主题驱动 Copyright @ 2025</p>
+				<p>{themeConfig.footer.text}</p>
 			</div>
 		</footer>
-	</body>
-</html>
+  </body>
+

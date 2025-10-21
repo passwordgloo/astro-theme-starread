@@ -1,49 +1,32 @@
 ---
-import '../styles/global.css';
-import Navigation from '../components/Navigation.astro';
-import AuthorWidget from '../components/AuthorWidget.astro';
+import "../styles/global.css";
+import NavBar from "../components/NavBar.astro";
+import AuthorWidget from "../components/AuthorWidget.astro";
+import ArticleTOC from "../components/ArticleTOC.astro";
 import { themeConfig } from '../content/config';
 ---
-
-<!doctype html>
-<html lang="zh-CN">
-	<head>
-		<meta charset="UTF-8" />
+<html lang="zh-CN" class="min-h-full antialiased">
+  <head>
+   	<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="{themeConfig.site.favicon}" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{ Astro.props.title || themeConfig.site.title }</title>
-	</head>
-	<body class="bg-gray-50 font-sans text-dark">
-		<!-- 顶部导航 -->
-		<Navigation title={Astro.props.title} />
-
-		<!-- 主要内容区域 -->
-		<main class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
-			<!-- 左侧主内容 -->
-			<div class="w-full lg:w-2/3 space-y-6">
-				<slot />
-			</div>
-
-			<!-- 右侧边栏 -->
+  </head>
+  <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-gray-950 dark:text-neutral-100 transition-colors">
+    <NavBar title={Astro.props.title} />
+    <main class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
+    <div class="w-full md:w-2/3 space-y-6">
+      <slot />
+    </div>
+    <!-- 右侧边栏 -->
 			<aside class="w-full md:w-1/3 space-y-6">
-			{themeConfig.sidebar.article.authorWidget && <AuthorWidget />}
-			{themeConfig.sidebar.article.tableOfContents && (
-				<div class="bg-white rounded-lg shadow-sm p-6 sticky top-6">
-					<h3 class="font-bold text-lg mb-4 pb-2 border-b border-gray-100">文章目录</h3>
-					<nav id="table-of-contents" class="text-sm space-y-1.5">
-						<!-- 目录将通过JavaScript动态生成 -->
-					</nav>
-				</div>
-			)}
-			</aside>
-		</main>
-
-		<!-- 页脚 -->
-		<footer class="bg-white shadow-inner mt-10 py-6">
-			<div class="container mx-auto px-4 text-center text-gray-600 text-sm">
-				<p>{themeConfig.footer.text}</p>
-			</div>
-		</footer>
-	</body>
+        	{themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
+        	{themeConfig.sidebar.article.toc && <ArticleTOC />}
+      </aside>
+    </main>
+    <footer class="mx-auto max-w-5xl px-4 py-10 text-sm text-gray-500 dark:text-gray-400">
+      <p>Built with Astro 5 + Tailwind v4 ✨</p>
+    </footer>
+  </body>
 </html>
