@@ -43,11 +43,7 @@ export const themeConfig = {
         {
           items: [
             { text: 'Windows工具', link: '#', icon: 'icon-[lucide--database]' },
-            { text: 'Mac工具', link: '#', icon: 'icon-[lucide--database]' }
-          ]
-        },
-        {
-          items: [
+            { text: 'Mac工具', link: '#', icon: 'icon-[lucide--database]' },
             { text: 'Linux工具', link: '#', icon: 'icon-[lucide--database]' },
             { text: '移动工具', link: '#', icon: 'icon-[lucide--database]' }
           ]
