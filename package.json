@@ -6,7 +6,9 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "release": "standard-version"
   },
   "dependencies": {
     "astro": "^5.13.3"
@@ -17,6 +19,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.12",
     "tailwindcss": "^4.1.12",
+    "conventional-changelog-cli": "^4.1.0",
     "standard-version": "^9.5.0"
   }
 }
