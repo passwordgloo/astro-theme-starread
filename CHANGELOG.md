@@ -2,6 +2,31 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.1-alpha.3](https://iglooblog.top:8090/foresee/astro/compare/v0.0.1-alpha.2...v0.0.1-alpha.3) (2025-10-21)
+
+
+### 📚 Documentation | 文档
+
+* **.versionrc:** 更新文档部分的emoji和标题样式 ([76bbc01](https://github.com/passwordgloo/astro-theme-starread/commit/76bbc01a3f4f2c5c4da72fcbf9067d7a32bbb300))
+
+
+### ✨ Features | 功能
+
+* **components:** 添加暗色模式支持并优化组件可见性 ([a9f6bf4](https://github.com/passwordgloo/astro-theme-starread/commit/a9f6bf4f08693fe2d0650ec02f500d63b99b2ab6))
+* **主题:** 添加深色模式支持 ([e54fc3e](https://github.com/passwordgloo/astro-theme-starread/commit/e54fc3ed1ef530c4ade1afa1e89cf543c9a61555))
+* 添加暗色模式支持 ([e422a4c](https://github.com/passwordgloo/astro-theme-starread/commit/e422a4ca048eef66ebd5fea9ded512c762d0d809))
+
+
+### 💄 Styles | 风格
+
+* 修复导航链接颜色和背景颜色的拼写错误 ([bd3515d](https://github.com/passwordgloo/astro-theme-starread/commit/bd3515d76bd2ff5365eaeb109cc1d4847df7fa18))
+* 移除多余空行并简化页面样式 ([050e5a3](https://github.com/passwordgloo/astro-theme-starread/commit/050e5a3093b0e484285e64359afccaaeceda7dde))
+
+
+### 📦 Chores | 其他更新
+
+* 更新 changelog 生成工具并删除无用组件 ([68b4661](https://github.com/passwordgloo/astro-theme-starread/commit/68b46617dae56ebcefed36543f1bd0a288a6788f))
+
 ### [0.0.1-alpha.2](https://iglooblog.top:8090/foresee/astro/compare/v0.0.1-alpha.1...v0.0.1-alpha.2) (2025-10-21)
 
 
