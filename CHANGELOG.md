@@ -2,6 +2,35 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.2...v0.0.3) (2025-10-21)
+
+
+### 📚 Documentation | 文档
+
+* **about:** 添加关于页面的测试标题 ([ad10457](https://github.com/passwordgloo/astro-theme-starread/commit/ad1045731cea3009341c9fe98a7a1b97344cdc12))
+
+
+### 💄 Styles | 风格
+
+* **global.css:** 优化深色模式样式并移除未使用的类 ([18807b1](https://github.com/passwordgloo/astro-theme-starread/commit/18807b1509487087d4c48520fda3d38d3d214c08))
+* 移除导航组件中多余的深色模式背景类 ([97b5969](https://github.com/passwordgloo/astro-theme-starread/commit/97b5969f7fe4069c9e5b5ccb8830629af1c08bf1))
+* 移除深色模式和markdown自定义样式 ([783c106](https://github.com/passwordgloo/astro-theme-starread/commit/783c106bf5471a4f11d4c9f3186003b39c8c6ed5))
+
+
+### ✨ Features | 功能
+
+* **components:** 更新组件样式并添加新功能 ([8c1868e](https://github.com/passwordgloo/astro-theme-starread/commit/8c1868ee11a3e8777adcc42ea668aa3e32d29554))
+* 更新首页和文档slug引用方式 ([c82be6a](https://github.com/passwordgloo/astro-theme-starread/commit/c82be6ad597970e82b9551c57700164dffa1af03))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **content:** 重构内容配置并更新示例文章 ([32680bb](https://github.com/passwordgloo/astro-theme-starread/commit/32680bbe69f35593e317bd93dbb4fd73db9be28b))
+* **img:** 删除多余的图片 ([71a4aaf](https://github.com/passwordgloo/astro-theme-starread/commit/71a4aaf4a31d6dfbd67ee05f10f1b34801b04e3a))
+* **layouts:** 重构文章和主页布局组件 ([cd94800](https://github.com/passwordgloo/astro-theme-starread/commit/cd948002503f09907b445a4af2439316f9d33c61))
+* 移除tailwind配置并更新astro的markdown配置 ([ff84eb6](https://github.com/passwordgloo/astro-theme-starread/commit/ff84eb6e92365652ce89ebb732afbf7c4985956c))
+* 移除无用文件并简化项目配置 ([e51dc64](https://github.com/passwordgloo/astro-theme-starread/commit/e51dc641d03e0eb90f2a917b415aa4624e514503))
+
 ### [0.0.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1...v0.0.2) (2025-10-21)
 
 
