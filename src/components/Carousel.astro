@@ -1,0 +1,146 @@
+---
+// 轮播卡片文章组件
+const articles = [
+  { title: 'FancyBox中文文档', image: 'https://picsum.photos/200/150?random=1', category: 'fancybox', author: 'applek', date: '2022-06-05' },
+  { title: 'JavaScript的深拷贝和浅拷贝', image: 'https://picsum.photos/200/150?random=2', category: 'JS', author: 'applek', date: '2021-12-07' },
+  { title: 'JavaScript实现网页截图导出方案', image: 'https://picsum.photos/200/150?random=3', category: 'JS', author: 'applek', date: '2022-06-05' },
+  { title: '前端提交POST，防止刷新问题', image: 'https://picsum.photos/200/150?random=4', category: 'JS', author: 'applek', date: '2021-12-07' }
+];
+---
+
+<div class="relative bg-white rounded-lg shadow-sm overflow-hidden mb-6">
+  <div class="px-4 py-3 border-b border-gray-100 flex justify-between items-center">
+    <h2 class="font-bold text-lg text-dark">轮播卡片文章演示</h2>
+    <div class="flex space-x-2">
+      <button id="prev-btn" class="p-1 rounded-full hover:bg-gray-100" aria-label="上一张">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+      </button>
+      <button id="next-btn" class="p-1 rounded-full hover:bg-gray-100" aria-label="下一张">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-500" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <div class="p-4 overflow-hidden" id="carousel-container">
+    <div id="carousel-track" class="flex transition-transform duration-500 ease-out space-x-4">
+      {articles.map((article, index) => (
+        <div key={index} class="min-w-[200px] bg-gray-50 rounded-lg overflow-hidden shadow-sm flex flex-col group">
+          <div class="h-40 bg-gray-200 overflow-hidden">
+            <img src={article.image} alt={article.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+          </div>
+          <div class="p-3 flex-1 flex flex-col">
+            <div class="mb-2">
+              <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full transform group-hover:scale-105 transition-transform duration-200">{article.category}</span>
+            </div>
+            <h3 class="font-medium text-gray-900 mb-2 line-clamp-2 h-12 group-hover:text-blue-600 transition-colors duration-200">{article.title}</h3>
+            <div class="mt-auto flex items-center text-xs text-gray-500">
+              <span>{article.author}</span>
+              <span class="mx-1">·</span>
+              <span>{article.date}</span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+
+  <div class="flex justify-center py-2 space-x-2">
+    {articles.map((_, index) => (
+      <button 
+        key={index} 
+        class={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === 0 ? 'bg-blue-600 w-8' : 'bg-gray-300'}`} 
+        aria-label={`切换到第 ${index + 1} 张幻灯片`} 
+        data-index={index}
+      ></button>
+    ))}
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const track = document.getElementById('carousel-track');
+    const slides = document.querySelectorAll('#carousel-track > div');
+    const indicators = document.querySelectorAll('[data-index]');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+    const slideWidth = slides[0].offsetWidth + 16; // 宽度 + margin
+    let currentIndex = 0;
+    let timer;
+    const autoplayInterval = 3000;
+
+    // 初始化自动播放
+    function startAutoplay() {
+      timer = setInterval(() => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateCarousel();
+      }, autoplayInterval);
+    }
+
+    // 停止自动播放
+    function stopAutoplay() {
+      clearInterval(timer);
+    }
+
+    // 更新轮播
+    function updateCarousel() {
+      track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+
+      // 更新指示器
+      indicators.forEach((indicator, index) => {
+        if (index === currentIndex) {
+          indicator.classList.add('bg-blue-600', 'w-8');
+          indicator.classList.remove('bg-gray-300');
+        } else {
+          indicator.classList.remove('bg-blue-600', 'w-8');
+          indicator.classList.add('bg-gray-300');
+        }
+      });
+    }
+
+    // 事件监听
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+      updateCarousel();
+      stopAutoplay();
+      startAutoplay();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % slides.length;
+      updateCarousel();
+      stopAutoplay();
+      startAutoplay();
+    });
+
+    indicators.forEach((indicator) => {
+      indicator.addEventListener('click', () => {
+        currentIndex = parseInt(indicator.dataset.index);
+        updateCarousel();
+        stopAutoplay();
+        startAutoplay();
+      });
+    });
+
+    // 鼠标悬停停止自动播放
+    const container = document.getElementById('carousel-container');
+    container.addEventListener('mouseenter', stopAutoplay);
+    container.addEventListener('mouseleave', startAutoplay);
+
+    // 开始自动播放
+    startAutoplay();
+  });
+</script>
+<style>
+  #carousel-container::-webkit-scrollbar {
+    display: none;
+  }
+  .group:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+</style>

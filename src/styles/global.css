@@ -1,1 +1,13 @@
 @import "tailwindcss";
+
+:root {
+  --color-primary: #1E40AF;
+  --color-secondary: #3B82F6;
+  --color-accent: #F97316;
+  --color-dark: #1E293B;
+  --color-light: #F8FAFC;
+
+  --font-sans: 'Inter', system-ui, sans-serif;
+}
+
+@import "./markdown-styles.css";

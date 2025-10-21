@@ -1,0 +1,64 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/article.astro';
+
+export async function getStaticPaths() {
+  return [];
+}
+
+// 获取所有文章
+const articles = await getCollection('articles');
+// 按日期排序
+articles.sort((a, b) => new Date(b.data.date || '').getTime() - new Date(a.data.date || '').getTime());
+---
+
+<Layout title="文章列表">
+  <div class="container mx-auto px-4 py-8">
+    <h1 class="text-2xl md:text-3xl font-bold mb-6">所有文章</h1>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {articles.map((article) => (
+        <article key={article.slug} class="bg-white rounded-lg shadow-sm overflow-hidden group hover:shadow-md transition-shadow duration-300">
+          <div class="relative h-48 overflow-hidden">
+            <img 
+              src={article.data.cover || 'https://picsum.photos/400/300?random=100'} 
+              alt={article.data.title || article.body.split('\n')[0].replace('#', '').trim()} 
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+            />
+            {article.data.categories && article.data.categories.length > 0 && (
+              <div class="absolute top-2 left-2">
+                <span class="bg-blue-600 text-white text-xs px-2 py-1 rounded-md">
+                  {article.data.categories[0]}
+                </span>
+              </div>
+            )}
+          </div>
+
+          <div class="p-4">
+            <h2 class="font-bold text-lg mb-2 group-hover:text-blue-600 transition-colors">
+              <a href={`/articles/${article.slug}`}>
+                {article.data.title || article.body.split('\n')[0].replace('#', '').trim()}
+              </a>
+            </h2>
+
+            <p class="text-sm text-gray-500 mb-3 line-clamp-2">
+              {article.data.description || article.body.slice(0, 100).replace(/[\r\n]/g, ' ').trim() + '...'}
+            </p>
+
+            <div class="flex items-center text-xs text-gray-400 justify-between">
+              <span>{article.data.date || new Date().toISOString().slice(0, 10)}</span>
+              <div class="flex items-center space-x-1">
+                {article.data.tags && article.data.tags.slice(0, 2).map((tag, idx) => (
+                  <span key={idx} class="text-blue-500 hover:text-blue-700 cursor-pointer">{tag}</span>
+                ))}
+                {article.data.tags && article.data.tags.length > 2 && (
+                  <span class="text-blue-500 hover:text-blue-700 cursor-pointer">+{article.data.tags.length - 2}</span>
+                )}
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</Layout>
