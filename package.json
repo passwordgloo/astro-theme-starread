@@ -7,7 +7,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "changelog": "changelog generate --config .changelogrc"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
+    "release": "standard-version"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
@@ -17,7 +18,7 @@
   "devDependencies": {
     "@iconify/json": "^2.2.376",
     "@iconify/tailwind": "^1.2.0",
-    "changelog-cli": "^1.1.0",
+    "conventional-changelog-cli": "^4.1.0",
     "standard-version": "^9.5.0"
   }
 }
