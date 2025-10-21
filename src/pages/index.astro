@@ -3,6 +3,31 @@ import Layout from '../layouts/home.astro';
 import Carousel from '../components/Carousel.astro';
 import ArticleSection from '../components/ArticleSection.astro';
 import LatestArticles from '../components/LatestArticles.astro';
+import { getCollection } from 'astro:content';
+import { themeConfig } from '../content/config';
+
+// 获取所有文章
+const allArticles = await getCollection('articles');
+
+// 按分类筛选文章
+const categoryArticles = {};
+
+themeConfig.categories.forEach(category => {
+  categoryArticles[category.name] = allArticles.filter(article => 
+    article.data.categories?.includes(category.name) || 
+    article.data.tags?.includes(category.name)
+  );
+});
+
+// 最新文章（按日期排序）
+const latestArticles = [...allArticles]
+  .sort((a, b) => new Date(b.data.date || 0) - new Date(a.data.date || 0))
+  .slice(0, 5);
+
+// 轮播文章（取前4篇有封面图的文章）
+const carouselArticles = allArticles
+  .filter(article => article.data.cover)
+  .slice(0, 4);
 ---
 
 <Layout>
@@ -26,39 +51,22 @@ import LatestArticles from '../components/LatestArticles.astro';
 	</div>
 
 	<!-- 轮播卡片 -->
-	<Carousel />
+	<Carousel articles={carouselArticles.length > 0 ? carouselArticles : []} />
 
 	<!-- 文章分类区域 -->
 	<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-		<ArticleSection
-		title="JS"
-		articles={[
-		  { title: 'JavaScript实现网页截图导出方案', author: 'applek', date: '2022-06-05' },
-		  { title: '前端提交POST，防止刷新问题', author: 'applek', date: '2021-12-07' },
-		  { title: 'Fancybox和lazyload同时存在的问题', author: 'applek', date: '2021-11-23' },
-		  { title: 'TypeScript学习笔记', author: 'applek', date: '2020-10-15' }
-		]}
-	/>
-
-	<ArticleSection
-		title="汇编逆向"
-		articles={[
-		  { title: '一些逆向心得分享', author: 'applek', date: '2019-07-15' },
-		  { title: '利用Fiddler调试微信网页js', author: 'applek', date: '2020-10-09' },
-		  { title: 'mplus翻译文件编译和修改', author: 'applek', date: '2019-07-21' },
-		  { title: 'Windows 注册表SID不一样如何写入', author: 'applek', date: '2019-07-15' }
-		]}
-		/>
+		{themeConfig.categories.map((category) => (
+			<ArticleSection
+				title={category.title}
+				articles={categoryArticles[category.name]?.length > 0 ? categoryArticles[category.name] : []}
+				key={category.name}
+			/>
+		))}
 	</div>
 
 	<!-- 最新文章 -->
 	<LatestArticles
-		articles={[
-			{ title: '【WordPress优化插件】WPOPT v2.4.7', author: 'applek', date: '2025-05-20', category: 'WordPress' },
-			{ title: 'CoreNext正式版1.7.4发布', author: 'applek', date: '2025-05-17', category: '主题开发' },
-			{ title: '粒子导航 - 一款独立的导航源码 1.4.95', author: 'applek', date: '2025-01-22', category: '前端开发' },
-			{ title: 'Core AI Power 1.1.0 - WordPress AI增强插件', author: 'applek', date: '2024-05-26', category: 'WordPress' },
-			{ title: 'NodeJS使用copy-dir快速复制内容', author: 'applek', date: '2024-03-15', category: 'NodeJS' }
-		]}
+		articles={latestArticles.length > 0 ? latestArticles : []}
+		className="latest-articles-custom"
 	/>
 </Layout>

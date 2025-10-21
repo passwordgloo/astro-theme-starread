@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Navigation from '../components/Navigation.astro';
 import AuthorWidget from '../components/AuthorWidget.astro';
+import { themeConfig } from '../content/config';
 ---
 
 <!doctype html>
@@ -9,9 +10,9 @@ import AuthorWidget from '../components/AuthorWidget.astro';
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="{themeConfig.site.favicon}" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{ Astro.props.title || 'Lovestu - 代码路上雾茫茫' }</title>
+		<title>{ Astro.props.title || themeConfig.site.title }</title>
 	</head>
 	<body class="bg-gray-50 font-sans text-dark">
 		<!-- 顶部导航 -->
@@ -26,22 +27,22 @@ import AuthorWidget from '../components/AuthorWidget.astro';
 
 			<!-- 右侧边栏 -->
 			<aside class="w-full md:w-1/3 space-y-6">
-			<AuthorWidget />
-			            <!-- 文章目录 -->
-        <div class="bg-white rounded-lg shadow-sm p-6 sticky top-6">
-          <h3 class="font-bold text-lg mb-4 pb-2 border-b border-gray-100">文章目录</h3>
-          <nav id="table-of-contents" class="text-sm space-y-1.5">
-            <!-- 目录将通过JavaScript动态生成 -->
-          </nav>
-		  
-        </div>
+			{themeConfig.sidebar.article.authorWidget && <AuthorWidget />}
+			{themeConfig.sidebar.article.tableOfContents && (
+				<div class="bg-white rounded-lg shadow-sm p-6 sticky top-6">
+					<h3 class="font-bold text-lg mb-4 pb-2 border-b border-gray-100">文章目录</h3>
+					<nav id="table-of-contents" class="text-sm space-y-1.5">
+						<!-- 目录将通过JavaScript动态生成 -->
+					</nav>
+				</div>
+			)}
 			</aside>
 		</main>
 
 		<!-- 页脚 -->
 		<footer class="bg-white shadow-inner mt-10 py-6">
 			<div class="container mx-auto px-4 text-center text-gray-600 text-sm">
-				<p>© 2025 预见 - 代码路上雾茫茫</p>
+				<p>{themeConfig.footer.text}</p>
 			</div>
 		</footer>
 	</body>

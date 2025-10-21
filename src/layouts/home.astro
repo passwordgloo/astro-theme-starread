@@ -4,6 +4,8 @@ import Navigation from '../components/Navigation.astro';
 import StatsWidget from '../components/StatsWidget.astro';
 import AuthorWidget from '../components/AuthorWidget.astro';
 import RecommendedArticles from '../components/RecommendedArticles.astro';
+import AdWidget from '../components/AdWidget.astro';
+import { themeConfig } from '../content/config';
 ---
 
 <!doctype html>
@@ -11,9 +13,9 @@ import RecommendedArticles from '../components/RecommendedArticles.astro';
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" type="image/svg+xml" href="{themeConfig.site.favicon}" />
 		<meta name="generator" content={Astro.generator} />
-		<title>{ Astro.props.title || 'Lovestu - 代码路上雾茫茫' }</title>
+		<title>{ Astro.props.title || themeConfig.site.title }</title>
 	</head>
 	<body class="bg-gray-50 font-sans text-dark">
 		<!-- 顶部导航 -->
@@ -28,9 +30,10 @@ import RecommendedArticles from '../components/RecommendedArticles.astro';
 
 			<!-- 右侧边栏 -->
 			<aside class="w-full md:w-1/3 space-y-6">
-			    <StatsWidget />
-				<AuthorWidget />
-				<RecommendedArticles />
+			    {themeConfig.sidebar.home.statsWidget && <StatsWidget />}
+				{themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
+				{themeConfig.sidebar.home.adWidget && <AdWidget />}
+				{themeConfig.sidebar.home.recommendedArticles && <RecommendedArticles />}
 			</aside>
 		</main>
 

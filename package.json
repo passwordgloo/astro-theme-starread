@@ -6,12 +6,18 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "changelog": "changelog generate --config .changelogrc"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.1.12",
     "astro": "^5.13.2",
-    "tailwindcss": "^4.1.12",
+    "tailwindcss": "^4.1.12"
+  },
+  "devDependencies": {
+    "@iconify/json": "^2.2.376",
+    "@iconify/tailwind": "^1.2.0",
+    "changelog-cli": "^1.1.0",
     "standard-version": "^9.5.0"
   }
 }
