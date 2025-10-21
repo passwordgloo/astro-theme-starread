@@ -14,5 +14,6 @@
     { "type": "ci", "section": "🔧 Continuous Integration | CI 配置" }
   ],
   "commitUrlFormat": "https://github.com/passwordgloo/astro-theme-starread/commit/{{hash}}",
-  "tagUrlFormat": "https://github.com/passwordgloo/astro-theme-starread/releases/tag/{{tag}}"
+  "tagUrlFormat": "https://github.com/passwordgloo/astro-theme-starread/releases/tag/{{tag}}",
+  "compareUrlFormat": "https://github.com/passwordgloo/astro-theme-starread/compare/{{previousTag}}...{{currentTag}}"
 }
