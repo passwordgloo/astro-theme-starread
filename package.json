@@ -6,19 +6,17 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "standard-version"
+    "astro": "astro"
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.1.12",
-    "astro": "^5.13.2",
-    "tailwindcss": "^4.1.12"
+    "astro": "^5.13.3"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.376",
+    "@iconify/json": "^2.2.377",
     "@iconify/tailwind4": "^1.0.6",
-    "conventional-changelog-cli": "^4.1.0",
+    "@tailwindcss/typography": "^0.5.16",
+    "@tailwindcss/vite": "^4.1.12",
+    "tailwindcss": "^4.1.12",
     "standard-version": "^9.5.0"
   }
 }
