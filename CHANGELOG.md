@@ -2,6 +2,30 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1...v0.0.2) (2025-10-21)
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **content:** 合并工具菜单项配置以简化结构 ([48a5df9](https://github.com/passwordgloo/astro-theme-starread/commit/48a5df9b05c06fc7e0ebcc756663d1166740ec20))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* **文章页面:** 调整页面布局和日期处理逻辑 ([dfdd3a7](https://github.com/passwordgloo/astro-theme-starread/commit/dfdd3a7deeb1bcd76fc80142e57292af51dbd04c))
+
+
+### 💄 Styles | 风格
+
+* **LatestArticles:** 更新悬停背景色以支持深色模式 ([65368dd](https://github.com/passwordgloo/astro-theme-starread/commit/65368ddca71436d0621d6570ad36e0a483fd6751))
+* **layout:** 调整文章布局在中等屏幕下的宽度 ([1d5311f](https://github.com/passwordgloo/astro-theme-starread/commit/1d5311f315d5d4d531587e9489ffeab5816322e5))
+* **styles:** 添加深色模式下的颜色变量和样式 ([2343be8](https://github.com/passwordgloo/astro-theme-starread/commit/2343be8822ce731ae1be1c6acd3ca3e4656386e6))
+
+
+### 📚 Documentation | 文档
+
+* 统一文章日期格式为仅日期 ([edd2fc7](https://github.com/passwordgloo/astro-theme-starread/commit/edd2fc7470d3050765590146216687f8bab13012))
+
 ### [0.0.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1-alpha.4...v0.0.1) (2025-10-21)
 
 
