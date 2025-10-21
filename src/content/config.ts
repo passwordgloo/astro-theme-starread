@@ -4,10 +4,11 @@ import { defineCollection, z, type CollectionEntry } from 'astro:content';
 export const themeConfig = {
   // 网站配置
   site: {
-    title: 'Lovestu - 代码路上雾茫茫',
+    title: 'Star-read 星阅主题',
     favicon: '/favicon.svg',
     logo: {
       image: '/logo.svg',
+      darkImage: '/logo-dark.svg',
       text: 'Lovestu',
       alt: 'Lovestu Logo',
     },

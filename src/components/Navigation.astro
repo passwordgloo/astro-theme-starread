@@ -7,19 +7,27 @@ import { themeConfig } from '../content/config';
   <!-- 确保深色模式切换按钮在移动设备上可见 -->
   <div class="md:hidden absolute right-4 top-3 z-10">
     <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 nav-mobile-icon fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 nav-mobile-icon" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
       </svg>
     </button>
   </div>
   <div class="container mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex items-center space-x-2 nav-content">
-	  {themeConfig.site.logo.image ? (
-	    <img src={themeConfig.site.logo.image} alt={themeConfig.site.logo.alt} class="h-8 w-auto" />
-	  ) : (
-	    <span class="font-bold text-xl nav-logo-text">{themeConfig.site.logo.text}</span>
-	  )}
-	</div>
+      <div id="logo-container">
+        {themeConfig.site.logo.image ? (
+          <img 
+            src={themeConfig.site.logo.image} 
+            alt={themeConfig.site.logo.alt} 
+            class="h-8 w-auto logo-image" 
+            data-light-src={themeConfig.site.logo.image} 
+            data-dark-src={themeConfig.site.logo.darkImage || themeConfig.site.logo.image} 
+          /> 
+        ) : (
+          <span class="font-bold text-xl nav-logo-text">{themeConfig.site.logo.text}</span>
+        )}
+      </div>
+    </div>
     <div class="article-title text-lg font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full md:w-auto text-center md:text-left">
       { title || themeConfig.site.title }
     </div>
@@ -84,6 +92,34 @@ import { themeConfig } from '../content/config';
     const header = document.querySelector('header');
     let lastScrollTop = 0;
 
+    // 初始化logo根据当前主题
+    const logoImage = document.querySelector('.logo-image');
+    const htmlElement = document.documentElement;
+    if (logoImage) {
+      const isDarkMode = htmlElement.classList.contains('dark');
+      logoImage.src = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
+    }
+
+    // 主题切换时更新logo
+    const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+
+    const updateLogo = () => {
+      const logoImage = document.querySelector('.logo-image');
+      if (logoImage) {
+        const isDarkMode = htmlElement.classList.contains('dark');
+        logoImage.src = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
+      }
+    };
+
+    if (themeToggle) {
+      themeToggle.addEventListener('click', updateLogo);
+    }
+
+    if (mobileThemeToggle) {
+      mobileThemeToggle.addEventListener('click', updateLogo);
+    }
+
     window.addEventListener('scroll', () => {
       const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
@@ -97,9 +133,8 @@ import { themeConfig } from '../content/config';
     });
 
     // 深色模式切换
-    const htmlElement = document.documentElement;
-    const themeToggle = document.getElementById('theme-toggle');
-    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+    const themeToggleBtn = document.getElementById('theme-toggle');
+    const mobileThemeToggleBtn = document.getElementById('mobile-theme-toggle');
     const themeIcon = document.getElementById('theme-icon');
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
 
