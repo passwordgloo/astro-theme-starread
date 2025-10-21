@@ -1,26 +1,34 @@
 ---
+import { getCollection } from 'astro:content';
+import { themeConfig } from '../content/config';
+
+// 获取推荐文章数据
+const recommendedArticles = await getCollection('articles', ({ data }) => {
+  // 这里可以添加筛选条件，比如推荐文章标签
+  return true;
+});
+
+// 限制显示4篇文章
+const limitedArticles = recommendedArticles.slice(0, 4);
 ---
 
 <div class="bg-white rounded-lg shadow-sm p-4">
   <div class="flex items-center space-x-2 mb-4">
-    <span class="text-accent font-bold text-lg">随便看看</span>
-  </div>
+    <svg class="w-5 h-5 text-accent" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" />
+    </svg>
+	  <span class="text-accent font-bold text-lg">推荐文章</span>
+	</div>
   <div class="space-y-3">
-    <a href="#" class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors">
-      <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">1</span>
-      <span class="text-sm text-gray-700 hover:text-blue-600 transition-colors">解决electron调用cmd中文乱码</span>
-    </a>
-    <a href="#" class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors">
-      <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">2</span>
-      <span class="text-sm text-gray-700 hover:text-blue-600 transition-colors">WordPress如何识别Windows 11浏览器</span>
-    </a>
-    <a href="#" class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors">
-      <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">3</span>
-      <span class="text-sm text-gray-700 hover:text-blue-600 transition-colors">TypeScript学习笔记</span>
-    </a>
-    <a href="#" class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors">
-      <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">4</span>
-      <span class="text-sm text-gray-700 hover:text-blue-600 transition-colors">JavaScript中的数字与符号表示</span>
-    </a>
+    {limitedArticles.length > 0 ? (
+      limitedArticles.map((article, index) => (
+        <a href={`/articles/${article.slug}`} class="flex items-center p-2 hover:bg-gray-50 rounded-lg transition-colors" key={article.slug}>
+          <span class="flex-shrink-0 w-6 h-6 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-bold mr-3">{index + 1}</span>
+          <span class="text-sm text-gray-700 hover:text-blue-600 transition-colors">{article.data.title}</span>
+        </a>
+      ))
+    ) : (
+      <p class="text-sm text-gray-500 text-center py-4">暂无推荐文章</p>
+    )}
   </div>
 </div>
