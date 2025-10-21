@@ -4,7 +4,7 @@ categories: [技术, 前端]
 tags: [vue, react, javascript]
 cover: https://picsum.photos/800/400?random=1
 description: 这是一篇示例文章，展示了如何使用frontmatter配置文章属性。
-date: 2024-05-20 14:30:00
+date: 2024-05-20
 ---
 
 # 这是文章标题
