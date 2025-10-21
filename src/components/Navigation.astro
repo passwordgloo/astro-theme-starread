@@ -3,7 +3,7 @@ const { title } = Astro.props;
 import { themeConfig } from '../content/config';
 ---
 
-<header class="bg-white dark:bg-dark shadow-sm sticky top-0 z-50 transition-all duration-300">
+<header class="bg-white shadow-sm sticky top-0 z-50 transition-all duration-300">
   <!-- 确保深色模式切换按钮在移动设备上可见 -->
   <div class="md:hidden absolute right-4 top-3 z-10">
     <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
@@ -31,7 +31,7 @@ import { themeConfig } from '../content/config';
     </div>
 
     <!-- 导航菜单 -->
-    <nav class="bg-white dark:bg-dark hidden md:flex items-center space-x-6">
+    <nav class="hidden md:flex items-center space-x-6">
       {themeConfig.nav.map((item) => (
         <div class="relative group" key={item.text || item.name}>
           {item.items ? (
