@@ -2,6 +2,18 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.1-alpha.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1-alpha.3...v0.0.1-alpha.4) (2025-10-21)
+
+
+### 📚 Documentation | 文档
+
+* 添加 compareUrlFormat 到版本配置文件 ([bf0943f](https://github.com/passwordgloo/astro-theme-starread/commit/bf0943f643c538b050c2c6ff544499ec3a3bc61c))
+
+
+### ✨ Features | 功能
+
+* **theme:** 更新星阅主题样式和功能 ([6614f17](https://github.com/passwordgloo/astro-theme-starread/commit/6614f172706e0edaea576f15999b484e52b88b70))
+
 ### [0.0.1-alpha.3](https://iglooblog.top:8090/foresee/astro/compare/v0.0.1-alpha.2...v0.0.1-alpha.3) (2025-10-21)
 
 
