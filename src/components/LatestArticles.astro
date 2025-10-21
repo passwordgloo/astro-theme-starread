@@ -16,7 +16,7 @@ const { articles } = Astro.props;
   <div class="space-y-4">
     {articles.length > 0 ? (
       articles.map((article, index) => (
-        <div key={article.slug} class="flex items-start p-4 hover:bg-gray-50 rounded-lg transition-all duration-300 border-l-2 border-transparent hover:border-blue-500">
+        <div key={article.slug} class="flex items-start p-4 hover:bg-[var(--color-hover-light)] dark:hover:bg-[var(--color-hover-dark)] rounded-lg transition-all duration-300 border-l-2 border-transparent hover:border-blue-500">
           <div class="flex-shrink-0 w-7 h-7 bg-blue-600 text-white rounded-md flex items-center justify-center font-bold mr-4 shadow-sm">
             {index + 1}
           </div>
