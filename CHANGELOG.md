@@ -2,6 +2,29 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1-alpha.4...v0.0.1) (2025-10-21)
+
+
+### 🚀 Build System | 构建
+
+* 更新依赖并优化构建配置 ([cf2e7c0](https://github.com/passwordgloo/astro-theme-starread/commit/cf2e7c063518ff9971351ae73fece48fc667f095))
+* 添加tailwind插件以支持iconify图标 ([a087cd2](https://github.com/passwordgloo/astro-theme-starread/commit/a087cd207cbf9c1ebe98cf31ae5ce18c3c576728))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **components:** 替换SVG图标为Iconify并优化导航菜单 ([4e31b58](https://github.com/passwordgloo/astro-theme-starread/commit/4e31b58aac61bf77af7935569f832fd0c119b767))
+
+
+### 📚 Documentation | 文档
+
+* **home:** 更新页脚版权信息为星阅主题驱动 ([77b677c](https://github.com/passwordgloo/astro-theme-starread/commit/77b677c0ce9f131f77318b94757af9b370854104))
+
+
+### ✨ Features | 功能
+
+* **content:** 添加示例文章并更新主题配置 ([251316b](https://github.com/passwordgloo/astro-theme-starread/commit/251316b3e2a27b6154ed1435badc8fe192febb6a))
+
 ### [0.0.1-alpha.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1-alpha.3...v0.0.1-alpha.4) (2025-10-21)
 
 
