@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 这个文件用于Meilisearch爬虫爬取站点内容 -->
+  <!-- 请使用meilisearch/scrapper并指向此URL: https://your-site.com/meilisearch.xml -->
+  
+  <!-- 搜索索引配置 -->
+  <indexConfig>
+    <indexName>articles</indexName>
+    <primaryKey>id</primaryKey>
+    <attributesForFaceting>
+      <attribute>categories</attribute>
+      <attribute>tags</attribute>
+    </attributesForFaceting>
+    <searchableAttributes>
+      <attribute>title</attribute>
+      <attribute>content</attribute>
+      <attribute>description</attribute>
+      <attribute>categories</attribute>
+      <attribute>tags</attribute>
+    </searchableAttributes>
+    <displayedAttributes>
+      <attribute>id</attribute>
+      <attribute>slug</attribute>
+      <attribute>title</attribute>
+      <attribute>content</attribute>
+      <attribute>description</attribute>
+      <attribute>categories</attribute>
+      <attribute>tags</attribute>
+      <attribute>date</attribute>
+    </displayedAttributes>
+  </indexConfig>
+  
+  <!-- 爬虫配置 -->
+  <crawlerConfig>
+    <startUrls>
+      <url>https://your-site.com/articles/</url>
+    </startUrls>
+    <sitemapUrls>
+      <url>https://your-site.com/sitemap.xml</url>
+    </sitemapUrls>
+    <pageSelectors>
+      <pageSelector>
+        <cssSelector>article</cssSelector>
+        <recordExtractor>{
+          "id": "{{ page.url | split: '/' | last }}",
+          "slug": "{{ page.url | split: '/' | last }}",
+          "title": "{{ page.title }}",
+          "content": "{{ page.content | strip_html }}",
+          "description": "{{ page.meta.description }}",
+          "categories": "{{ page.categories }}",
+          "tags": "{{ page.tags }}",
+          "date": "{{ page.date }}"
+        }</recordExtractor>
+      </pageSelector>
+    </pageSelectors>
+  </crawlerConfig>
+</urlset>
