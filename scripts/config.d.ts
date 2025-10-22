@@ -72,4 +72,7 @@ export interface starreadthemeconfig {
       writeApiKey: string;
     };
   };
+  carousel: {
+    title: string;
+  };
 }
