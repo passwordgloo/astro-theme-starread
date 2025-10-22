@@ -64,12 +64,6 @@ export interface starreadthemeconfig {
   };
   search: {
     provider: 'local' | 'algolia';
-    algolia: {
-      appId: string;
-      searchKey: string;
-      indexName: string;
-      writeApiKey: string;
-    };
   };
   carousel: {
     title: string;
