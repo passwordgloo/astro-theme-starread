@@ -5,8 +5,10 @@ import {
   SearchBox,
   Hits,
   Highlight,
+  Snippet,
   Pagination,
   RefinementList,
+  useInstantSearch,
 } from 'react-instantsearch';
 
 const searchClient = algoliasearch(
@@ -32,10 +34,16 @@ const renderTags = (tags) => {
 };
 
 function Hit({ hit }) {
+  const { indexUiState } = useInstantSearch();
+  const hasQuery = indexUiState.query && indexUiState.query.trim().length > 0; // 判断是否有搜索
   const link = `/${hit.slug}`;
 
   return (
-    <article className="flex items-center shadow-sm border border-gray-100 p-6 text-sm bg-white  dark:bg-white/5 dark:backdrop-blur-xl dark:border-white/10 font-normal leading-5 first:rounded-t last:rounded-b only:rounded mb-0">
+    <article className="flex items-center shadow-sm border border-gray-100 p-6 text-sm bg-white dark:bg-white/5 dark:backdrop-blur-xl dark:border-white/10 font-normal leading-5 
+      first:!rounded-t-md last:!rounded-b-md 
+      rounded-none
+     mb-0"
+>
       {hit.cover && hit.cover.trim() !== '' && (
         <a
           href={link}
@@ -59,9 +67,15 @@ function Hit({ hit }) {
           </a>
         </h3>
 
+        {/* 判断是否有搜索，搜索时使用 Snippet 显示高亮部分 */}
         {hit.content && (
           <p className="mb-2 text-sm text-gray-600 dark:text-slate-300">
-            <Highlight attribute="content" hit={hit} />
+            {hasQuery ? (
+              <Snippet attribute="content" hit={hit} />
+            ) : (
+              // 无搜索时，只显示前三行
+              hit.content.split('\n').slice(0, 3).join(' ')
+            )}
           </p>
         )}
 
@@ -112,9 +126,9 @@ export default function AlgoliaSearch() {
             <div className="mt-5 text-center">
               <Pagination
                 classNames={{
-                  list: 'flex items-center justify-center m-0 p-0 list-none ',
-                  item: 'inline-block',
-                  link: 'appearance-none bg-gradient-to-b from-white to-gray-50 border border-gray-300 rounded shadow-sm text-gray-800 cursor-pointer inline-flex text-sm font-normal h-8 justify-center leading-5 px-4 items-center no-underline select-none hover:from-white hover:to-gray-100 hover:border-gray-300 focus:from-white focus:to-gray-100 focus:border-blue-500 focus:shadow-blue-500 focus:outline-none active:border-gray-300 active:shadow-inner disabled:from-white disabled:to-gray-100 disabled:border-gray-200 disabled:shadow-none disabled:text-gray-400 disabled:cursor-not-allowed',
+                  list: 'flex items-center justify-center m-0 p-0 list-none',
+                  item: 'inline-block first:rounded-l-md last:rounded-r-md overflow-hidden',
+                  link: 'appearance-none bg-gradient-to-b from-white to-gray-50 border border-gray-300 text-gray-800 cursor-pointer inline-flex text-sm font-normal h-8 justify-center leading-5 px-4 items-center no-underline select-none hover:from-white hover:to-gray-100 hover:border-gray-300 focus:border-blue-500 focus:outline-none active:border-gray-300 active:shadow-inner disabled:from-white disabled:to-gray-100 disabled:border-gray-200 disabled:shadow-none disabled:text-gray-400 disabled:cursor-not-allowed rounded-none',
                   selectedItem: 'font-bold',
                   disabledItem: '',
                 }}
