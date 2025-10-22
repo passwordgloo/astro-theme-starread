@@ -2,6 +2,28 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.5-beta.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.0...v0.0.5-beta.1) (2025-10-22)
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **search:** 移除pagefind集成并统一搜索结果链接格式 ([8d32465](https://github.com/passwordgloo/astro-theme-starread/commit/8d3246505d370a12c303d0b9d511eb5899812b92))
+* **search:** 重构搜索功能并简化实现 ([1208b2b](https://github.com/passwordgloo/astro-theme-starread/commit/1208b2b449f7c003020f7d398fde4dcea8c003c9))
+
+
+### ✨ Features | 功能
+
+* **algolia:** 添加 Algolia 数据推送脚本并移除无用配置 ([643108e](https://github.com/passwordgloo/astro-theme-starread/commit/643108ea0425edf58f74a1c6ae3445d0e17df733))
+* **搜索:** 重构搜索组件并添加本地搜索功能 ([edc2c16](https://github.com/passwordgloo/astro-theme-starread/commit/edc2c166e35cc6e6bfe39ffa9d326c16b0ae2366))
+* 添加Algolia搜索依赖并配置轮播标题 ([1e898d9](https://github.com/passwordgloo/astro-theme-starread/commit/1e898d9eec107c95b8b214e1adf4caa0459dafac))
+* 添加搜索页面布局文件 ([ba994e7](https://github.com/passwordgloo/astro-theme-starread/commit/ba994e72265e50d2f48b1d407180c47df6b4a749))
+* **配置:** 在主题配置中添加轮播标题字段 ([708330a](https://github.com/passwordgloo/astro-theme-starread/commit/708330a22738b021a332464799d043670ed9fdc4))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* 移除Algolia搜索的默认配置 ([d1919a7](https://github.com/passwordgloo/astro-theme-starread/commit/d1919a746318976e68e884626a23223791828c99))
+
 ### [0.0.5-beta.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.3...v0.0.5-beta.0) (2025-10-22)
 
 
