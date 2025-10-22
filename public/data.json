@@ -1,32 +1,17 @@
 [
   {
-    "title": "Astro主题开发指南",
-    "excerpt": "本文介绍了如何开发自定义Astro主题，包括目录结构和组件设计",
-    "slug": "astro-theme-development",
-    "date": "2023-10-15"
+    "title": "关于",
+    "content": "这是关于我们的页面。\n\n<h3 class=\"text-gray-900 dark:text-white\">测试</h3>\n\n**任务列表**\n\n- [x] 支持 task list\n- [ ] 还没完成\n\n\n\n**表格**\n\n| 字段 | 值 |\n| --- | --- |\n| 版本 | Tailwind v4 |\n| 插件 | @tailwindcss/typography |\n\n**删除线**：~~被删除的文本~~\n\n**脚注**：这里有脚注[^1]。\n\n> 引用块也 OK。\n\n\n>[!note]\n> 这是一个注意事项\n\n```js\nconsole.log(' fenced code 支持高亮按你的主题来 ');\n```",
+    "slug": "articles/about"
   },
   {
-    "title": "Markdown语法完全指南",
-    "excerpt": "详细讲解Markdown的各种语法和高级技巧，帮助你写出更优雅的文档",
-    "slug": "markdown-complete-guide",
-    "date": "2023-11-02"
+    "title": "样例",
+    "content": "# 样例\n\n这是一篇精心准备的样例文章，旨在向读者展示文章的基本结构与内容呈现方式。通过这篇文章，大家可以了解到如何组织段落、表达观点，同时也能体会到整体的行文风格。无论是初次接触相关内容的新手，还是寻求写作灵感的老手，都能从这篇样例文章中有所收获。\n\n## 章节一\n\n这是文章的第一部分内容。\n\n### 小节1.1\n\n这是第一部分的第一个小节。\n\n## 章节二\n\n这是文章的第二部分内容。\n\n### 小节2.1\n\n这是第二部分的第一个小节。\n\n## 章节三\n\n这是文章的第三部分内容。",
+    "slug": "articles/example"
   },
   {
-    "title": "前端性能优化实践",
-    "excerpt": "分享前端性能优化的实用技巧，包括资源加载和代码分割策略",
-    "slug": "frontend-performance-optimization",
-    "date": "2023-11-20"
-  },
-  {
-    "title": "React组件设计模式",
-    "excerpt": "深入探讨React中的各种组件设计模式，提升代码复用性和可维护性",
-    "slug": "react-component-patterns",
-    "date": "2023-12-05"
-  },
-  {
-    "title": "TypeScript高级类型技巧",
-    "excerpt": "学习TypeScript的高级类型特性，编写更健壮的类型定义",
-    "slug": "typescript-advanced-types",
-    "date": "2023-12-18"
+    "title": "帮助文档",
+    "content": "# 这是文章标题\n\n如果用户没有在frontmatter中设置title，系统将使用文章的第一句话作为标题。\n\n## 章节一\n\n这是文章的第一部分内容。\n\n### 小节1.1\n\n这是第一部分的第一个小节。\n\n## 章节二\n\n这是文章的第二部分内容。\n\n### 小节2.1\n\n这是第二部分的第一个小节。\n\n## 章节三\n\n这是文章的第三部分内容。",
+    "slug": "articles/help"
   }
 ]
