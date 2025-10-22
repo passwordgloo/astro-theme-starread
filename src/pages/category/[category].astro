@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import CategoryLayout from '../../layouts/category.astro';
+
+// 生成所有分类页面的静态路径
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  
+  // 收集所有分类
+  const allCategories = new Set<string>();
+  articles.forEach(article => {
+    article.data.categories?.forEach(category => allCategories.add(category));
+  });
+  
+  // 为每个分类生成静态路径
+  return Array.from(allCategories).map(category => ({
+    params: { category },
+    props: { category },
+  }));
+}
+
+// 获取当前分类和相关文章
+const { category } = Astro.props;
+const articles = await getCollection('articles', ({ data }) => 
+  data.categories?.includes(category) || false
+);
+
+// 获取所有分类及其计数
+const allArticles = await getCollection('articles');
+const categoryCounts: Record<string, number> = {};
+allArticles.forEach(article => {
+  article.data.categories?.forEach(cat => {
+    categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+  });
+});
+
+const pageTitle = `分类: ${category}`;
+---
+
+<CategoryLayout 
+  title={pageTitle} 
+  categoryName={category} 
+  currentCategory={category} 
+  articles={articles} 
+  allCategories={categoryCounts} 
+/>
