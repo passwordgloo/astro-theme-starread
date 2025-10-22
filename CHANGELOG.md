@@ -2,6 +2,31 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.5-alpha.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.0...v0.0.5-alpha.1) (2025-10-22)
+
+
+### 📦 Chores | 其他更新
+
+* 删除不再使用的meilisearch.xml配置文件 ([75e8cf6](https://github.com/passwordgloo/astro-theme-starread/commit/75e8cf64f743e13d315aa0ff57890dc17d27ea8c))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* 修复主页布局缩进问题并移除废弃的搜索页面 ([f1768e9](https://github.com/passwordgloo/astro-theme-starread/commit/f1768e95b4a8d694e069847985da459c59766ab2))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **search:** 替换Algolia为Pagefind实现本地搜索 ([94143e1](https://github.com/passwordgloo/astro-theme-starread/commit/94143e162b1d3191bd0a2a3191b0d7c306b79375))
+* **导航栏:** 重构导航栏组件和搜索功能 ([e15f1ca](https://github.com/passwordgloo/astro-theme-starread/commit/e15f1ca81f333130fd409e2ea639076a1cb216a0))
+* **搜索组件:** 将Search组件替换为LocalSearch组件并删除旧组件 ([c946348](https://github.com/passwordgloo/astro-theme-starread/commit/c94634866aa4658256516372cb1940f78be9250c))
+
+
+### ✨ Features | 功能
+
+* **changelog:** 添加自定义CHANGELOG更新器，将三级标题改为二级 ([ba3a49a](https://github.com/passwordgloo/astro-theme-starread/commit/ba3a49a69419a1c7f844d5ed7209b1d24fd4664c))
+* **search:** 添加本地搜索组件及交互逻辑 ([b102dd0](https://github.com/passwordgloo/astro-theme-starread/commit/b102dd0df890dac9cf190f5f05afe8703da84e45))
+
 ### [0.0.5-alpha.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.4...v0.0.5-alpha.0) (2025-10-22)
 
 
