@@ -1,0 +1,37 @@
+---
+import { themeConfig } from '../../content/config';
+
+// Algolia配置
+const algoliaConfig = {
+  appId: themeConfig.search.algolia.appId || import.meta.env.ALGOLIA_APP_ID || '',
+  searchKey: themeConfig.search.algolia.searchKey || import.meta.env.ALGOLIA_SEARCH_KEY || '',
+  indexName: themeConfig.search.algolia.indexName || import.meta.env.ALGOLIA_INDEX_NAME || 'articles'
+};
+  const baseUrl = import.meta.env.BASE_URL || '/';
+---
+
+<div class="search-container relative">
+  <button 
+    id="search-toggle" 
+    class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 dark:focus:ring-offset-gray-900"
+    aria-label="搜索"
+  >
+    <span class="icon-[lucide--search] h-5 w-5 text-gray-700 dark:text-gray-300"></span>测试
+  </button>
+  
+  <div 
+    id="search-dropdown" 
+    class="absolute right-0 mt-2 w-80 md:w-96 bg-white dark:bg-gray-900 shadow-lg rounded-md z-50 overflow-hidden transform origin-top-right scale-95 opacity-0 invisible transition-all duration-200"
+  >
+    <div class="relative">
+      <div id="algolia-search-container" class="p-0"></div>
+      <button 
+        id="search-close" 
+        class="absolute right-3 top-3 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
+        aria-label="关闭搜索"
+      >
+        <span class="icon-[lucide--x] h-5 w-5 text-gray-400"></span>
+      </button>
+    </div>
+  </div>
+</div>
