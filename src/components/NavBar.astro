@@ -1,7 +1,7 @@
 ---
 const { title } = Astro.props;
 import ThemeToggle from "./ThemeToggle.astro";
-import Search from "./Search.astro";
+import LocalSearch from "../pages/search/LocalSearch.astro";
 import { themeConfig } from '../content/config';
 ---
 <header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md">
@@ -99,7 +99,7 @@ import { themeConfig } from '../content/config';
     </nav>
     <!-- 搜索和登录 -->
     <div class="flex items-center space-x-2">
-      <Search />
+      <LocalSearch />
       <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
         <span class="icon-[lucide--moon] h-5 w-5 nav-theme-icon" id="theme-icon"></span>
       </button>
