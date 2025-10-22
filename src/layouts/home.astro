@@ -6,6 +6,7 @@ import Carousel from '../components/Carousel.astro';
 import StatsWidget from '../components/StatsWidget.astro';
 import AuthorWidget from '../components/AuthorWidget.astro';
 import AdWidget from '../components/AdWidget.astro';
+import TagCloud from "../components/TagCloud.astro";
 import ArticleSection from '../components/ArticleSection.astro';
 import { themeConfig } from '../content/config';
 import { getCollection } from 'astro:content';
@@ -57,6 +58,7 @@ const carouselArticles = allArticles
          {themeConfig.sidebar.home.statsWidget && <StatsWidget />}
          {themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
          {themeConfig.sidebar.home.adWidget && <AdWidget />}
+         {themeConfig.sidebar.home.tag && <TagCloud />}
       </aside>
     </main>
 

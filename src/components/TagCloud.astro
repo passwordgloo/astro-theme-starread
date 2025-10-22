@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+
+// 获取所有文章和标签
+const articles = await getCollection('articles');
+
+// 计算每个标签的文章数量
+const tagCounts: Record<string, number> = {};
+articles.forEach(article => {
+  article.data.tags?.forEach(tag => {
+    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+  });
+});
+
+// 将标签按数量排序
+const sortedTags = Object.entries(tagCounts).sort(([, a], [, b]) => b - a);
+---
+
+<div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4">
+  <div class="flex items-center space-x-2 mb-4">
+    <span class="icon-[lucide--tag] w-5 h-5 text-accent"></span>
+    <span class="text-accent font-bold text-lg">标签云</span>
+  </div>
+  
+  {sortedTags.length > 0 ? (
+    <div class="flex flex-wrap gap-2">
+      {sortedTags.map(([tag, count]) => (
+        <a
+          key={tag}
+          href={`/tag/${encodeURIComponent(tag)}`}
+          class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 transition-colors"
+        >
+          {tag}
+          <span class="ml-1 text-xs font-bold bg-blue-500 text-white px-1.5 py-0.5 rounded-full">{count}</span>
+        </a>
+      ))}
+    </div>
+  ) : (
+    <p class="text-center text-gray-500 dark:text-gray-400 py-4">没有标签</p>
+  )}
+</div>
