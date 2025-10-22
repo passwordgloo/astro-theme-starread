@@ -2,6 +2,27 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.5-beta.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.3...v0.0.5-beta.0) (2025-10-22)
+
+
+### 📦 Chores | 其他更新
+
+* 删除模板文件astro.config.mjs和package.json ([ae1e646](https://github.com/passwordgloo/astro-theme-starread/commit/ae1e646b666e473fe48f1e21c5d6d3679183975e))
+
+
+### ✨ Features | 功能
+
+* 将搜索提供商更改为algolia并更新依赖配置 ([263eead](https://github.com/passwordgloo/astro-theme-starread/commit/263eeadd532e7f40a1384b25526dabd6148609b7))
+* **搜索:** 实现本地模拟数据的搜索功能 ([e084ad2](https://github.com/passwordgloo/astro-theme-starread/commit/e084ad2e791b9971c38be994be8627100ac408d7))
+* 添加初始数据文件包含多篇文章信息 ([5ef2c0d](https://github.com/passwordgloo/astro-theme-starread/commit/5ef2c0de868dae3e336378611f16d9082a4f33e2))
+* 添加自动生成文章索引的脚本 ([dab347c](https://github.com/passwordgloo/astro-theme-starread/commit/dab347c388ff410dc55913b9cc178a19b75770ee))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **search:** 重构搜索组件并迁移到Algolia搜索方案 ([1cacd38](https://github.com/passwordgloo/astro-theme-starread/commit/1cacd3825960b0a770c50bf06db199219a569444))
+* 将搜索提供商改为本地并移除algolia相关配置 ([a07e701](https://github.com/passwordgloo/astro-theme-starread/commit/a07e7011bb53f78382deb08be996172c524e0cef))
+
 ### [0.0.5-alpha.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.2...v0.0.5-alpha.3) (2025-10-22)
 
 
