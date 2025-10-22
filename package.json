@@ -32,8 +32,7 @@
     "preview": "astro preview",
     "local": "node scripts/autoindex.js && astro build",
     "algolia": "node scripts/pushAlgolia.js",
-    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "standard-version"
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --config scripts/changelog-updater.js -r 0"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
@@ -54,8 +53,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.12",
     "conventional-changelog-cli": "^4.1.0",
-    "gray-matter": "^4.0.3",
-    "standard-version": "^9.5.0"
+    "gray-matter": "^4.0.3"
   },
   "bin": {
     "astro-theme-starread": "scripts/init.cjs"
