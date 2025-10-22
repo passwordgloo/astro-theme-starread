@@ -34,7 +34,7 @@ const sortedArticles = [...articles]
   .slice(0, defaultLimit);
 ---
 
-<div class="relative">
+<div class="relative" client:load>
   <!-- 顶部标题栏 -->
   <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4 mb-6">
     <div class="flex items-center space-x-2">
