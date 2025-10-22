@@ -8,7 +8,9 @@
     "preview": "astro preview",
     "astro": "astro",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "standard-version"
+    "release": "standard-version",
+    "algolia": "node scripts/algolia-index.js",
+    "init-db": "node scripts/init-search-db.js"
   },
   "dependencies": {
     "astro": "^5.13.3"
@@ -18,8 +20,10 @@
     "@iconify/tailwind4": "^1.0.6",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.12",
-    "tailwindcss": "^4.1.12",
+    "algoliasearch": "^5.36.0",
     "conventional-changelog-cli": "^4.1.0",
-    "standard-version": "^9.5.0"
+    "gray-matter": "^4.0.3",
+    "standard-version": "^9.5.0",
+    "tailwindcss": "^4.1.12"
   }
 }
