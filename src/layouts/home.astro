@@ -8,6 +8,7 @@ import AuthorWidget from '../components/AuthorWidget.astro';
 import AdWidget from '../components/AdWidget.astro';
 import TagCloud from "../components/TagCloud.astro";
 import ArticleSection from '../components/ArticleSection.astro';
+import LatestArticle from '../components/LatestArticle.astro';
 import { themeConfig } from '../content/config';
 import { getCollection } from 'astro:content';
 
@@ -46,13 +47,16 @@ const carouselArticles = allArticles
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
         {themeConfig.categories.map((category) => (
           <ArticleSection
-            title={category.title}
-            articles={categoryArticles[category.name]?.length > 0 ? categoryArticles[category.name] : []}
-            key={category.name}
-          />
+  title={category.title}
+  articles={categoryArticles[category.name]?.length > 0 ? categoryArticles[category.name] : []}
+  category={category.name}
+  key={category.name}
+/>
         ))}
       </div>
+    <LatestArticle articles={allArticles} />
     </div>
+
     <!-- 右侧边栏 -->
 			<aside class="w-full md:w-1/3 space-y-6">
          {themeConfig.sidebar.home.statsWidget && <StatsWidget />}

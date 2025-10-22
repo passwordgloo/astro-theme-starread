@@ -1,0 +1,202 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { themeConfig } from '../content/config';
+
+interface Props {
+  articles: CollectionEntry<'articles'>[];
+}
+
+const { articles } = Astro.props;
+const { articleLoad } = themeConfig;
+const { type: loadType, initialLoad, loadMore, defaultLimit } = articleLoad;
+
+// 处理日期格式和验证
+const formatDate = (dateString?: string): string => {
+  let date: Date;
+
+  if (!dateString || typeof dateString !== 'string') {
+    // 如果没有提供日期或日期不是字符串类型，使用当前系统时间
+    date = new Date();
+  } else {
+      // 解析日期字符串
+      const [year, month, day] = dateString.split('-').map(Number);
+      date = new Date(year, month - 1, day);
+  }
+
+  // 格式化日期为yyyy-mm-dd
+  return date.toISOString().split('T')[0];
+};
+
+// 按日期排序并限制总数
+const sortedArticles = [...articles]
+  .sort((a, b) => new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime())
+  .slice(0, defaultLimit);
+---
+
+<div class="relative">
+  <!-- 顶部标题栏 -->
+  <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4 mb-6">
+    <div class="flex items-center space-x-2">
+      <span class="icon-[lucide--newspaper] w-5 h-5 text-accent"></span>
+      <h2 class="text-accent font-bold text-lg">最新文章</h2>
+    </div>
+    <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+      {sortedArticles.slice(0, initialLoad).map((article) => (
+        <div key={article.slug} class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-white/5 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
+          {/* 左上角分类标签 */}
+          {article.data.categories && article.data.categories.length > 0 && (
+            <div class="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">
+              {article.data.categories[0]}
+            </div>
+          )}
+
+          {/* 文章封面 */}
+          <div class="relative">
+            <img
+              src={article.data.cover || '/defaultCover.jpg'}
+              alt={article.data.title}
+              class="w-full h-48 object-cover"
+            />
+          </div>
+
+          <div class="p-4">
+            {/* 标签 */}
+            {article.data.tags && article.data.tags.length > 0 && (
+              <div class="flex flex-wrap gap-2 mb-2">
+                {article.data.tags.map((tag) => (
+                  <span key={tag} class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2 py-1 rounded">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            )}
+
+            {/* 文章标题 */}
+            <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary transition-colors">
+              <a href={`/articles/${article.slug}`}>{article.data.title}</a>
+            </h3>
+
+            {/* 底部信息 - 日期和浏览量 */}
+            <div class="flex justify-between items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
+              <span>{formatDate(article.data.date)}</span>
+              <span class="flex items-center">
+                <span class="icon-[lucide--eye] mr-1 w-3 h-3"></span>
+                {article.data.views || 0}
+              </span>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+        {/* 加载更多按钮 */}
+        {loadType === 'button' && sortedArticles.length > initialLoad && (
+        <div class="flex justify-center mt-8">
+          <button
+            id="load-more-btn"
+            class="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+            data-loaded={initialLoad}
+            data-total={sortedArticles.length}
+          >
+            加载更多
+          </button>
+        </div>
+      )}
+
+      {/* 自动加载触发器 */}
+      {loadType === 'auto' && (
+        <div
+          id="load-trigger"
+          class="h-10 w-full"
+          data-loaded={initialLoad}
+          data-total={sortedArticles.length}
+        ></div>
+      )}
+    </div>
+
+  </div>
+
+
+<script is:inline define:vars={{ articleLoadConfig: { initialLoad, loadMore, defaultLimit }, articles: sortedArticles, loadType }}>
+  const container = document.getElementById('articles-container');
+  const trigger = loadType === 'button' ? document.getElementById('load-more-btn') : document.getElementById('load-trigger');
+
+  // 渲染文章卡片
+  function renderArticles(startIndex, endIndex) {
+    const fragment = document.createDocumentFragment();
+    
+    articles.slice(startIndex, endIndex).forEach(article => {
+      const articleCard = document.createElement('div');
+      articleCard.className = 'bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden';
+      articleCard.innerHTML = `
+        ${article.data.categories?.length ? `<div class="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">${article.data.categories[0]}</div>` : ''}
+        <div class="relative">
+          <img src="${article.data.cover || '/defaultCover.jpg'}" alt="${article.data.title}" class="w-full h-48 object-cover">
+        </div>
+        <div class="p-4">
+          ${article.data.tags?.length ? `
+            <div class="flex flex-wrap gap-2 mb-2">
+              ${article.data.tags.map(tag => `<span class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2 py-1 rounded">${tag}</span>`).join('')}
+            </div>
+          ` : ''}
+          <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary transition-colors">
+            <a href="/articles/${article.slug}">${article.data.title}</a>
+          </h3>
+          <div class="flex justify-between items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
+            <span>${new Date(article.data.date || new Date()).toISOString().split('T')[0]}</span>
+            <span class="flex items-center">
+              <span class="icon-[lucide--eye] mr-1 w-3 h-3"></span>
+              ${article.data.views || 0}
+            </span>
+          </div>
+        </div>
+      `;
+      fragment.appendChild(articleCard);
+    });
+    
+    container.appendChild(fragment);
+  }
+
+  // 加载更多文章
+  function loadMoreArticles() {
+    const loaded = parseInt(trigger.dataset.loaded);
+    const total = parseInt(trigger.dataset.total);
+    const newLoaded = Math.min(loaded + articleLoadConfig.loadMore, total, articleLoadConfig.defaultLimit);
+
+    if (newLoaded > loaded) {
+      renderArticles(loaded, newLoaded);
+      trigger.dataset.loaded = newLoaded;
+
+      // 如果已经加载全部，隐藏触发器
+      if (newLoaded >= total || newLoaded >= articleLoadConfig.defaultLimit) {
+        trigger.style.display = 'none';
+      }
+    }
+  }
+
+  // 按钮加载模式
+  if (loadType === 'button' && trigger) {
+    trigger.addEventListener('click', loadMoreArticles);
+
+    // 初始检查是否需要隐藏按钮
+    if (parseInt(trigger.dataset.loaded) >= parseInt(trigger.dataset.total) || parseInt(trigger.dataset.loaded) >= articleLoadConfig.defaultLimit) {
+      trigger.style.display = 'none';
+    }
+      trigger.style.display = 'none';
+  }
+
+  // 自动加载模式
+  if (loadType === 'auto' && trigger) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        loadMoreArticles();
+      }
+    }, { threshold: 0.1 });
+
+    observer.observe(trigger);
+
+    // 初始检查是否需要隐藏触发器
+    if (parseInt(trigger.dataset.loaded) >= parseInt(trigger.dataset.total) || parseInt(trigger.dataset.loaded) >= articleLoadConfig.defaultLimit) {
+      trigger.style.display = 'none';
+    }
+  }
+</script>
