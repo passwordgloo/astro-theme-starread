@@ -2,6 +2,22 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.5-alpha.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.2...v0.0.5-alpha.3) (2025-10-22)
+
+
+### ✨ Features | 功能
+
+* 添加astro主题初始配置文件和依赖 ([9512d91](https://github.com/passwordgloo/astro-theme-starread/commit/9512d916e1fb818e51f8cd2d72916c1ef1dcd152))
+* 添加脚本文件和类型定义 ([1659fdb](https://github.com/passwordgloo/astro-theme-starread/commit/1659fdb3811d08c7a7e4e56ccca5f0fa62bc464c))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **components:** 统一从starread.config导入themeConfig ([6621903](https://github.com/passwordgloo/astro-theme-starread/commit/6621903eb3791714f014cc6650017d476b4ff361))
+* **config:** 将主题配置迁移到starread.config并添加内容集合配置 ([a9c58bb](https://github.com/passwordgloo/astro-theme-starread/commit/a9c58bba74bddcbacf85c97e614385f17cdfc51e))
+* **search:** 重构搜索功能配置和实现 ([34dca09](https://github.com/passwordgloo/astro-theme-starread/commit/34dca09ef2f0cbdc8ae23daf82fef37c823edb59))
+* 重构项目为astro主题模板并移除algolia集成 ([a5723b7](https://github.com/passwordgloo/astro-theme-starread/commit/a5723b7cae7776382c18bd6b1c99958c05f82e0f))
+
 ### [0.0.5-alpha.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.1...v0.0.5-alpha.2) (2025-10-22)
 
 

@@ -1,7 +1,7 @@
 {
   "name": "astro-theme-starread",
   "type": "module",
-  "version": "0.0.5-alpha.2",
+  "version": "0.0.5-alpha.3",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && npx pagefind --site dist --output-subdir _pagefind",
