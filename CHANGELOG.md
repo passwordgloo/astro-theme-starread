@@ -2,6 +2,20 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.5-alpha.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.4...v0.0.5-alpha.0) (2025-10-22)
+
+
+### 📦 Chores | 其他更新
+
+* 添加algolia搜索相关脚本和依赖 ([f6194c7](https://github.com/passwordgloo/astro-theme-starread/commit/f6194c70801cd0b6903a21586348a43791a4a029))
+
+
+### ✨ Features | 功能
+
+* **搜索:** 添加Meilisearch爬虫配置文件 ([465f9b9](https://github.com/passwordgloo/astro-theme-starread/commit/465f9b9f10cc65f38645c05774fdb9f05a9e0ac9))
+* **搜索:** 添加搜索组件并支持多种搜索后端 ([48bcb9d](https://github.com/passwordgloo/astro-theme-starread/commit/48bcb9da763db5cfe0843cab60c4da4656f6397e))
+* **文章:** 添加最新文章组件和文章加载配置 ([4d0df48](https://github.com/passwordgloo/astro-theme-starread/commit/4d0df48e47f6c7bdd115f6512942c704cdd9db96))
+
 ### [0.0.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.3...v0.0.4) (2025-10-22)
 
 
