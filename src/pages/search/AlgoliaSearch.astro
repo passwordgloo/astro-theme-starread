@@ -35,6 +35,7 @@ const ref = Astro.props.ref || null;
         id="search-close" 
         class="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
         aria-label="关闭搜索"
+        onclick="document.getElementById('search-dropdown').classList.add('hidden')"
       >
         <span class="icon-[lucide--x] h-5 w-5 text-gray-400"></span>
       </button>
@@ -57,10 +58,14 @@ const ref = Astro.props.ref || null;
     return response.json();
   };
 
+  const searchContainer = document.querySelector('.search-container');
   const searchDropdown = document.getElementById('search-dropdown');
   const searchInput = document.getElementById('search-input');
   const searchResults = document.getElementById('search-results');
   const searchPlaceholder = document.getElementById('search-placeholder');
+
+  // 初始隐藏搜索下拉框
+  searchDropdown.classList.add('hidden');
 
   // 搜索功能实现
   let searchTimeout;
@@ -80,7 +85,7 @@ const ref = Astro.props.ref || null;
       const mockData = await fetchMockData();
       const hits = mockData.filter(hit => 
         hit.title.toLowerCase().includes(query.toLowerCase()) || 
-        hit.excerpt.toLowerCase().includes(query.toLowerCase())
+        hit.content.toLowerCase().includes(query.toLowerCase())
       );
 
       if (hits.length === 0) {
@@ -92,8 +97,8 @@ const ref = Astro.props.ref || null;
       searchResults.innerHTML = hits.map(hit => `
         <a href="/articles/${hit.slug}" class="block p-4 hover:bg-gray-50 dark:hover:bg-gray-800 rounded-md transition-colors">
           <h3 class="font-medium text-gray-900 dark:text-white">${hit.title}</h3>
-          <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${hit.excerpt || hit.content.substring(0, 100)}...</p>
-          <div class="text-xs text-gray-400 mt-2">${new Date(hit.date).toLocaleDateString()}</div>
+          <p class="text-sm text-gray-500 dark:text-gray-400 mt-1 line-clamp-2">${hit.content.substring(0, 100)}...</p>
+
         </a>
       `).join('');
     } catch (error) {
@@ -111,4 +116,18 @@ const ref = Astro.props.ref || null;
   
   // 初始化时自动聚焦搜索框
     setTimeout(() => searchInput.focus(), 300);
+
+  // 搜索框显示/隐藏切换
+  const searchToggle = document.getElementById('search-toggle');
+
+  searchToggle.addEventListener('click', () => {
+    searchDropdown.classList.toggle('hidden');
+  });
+
+  // 点击页面其他区域关闭搜索框
+  document.addEventListener('click', (e) => {
+    if (!searchContainer.contains(e.target)) {
+      searchDropdown.classList.add('hidden');
+    }
+  });
 </script>
