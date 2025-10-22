@@ -1,7 +1,7 @@
 ---
 title: 样例
 categories: [支持]
-tags: [vue, react, javascript]
+tags: [vue, javascript]
 cover: https://picsum.photos/800/400?random=1
 description: 这是一篇示例文章，展示了如何使用frontmatter配置文章属性。
 date: 2024-05-20

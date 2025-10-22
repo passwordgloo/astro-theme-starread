@@ -1,0 +1,46 @@
+---
+import { getCollection } from 'astro:content';
+import TagLayout from '../../layouts/tag.astro';
+
+// 生成所有标签页的静态路径
+export async function getStaticPaths() {
+  const articles = await getCollection('articles');
+  
+  // 收集所有标签
+  const allTags = new Set<string>();
+  articles.forEach(article => {
+    article.data.tags?.forEach(tag => allTags.add(tag));
+  });
+  
+  // 为每个标签生成一个静态路径
+  return Array.from(allTags).map(tag => ({
+    params: { tag },
+    props: { tag },
+  }));
+}
+
+// 获取当前页面的标签和相关文章
+const { tag } = Astro.props;
+const articles = await getCollection('articles', ({ data }) => 
+  data.tags?.includes(tag) || false
+);
+
+// 获取所有标签及其计数
+const allArticles = await getCollection('articles');
+const tagCounts: Record<string, number> = {};
+allArticles.forEach(article => {
+  article.data.tags?.forEach(tag => {
+    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+  });
+});
+
+const pageTitle = `标签: ${tag}`;
+---
+
+<TagLayout 
+  title={pageTitle} 
+  tagName={tag} 
+  currentTag={tag} 
+  articles={articles} 
+  allTags={tagCounts} 
+/>
