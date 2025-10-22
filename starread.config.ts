@@ -121,13 +121,5 @@ export const themeConfig: starreadthemeconfig = {
   search: {
       // 搜索服务提供商: 'local', 'algolia'
       provider: 'local',
-      
-      // Algolia搜索配置
-      algolia: {
-        appId: '',
-        searchKey: '',
-        indexName: '',
-        writeApiKey: ''
-      }
     }
 };
