@@ -1,0 +1,199 @@
+---
+import { themeConfig } from '../content/config';
+
+// 默认使用的搜索类型
+const defaultSearchType = themeConfig.search?.default || 'local';
+
+// 暴露给父组件的引用
+const ref = Astro.props.ref || null;
+---
+
+<div class="search-container relative" ref={ref}>
+  <button id="search-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+    <span class="icon-[lucide--search] h-5 w-5 text-gray-700 dark:text-gray-300"></span>
+  </button>
+  
+  <div id="search-dropdown" class="absolute right-0 mt-2 w-80 md:w-96 bg-white dark:bg-cyan-950 shadow-lg rounded-md z-50 overflow-hidden transform origin-top-right scale-95 opacity-0 invisible transition-all duration-200">
+    <div class="relative">
+      <input 
+        id="search-input" 
+        type="text" 
+        placeholder="搜索文章..." 
+        class="w-full px-4 py-3 pl-10 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-900 dark:text-white dark:focus:ring-blue-600"
+      />
+      <span class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
+        <span class="icon-[lucide--search] h-5 w-5"></span>
+      </span>
+      <button id="search-close" class="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+        <span class="icon-[lucide--x] h-5 w-5 text-gray-400"></span>
+      </button>
+    </div>
+    
+    <div id="search-results" class="max-h-96 overflow-y-auto p-2">
+      <!-- 搜索结果将通过JavaScript动态填充 -->
+      <div id="search-placeholder" class="text-center py-8 text-gray-500 dark:text-gray-400">
+        输入关键词开始搜索
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchToggle = document.getElementById('search-toggle');
+    const searchDropdown = document.getElementById('search-dropdown');
+    const searchInput = document.getElementById('search-input');
+    const searchClose = document.getElementById('search-close');
+    const searchPlaceholder = document.getElementById('search-placeholder');
+    const searchResults = document.getElementById('search-results');
+    
+    // 切换搜索框显示/隐藏
+    searchToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (searchDropdown.classList.contains('invisible')) {
+        // 显示搜索框
+        searchDropdown.classList.remove('invisible', 'opacity-0', 'scale-95');
+        searchDropdown.classList.add('opacity-100', 'scale-100');
+        searchInput.focus();
+      } else {
+        // 隐藏搜索框
+        searchDropdown.classList.add('invisible', 'opacity-0', 'scale-95');
+        searchDropdown.classList.remove('opacity-100', 'scale-100');
+      }
+    });
+    
+    // 关闭搜索框
+    searchClose.addEventListener('click', () => {
+      searchDropdown.classList.add('invisible', 'opacity-0', 'scale-95');
+      searchDropdown.classList.remove('opacity-100', 'scale-100');
+      searchInput.value = '';
+      searchPlaceholder.style.display = 'block';
+      // 清空搜索结果
+      while (searchResults.children.length > 1) {
+        searchResults.removeChild(searchResults.lastChild);
+      }
+    });
+    
+    // 点击页面其他地方关闭搜索框
+    document.addEventListener('click', (e) => {
+      const searchContainer = document.querySelector('.search-container');
+      if (searchContainer && !searchContainer.contains(e.target)) {
+        searchDropdown.classList.add('invisible', 'opacity-0', 'scale-95');
+        searchDropdown.classList.remove('opacity-100', 'scale-100');
+      }
+    });
+    
+    // ESC键关闭搜索框
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !searchDropdown.classList.contains('invisible')) {
+        searchClose.click();
+      }
+    });
+    
+    // 搜索功能
+    searchInput.addEventListener('input', async (e) => {
+      const query = e.target.value.trim();
+      
+      if (query.length < 2) {
+        searchPlaceholder.style.display = 'block';
+        // 清空搜索结果
+        while (searchResults.children.length > 1) {
+          searchResults.removeChild(searchResults.lastChild);
+        }
+        return;
+      }
+      
+      searchPlaceholder.style.display = 'none';
+      
+      try {
+        // 根据配置选择不同的搜索后端
+        const searchType = '${defaultSearchType}';
+        let results;
+        
+        if (searchType === 'local') {
+          results = await searchLocal(query);
+        } else if (searchType === 'algolia') {
+          results = await searchAlgolia(query);
+        } else if (searchType === 'meilisearch') {
+          results = await searchMeilisearch(query);
+        }
+        
+        displayResults(results);
+      } catch (error) {
+        console.error('搜索错误:', error);
+        searchResults.innerHTML = '<div class="text-center py-4 text-red-500">搜索出错，请稍后再试</div>';
+        searchPlaceholder.style.display = 'none';
+      }
+    });
+    
+    // 显示搜索结果
+    function displayResults(results) {
+      // 清空现有结果
+      while (searchResults.children.length > 1) {
+        searchResults.removeChild(searchResults.lastChild);
+      }
+      
+      if (!results || results.length === 0) {
+        const noResult = document.createElement('div');
+        noResult.className = 'text-center py-4 text-gray-500 dark:text-gray-400';
+        noResult.textContent = '没有找到相关内容';
+        searchResults.appendChild(noResult);
+        return;
+      }
+      
+      // 添加搜索结果
+      results.forEach(result => {
+        const resultItem = document.createElement('a');
+        resultItem.href = `/articles/${result.slug || result.id}`;
+        resultItem.className = 'block p-3 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md transition-colors mb-1';
+        
+        const title = document.createElement('h3');
+        title.className = 'font-medium text-gray-900 dark:text-gray-100';
+        title.textContent = result.title;
+        
+        if (result.snippet) {
+          const snippet = document.createElement('p');
+          snippet.className = 'text-sm text-gray-600 dark:text-gray-400 mt-1 line-clamp-2';
+          snippet.textContent = result.snippet;
+          resultItem.appendChild(snippet);
+        }
+        
+        resultItem.appendChild(title);
+        searchResults.appendChild(resultItem);
+      });
+    }
+    
+    // 本地搜索函数
+    async function searchLocal(query) {
+      try {
+        const response = await fetch(`/search/local?q=${encodeURIComponent(query)}`);
+        return await response.json();
+      } catch (error) {
+        console.error('本地搜索失败:', error);
+        return [];
+      }
+    }
+    
+    // Algolia搜索函数
+    async function searchAlgolia(query) {
+      try {
+        const response = await fetch(`/search/algolia?q=${encodeURIComponent(query)}`);
+        return await response.json();
+      } catch (error) {
+        console.error('Algolia搜索失败:', error);
+        return [];
+      }
+    }
+    
+    // Meilisearch搜索函数
+    async function searchMeilisearch(query) {
+      try {
+        const response = await fetch(`/search/meilisearch?q=${encodeURIComponent(query)}`);
+        return await response.json();
+      } catch (error) {
+        console.error('Meilisearch搜索失败:', error);
+        return [];
+      }
+    }
+  });
+</script>
