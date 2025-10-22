@@ -1,6 +1,10 @@
 import type { starreadthemeconfig } from './scripts/config';
 
 export const themeConfig: starreadthemeconfig = {
+  carousel: {
+    title: "轮播"
+  },
+
   // 网站配置
   site: {
     title: '星阅主题',
@@ -115,20 +119,16 @@ export const themeConfig: starreadthemeconfig = {
 
   // 搜索配置
   search: {
-    // 搜索服务提供商: 'local', 'algolia'
-    provider: 'local',
-    
-    // Algolia搜索配置
-    algolia: {
-      enabled: true,
-      // Algolia应用ID
-      appId: process.env.APP_ID || '',
-      // Algolia搜索密钥
-      searchKey: process.env.SEARCH_KEY || '',
-      // Algolia索引名称
-      indexName: process.env.INDEX_NAME || 'articles',
-      // Algolia管理员API密钥
-      writeApiKey: process.env.WRITE_API_KEY || '',
+      // 搜索服务提供商: 'local', 'algolia'
+      provider: 'local',
+      
+      // Algolia搜索配置
+      algolia: {
+        enabled: true,
+        appId: 'PBX37K0XRJ',
+        searchKey: '0095a884a16316f72612b5ab84090fcd',
+        indexName: 'hive',
+        writeApiKey: ''
+      }
     }
-  }
 };
