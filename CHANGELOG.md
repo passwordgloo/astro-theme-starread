@@ -2,6 +2,22 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.3...v0.0.4) (2025-10-22)
+
+
+### ⏪ Reverts | 版本回退
+
+* **package:** 回退之前的版本更新插件 ([e6356e2](https://github.com/passwordgloo/astro-theme-starread/commit/e6356e29d402a797892af8618969ea7a841654a5))
+
+
+### ✨ Features | 功能
+
+* **侧边栏:** 添加标签云组件并优化文章目录样式 ([90284c0](https://github.com/passwordgloo/astro-theme-starread/commit/90284c0f482eb2861f678a655a0d6783a76a45cf))
+* **分类:** 添加分类页面和布局组件 ([c5453c9](https://github.com/passwordgloo/astro-theme-starread/commit/c5453c904eb90a39ebadb929ce519bc25aaa7e7f))
+* **文章:** 添加默认封面并优化轮播组件 ([40b1dae](https://github.com/passwordgloo/astro-theme-starread/commit/40b1dae89055dc6ccfb71c1dff1516f8cb2489d3))
+* 更新公共资源文件，包括404图片、默认封面和图标 ([b3a2af4](https://github.com/passwordgloo/astro-theme-starread/commit/b3a2af4e9a3df3047c1495ad380bc7f57ea7a8e1))
+* **标签:** 添加标签页面和功能 ([168f816](https://github.com/passwordgloo/astro-theme-starread/commit/168f81649ae6740572edf06ca79536a73887f804))
+
 ### [0.0.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.2...v0.0.3) (2025-10-21)
 
 
