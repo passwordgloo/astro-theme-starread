@@ -1,28 +1,45 @@
 {
-  "name": "star-read",
+  "name": "astro-theme-starread",
   "type": "module",
   "version": "0.0.5-alpha.2",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist --output-subdir _pagefind",
+    "build": "astro build && npx pagefind --site dist --output-subdir _pagefind",
     "preview": "astro preview",
     "astro": "astro",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s",
-    "release": "standard-version"
+    "release": "standard-version",
+    "algolia": "tsc scripts/algolia.ts && node scripts/algolia.js"
   },
   "dependencies": {
-    "astro": "^5.13.3"
+    "@astrojs/check": "^0.9.4",
+    "typescript": "^5.9.2"
+  },
+  "peerDependencies": {
+    "astro": "^5.0.0 || ^6.0.0"
+  },
+  "peerDependenciesMeta": {
+    "astro": {
+      "optional": false
+    }
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=8.0.0",
+    "pnpm": ">=7.0.0"
   },
   "devDependencies": {
-    "@algolia/client-search": "^5.20.4",
     "@iconify/json": "^2.2.377",
     "@iconify/tailwind4": "^1.0.6",
     "@tailwindcss/typography": "^0.5.16",
     "@tailwindcss/vite": "^4.1.12",
-    "algoliasearch": "^5.36.0",
     "astro-pagefind": "^1.8.3",
     "conventional-changelog-cli": "^4.1.0",
+    "pagefind": "^1.0.4",
     "standard-version": "^9.5.0",
     "tailwindcss": "^4.1.12"
+  },
+  "bin": {
+    "astro-theme-starread": "scripts/init.cjs"
   }
 }
