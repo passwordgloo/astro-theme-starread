@@ -2,6 +2,23 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.5-alpha.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.1...v0.0.5-alpha.2) (2025-10-22)
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **搜索配置:** 简化搜索配置结构并移除meilisearch支持 ([6134410](https://github.com/passwordgloo/astro-theme-starread/commit/6134410214ec07274351d764f3ea3f132aae45a5))
+* **组件:** 使用astro:assets的Image组件替换img标签 ([e8f785f](https://github.com/passwordgloo/astro-theme-starread/commit/e8f785fa1e6a66d3611a3c286efc808711c547c0))
+
+
+### ✨ Features | 功能
+
+* **search:** 添加Algolia搜索功能集成 ([3cfebba](https://github.com/passwordgloo/astro-theme-starread/commit/3cfebbab6c69bcf288f63c1c2d9b755b52f51012))
+* **search:** 添加Algolia搜索集成功能 ([d5b9193](https://github.com/passwordgloo/astro-theme-starread/commit/d5b9193930d9612a15ac7fdf6ebe1bc8609fd92b))
+* **布局:** 添加移动端底部导航栏并调整页脚间距 ([a8841d0](https://github.com/passwordgloo/astro-theme-starread/commit/a8841d09e10cd0277ded6e0f406da2ee7e8a0c88))
+* 添加Algolia搜索支持并重构主题切换逻辑 ([036671e](https://github.com/passwordgloo/astro-theme-starread/commit/036671ed31e38c8036a45ee3f4c3b87fc062eebd))
+* **组件:** 为多个组件添加 client:load 指令以启用客户端交互 ([0c1385e](https://github.com/passwordgloo/astro-theme-starread/commit/0c1385ec612022f4790109506dfbe3587d214575))
+
 ### [0.0.5-alpha.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.0...v0.0.5-alpha.1) (2025-10-22)
 
 
