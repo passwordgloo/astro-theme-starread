@@ -4,7 +4,7 @@ import ThemeToggle from "./ThemeToggle.astro";
 import Search from "./Search.astro";
 import { themeConfig } from '../content/config';
 ---
-<header class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md">
+<header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md">
   <!-- 确保深色模式切换按钮在移动设备上可见 -->
   <div class="md:hidden absolute right-4 top-3 z-10">
     <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors">
@@ -39,19 +39,19 @@ import { themeConfig } from '../content/config';
             // 下拉菜单
             <button class="nav-link transition-colors flex items-center space-x-2.5 p-2 group-hover:bg-gray-100 dark:group-hover:bg-gray-800 rounded-md">
               {item.icon && (
-                <span class="nav-icon w-4 h-4 flex-shrink-0">
-                  <span class={`${item.icon} h-4 w-4`}></span>
+                <span class="nav-icon w-5 h-5 flex-shrink-0">
+                  <span class={`${item.icon} h-5 w-5`}></span>
                 </span>
               )}
               <span>{item.text || item.name}</span>
-              <span class="icon-[lucide--chevron-down] w-4 h-4 ml-1"></span>
+              <span class="icon-[lucide--chevron-down] w-5 h-5 ml-1"></span>
             </button>
           ) : (
             // 普通链接
             <a href={item.href} class="nav-link transition-colors flex items-center space-x-2.5 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
               {item.icon && (
-                <span class="nav-icon w-4 h-4 flex-shrink-0">
-                  <span class={`${item.icon} h-4 w-4`}></span>
+                <span class="nav-icon w-5 h-5 flex-shrink-0">
+                  <span class={`${item.icon} h-5 w-5`}></span>
                 </span>
               )}
               <span>{item.text || item.name}</span>
@@ -70,8 +70,8 @@ import { themeConfig } from '../content/config';
                   )}
                   {subItem.icon && !subItem.text && (
                     <span class="block px-4 py-2 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider flex items-center">
-                      <span class="nav-icon w-4 h-4 mr-2 flex-shrink-0">
-                        <span class={`${subItem.icon} h-4 w-4`}></span>
+                      <span class="nav-icon w-5 h-5 mr-2 flex-shrink-0">
+                        <span class={`${subItem.icon} h-5 w-5`}></span>
                       </span>
                       <span>{subItem.icon}</span>
                     </span>
@@ -83,8 +83,8 @@ import { themeConfig } from '../content/config';
                       key={subSubItem.text}
                     >
                       {subSubItem.icon && (
-                        <span class="nav-icon w-4 h-4 mr-2 flex-shrink-0">
-                          <span class={`${subSubItem.icon} h-4 w-4`}></span>
+                        <span class="nav-icon w-5 h-5 mr-2 flex-shrink-0">
+                          <span class={`${subSubItem.icon} h-5 w-5`}></span>
                         </span>
                       )}
                       {subSubItem.text}
@@ -98,14 +98,17 @@ import { themeConfig } from '../content/config';
       ))}
     </nav>
     <!-- 搜索和登录 -->
-    <div class="flex items-center space-x-4">
+    <div class="flex items-center space-x-2">
       <Search />
+      <button id="theme-toggle" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+        <span class="icon-[lucide--moon] h-5 w-5 nav-theme-icon" id="theme-icon"></span>
+      </button>
       <ThemeToggle />
-      <button class="md:block rounded-lg bg-sky-600 text-white hover:bg-sky-700 active:bg-sky-800
+      <button class="hidden md:block rounded-lg bg-sky-600 text-white hover:bg-sky-700 active:bg-sky-800
                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 dark:bg-sky-500 dark:text-slate-950 dark:hover:bg-sky-400 dark:active:bg-sky-300
                    dark:focus-visible:ring-sky-300/50 px-4 py-2 rounded-md transition-colors">登录</button>
       <button class="md:hidden p-2 rounded-full hover:bg-gray-100 transition-colors">
-        <span class="icon-[lucide--menu] h-6 w-6 nav-menu-icon"></span>
+        <span class="icon-[lucide--menu] h-5 w-5 nav-menu-icon"></span>
       </button>
     </div>
   </div>
@@ -119,13 +122,17 @@ import { themeConfig } from '../content/config';
 
   /* 向下滚动时显示文章标题，隐藏导航 */
   header.show-title .nav-content, 
-  header.show-title nav, 
-  header.show-title .flex.items-center.space-x-4:not(.nav-content) {
+  header.show-title nav {
     display: none;
   }
 
   header.show-title .article-title {
     display: block;
+  }
+
+  /* 向上滚动时完全隐藏导航栏 */
+  header.hide-nav {
+    transform: translateY(-100%);
   }
 
   .nav-icon {
@@ -145,3 +152,84 @@ import { themeConfig } from '../content/config';
   }
 </style>
 
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const searchToggle = document.getElementById('search-toggle');
+    const searchContainer = document.getElementById('pagefind-search-container');
+    
+    if (searchToggle && searchContainer) {
+      // 切换搜索框显示/隐藏
+      searchToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (searchContainer.classList.contains('invisible')) {
+          // 显示搜索框
+          searchContainer.classList.remove('invisible', 'opacity-0', 'scale-95');
+          searchContainer.classList.add('opacity-100', 'scale-100');
+          // 聚焦到搜索输入框
+          const searchInput = searchContainer.querySelector('.pagefind-ui__search-input');
+          if (searchInput) {
+            searchInput.focus();
+          }
+        } else {
+          // 隐藏搜索框
+          searchContainer.classList.add('invisible', 'opacity-0', 'scale-95');
+          searchContainer.classList.remove('opacity-100', 'scale-100');
+        }
+      });
+      
+      // 点击页面其他地方关闭搜索框
+      document.addEventListener('click', (e) => {
+        if (!searchToggle.contains(e.target) && !searchContainer.contains(e.target)) {
+          searchContainer.classList.add('invisible', 'opacity-0', 'scale-95');
+          searchContainer.classList.remove('opacity-100', 'scale-100');
+        }
+      });
+      
+      // ESC键关闭搜索框
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && !searchContainer.classList.contains('invisible')) {
+          searchContainer.classList.add('invisible', 'opacity-0', 'scale-95');
+          searchContainer.classList.remove('opacity-100', 'scale-100');
+        }
+      });
+    }
+
+    // 导航栏滚动逻辑
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    function handleScroll() {
+      const navbar = document.getElementById('navbar');
+      if (!navbar) return;
+
+      const currentScrollY = window.scrollY;
+      
+      // 向下滚动时显示标题
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        navbar.classList.add('show-title');
+        navbar.classList.remove('hide-nav');
+      } 
+      // 向上滚动时显示完整导航栏
+      else if (currentScrollY < lastScrollY) {
+        navbar.classList.remove('show-title');
+        navbar.classList.remove('hide-nav');
+      }
+      
+      // 滚动到顶部时重置
+      if (currentScrollY <= 10) {
+        navbar.classList.remove('show-title');
+        navbar.classList.remove('hide-nav');
+      }
+
+      lastScrollY = currentScrollY;
+      ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(handleScroll);
+        ticking = true;
+      }
+    });
+  });
+</script>
