@@ -2,6 +2,28 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.5-beta.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.1...v0.0.5-beta.2) (2025-10-22)
+
+
+### 📚 Documentation | 文档
+
+* 更新文章目录结构并添加新文档 ([c484f0c](https://github.com/passwordgloo/astro-theme-starread/commit/c484f0cf6682cfdaf323250e83ce8e95a2941f72))
+
+
+### ✨ Features | 功能
+
+* **Algolia:** 优化搜索结果显示和索引配置 ([9eb83e5](https://github.com/passwordgloo/astro-theme-starread/commit/9eb83e560801bca9fc95673a08ecf9de3070897f))
+* 添加React支持和Algolia搜索功能 ([ada3321](https://github.com/passwordgloo/astro-theme-starread/commit/ada33211fabfeef738aaab5e1170f170baadf94d))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **Algolia:** 使用环境变量配置索引名并优化搜索图标样式 ([f9d14b1](https://github.com/passwordgloo/astro-theme-starread/commit/f9d14b19f06c6807a05986db3031ff3578edb3be))
+* **changelog:** changelog使用es语法 ([b057697](https://github.com/passwordgloo/astro-theme-starread/commit/b057697c31da627744a89326f3156b0a47588e8b))
+* **scripts:** 重构搜索相关脚本和类型定义 ([2a7596f](https://github.com/passwordgloo/astro-theme-starread/commit/2a7596fe60a52822ea15c17f149869b2dbdae1da))
+* **search:** 将搜索页从目录结构移动到根路径并重构 ([706c12c](https://github.com/passwordgloo/astro-theme-starread/commit/706c12cbca877ea8ef1daa7741deee1d5049302a))
+* **搜索:** 将 Algolia 搜索组件从 Astro 迁移到 React ([920e989](https://github.com/passwordgloo/astro-theme-starread/commit/920e989f7904aac51c982e1fe7a4b9b2ca504c6b))
+
 ### [0.0.5-beta.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.0...v0.0.5-beta.1) (2025-10-22)
 
 
