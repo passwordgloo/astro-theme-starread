@@ -2,6 +2,39 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.5-beta.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.2...v0.0.5-beta.3) (2025-10-23)
+
+
+### ⏪ Reverts | 版本回退
+
+* 撤销移除的standard-version插件 ([c215f46](https://github.com/passwordgloo/astro-theme-starread/commit/c215f4602248d50210e36518cd0642e812b84d7e))
+
+
+### 📚 Documentation | 文档
+
+* **config:** 完善主题配置接口的文档注释 ([1e150eb](https://github.com/passwordgloo/astro-theme-starread/commit/1e150eba13ffaac292b32f0725b1baf3aeb6624d))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* **LatestArticle:** 处理更多日期格式输入情况 ([f23c103](https://github.com/passwordgloo/astro-theme-starread/commit/f23c103ed30dfe089c6330011d1e32e0ecdcf577))
+* 修正 favicon 链接的语法错误 ([c4f44e3](https://github.com/passwordgloo/astro-theme-starread/commit/c4f44e3ac8f24cfd980052504e9507054163c901))
+* 将网站图标类型从svg+xml改为png ([40a0ea7](https://github.com/passwordgloo/astro-theme-starread/commit/40a0ea7fa92695d2a3ec3643086125170493f859))
+
+
+### 📦 Chores | 其他更新
+
+* 移除postinstall.js脚本及其相关功能 ([fb033dc](https://github.com/passwordgloo/astro-theme-starread/commit/fb033dcb201bd6daaddc689ac24ac3ccc3719965))
+
+
+### ✨ Features | 功能
+
+* **public:** 添加favicon图标并更新数据内容 ([26e807e](https://github.com/passwordgloo/astro-theme-starread/commit/26e807e84181951caa99c19091aa3ddad0423ac5))
+* **文章:** 添加文章导航功能并优化数据处理 ([84d4f42](https://github.com/passwordgloo/astro-theme-starread/commit/84d4f42789aa294ce86d955129d0898bc18607c3))
+* 添加 build 脚本和 create-astro-theme-starread 命令 ([97650b2](https://github.com/passwordgloo/astro-theme-starread/commit/97650b248f41993d284d13e792b5738c046c539d))
+* **组件:** 添加文章导航和信息组件并优化目录样式 ([19fe465](https://github.com/passwordgloo/astro-theme-starread/commit/19fe465804bceba3d0d4c56e2d39bdb4dfbb419c))
+* **配置:** 添加首页banner配置类型定义 ([6bd06f8](https://github.com/passwordgloo/astro-theme-starread/commit/6bd06f8f99259178f61e72f48d34a383e471dd9b))
+
 ### [0.0.5-beta.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.1...v0.0.5-beta.2) (2025-10-22)
 
 
