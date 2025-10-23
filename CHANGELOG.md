@@ -2,6 +2,26 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.5](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.3...v0.0.5) (2025-10-23)
+
+
+### 💄 Styles | 风格
+
+* 更新全局样式和组件颜色主题 ([45a8edb](https://github.com/passwordgloo/astro-theme-starread/commit/45a8edb404f3183d07ec644ee1e1d289c5a98f16))
+
+
+### ✨ Features | 功能
+
+* **components:** 优化搜索组件样式并移除多余焦点样式 ([9383c01](https://github.com/passwordgloo/astro-theme-starread/commit/9383c011b2c73a7a59f0384ef62cf8e4aa8aced7))
+* **config:** 添加封面图片配置选项 ([bf5b6f7](https://github.com/passwordgloo/astro-theme-starread/commit/bf5b6f74acb1a6ef84e28181abda2278f7df0d8c))
+* 添加不蒜子统计功能并优化UI样式 ([1941358](https://github.com/passwordgloo/astro-theme-starread/commit/1941358a10d893f89b5bec3d74921a7de7bd4821))
+* 添加多语言支持并更新主题配置 ([fc27d39](https://github.com/passwordgloo/astro-theme-starread/commit/fc27d394f99ea2ea99ba58c662970d4dced450e4))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* 修复busuanzi脚本路径并调整图片高度参数 ([8d09098](https://github.com/passwordgloo/astro-theme-starread/commit/8d09098dc04589de380b69dceaf848a043b22550))
+
 ### [0.0.5-beta.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.2...v0.0.5-beta.3) (2025-10-23)
 
 
