@@ -2,6 +2,33 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.7](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.6...v0.0.7) (2025-10-23)
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **config:** 重构主题配置结构，将配置项分组到更合理的模块中 ([8e16aef](https://github.com/passwordgloo/astro-theme-starread/commit/8e16aefcfbfaf37ced9bf8bde6ec6b063c152411))
+
+
+### ✨ Features | 功能
+
+* **ArticleInfo:** 添加深色模式波浪动画效果并优化样式 ([902bd83](https://github.com/passwordgloo/astro-theme-starread/commit/902bd83ed6554542bce39ebf229e83551dd540a5))
+* **搜索:** 切换搜索服务提供商到algolia并添加错误处理 ([fb6cb1e](https://github.com/passwordgloo/astro-theme-starread/commit/fb6cb1e753b31b2f09eb352ec2a7e7fba34686ff))
+* **搜索:** 将默认搜索提供商改为本地并添加粘性目录功能 ([f2c56f9](https://github.com/passwordgloo/astro-theme-starread/commit/f2c56f9ca233fa68229a3819e9377bae4a942e1f))
+* **文章统计:** 添加文章字数统计和全站统计功能 ([b44ef3b](https://github.com/passwordgloo/astro-theme-starread/commit/b44ef3bcf44b3af5fff916c8e8636ab9ca10f597))
+* 添加客户端路由并优化搜索组件 ([be75720](https://github.com/passwordgloo/astro-theme-starread/commit/be757202126afb2730cbd3373e4ed812a8768240))
+
+
+### 💄 Styles | 风格
+
+* 优化代码块样式并清理无用配置 ([ba9253c](https://github.com/passwordgloo/astro-theme-starread/commit/ba9253c563ccc1e5222a55424c7a63ce8333c318))
+
+
+### 📚 Documentation | 文档
+
+* **文章:** 更新GFM示例文章内容 ([b899671](https://github.com/passwordgloo/astro-theme-starread/commit/b89967159495ae6902e19ab9061f2f0b390fe163))
+* 更新多语言文档和主题配置结构 ([5845932](https://github.com/passwordgloo/astro-theme-starread/commit/5845932abc06fb0cc25b5aac08030649bb013446))
+
 ### [0.0.6](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5...v0.0.6) (2025-10-23)
 
 
