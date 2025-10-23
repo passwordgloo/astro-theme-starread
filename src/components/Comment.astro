@@ -1,0 +1,21 @@
+<section class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4">
+  <div id="tcomment"></div>
+</section>
+
+<!-- 引入 Twikoo CDN -->
+<script is:inline src="/twikoo.min.js""></script>
+
+<!-- 初始化 Twikoo -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.twikoo) {
+      window.twikoo.init({
+        envId: 'https://example.com', // 你的环境地址
+        el: '#tcomment',
+        path: window.location.pathname // 建议加上路径区分文章
+      });
+    } else {
+      console.error('Twikoo 加载失败，请检查 twikoo本地位置或者CDN地址');
+    }
+  });
+</script>

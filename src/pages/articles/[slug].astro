@@ -55,8 +55,8 @@ export function getCoverImage(cover?: string): string {
 // 作者信息处理工具函数
 export function getAuthorInfo(author?: { name?: string; avatar?: string }) {
   return {
-    name: author?.name || themeConfig.author.name,
-    avatar: author?.avatar || themeConfig.author.avatar
+    name: author?.name || themeConfig.widget.author.name,
+avatar: author?.avatar || themeConfig.widget.author.avatar
   };
 }
 

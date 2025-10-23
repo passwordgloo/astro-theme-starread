@@ -6,7 +6,7 @@ import AlgoliaSearch from "./SwitchAlgoliaSearch.astro";
 import { themeConfig } from '../../starread.config';
 
 // 根据配置选择搜索组件
-const SearchComponent = themeConfig.search.provider === 'algolia' ? AlgoliaSearch : LocalSearch;
+const SearchComponent = themeConfig.plugin.search.provider === 'algolia' ? AlgoliaSearch : LocalSearch;
 ---
 
 <header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md" client:load>
@@ -40,7 +40,7 @@ const SearchComponent = themeConfig.search.provider === 'algolia' ? AlgoliaSearc
 
     <!-- 导航菜单 -->
     <nav class="hidden md:flex items-center space-x-6">
-      {themeConfig.nav.map((item) => (
+      {themeConfig.navbar.map((item) => (
         <div class="relative group" key={item.text || item.name}>
           {item.items ? (
             // 下拉菜单
@@ -131,7 +131,7 @@ const SearchComponent = themeConfig.search.provider === 'algolia' ? AlgoliaSearc
       </div>
     </div>
     <nav class="p-4 space-y-2">
-      {themeConfig.nav.map((item) => (
+      {themeConfig.navbar.map((item) => (
         <div key={item.name}>
           {item.href ? (
             <a href={item.href} class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">

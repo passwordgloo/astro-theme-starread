@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { articles } = Astro.props;
-const { articleLoad, coverImage } = themeConfig;
+const { article: { articleLoad, coverImage } } = themeConfig.site;
 const { type: loadType, initialLoad, loadMore, defaultLimit } = articleLoad;
 const [widthRatio, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
 const imageHeight = Math.round(384 * heightRatio / widthRatio);
@@ -22,8 +22,6 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
 ---
 
 <div class="relative" client:load>
-  <!-- 不蒜子统计脚本 -->
-  <script src="/busuanzi.min.js" defer></script>
   <!-- 顶部标题栏 -->
   <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4 mb-6">
     <div class="flex items-center space-x-2">
@@ -68,10 +66,9 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
               <a href={`/articles/${article.slug}`}>{article.data.title}</a>
             </h3>
 
-            {/* 底部信息 - 日期和浏览量 */}
-            <div class="flex justify-between items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
+            {/* 底部信息 - 日期 */}
+            <div class="flex items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
               <span>{article.processed.date}</span>
-
             </div>
           </div>
         </div>
@@ -149,12 +146,8 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
           <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary transition-colors">
             <a href="/articles/${article.slug}">${article.data.title}</a>
           </h3>
-          <div class="flex justify-between items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
+          <div class="flex items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
             <span>${processed.processed.date}</span>
-            <span class="flex items-center">
-              <span class="icon-[lucide--eye] mr-1 w-3 h-3"></span>
-              <span id="busuanzi_page_pv">加载中...</span>
-            </span>
           </div>
         </div>
       `;
@@ -176,7 +169,11 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
 
       // 如果已经加载全部，隐藏触发器
       if (newLoaded >= total || newLoaded >= articleLoadConfig.defaultLimit) {
-        // 修复多余的隐藏触发器代码
+        if (loadType === 'button' && trigger) {
+          trigger.style.display = 'none';
+        } else if (loadType === 'auto' && trigger) {
+          trigger.style.display = 'none';
+        }
       }
     }
   }
@@ -187,9 +184,8 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
 
     // 初始检查是否需要隐藏按钮
     if (parseInt(trigger.dataset.loaded) >= parseInt(trigger.dataset.total) || parseInt(trigger.dataset.loaded) >= articleLoadConfig.defaultLimit) {
-      // 移除多余的无条件隐藏触发器代码
+      trigger.style.display = 'none';
     }
-      // 移除无条件隐藏触发器的代码
   }
 
   // 自动加载模式
