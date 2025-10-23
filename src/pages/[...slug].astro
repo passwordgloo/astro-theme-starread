@@ -1,0 +1,171 @@
+---
+import { getEntryBySlug, getCollection } from 'astro:content';
+import BaseLayout from '../layouts/article.astro';
+import ArticleNav from '../components/ArticleNav.astro';
+import { 
+  formatDate, 
+  getCoverImage, 
+  countWords
+} from '../components/frontmatter.ts';
+
+// 导出静态路径生成函数
+export async function getStaticPaths() {
+  // 获取所有文章和笔记
+  const articles = await getCollection('articles');
+  const notes = await getCollection('notes', ({ data }) => {
+    return data.published !== false;
+  });
+  
+  const paths = [];
+  
+  // 处理文章条目
+  const sortedArticles = [...articles].sort((a, b) => 
+    new Date(a.data.date || 0).getTime() - new Date(b.data.date || 0).getTime()
+  );
+  
+  sortedArticles.forEach((entry, index) => {
+    // 添加带有 /articles/ 前缀的路径
+    paths.push({
+      params: { slug: `articles/${entry.slug}` },
+      props: { 
+        entry,
+        prev: index > 0 ? sortedArticles[index - 1] : null,
+        next: index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null,
+        basePath: '/articles'
+      },
+    });
+    
+    // 添加不带前缀的slug路径（兼容原路径）
+    paths.push({
+      params: { slug: entry.slug },
+      props: { 
+        entry,
+        prev: index > 0 ? sortedArticles[index - 1] : null,
+        next: index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null,
+        basePath: '/articles'
+      },
+    });
+    
+    // 添加基于permalink的路径
+    if (entry.data.permalink) {
+      // 移除可能的首尾斜杠
+      let permalink = entry.data.permalink.replace(/^\/|\/$/g, '');
+      
+      paths.push({
+        params: { slug: permalink },
+        props: { 
+          entry,
+          prev: index > 0 ? sortedArticles[index - 1] : null,
+          next: index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null,
+          basePath: '/articles'
+        },
+      });
+    }
+  });
+  
+  // 处理笔记条目
+  const sortedNotes = [...notes].sort((a, b) => 
+    new Date(a.data.date || 0).getTime() - new Date(b.data.date || 0).getTime()
+  );
+  
+  sortedNotes.forEach((entry, index) => {
+    // 添加带有 /notes/ 前缀的路径
+    paths.push({
+      params: { slug: `notes/${entry.slug}` },
+      props: { 
+        entry,
+        prev: index > 0 ? sortedNotes[index - 1] : null,
+        next: index < sortedNotes.length - 1 ? sortedNotes[index + 1] : null,
+        basePath: '/notes'
+      },
+    });
+    
+    // 添加不带前缀的slug路径（兼容原路径）
+    paths.push({
+      params: { slug: entry.slug },
+      props: { 
+        entry,
+        prev: index > 0 ? sortedNotes[index - 1] : null,
+        next: index < sortedNotes.length - 1 ? sortedNotes[index + 1] : null,
+        basePath: '/notes'
+      },
+    });
+    
+    // 添加基于permalink的路径
+    if (entry.data.permalink) {
+      // 移除可能的首尾斜杠
+      let permalink = entry.data.permalink.replace(/^\/|\/$/g, '');
+      
+      paths.push({
+        params: { slug: permalink },
+        props: { 
+          entry,
+          prev: index > 0 ? sortedNotes[index - 1] : null,
+          next: index < sortedNotes.length - 1 ? sortedNotes[index + 1] : null,
+          basePath: '/notes'
+        },
+      });
+    }
+  });
+  
+  return paths;
+}
+
+const { entry, prev, next, basePath } = Astro.props;
+// 从URL参数中获取slug数组（嵌套路径）
+const { slug } = Astro.params;
+const { Content } = await entry.render();
+
+// 使用entry的permalink或直接使用slug
+const permalink = entry.data.permalink || entry.slug;
+
+// 计算内容字数
+const wordCount = countWords(entry.body);
+
+// 使用从props传递的相邻文章信息
+const adjacentArticles = {
+  prev: prev ? {
+    slug: prev.slug,
+    title: prev.data.title,
+    cover: getCoverImage(prev.data.cover),
+    date: formatDate(prev.data.date),
+    permalink: prev.data.permalink || prev.slug
+  } : null,
+  next: next ? {
+    slug: next.slug,
+    title: next.data.title,
+    cover: getCoverImage(next.data.cover),
+    date: formatDate(next.data.date),
+    permalink: next.data.permalink || next.slug
+  } : null
+};
+
+// 在开发模式下，如果没有date或permalink，应该写入到文件中
+// 注意：这部分逻辑需要在构建脚本中实现，因为Astro组件无法直接写入文件
+---
+
+<BaseLayout 
+  title={entry.data.title}
+  entry={entry}
+  wordCount={wordCount}
+  formatDate={formatDate}
+  date={formatDate(entry.data.date)}
+  tags={entry.data.tags || []}
+  categories={entry.data.categories || []}
+  cover={getCoverImage(entry.data.cover)}
+  permalink={permalink}
+>
+
+  <article id="article-content" class="prose max-w-none dark:prose-invert p-4 rounded-lg shadow-sm bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)]">
+    <Content />
+  </article>
+
+  <div class="mb-6">
+    <ArticleNav 
+      prev={adjacentArticles.prev}
+      next={adjacentArticles.next}
+      basePath={basePath}
+    />
+  </div>
+
+</BaseLayout>
