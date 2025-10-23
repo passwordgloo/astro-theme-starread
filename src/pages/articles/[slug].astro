@@ -2,6 +2,8 @@
 import { getEntryBySlug, getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/article.astro';
 import { themeConfig } from '../../../starread.config';
+import ArticleNav from '../../components/ArticleNav.astro';
+import ArticleInfo from '../../components/ArticleInfo.jsx';
 
 export async function getStaticPaths() {
   const entries = await getCollection('articles');
@@ -120,80 +122,25 @@ const adjacentArticles = await getAdjacentArticles(entry.slug);
 ---
 
 <BaseLayout title={entry.data.title}>
+  {/* 文章信息组件 */}
+  <div class="mb-8">
+    <ArticleInfo 
+      client:load
+      title={entry.data.title}
+      cover={entry.data.cover || themeConfig.site.defaultCover}
+      date={formatDate(entry.data.date)}
+      tags={entry.data.tags || []}
+      categories={entry.data.categories || []}
+    />
+  </div>
+
   <article id="article-content" class="prose max-w-none dark:prose-invert p-4 rounded-lg shadow-sm bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)]">
     <Content />
   </article>
 
-  {/* 文章导航 */}
-  {(adjacentArticles.prev || adjacentArticles.next) && (
-    <nav class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-      {adjacentArticles.prev && (
-        <a 
-          href={`/articles/${adjacentArticles.prev.slug}`}
-          class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700"
-        >
-          {/* 背景图片 */}
-          <div class="absolute inset-0 overflow-hidden">
-            <img 
-              src={adjacentArticles.prev.cover} 
-              alt={adjacentArticles.prev.title}
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-          </div>
-          
-          {/* 内容区域 */}
-          <div class="relative p-6 min-h-[120px] flex flex-col justify-end">
-            <div class="flex items-center mb-2">
-              <svg class="w-4 h-4 text-white/80 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-              </svg>
-              <span class="text-xs font-medium text-white/80 uppercase tracking-wider">上一篇</span>
-            </div>
-            <h3 class="text-lg font-bold text-white leading-tight line-clamp-2 group-hover:text-cyan-300 transition-colors duration-300">
-              {adjacentArticles.prev.title}
-            </h3>
-            <p class="text-sm text-white/70 mt-1">{adjacentArticles.prev.date}</p>
-          </div>
-          
-          {/* 悬停遮罩 */}
-          <div class="absolute inset-0 bg-cyan-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </a>
-      )}
-      
-      {adjacentArticles.next && (
-        <a 
-          href={`/articles/${adjacentArticles.next.slug}`}
-          class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700 md:col-start-2"
-        >
-          {/* 背景图片 */}
-          <div class="absolute inset-0 overflow-hidden">
-            <img 
-              src={adjacentArticles.next.cover} 
-              alt={adjacentArticles.next.title}
-              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-            />
-            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
-          </div>
-          
-          {/* 内容区域 */}
-          <div class="relative p-6 min-h-[120px] flex flex-col justify-end">
-            <div class="flex items-center justify-end mb-2">
-              <span class="text-xs font-medium text-white/80 uppercase tracking-wider">下一篇</span>
-              <svg class="w-4 h-4 text-white/80 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-              </svg>
-            </div>
-            <h3 class="text-lg font-bold text-white leading-tight line-clamp-2 text-right group-hover:text-cyan-300 transition-colors duration-300">
-              {adjacentArticles.next.title}
-            </h3>
-            <p class="text-sm text-white/70 mt-1 text-right">{adjacentArticles.next.date}</p>
-          </div>
-          
-          {/* 悬停遮罩 */}
-          <div class="absolute inset-0 bg-cyan-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-        </a>
-      )}
-    </nav>
-  )}
+  {/* 文章导航组件 */}
+  <ArticleNav 
+    prev={adjacentArticles.prev}
+    next={adjacentArticles.next}
+  />
 </BaseLayout>
