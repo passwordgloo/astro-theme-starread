@@ -1,6 +1,35 @@
 # Changelog
 
-项目站点 [星阅主题](https://star.iglooblog.top)
+项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
+
+## [0.1.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.9...v0.1.0) (2025-10-23)
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **content:** 统一处理文章和笔记的链接及分类标签 ([55c883a](https://github.com/passwordgloo/astro-theme-starread/commit/55c883ad4524657c90aff303679f7329d9fc6046))
+
+
+### 📦 Chores | 其他更新
+
+* 更新依赖配置和类型声明文件 ([9f99578](https://github.com/passwordgloo/astro-theme-starread/commit/9f995788224a4cbd1f5bb30a8f700d8722d184c4))
+* 清理无用文件和更新依赖项 ([0cf8e7e](https://github.com/passwordgloo/astro-theme-starread/commit/0cf8e7e1565ba0f1c7c71a150648851ed5399c21))
+
+
+### ✨ Features | 功能
+
+* 添加GitHub风格警告框支持并移除主题切换功能 ([1d2e2bd](https://github.com/passwordgloo/astro-theme-starread/commit/1d2e2bdf551d4cf8742d08fd4ae971bd1f22ead8))
+* 添加多语言主题文档并更新配置 ([3d60fa8](https://github.com/passwordgloo/astro-theme-starread/commit/3d60fa898712fca200bd9a091f79961e58b16bb5))
+* 添加多语言文档并更新package.json配置 ([f81b2ee](https://github.com/passwordgloo/astro-theme-starread/commit/f81b2eecfb240e419e4f825161254d81f37cb708))
+* 添加文章永久链接并优化搜索功能 ([cf1fbaa](https://github.com/passwordgloo/astro-theme-starread/commit/cf1fbaa531755e8a156fa634e1523eb274aa7d53))
+
+
+### 📚 Documentation | 文档
+
+* **主题:** 为多语言文档添加主题安装标签并调整样式 ([2bed443](https://github.com/passwordgloo/astro-theme-starread/commit/2bed443dca8534a5ed2c0c4d7fbcb2db51d85cba))
+* 从README文件中移除pnpm local命令 ([c982578](https://github.com/passwordgloo/astro-theme-starread/commit/c9825783c37d6f7be1f5e89649436e08e2c93d60))
+* 在搜索文章中添加来源引用 ([4dbfbb6](https://github.com/passwordgloo/astro-theme-starread/commit/4dbfbb6f83766fcd428f49957032fc794f9679b8))
+* 更新版本配置文件中的项目站点描述 ([1b35d1b](https://github.com/passwordgloo/astro-theme-starread/commit/1b35d1b1138bf4f9baaaafd3dc878f9130621ee0))
 
 ### [0.0.9](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.8...v0.0.9) (2025-10-23)
 
