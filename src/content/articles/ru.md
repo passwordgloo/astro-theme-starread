@@ -4,7 +4,6 @@ categories: [主题说明]
 cover: https://t.alcy.cc/lai
 description: Это русскоязычная документация для блог-темы Star Read для Astro.
 date: 2025-10-01
-permalink: /articles/2b75a9/
 ---
 
 <div align="center">

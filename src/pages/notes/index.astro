@@ -46,7 +46,7 @@ const carouselNotes = allNotes
           {allNotes.map(note => (
             <article key={note.slug} class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
               <h2 class="text-xl font-semibold mb-2">
-                <a href={`/notes/${note.slug}`} class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                <a href={note.data.permalink || `/notes/${note.slug}`} class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
                   {note.data.title}
                 </a>
               </h2>
@@ -67,7 +67,7 @@ const carouselNotes = allNotes
                 <p class="text-gray-600 dark:text-gray-300 mb-4">{note.data.description}</p>
               )}
               <a 
-                href={`/notes/${note.slug}`} 
+                href={note.data.permalink || `/notes/${note.slug}`} 
                 class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
               >
                 阅读更多
