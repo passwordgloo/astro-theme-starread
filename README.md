@@ -293,7 +293,6 @@ To enable Twikoo comment system, please modify the `envId` value on line 13 of `
 | `pnpm install`           | Install dependencies                           |
 | `pnpm dev`               | Start local development server `localhost:4321` |
 | `pnpm preview`           | Preview build results locally                   |
-| `pnpm local`             | Run automatic indexing script and build production site |
 | `pnpm algolia`           | Push data to Algolia search                      |
 | `pnpm changelog`         | Generate changelog                              |
 | `pnpm release`           | Version management (update version number, generate commits, etc.) |
