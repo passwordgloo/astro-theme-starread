@@ -1,9 +1,8 @@
 ---
 import { themeConfig } from '../../starread.config';
-const ref = Astro.props.ref || null;
 ---
 
-<div class="search-container relative" ref={ref}>
+<div class="search-container relative">
   {themeConfig.plugin.search.provider === 'algolia' ? (
     <a href="/search" class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
       aria-label="搜索"
@@ -22,7 +21,7 @@ const ref = Astro.props.ref || null;
   <!-- 搜索框容器 -->
   <div 
     id="search-dropdown" 
-    class="absolute right-0 mt-2 w-80 md:w-96 bg-white dark:bg-cyan-950 shadow-lg rounded-md z-50 overflow-hidden transform origin-top-right scale-100 transition-all duration-200"
+    class="absolute right-0 mt-2 w-80 md:w-96 bg-white dark:bg-cyan-950 shadow-lg rounded-md z-50 overflow-hidden transform origin-top-right scale-100 transition-all duration-200 hidden"
   >
     <div class="relative">
       <!-- 输入框 -->
@@ -118,15 +117,19 @@ const ref = Astro.props.ref || null;
     searchTimeout = setTimeout(() => handleSearch(query), 300);
   });
   
-  // 初始化时自动聚焦搜索框
-    setTimeout(() => searchInput.focus(), 300);
+  // 移除初始自动聚焦，改为点击搜索按钮时聚焦
 
   // 搜索框显示/隐藏切换
   const searchToggle = document.getElementById('search-toggle');
-
-  searchToggle.addEventListener('click', () => {
-    searchDropdown.classList.toggle('hidden');
-  });
+  if (searchToggle) {
+    searchToggle.addEventListener('click', () => {
+      searchDropdown.classList.toggle('hidden');
+      if (!searchDropdown.classList.contains('hidden')) {
+        // 显示时聚焦搜索框
+        setTimeout(() => searchInput.focus(), 100);
+      }
+    });
+  }
 
   // 点击页面其他区域关闭搜索框
   document.addEventListener('click', (e) => {
