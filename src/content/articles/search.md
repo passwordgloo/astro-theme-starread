@@ -2,6 +2,7 @@
 title: 创建Algolia应用
 categories: [帮助]
 date: 2025-05-20
+permalink: /articles/31c3ea/
 ---
 
 # Algolia

@@ -78,8 +78,7 @@ pnpm dev
 ### 방법 3: 소스 코드에서 설치
 
 >[!warning]
->该方式需访问Github仓库，确保网络畅通。
-
+>이 방법은 Github 저장소에 접근해야 하므로 네트워크 연결이 원활한지 확인하세요.
 
 ```bash
 git clone https://github.com/passwordgloo/astro-theme-starread
@@ -91,6 +90,88 @@ pnpm install
 >설치가 완료되면 개발 서버를 실행하세요：
 ```bash
 pnpm dev
+```
+
+### 방법 4: 기존 Astro 프로젝트에 의존성으로 설치
+
+테마를 기존 Astro 프로젝트에 의존성으로 설치하고 node_modules에서 직접 컴포넌트, 레이아웃 및 페이지를 사용할 수 있습니다.
+
+1. **테마 패키지 설치**: 
+
+```bash
+# pnpm 사용
+pnpm add astro-theme-starread
+
+# npm 사용
+npm install astro-theme-starread
+
+# yarn 사용
+yarn add astro-theme-starread
+```
+
+2. **node_modules에서 직접 컴포넌트 가져와서 사용**:
+
+```astro
+---
+// node_modules의 테마에서 컴포넌트를 직접 가져옵니다
+import { NavBar, ThemeToggle, ArticleInfo, AuthorWidget, TagCloud } from 'astro-theme-starread';
+---
+
+<html>
+  <head>
+    <title>내 Astro 블로그</title>
+    <!-- 테마 스타일을 사용하려면 -->
+    <link rel="stylesheet" href="node_modules/astro-theme-starread/src/styles/global.css" />
+  </head>
+  <body>
+    <!-- node_modules의 NavBar 컴포넌트 사용 -->
+    <NavBar />
+    
+    <!-- node_modules의 ThemeToggle 컴포넌트 사용 -->
+    <ThemeToggle />
+    
+    <article>
+      <!-- 속성을 가진 ArticleInfo 컴포넌트 사용 -->
+      <ArticleInfo 
+        title="내 글"
+        date="2024-01-01"
+        author="작성자 이름"
+      />
+      <p>글 내용...</p>
+    </article>
+    
+    <aside>
+      <!-- 사이드바 컴포넌트 사용 -->
+      <AuthorWidget />
+      <TagCloud />
+    </aside>
+  </body>
+</html>
+```
+
+3. **node_modules에서 직접 레이아웃 사용**:
+
+```astro
+---
+// node_modules의 테마에서 레이아웃을 직접 가져옵니다
+import { article as ArticleLayout } from 'astro-theme-starread';
+
+// node_modules에서의 레이아웃 적용
+export const layout = ArticleLayout;
+
+// 내용
+export const content = {
+  title: "내 블로그 글",
+  date: "2024-01-01",
+  author: "작성자 이름",
+  tags: ["기술", "블로그"]
+};
+---
+
+<!-- 이 내용은 node_modules의 레이아웃에서 렌더링됩니다 -->
+<main>
+  <p>이것은 내 블로그 글의 내용입니다. 테마의 글 레이아웃에서 렌더링됩니다.</p>
+</main>
 ```
 
 ## 📂 프로젝트 구조

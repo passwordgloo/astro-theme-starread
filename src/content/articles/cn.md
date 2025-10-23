@@ -5,6 +5,7 @@ tags: [vue, javascript]
 description: Star Read是一个出色、简洁且精致的Astro博客主题，提供多种安装方式，项目结构清晰，具备现代UI、搜索支持、响应式设计、主题切换等功能，还提供搜索、主题定制和评论系统的详细配置。
 date: 2025-10-20
 cover: https://t.alcy.cc/pc
+permalink: /articles/8f487f/
 ---
 
 <div align="center">

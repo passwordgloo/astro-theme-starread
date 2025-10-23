@@ -24,11 +24,47 @@ console.log(`📂 读取数据文件: ${dataPath}`);
 const raw = fs.readFileSync(dataPath, 'utf-8');
 const data = JSON.parse(raw);
 
-// 确保每条记录有 objectID
-const records = data.map((item, i) => ({
-  objectID: item.objectID || `${i + 1}`,
-  ...item
-}));
+// 导入siteUrl（使用ES模块语法）
+  let siteUrl = '';
+  try {
+    import('fs').then(fsModule => {
+      import('path').then(pathModule => {
+        const astroConfigPath = pathModule.join(process.cwd(), 'astro.config.mjs');
+        const configContent = fsModule.readFileSync(astroConfigPath, 'utf8');
+        const siteMatch = configContent.match(/site:\s*["']([^"']+)["']/);
+        if (siteMatch && siteMatch[1]) {
+          siteUrl = siteMatch[1].replace(/\/$/, ''); // 移除末尾的斜杠
+        }
+      });
+    });
+  } catch (error) {
+    console.error('读取astro.config.mjs文件失败:', error);
+    // 设置默认siteUrl作为备用
+    siteUrl = 'http://localhost:4321';
+  }
+  
+  // 确保每条记录有 objectID，并处理URL字段
+  // 优化内容大小，截断过长的content字段以符合Algolia的10000字节限制
+  const records = data.map((item, i) => {
+    // 截断content字段，保留搜索所需的前1000个字符
+    const truncatedContent = item.content ? item.content.substring(0, 1000) : '';
+    
+    return {
+      objectID: item.objectID || `${i + 1}_${item.collection || 'articles'}`,
+      title: item.title || 'Untitled',
+      description: item.description || '',
+      cover: item.cover,
+      categories: item.categories,
+      tags: item.tags,
+      date: item.date || '',
+      content: truncatedContent, // 使用截断后的内容
+      slug: item.slug,
+      url: item.url || (item.permalink && `${siteUrl || 'http://localhost:4321'}${item.permalink}`) || `http://localhost:4321/${item.slug}/`,
+      route: item.permalink || `/${item.slug}/`,
+      permalink: item.permalink,
+      collection: item.collection || 'articles'
+    };
+  });
 
 // ===== 初始化 Algolia 客户端（v5 API）=====
 const client = algoliasearch(APP_ID, ADMIN_API_KEY);
@@ -49,8 +85,11 @@ const client = algoliasearch(APP_ID, ADMIN_API_KEY);
     await client.setSettings({
       indexName: INDEX_NAME,
       indexSettings: {
-        searchableAttributes: ["title", "content"],
+        searchableAttributes: ["title", "content", "description", "categories", "tags", "url"],
         attributesToSnippet: ["content:100"], // <== 必须有
+        customRanking: ["desc(date)"], // 按日期降序排序
+        // 确保永久链接被正确索引
+        attributesForFaceting: ["categories", "tags", "collection"]
       },
     });
 

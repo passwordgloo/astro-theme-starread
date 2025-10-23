@@ -3,6 +3,7 @@ title: Twikoo 评论系统
 cover: https://imgapi.xl0408.top/index.php
 categories: [帮助]
 date: 2025-07-20
+permalink: /articles/e6a07d/
 ---
 
 ## 云函数部署 
