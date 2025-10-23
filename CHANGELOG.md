@@ -2,6 +2,23 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.6](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5...v0.0.6) (2025-10-23)
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* **ArticleInfo:** 修复busuanzi脚本加载后未立即执行的问题 ([aa4ff4e](https://github.com/passwordgloo/astro-theme-starread/commit/aa4ff4e030b885fffdc0c060ca5708efaa25f50c))
+
+
+### ✨ Features | 功能
+
+* **Algolia:** 添加Algolia品牌标识和版权声明 ([0d3446d](https://github.com/passwordgloo/astro-theme-starread/commit/0d3446d5f5aba608ae7c08ccc86b318486f973ad))
+* **Algolia:** 配置每页显示5条结果并更新样式 ([ef17802](https://github.com/passwordgloo/astro-theme-starread/commit/ef1780239c574a71807631a1a02b599c0ad6dc1d))
+* **search:** 优化搜索页面样式和功能 ([d2a18a2](https://github.com/passwordgloo/astro-theme-starread/commit/d2a18a2d4dc7f8aca5468bd6f54d5d7e39f4bcb4))
+* **主题配置:** 添加建站日期和站点统计功能配置 ([5b4f03f](https://github.com/passwordgloo/astro-theme-starread/commit/5b4f03f25f71eceb3fb70cc52e3ef86f45703079))
+* **组件:** 优化文章列表显示逻辑和样式 ([bf3fc7a](https://github.com/passwordgloo/astro-theme-starread/commit/bf3fc7aa4bae6f156f32aefb48b78355bc81f254))
+* **统计:** 添加站点统计组件并移除文章页的浏览量显示 ([357c2ae](https://github.com/passwordgloo/astro-theme-starread/commit/357c2aeaaf158a6beee9292cf2cb740d2d147ae3))
+
 ### [0.0.5](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.3...v0.0.5) (2025-10-23)
 
 
