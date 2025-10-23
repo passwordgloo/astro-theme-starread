@@ -22,6 +22,7 @@ export const themeConfig: starreadthemeconfig = {
     title: '星阅主题',
     favicon: '/favicon.png',
     defaultCover: '/defaultCover.jpg',
+    foundedDate: '2024-01-01',
     
     logo: {
       image: '/logo.svg',
@@ -106,6 +107,7 @@ export const themeConfig: starreadthemeconfig = {
       adWidget: true,
       tag: true,
       recommendedArticles: true,
+      statistic: true, // 站点统计组件
     },
     // 文章页侧边栏组件
     article: {
