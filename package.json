@@ -31,9 +31,7 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "build": "astro build",
-    "local": "astro build",
     "algolia": "node scripts/pushAlgolia.js",
-    "update-frontmatter": "node scripts/autoUpdateFrontmatter.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --config scripts/changelog-updater.js -r 0"
   },
   "dependencies": {

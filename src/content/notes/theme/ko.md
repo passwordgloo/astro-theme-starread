@@ -3,8 +3,8 @@ title: Star ReadAstro 블로그 테마
 categories: [主题说明]
 cover: https://t.alcy.cc/fj
 description: Star Read Astro 블로그 테마의 설치 방법, 특징, 검색, 사용자 정의 구성, 댓글 설정 및 명령어 등에 대한 안내 문서입니다.
-permalink: /notes/fca0b8/
-date: 2025-10-07 21:33:22
+permalink: /theme/e3d31c/
+date: 2025-10-07 21:37:04
 ---
 
 
