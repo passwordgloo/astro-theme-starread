@@ -1,10 +1,21 @@
 ---
 import { themeConfig } from '../../starread.config';
+import { formatDate, getCoverImage, getAuthorInfo } from '../pages/articles/[slug].astro';
 
 // 轮播卡片文章组件
 const { articles = [] } = Astro.props;
 import { Image } from 'astro:assets';
-import { themeConfig } from '../../starread.config';
+
+// 处理文章数据
+const processedArticles = articles.map(article => ({
+  ...article,
+  processed: {
+    date: formatDate(article.data.date),
+    cover: getCoverImage(article.data.cover),
+    author: getAuthorInfo(article.data.author),
+    category: article.data.categories?.[0] || '未分类'
+  }
+}));
 ---
 
 <div class="relative bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden" client:load>
@@ -25,25 +36,24 @@ import { themeConfig } from '../../starread.config';
 
   <div class="p-4 overflow-hidden" id="carousel-container">
     <div id="carousel-track" class="flex transition-transform duration-500 ease-out space-x-4">
-      {articles.length > 0 ? (
-        articles.map((article, index) => (
+      {processedArticles.length > 0 ? (
+        processedArticles.map((article, index) => (
           <a href={`/articles/${encodeURIComponent(article.slug)}`} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
               <div class="h-40 bg-gray-200 overflow-hidden">
-                <Image src={article.data.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={160} />
+                <Image src={article.processed.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={160} />
               </div>
               <div class="p-3 flex-1 flex flex-col">
                 <div class="mb-2">
-                  <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full transform group-hover:scale-105 transition-transform duration-200">{article.data.categories?.[0] || '未分类'}</span>
+                  <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full transform group-hover:scale-105 transition-transform duration-200">{article.processed.category}</span>
                 </div>
                 <h3 class="font-medium text-slate-900 dark:text-slate-100 mb-2 line-clamp-2 h-12 group-hover:text-blue-600 transition-colors duration-200">{article.data.title}</h3>
                 <div class="mt-auto flex items-center text-xs text-gray-500">
-                  <span>{article.data.author?.name || themeConfig.author.name}</span>
+                  <span>{article.processed.author.name}</span>
                   <span class="mx-1">·</span>
-                  <span>{typeof article.data.date === 'string' ? article.data.date.split(' ')[0] : article.data.date?.toISOString().split('T')[0]}</span>
+                  <span>{article.processed.date}</span>
                 </div>
               </div>
           </a>
-        </div>
         ))
       ) : (
         <div class="flex-1 text-center py-12 text-gray-500">
@@ -54,7 +64,7 @@ import { themeConfig } from '../../starread.config';
   </div>
 
   <div class="flex justify-center py-2 space-x-2">
-    {articles.map((_, index) => (
+    {processedArticles.map((_, index) => (
       <button 
         key={index} 
         class={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === 0 ? 'bg-blue-600 w-8' : 'bg-gray-300'}`} 

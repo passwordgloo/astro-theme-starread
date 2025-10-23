@@ -11,6 +11,8 @@ export const collections = {
       categories: z.array(z.string()).optional(),
       cover: z.string().default('/defaultCover.jpg'),
       tags: z.array(z.string()).optional(),
+      prev: z.string().nullable().optional(),
+      next: z.string().nullable().optional(),
     }),
   }),
 };
