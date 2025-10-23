@@ -1,6 +1,7 @@
 ---
 title: Star Read Astroブログテーマ
 categories: [主题说明]
+tags: [主题安装]
 description: Star Read Astroブログテーマは、Astroを使用して作成されたブログテーマであり、インストール方法やプロジェクト構造、検索機能、カスタム設定、コメントシステムなどの使い方が説明されています。
 cover: https://t.alcy.cc/ysz
 permalink: /theme/30414f/

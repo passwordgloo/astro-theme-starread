@@ -51,7 +51,7 @@ date: 2025-10-07 21:33:22
 
 **暂不支持 NexT 8 以下的版本**，请先升级到 NexT 8。然后在 Hexo 项目根目录执行
 
-```
+```bash
 # For NexT version >= 8.0.0 && < 8.4.0
 npm install hexo-next-twikoo@1.0.0
 # For NexT version >= 8.4.0
@@ -60,7 +60,7 @@ npm install hexo-next-twikoo@1.0.3
 
 然后在配置中添加
 
-```
+```yaml
 twikoo:
   enable: true
   visitor: true
@@ -118,7 +118,7 @@ twikoo:
 
 如果您使用的博客主题不支持 Twikoo，并且您不知道如何引入 Twikoo，您可以向博客主题开发者提交适配请求
 
-```
+```html
 <div id="tcomment"></div>
 <script src="https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.min.js"></script>
 <script>
@@ -160,11 +160,12 @@ twikoo.init({
 
 建议使用 CDN 引入 Twikoo 的用户在代码中加入 [SRI](https://developer.mozilla.org/zh-CN/docs/Web/Security/Subresource_Integrity) 以确保完整性，例：
 
-```
+```js
 <script
   src="https://cdn.jsdelivr.net/npm/twikoo@1.6.36/dist/twikoo.all.min.js"
   integrity="sha384-4KfOjEinLSkv1i1J8TzlkC/RTnuiLoR1OLerVgjEKoH5djYtbf7mzEFsz9p3nfuA"
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous">
+</script>
 ```
 
 其中 `integrity` 的值可以在 [SRI Hash Generator](https://www.srihash.org/) 查询。
