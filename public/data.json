@@ -1,47 +1,122 @@
 [
   {
-    "title": "关于",
-    "description": "介绍 astro-theme-starread 主题项目，涵盖项目概述、设计理念、核心功能及使用指南等内容，帮助用户快速了解和上手该项目。",
-    "cover": "https://star.iglooblog.top/defaultCover.jpg",
+    "title": "2025最新版AI短视频系统训练营课程",
+    "description": "",
+    "cover": "https://example.com/cover/TensAI_gR3r-wiiDPNh3kupY0hN5.jpg",
     "categories": [
-      "支持"
+      "自媒体"
     ],
     "tags": [
-      "vue",
-      "javascript"
+      "AI视频"
     ],
-    "date": "2024-05-20T00:00:00.000Z",
-    "content": "# 项目介绍\n\n本项目 `astro-theme-starread` 是一个主题项目，下面将为您详细介绍该项目的相关内容，帮助您快速了解项目的基本结构、功能和使用方式。无论是刚接触此项目的新手，还是希望深入探索的开发者，都能从中获取有价值的信息。\n\n## 项目概述\n\n这里将对 `astro-theme-starread` 项目进行整体介绍，阐述项目的核心目标、应用场景以及在同类项目中的优势。\n\n### 设计理念\n\n详细说明项目设计时所遵循的理念，这些理念如何影响项目的架构和功能实现。\n\n## 核心功能\n\n介绍 `astro-theme-starread` 项目的主要功能模块，每个功能模块如何为用户提供服务。\n\n### 功能模块一\n\n具体讲解第一个核心功能模块的用途、特点和使用方法。\n\n## 使用指南\n\n这部分内容会指导您如何快速上手使用 `astro-theme-starread` 项目，从安装到配置，再到运行项目的完整流程。",
-    "slug": "articles/about"
+    "date": "2023-08-12T00:00:00.000Z",
+    "content": "## 资源介绍\n\nAI短视频是一种使用人工智能技术制作短视频的形式。它通常使用图像识别、自然语言处理、机器学习等人工智能技术，来生成具有创意和吸引力的视频内容。AI短视频的特点是制作速度快、内容丰富多样、个性化推荐等。\n\n制作AI短视频需要使用到一些特定的工具和技术，例如使用机器学习算法来识别和生成视频内容，使用自然语言处理技术来生成文字或语音描述，使用图像识别技术来识别和提取视频中的关键帧等。同时，AI短视频也需要一些人工干预和调整，以确保最终的视频质量和效果符合预期。\n\nAI短视频的应用场景非常广泛，例如社交媒体、广告、电商、教育等。它们可以帮助用户更好地展示产品和服务，吸引更多的用户关注和互动，提高品牌知名度和销售额。同时，AI短视频也可以作为一种新的内容形式，为创作者提供更多的创意和表达方式，帮助他们更好地展示自己的才华和创意。\n\n## 资源链接\n\n```txt\nhttps://pan.baidu.com/share/init?surl=wleG5zSDUcOnnsKOX5oC6A\n\nrfus\n```",
+    "slug": "articles/aixunlian"
   },
   {
-    "title": "帮助文档",
+    "title": "Cursor快速入门与实战",
+    "description": "",
+    "cover": "https://example.com/cover/TensAI_57Qms8ixgvJOKpe3AnaqF.jpg",
+    "categories": [
+      "IT"
+    ],
+    "tags": [],
+    "date": "2025-07-01T00:00:00.000Z",
+    "content": "## 软件介绍\n\nCursor软件是一款专门用于管理数据库的软件，它提供了友好的图形界面和强大的功能，可以帮助用户轻松地创建、查询、更新、维护和操作数据库。\n\nCursor软件支持多种数据库系统，包括MySQL、PostgreSQL、SQLite等，它提供了丰富的数据库操作工具，如查询编辑器、数据导入导出、数据备份还原、数据库结构管理、权限管理等。此外，Cursor软件还支持多用户同时访问数据库，可以实现分布式数据库管理，提高了数据的安全性和可靠性。\n\n除了基本的数据库管理功能外，Cursor软件还提供了高级功能，如数据挖掘、数据分析、数据可视化等，这些功能可以帮助用户更好地理解和利用数据库中的数据，提高数据的使用价值和效率。\n\n总之，Cursor软件是一款功能强大、易于使用的数据库管理软件，它可以帮助用户轻松地管理数据库、分析和利用数据，提高数据的使用价值和效率。\n\n## 资源链接\n\n```txt\nhttps://pan.quark.cn/s/44f8b3dfd142\n```",
+    "slug": "articles/cursor"
+  },
+  {
+    "title": "剪映新手入门+实战教程",
+    "description": "",
+    "cover": "https://example.com/cover/TensAI_y8OjUe7TZLvTKsPOuiyFQ.jpg",
+    "categories": [
+      "自媒体"
+    ],
+    "tags": [
+      "AI视频"
+    ],
+    "date": "2022-12-23T00:00:00.000Z",
+    "content": "## 资源介绍\n\n剪映是一款手机视频编辑应用，由抖音官方推出。这款应用能够快速编辑视频，帮助用户在手机就能制作出炫酷的短片。剪映提供了多种视频剪辑工具，例如变速、倒放、画布、滤镜、音效、特效等，以及丰富的图文转换功能。用户可以通过添加文字、语音转文字等，让视频更加丰富有趣。剪映也支持一键分享到抖音、快手、B站等平台，让更多人观看和点赞。\n\n## 资源预览\n\n```txt\nhttps://pan.baidu.com/share/init?surl=Zz1Pdkg6Y61Rvz2DxSYWIQ\n\ny3fg\n```",
+    "slug": "articles/cutout"
+  },
+  {
+    "title": "2025年DeepSeek本地部署视频教程+全套安装包",
     "description": "",
     "cover": "https://picsum.photos/800/400?random=1",
     "categories": [
-      "帮助"
+      "AI工具"
     ],
     "tags": [
-      "vue",
-      "react",
-      "javascript"
-    ],
-    "date": "",
-    "content": "# 这是文章标题\n\n如果用户没有在frontmatter中设置title，系统将使用文章的第一句话作为标题。\n\n## 章节一\n\n这是文章的第一部分内容。\n\n### 小节1.1\n\n这是第一部分的第一个小节。\n\n## 章节二\n\n这是文章的第二部分内容。\n\n### 小节2.1\n\n这是第二部分的第一个小节。\n\n## 章节三\n\n这是文章的第三部分内容。",
-    "slug": "articles/example"
-  },
-  {
-    "title": "GFM语法",
-    "description": "这是一篇示例文章，展示了如何使用frontmatter配置文章属性。",
-    "cover": "https://picsum.photos/800/400?random=1",
-    "categories": [
-      "帮助"
-    ],
-    "tags": [
-      "你好"
+      "deepseek"
     ],
     "date": "2025-10-01T00:00:00.000Z",
-    "content": "<h3 class=\"text-gray-900 dark:text-white\">测试</h3>\n\n**任务列表**\n\n- [x] 支持 task list\n- [ ] 还没完成\n\n**表格**\n\n| 字段 | 值 |\n| --- | --- |\n| 版本 | Tailwind v4 |\n| 插件 | @tailwindcss/typography |\n\n**删除线**：~~被删除的文本~~\n\n**脚注**：这里有脚注[^1]。\n\n> 引用块也 OK。\n\n>[!note]\n> 这是一个注意事项\n\n```js\nconsole.log(' fenced code 支持高亮按你的主题来 ');\n```",
-    "slug": "articles/gfm"
+    "content": "## 资源介绍\n\n教学视频，旨在指导用户如何在本地计算机上部署DeepSeek平台\n\n全套安装包：这部分是一个打包好的安装包，包含了DeepSeek平台的全部文件和必要的依赖项。用户可以通过以下方式使用这个安装包：\n\n解压安装包到本地目录。\n按照视频教程中的指导进行安装和配置。\n无需手动下载和安装依赖项，因为它们已经包含在安装包中。\n快速启动DeepSeek平台，开始使用其功能进行生物信息学分析\n\n## 资源下载\n\n```txt\nhttps://pan.quark.cn/s/a2b2d8dc52ae#/list/share\n```",
+    "slug": "articles/deepseek"
+  },
+  {
+    "title": "零基础玩转DeepSeek提示词模板、技巧合集",
+    "description": "",
+    "cover": "https://example.com/cover/TensAI_Eyop6mHq9zYXi7dkWgrdA.jpg",
+    "categories": [
+      "AI工具"
+    ],
+    "tags": [
+      "deepseek"
+    ],
+    "date": "",
+    "content": "## 资源介绍\n\nDeepSeek是一个生物信息学领域的开放平台，它利用深度学习技术加速生物学和医学研究。平台整合了丰富的生物医学数据资源，包括基因序列、蛋白质结构和临床试验数据，为研究人员提供了强大的工具和算法，如CNN、RNN和GAN。DeepSeek旨在通过分析大规模生物数据集，帮助科学家发现新的生物标记物、药物靶点和疾病机制，推动生物学和医学研究的进展。作为一个开放平台，DeepSeek鼓励全球研究者的参与和贡献，共同推动生物信息学和深度学习技术的应用和发展。\n\n## 资源链接\n\n```txt\nhttps://pan.quark.cn/s/59b50586b4fc\n```",
+    "slug": "articles/deepseek1"
+  },
+  {
+    "title": "今日水印相机破解版APP（安卓）",
+    "description": "",
+    "cover": "https://example.com/cover/TensAI_paoijwsLEweSn4nDlqYfS.jpg",
+    "categories": [
+      "软件"
+    ],
+    "tags": [],
+    "date": "2024-10-12T00:00:00.000Z",
+    "content": "## 资源介绍\n\n>此今日水印相机APP，属于破解版，支持修改时间，修改改位置版。有不少工作因为工作内容的限制都无法每天固定地点打卡，但是这并不意味着就不需要打卡，毕竟考勤极其重要。这种时候就可以使用今日水印相机破解版改时间改位置版来拍照打卡！\n\n\n## 资源链接\n\n```txt\nhttps://pan.quark.cn/s/950df712b367\n```",
+    "slug": "articles/jrxj"
+  },
+  {
+    "title": "【马哥教育】Linux运维就业班_Linux架构班_Linux零基础到运维架构大神",
+    "description": "",
+    "cover": "https://example.com/cover/TensAI_sKXF3arGXCxLODI145H0O.jpg",
+    "categories": [
+      "IT"
+    ],
+    "tags": [
+      "运维"
+    ],
+    "date": "2024-10-01T00:00:00.000Z",
+    "content": "## 资源链接\n\n```txt\nhttps://pan.quark.cn/s/c55d30f6b1c3\n```",
+    "slug": "articles/mage"
+  },
+  {
+    "title": "SpringBoot+Vue3+MySQL集群 开发大健康体检双系统",
+    "description": "",
+    "cover": "https://example.com/cover/TensAI_V4Mc4qa80x62ebsJ74iQL.jpg",
+    "categories": [
+      "IT"
+    ],
+    "tags": [],
+    "date": "2025-07-11T00:00:00.000Z",
+    "content": "## 项目介绍\n\nSpringBoot+Vue3+MySQL集群的开发大健康体检双系统是一个非常复杂和系统的项目，需要综合考虑技术选型、系统设计、数据安全、性能优化等方面。\n\n技术选型： SpringBoot：Java后端开发框架，提供了一整套的开箱即用的解决方案，包括配置管理、安全、REST API等，使得开发人员能够更加专注于业务开发。 Vue3：前端开发框架，提供了丰富的组件库和响应式编程机制，能够快速构建用户界面，并且支持与后端API的交互。 MySQL集群：数据库系统，提供了高性能、可扩展的解决方案，适合用于存储大量数据。\n\n系统设计： 系统可以分为前端和后端两个部分。前端使用Vue3框架构建用户界面，后端使用SpringBoot框架提供REST API接口。系统需要设计合理的API接口，实现前后端分离的开发模式。\n\n系统需要设计数据库表结构，包括体检数据、用户信息、权限管理等。MySQL集群需要实现数据分片和负载均衡，以保证系统的可扩展性和高可用性。\n\n系统需要设计合理的权限管理机制，包括用户权限、角色权限等，以保证系统的安全性和稳定性。\n\n数据安全： 系统需要采用加密存储、访问控制等措施，保证用户数据的安全性。同时，需要定期对数据进行备份和恢复，以防止数据丢失和损坏。\n\n性能优化： 系统需要进行性能测试和优化，包括数据库优化、代码优化等方面。可以使用缓存技术、异步处理等技术手段，提高系统的响应速度和吞吐量。\n\n## 资源链接\n\n```txt\nhttps://pan.baidu.com/s/1mUFEjGTFzXee3-7t64rs-A?pwd=8kpm\n\n8kpm\n```",
+    "slug": "articles/rjkf"
+  },
+  {
+    "title": "咸鱼信息差项目",
+    "description": "介绍咸鱼项目的虚拟资料、网盘扩容、养号技巧、素材准备、上架商品、风险提醒各个环节，配有视频文字",
+    "cover": "https://example.com/cover/TensAI_citBxZSYWGqwPpP_qq1p7.jpg",
+    "categories": [
+      "自媒体"
+    ],
+    "tags": [
+      "咸鱼"
+    ],
+    "date": "2025-05-14T00:00:00.000Z",
+    "content": "## 资源介绍\n\n手把手介绍咸鱼项目的虚拟资料、网盘扩容、养号技巧、素材准备、上架商品、风险提醒各个环节，配有视频文字\n\n## 资源链接\n\n```txt\nhttps://pan.baidu.com/share/init?surl=FkVG8cX3IwNDMN80mYx25Q\n\n5f8u\n```",
+    "slug": "articles/xianyu"
   }
 ]
