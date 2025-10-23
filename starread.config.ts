@@ -148,7 +148,7 @@ export const themeConfig: starreadthemeconfig = {
     // 搜索配置
     search: {
       // 搜索服务提供商: 'local', 'algolia'
-      provider: 'algolia',
+      provider: 'local',
     }
   }
 };
