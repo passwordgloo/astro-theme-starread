@@ -16,6 +16,17 @@ export async function getStaticPaths() {
     return data.published !== false;
   });
   
+  // 定义保留的路由名称，这些路由由其他文件处理，不应被catch-all路由生成
+  const reservedRoutes = ['search', 'category', 'tag', 'notes'];
+  
+  // 检查路径是否是保留路由
+  const isReservedRoute = (path) => {
+    // 检查是否以保留路由开头或完全匹配保留路由
+    return reservedRoutes.some(route => 
+      path === route || path.startsWith(`${route}/`)
+    );
+  };
+  
   const paths = [];
   
   // 处理文章条目
@@ -25,34 +36,10 @@ export async function getStaticPaths() {
   
   sortedArticles.forEach((entry, index) => {
     // 添加带有 /articles/ 前缀的路径
-    paths.push({
-      params: { slug: `articles/${entry.slug}` },
-      props: { 
-        entry,
-        prev: index > 0 ? sortedArticles[index - 1] : null,
-        next: index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null,
-        basePath: '/articles'
-      },
-    });
-    
-    // 添加不带前缀的slug路径（兼容原路径）
-    paths.push({
-      params: { slug: entry.slug },
-      props: { 
-        entry,
-        prev: index > 0 ? sortedArticles[index - 1] : null,
-        next: index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null,
-        basePath: '/articles'
-      },
-    });
-    
-    // 添加基于permalink的路径
-    if (entry.data.permalink) {
-      // 移除可能的首尾斜杠
-      let permalink = entry.data.permalink.replace(/^\/|\/$/g, '');
-      
+    const articlesPath = `articles/${entry.slug}`;
+    if (!isReservedRoute(articlesPath)) {
       paths.push({
-        params: { slug: permalink },
+        params: { slug: articlesPath },
         props: { 
           entry,
           prev: index > 0 ? sortedArticles[index - 1] : null,
@@ -60,6 +47,37 @@ export async function getStaticPaths() {
           basePath: '/articles'
         },
       });
+    }
+    
+    // 添加不带前缀的slug路径（兼容原路径）
+    if (!isReservedRoute(entry.slug)) {
+      paths.push({
+        params: { slug: entry.slug },
+        props: { 
+          entry,
+          prev: index > 0 ? sortedArticles[index - 1] : null,
+          next: index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null,
+          basePath: '/articles'
+        },
+      });
+    }
+    
+    // 添加基于permalink的路径
+    if (entry.data.permalink) {
+      // 移除可能的首尾斜杠
+      let permalink = entry.data.permalink.replace(/^\/|\/$/g, '');
+      
+      if (!isReservedRoute(permalink)) {
+        paths.push({
+          params: { slug: permalink },
+          props: { 
+            entry,
+            prev: index > 0 ? sortedArticles[index - 1] : null,
+            next: index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null,
+            basePath: '/articles'
+          },
+        });
+      }
     }
   });
   
@@ -70,8 +88,10 @@ export async function getStaticPaths() {
   
   sortedNotes.forEach((entry, index) => {
     // 添加带有 /notes/ 前缀的路径
+    // 注意：'notes/' 前缀本身是保留路由，但这是我们需要的路径格式
+    const notesPath = `notes/${entry.slug}`;
     paths.push({
-      params: { slug: `notes/${entry.slug}` },
+      params: { slug: notesPath },
       props: { 
         entry,
         prev: index > 0 ? sortedNotes[index - 1] : null,
@@ -81,23 +101,9 @@ export async function getStaticPaths() {
     });
     
     // 添加不带前缀的slug路径（兼容原路径）
-    paths.push({
-      params: { slug: entry.slug },
-      props: { 
-        entry,
-        prev: index > 0 ? sortedNotes[index - 1] : null,
-        next: index < sortedNotes.length - 1 ? sortedNotes[index + 1] : null,
-        basePath: '/notes'
-      },
-    });
-    
-    // 添加基于permalink的路径
-    if (entry.data.permalink) {
-      // 移除可能的首尾斜杠
-      let permalink = entry.data.permalink.replace(/^\/|\/$/g, '');
-      
+    if (!isReservedRoute(entry.slug)) {
       paths.push({
-        params: { slug: permalink },
+        params: { slug: entry.slug },
         props: { 
           entry,
           prev: index > 0 ? sortedNotes[index - 1] : null,
@@ -105,6 +111,24 @@ export async function getStaticPaths() {
           basePath: '/notes'
         },
       });
+    }
+    
+    // 添加基于permalink的路径
+    if (entry.data.permalink) {
+      // 移除可能的首尾斜杠
+      let permalink = entry.data.permalink.replace(/^\/|\/$/g, '');
+      
+      if (!isReservedRoute(permalink)) {
+        paths.push({
+          params: { slug: permalink },
+          props: { 
+            entry,
+            prev: index > 0 ? sortedNotes[index - 1] : null,
+            next: index < sortedNotes.length - 1 ? sortedNotes[index + 1] : null,
+            basePath: '/notes'
+          },
+        });
+      }
     }
   });
   
