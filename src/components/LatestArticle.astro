@@ -108,7 +108,7 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
   </div>
 
 
-<script is:inline define:vars={{ articleLoadConfig: { initialLoad, loadMore, defaultLimit }, articles: sortedArticles, loadType }}>
+<script is:inline define:vars={{ articleLoadConfig: { initialLoad, loadMore, defaultLimit }, articles: sortedArticles, loadType, imageHeight }}>
   const container = document.getElementById('articles-container');
   const trigger = loadType === 'button' ? document.getElementById('load-more-btn') : document.getElementById('load-trigger');
 
