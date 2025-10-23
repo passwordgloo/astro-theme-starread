@@ -3,7 +3,8 @@ title: Star Read Astro Blog Theme
 categories: [主题说明]
 description: Star Read is a brilliant, clean, and sophisticated Astro blog theme. It offers multiple installation methods, has a well structured project layout, and comes with features like modern UI, search support, responsive design, theme toggling, and more. It also provides detailed configurations for search, theme customization, and comment systems.
 cover: https://picsum.photos/800/400?random=1
-date: 2025-10-20
+permalink: /notes/74fe4b/
+date: 2025-10-07 21:33:22
 ---
 
 <div align="center">

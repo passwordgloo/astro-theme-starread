@@ -1,10 +1,10 @@
 ---
 title: Star Read Astro博客主题
 categories: [主题说明]
-tags: [vue, javascript]
 description: Star Read是一个出色、简洁且精致的Astro博客主题，提供多种安装方式，项目结构清晰，具备现代UI、搜索支持、响应式设计、主题切换等功能，还提供搜索、主题定制和评论系统的详细配置。
-date: 2025-10-20
 cover: https://t.alcy.cc/pc
+permalink: /notes/1c0989/
+date: 2025-10-07 21:33:22
 ---
 
 <div align="center">
@@ -204,7 +204,6 @@ nav: [
 | `pnpm install`           | 安装依赖                                       |
 | `pnpm dev`               | 启动本地开发服务器 `localhost:4321`            |
 | `pnpm preview`           | 本地预览构建结果                               |
-| `pnpm local`             | 运行自动索引脚本并构建生产站点                 |
 | `pnpm algolia`           | 推送数据到Algolia搜索                          |
 | `pnpm changelog`         | 生成更新日志                                   |
 | `pnpm release`           | 版本管理（更新版本号、生成提交等）             |
