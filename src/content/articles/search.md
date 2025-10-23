@@ -5,6 +5,8 @@ permalink: /articles/6be587/
 date: 2025-10-07 21:33:22
 ---
 
+>本文节选自我的[Vuepress 2从0-1保姆级进阶教程——全文搜索篇（含Algolia、meilisearch）](https://blog.csdn.net/passwordgloo/article/details/134687291)
+
 # Algolia
 
 ## 1.注册Algolia账号
