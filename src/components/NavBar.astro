@@ -1,7 +1,6 @@
 ---
 const { title } = Astro.props;
 import { themeConfig } from '../../starread.config';
-import ThemeToggle from "./ThemeToggle.astro";
 import LocalSearch from "./SwitchLocalSearch.astro";
 import AlgoliaSearch from "./SwitchAlgoliaSearch.astro";
 
@@ -10,12 +9,7 @@ const SearchComponent = themeConfig.plugin.search.provider === 'algolia' ? Algol
 ---
 
 <header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md" client:load>
-  <!-- 确保深色模式切换按钮在移动设备上可见 -->
-  <div class="md:hidden absolute right-4 top-3 z-10">
-    <button id="mobile-theme-toggle" class="p-2 rounded-full hover:bg-gray-100 transition-colors" client:load>
-      <span class="icon-[lucide--moon] h-5 w-5 nav-mobile-icon"></span>
-    </button>
-  </div>
+  <!-- 移除移动端主题切换按钮 -->
   <div class="container mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex items-center space-x-2 nav-content">
       <div id="logo-container">
@@ -107,7 +101,6 @@ const SearchComponent = themeConfig.plugin.search.provider === 'algolia' ? Algol
     <!-- 搜索和登录 -->
     <div class="flex items-center space-x-2">
       <SearchComponent />
-      <ThemeToggle />
       <button class="hidden md:block rounded-lg bg-primary text-white hover:bg-primary/70 active:bg-primary/80
                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 dark:bg-secondary dark:text-slate-950 dark:hover:bg-secondary/70 dark:active:bg-secondary/60
                    dark:focus-visible:ring-sky-300/50 px-4 py-2 rounded-md transition-colors">登录</button>
@@ -202,6 +195,42 @@ const SearchComponent = themeConfig.plugin.search.provider === 'algolia' ? Algol
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // logo根据主题同步切换功能
+    const updateLogo = () => {
+      const htmlElement = document.documentElement;
+      const logoImages = document.querySelectorAll('.logo-image');
+      const isDarkMode = htmlElement.classList.contains('dark');
+      
+      logoImages.forEach(logoImage => {
+        if (logoImage && logoImage.dataset.darkSrc && logoImage.dataset.lightSrc) {
+          const newSrc = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
+          // 使用requestAnimationFrame确保DOM更新完成
+          requestAnimationFrame(() => {
+            if (logoImage.src !== newSrc) {
+              logoImage.src = newSrc;
+            }
+          });
+        }
+      });
+    };
+
+    // 监听主题变化
+    const htmlElement = document.documentElement;
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          updateLogo();
+        }
+      });
+    });
+
+    observer.observe(htmlElement, { 
+      attributes: true, 
+      attributeFilter: ['class'] 
+    });
+
+    // 初始化时更新一次logo
+    updateLogo();
     const searchToggle = document.getElementById('search-toggle');
     const searchContainer = document.getElementById('pagefind-search-container');
     

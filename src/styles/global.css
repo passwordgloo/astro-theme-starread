@@ -4,7 +4,16 @@
 }
 @plugin "@tailwindcss/typography";
 
-@custom-variant dark (&:where(.dark, .dark *)); 
+:root {
+  --rawblock-edit-panel-bd: #ffffff; /* 浅色模式背景 */
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --rawblock-edit-panel-bd: rgb(29,42,60) /* 深色模式背景 */
+  }
+}
+
 
 @theme {
   /* 主题色
@@ -38,4 +47,151 @@
   :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
     content: "" !important;
   }
+}
+
+/* GFM Alerts 基础样式 */
+.markdown-alert {
+  text-indent: 0em;
+  line-height: inherit;
+  min-height: 1.5rem;
+  margin: 1em 0;
+  padding: 10px 0 8px 10px;
+  border-radius: 6px;
+  border-left: 8px solid transparent;
+  background-clip: padding-box, border-box;
+  background-origin: padding-box, border-box;
+  overflow: hidden;
+}
+
+.markdown-alert > :first-child {
+  margin-top: 0;
+}
+
+.markdown-alert > :last-child {
+  margin-bottom: 0;
+}
+
+.markdown-alert-title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* SVG 图标样式 */
+.markdown-alert-title svg.octicon {
+  flex-shrink: 0;
+}
+
+/* Note - 蓝色渐变 */
+.markdown-alert-note {
+  background-image: linear-gradient(to right, var(--rawblock-edit-panel-bd), var(--rawblock-edit-panel-bd)), 
+                    linear-gradient(0deg, #005bea, #007bf9, #0097ff, #00affe, #00c6fb);
+  color: #00bfff;
+}
+
+.markdown-alert-note .markdown-alert-title {
+  color: #00bfff;
+}
+
+.markdown-alert-note svg.octicon {
+  fill: #00bfff;
+}
+
+/* Warning - 橙色渐变 */
+.markdown-alert-warning {
+  background-image: linear-gradient(to right, var(--rawblock-edit-panel-bd), var(--rawblock-edit-panel-bd)), 
+                    linear-gradient(0deg, #e9a11a, #eab211, #e8c40a, #e5d50f, #dee71d);
+  color: #ff8c00;
+}
+
+.markdown-alert-warning .markdown-alert-title {
+  color: #ff8c00;
+}
+
+.markdown-alert-warning svg.octicon {
+  fill: #ff8c00;
+}
+
+/* Important - 紫色渐变 */
+.markdown-alert-important {
+  background-image: linear-gradient(to right, var(--rawblock-edit-panel-bd), var(--rawblock-edit-panel-bd)), 
+                    linear-gradient(0deg, #c471f5, #d66feb, #e46fe1, #f06fd7, #fa71cd);
+  color: #f0f;
+}
+
+.markdown-alert-important .markdown-alert-title {
+  color: #f0f;
+}
+
+.markdown-alert-important svg.octicon {
+  fill: #f0f;
+}
+
+/* Tip - 绿色渐变 */
+.markdown-alert-tip {
+  background-image: linear-gradient(to right, var(--rawblock-edit-panel-bd), var(--rawblock-edit-panel-bd)), 
+                    linear-gradient(0deg, #0ba360, #39b05d, #57bc5a, #72c856, #8ed451);
+  color: #00cd66;
+}
+
+.markdown-alert-tip .markdown-alert-title {
+  color: #00cd66;
+}
+
+.markdown-alert-tip svg.octicon {
+  fill: #00cd66;
+}
+
+/* Caution - 红色渐变 */
+.markdown-alert-caution {
+  background-image: linear-gradient(to right, var(--rawblock-edit-panel-bd), var(--rawblock-edit-panel-bd)), 
+                    linear-gradient(0deg, #ed2842, #f33d58, #f7506d, #fa6181, #fb7294);
+  color: #f14669;
+}
+
+.markdown-alert-caution .markdown-alert-title {
+  color: #f14669;
+}
+
+.markdown-alert-caution svg.octicon {
+  fill: #f14669;
+}
+
+/* 如果 alerts 中包含其他图标(img) */
+.markdown-alert img {
+  position: relative;
+  transform: translateY(26.8px);
+  height: 1rem;
+  margin-right: 0.2rem;
+}
+
+.markdown-alert-note img {
+  filter: drop-shadow(#00bfff 0px -28px);
+}
+
+.markdown-alert-warning img {
+  filter: drop-shadow(#ff8c00 0px -28px);
+}
+
+.markdown-alert-important img {
+  filter: drop-shadow(#f0f 0px -28px);
+}
+
+.markdown-alert-tip img {
+  filter: drop-shadow(#00cd66 0px -28px);
+}
+
+.markdown-alert-caution img {
+  filter: drop-shadow(#f14669 0px -28px);
+}
+
+/* 修复普通 blockquote 样式(非 alert) */
+.prose blockquote:not(.markdown-alert) {
+  font-style: italic;
+  border-left: 4px solid #e5e7eb;
+  padding-left: 1rem;
+  color: #6b7280;
+  background: none;
 }
