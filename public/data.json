@@ -23,7 +23,7 @@
     ],
     "tags": [],
     "date": "2025-10-07T21:33:22.000Z",
-    "content": "# Algolia\n\n## 1.注册Algolia账号\n\n使用Github账号登录[Algolia 官网](https://www.algolia.com/)，如果你会魔法，请大胆用google账号\n\n![](/img/b00ffd826909d6963db185d09ae52102.png)\n\n![](/img/2256c4860b3d6be29e7044728d371b33.png)\n\n## 2.创建应用\n\n新版网页界面简化创建流程，点击`+ Create Application` 新建\n\n![](/img/62c8b8c88751e0b0421fdf086c601dba.png)\n\n![](/img/e7bc201a4979717d5a923ae770ad66d9.png)\n\n稍等片刻，自动创建完毕\n\n【可选】修改名称，不影响后续操作\n\n![](/img/7e4cfb390941057b8c8f2a0efc6c1df8.png)\n\n☑️ 要修改的项目，点击重命名\n\n## 3.查看必要信息\n\n### 方法1 点击首页Overview\n\n![](/img/837b5940f82495a1f5a561bf21210cb6.png)\n\n### 方法2 API Keys页面\n\n♦️点击设置进入`API Keys`\n\n![](/img/a60ed301cdd73cf73fc4982a3788cdbf.png)\n\n♦️复制紫色框内信息\n\n![](/img/53572c2df05e6520f767e46301990504.png)",
+    "content": ">本文节选自我的[Vuepress 2从0-1保姆级进阶教程——全文搜索篇（含Algolia、meilisearch）](https://blog.csdn.net/passwordgloo/article/details/134687291)\n\n# Algolia\n\n## 1.注册Algolia账号\n\n使用Github账号登录[Algolia 官网](https://www.algolia.com/)，如果你会魔法，请大胆用google账号\n\n![](/img/b00ffd826909d6963db185d09ae52102.png)\n\n![](/img/2256c4860b3d6be29e7044728d371b33.png)\n\n## 2.创建应用\n\n新版网页界面简化创建流程，点击`+ Create Application` 新建\n\n![](/img/62c8b8c88751e0b0421fdf086c601dba.png)\n\n![](/img/e7bc201a4979717d5a923ae770ad66d9.png)\n\n稍等片刻，自动创建完毕\n\n【可选】修改名称，不影响后续操作\n\n![](/img/7e4cfb390941057b8c8f2a0efc6c1df8.png)\n\n☑️ 要修改的项目，点击重命名\n\n## 3.查看必要信息\n\n### 方法1 点击首页Overview\n\n![](/img/837b5940f82495a1f5a561bf21210cb6.png)\n\n### 方法2 API Keys页面\n\n♦️点击设置进入`API Keys`\n\n![](/img/a60ed301cdd73cf73fc4982a3788cdbf.png)\n\n♦️复制紫色框内信息\n\n![](/img/53572c2df05e6520f767e46301990504.png)",
     "slug": "articles/search",
     "url": "/articles/6be587/",
     "permalink": "/articles/6be587/",
