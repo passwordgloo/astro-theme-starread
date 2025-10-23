@@ -1,9 +1,9 @@
 ---
 const { title } = Astro.props;
+import { themeConfig } from '../../starread.config';
 import ThemeToggle from "./ThemeToggle.astro";
 import LocalSearch from "./SwitchLocalSearch.astro";
 import AlgoliaSearch from "./SwitchAlgoliaSearch.astro";
-import { themeConfig } from '../../starread.config';
 
 // 根据配置选择搜索组件
 const SearchComponent = themeConfig.plugin.search.provider === 'algolia' ? AlgoliaSearch : LocalSearch;

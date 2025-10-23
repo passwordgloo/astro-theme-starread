@@ -2,23 +2,26 @@
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import { themeConfig } from '../../starread.config';
-import { formatDate, getCoverImage, getAuthorInfo, sortArticlesByDate, processArticleData } from '../pages/articles/[slug].astro';
+import { formatDate, getCoverImage, getAuthorInfo, sortEntriesByDate, processEntryData } from '../components/frontmatter';
 
 interface Props {
-  articles: CollectionEntry<'articles'>[];
+  articles?: CollectionEntry<'articles'>[];
+  notes?: CollectionEntry<'notes'>[];
 }
 
-const { articles } = Astro.props;
+const { articles = [], notes = [] } = Astro.props;
+// 合并并按日期排序
+const allContent = [...articles, ...notes];
 const { article: { articleLoad, coverImage } } = themeConfig.site;
 const { type: loadType, initialLoad, loadMore, defaultLimit } = articleLoad;
 const [widthRatio, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
 const imageHeight = Math.round(384 * heightRatio / widthRatio);
 
-// 处理文章数据
-const processedArticles = processArticleData(articles);
+// 处理所有内容数据
+  const processedArticles = processEntryData(allContent, 'articles');
 
-// 按日期排序并限制总数
-const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLimit);
+  // 按日期排序并限制总数
+  const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimit);
 ---
 
 <div class="relative" client:load>
@@ -63,8 +66,8 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
 
             {/* 文章标题 */}
             <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary dark:hover:text-secondary transition-colors">
-              <a href={`/articles/${article.slug}`}>{article.data.title}</a>
-            </h3>
+                <a href={article.data.permalink || `/${article.collection}/${article.slug}`}>{article.data.title}</a>
+              </h3>
 
             {/* 底部信息 - 日期 */}
             <div class="flex items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
@@ -132,22 +135,28 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
       const processed = processArticleData(article);
       const articleCard = document.createElement('div');
       articleCard.className = 'bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden';
+      // 确保_processed属性已正确设置
+      const categories = processed.processed?.categories || article.data.categories || [];
+      const tags = processed.processed?.tags || article.data.tags || [];
+      const cover = processed.processed?.cover || article.data.cover || '/defaultCover.jpg';
+      const date = processed.processed?.date || (article.data.date ? new Date(article.data.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]);
+      
       articleCard.innerHTML = `
-        ${processed.processed.categories.length ? `<div class="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">${processed.processed.categories[0]}</div>` : ''}
+        ${categories.length ? `<div class="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">${categories[0]}</div>` : ''}
         <div class="relative">
-          <img src="${processed.processed.cover}" alt="${article.data.title}" class="w-full h-48 object-cover" loading="lazy" width="384" height="${imageHeight}">
+          <img src="${cover}" alt="${article.data.title}" class="w-full h-48 object-cover" loading="lazy" width="384" height="${imageHeight}">
         </div>
         <div class="p-4">
-          ${processed.processed.tags.length ? `
+          ${tags.length ? `
             <div class="flex flex-wrap gap-2 mb-2">
-              ${processed.processed.tags.map(tag => `<span class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2 py-1 rounded">${tag}</span>`).join('')}
+              ${tags.map(tag => `<span class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2 py-1 rounded">${tag}</span>`).join('')}
             </div>
           ` : ''}
           <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary transition-colors">
-            <a href="/articles/${article.slug}">${article.data.title}</a>
+            <a href="${article.data.permalink}">${article.data.title}</a>
           </h3>
           <div class="flex items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
-            <span>${processed.processed.date}</span>
+            <span>${date}</span>
           </div>
         </div>
       `;

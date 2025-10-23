@@ -1,25 +1,33 @@
 ---
 import { themeConfig } from '../../starread.config';
 import { getCollection } from 'astro:content';
+import { countWords } from './frontmatter.ts';
 
-// 字数统计函数（适用于中英文混合文本）
-function countWords(text) {
-  if (!text) return 0;
-  // 匹配中文字符和英文单词
-  const chineseChars = text.match(/[\u4e00-\u9fa5]/g) || [];
-  const englishWords = text.match(/[a-zA-Z]+/g) || [];
-  return chineseChars.length + englishWords.length;
-}
-
-// 获取文章总数和全站字数
+// 获取所有内容集合
 const articles = await getCollection('articles');
-const articleCount = articles.length;
+const notes = await getCollection('notes', ({ data }) => {
+  return data.published !== false;
+});
+
+// 计算总文件数
+const totalFileCount = articles.length + notes.length;
 
 // 计算全站总字数
 let totalWords = 0;
+
+// 统计文章字数
 for (const article of articles) {
   totalWords += countWords(article.body);
 }
+
+// 统计笔记字数
+for (const note of notes) {
+  totalWords += countWords(note.body);
+}
+
+// 单独统计各类型文件数
+const articleCount = articles.length;
+const noteCount = notes.length;
 
 // 计算建站天数
 function getSiteDays() {
@@ -42,6 +50,15 @@ const siteDays = getSiteDays();
   </div>
 
   <div class="space-y-3 text-sm">
+    <!-- 总文件数 -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="icon-[lucide--files] w-4 h-4 text-gray-500 dark:text-slate-400"></span>
+        <span class="text-gray-600 dark:text-slate-400">总文件数</span>
+      </div>
+      <span class="font-medium text-primary dark:text-secondary">{totalFileCount} 个</span>
+    </div>
+    
     <!-- 文章总数 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
@@ -49,6 +66,15 @@ const siteDays = getSiteDays();
         <span class="text-gray-600 dark:text-slate-400">文章总数</span>
       </div>
       <span class="font-medium text-primary dark:text-secondary">{articleCount} 篇</span>
+    </div>
+    
+    <!-- 笔记总数 -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="icon-[lucide--file-text] w-4 h-4 text-gray-500 dark:text-slate-400"></span>
+        <span class="text-gray-600 dark:text-slate-400">笔记总数</span>
+      </div>
+      <span class="font-medium text-primary dark:text-secondary">{noteCount} 篇</span>
     </div>
     
     <!-- 全站字数 -->

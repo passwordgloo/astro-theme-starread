@@ -16,6 +16,7 @@ interface ArticleInfoProps {
   tags?: string[];
   categories?: string[];
   wordCount?: number;
+  permalink?: string;
 }
 
 const ArticleInfo: React.FC<ArticleInfoProps> = ({ 
@@ -24,7 +25,8 @@ const ArticleInfo: React.FC<ArticleInfoProps> = ({
   date, 
   tags = [], 
   categories = [], 
-  wordCount = 0 
+  wordCount = 0,
+  permalink
 }) => {
   useEffect(() => {
     const script = document.createElement('script');

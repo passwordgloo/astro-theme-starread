@@ -1,13 +1,15 @@
 ---
 import { getCollection } from 'astro:content';
 
-// 获取所有文章和标签
+// 获取所有文章和笔记
 const articles = await getCollection('articles');
+const notes = await getCollection('notes');
+const allContent = [...articles, ...notes];
 
-// 计算每个标签的文章数量
+// 计算每个标签的内容数量
 const tagCounts: Record<string, number> = {};
-articles.forEach(article => {
-  article.data.tags?.forEach(tag => {
+allContent.forEach(item => {
+  item.data.tags?.forEach(tag => {
     tagCounts[tag] = (tagCounts[tag] || 0) + 1;
   });
 });

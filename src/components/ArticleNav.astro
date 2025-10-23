@@ -5,12 +5,14 @@ export interface Props {
     title: string;
     cover: string;
     date: string;
+    permalink?: string;
   } | null;
   next?: {
     slug: string;
     title: string;
     cover: string;
     date: string;
+    permalink?: string;
   } | null;
   basePath?: string;
 }
@@ -22,7 +24,7 @@ const { prev, next, basePath = '/articles' } = Astro.props;
   <nav class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
     {prev && (
       <a 
-        href={`${basePath}/${prev.slug}`}
+        href={prev.permalink || `${basePath}/${prev.slug}`}
         class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700"
       >
         {/* 背景图片 */}
@@ -56,7 +58,7 @@ const { prev, next, basePath = '/articles' } = Astro.props;
     
     {next && (
       <a 
-        href={`${basePath}/${next.slug}`}
+        href={next.permalink || `${basePath}/${next.slug}`}
         class="group relative overflow-hidden rounded-xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 border border-gray-200 dark:border-gray-700 md:col-start-2"
       >
         {/* 背景图片 */}

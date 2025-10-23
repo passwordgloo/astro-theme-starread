@@ -4,7 +4,7 @@ import { themeConfig } from '../../starread.config';
 const categories = themeConfig.widget.categories;
 interface Props {
   title: string;
-  articles: CollectionEntry<'articles'>[];
+  articles: Array<CollectionEntry<'articles'> | CollectionEntry<'notes'>>;
   category: string;
 }
 
@@ -28,7 +28,7 @@ const { title, articles, category } = Astro.props;
             {index + 1}
           </div>
           <div class="flex-1 min-w-0">
-            <a href={`/articles/${article.slug}`} class="hover:text-primary dark:hover:text-secondary transition-colors line-clamp-1">{article.data.title}</a>
+            <a href={article.data.permalink || `/${article.collection}/${article.slug}`} class="hover:text-primary dark:hover:text-secondary transition-colors line-clamp-1">{article.data.title}</a>
             <div class="flex items-center mt-1 text-xs text-gray-500 space-x-2">
               <span>{article.data.author || themeConfig.widget.author.name}</span>
               <span>·</span>

@@ -1,6 +1,6 @@
 ---
 import { themeConfig } from '../../starread.config';
-import { formatDate, getCoverImage, getAuthorInfo } from '../pages/articles/[slug].astro';
+import { formatDate, getCoverImage, getAuthorInfo } from '../components/frontmatter';
 
 // 轮播卡片文章组件
 const { articles = [] } = Astro.props;
@@ -41,7 +41,7 @@ const processedArticles = articles.map(article => ({
     <div id="carousel-track" class="flex transition-transform duration-500 ease-out space-x-4">
       {processedArticles.length > 0 ? (
         processedArticles.map((article, index) => (
-          <a href={`/articles/${encodeURIComponent(article.slug)}`} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
+          <a href={article.data.permalink || `/${article.collection}/${article.slug}`} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
               <div class="h-40 bg-gray-200 overflow-hidden">
                 <Image src={article.processed.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={imageHeight} />
               </div>
