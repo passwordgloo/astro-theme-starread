@@ -2,6 +2,20 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.8](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.7...v0.0.8) (2025-10-23)
+
+
+### ✨ Features | 功能
+
+* **search:** 添加Algolia搜索组件并实现相关功能，包括搜索结果展示、分页和错误处理 ([9adffec](https://github.com/passwordgloo/astro-theme-starread/commit/9adffecd89c44a49acf3a1c402b6ae6684b3ba6a))
+* **组件:** 添加文章目录组件并重构布局索引 ([aeeff3c](https://github.com/passwordgloo/astro-theme-starread/commit/aeeff3c2bcd1870d8357e334046fde1d535c75e6))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **ArticleInfo:** 重构文章信息组件并迁移至TSX格式 ([9467c8b](https://github.com/passwordgloo/astro-theme-starread/commit/9467c8b94e7f200331a9d5a9acd800ba4ba769ac))
+* **search:** 将搜索提供商从algolia切换为本地搜索 ([f506e51](https://github.com/passwordgloo/astro-theme-starread/commit/f506e51fb2bb5bd6b07ed6fc32afccfd912f6a4f))
+
 ### [0.0.7](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.6...v0.0.7) (2025-10-23)
 
 
