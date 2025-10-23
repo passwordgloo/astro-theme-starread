@@ -4,13 +4,13 @@ const ArticleInfo = ({ title, cover, date, tags = [], categories = [] }) => {
   useEffect(() => {
     // 动态加载本地busuanzi脚本
     const script = document.createElement('script');
-    script.src = '/scripts/busuanzi.min.js';
+    script.src = '/busuanzi.min.js';
     script.defer = true;
     document.body.appendChild(script);
     
     return () => {
       // 清理脚本
-      const existingScript = document.querySelector('script[src="/scripts/busuanzi.min.js"]');
+      const existingScript = document.querySelector('script[src="/busuanzi.min.js"]');
       if (existingScript) {
         document.body.removeChild(existingScript);
       }
