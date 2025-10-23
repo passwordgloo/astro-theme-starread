@@ -31,7 +31,7 @@ const sortedTags = Object.entries(tagCounts).sort(([, a], [, b]) => b - a);
           class="inline-flex items-center px-3 py-1 text-sm font-medium rounded-full bg-gray-100 hover:bg-gray-200 text-gray-800 dark:bg-gray-700 dark:hover:bg-gray-600 dark:text-gray-200 transition-colors"
         >
           {tag}
-          <span class="ml-1 text-xs font-bold bg-blue-500 text-white px-1.5 py-0.5 rounded-full">{count}</span>
+          <span class="ml-1 text-xs font-bold  bg-primary dark:bg-secondary text-white px-1.5 py-0.5 rounded-full">{count}</span>
         </a>
       ))}
     </div>

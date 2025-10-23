@@ -33,7 +33,7 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
         <div key={article.slug} class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-white/5 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
           {/* 左上角分类标签 */}
           {article.processed.categories.length > 0 && (
-            <div class="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">
+            <div class="absolute top-2 left-2 bg-primary dark:bg-secondary text-white text-xs font-bold px-2 py-1 rounded z-10">
               {article.processed.categories[0]}
             </div>
           )}
@@ -62,7 +62,7 @@ const sortedArticles = sortArticlesByDate(processedArticles).slice(0, defaultLim
             )}
 
             {/* 文章标题 */}
-            <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary transition-colors">
+            <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary dark:hover:text-secondary transition-colors">
               <a href={`/articles/${article.slug}`}>{article.data.title}</a>
             </h3>
 

@@ -18,7 +18,7 @@ const { prev, next } = Astro.props;
 ---
 
 {(prev || next) && (
-  <nav class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+  <nav class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
     {prev && (
       <a 
         href={`/articles/${prev.slug}`}

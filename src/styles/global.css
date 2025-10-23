@@ -12,5 +12,12 @@
   背景  bg-primary
   */
   --color-primary: #4f46e5;
-  --color-secondary: #f59e0b;
+  --color-secondary: #2388f5;
+}
+
+
+
+
+.test{
+  color: #2388f5;
 }
