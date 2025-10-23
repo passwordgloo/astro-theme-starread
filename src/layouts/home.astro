@@ -14,27 +14,29 @@ import { themeConfig } from '../../starread.config';
 import { getCollection } from 'astro:content';
 import { ClientRouter } from "astro:transitions";
 
-// 获取所有文章
-const allArticles = await getCollection('articles');
+// 获取所有文章和笔记
+const articles = await getCollection('articles');
+const notes = await getCollection('notes');
+const allContent = [...articles, ...notes];
 
-// 按分类筛选文章
+// 按分类筛选内容
 const categoryArticles = {};
 
 themeConfig.widget.categories.forEach(category => {
-  categoryArticles[category.name] = allArticles.filter(article => 
-    article.data.categories?.includes(category.name) || 
-    article.data.tags?.includes(category.name)
+  categoryArticles[category.name] = allContent.filter(item => 
+    item.data.categories?.includes(category.name) || 
+    item.data.tags?.includes(category.name)
   );
 });
 
-// 最新文章（按日期排序）
-const latestArticles = [...allArticles]
+// 最新内容（按日期排序）
+const latestArticles = [...allContent]
   .sort((a, b) => new Date(b.data.date || 0) - new Date(a.data.date || 0))
   .slice(0, 5);
 
-// 轮播文章（取前5篇有封面图的文章）
-const carouselArticles = allArticles
-  .filter(article => article.data.cover)
+// 轮播文章（取前5篇有封面图的内容）
+const carouselArticles = allContent
+  .filter(item => item.data.cover)
   .slice(0, 5);
 ---
 
@@ -65,7 +67,7 @@ const carouselArticles = allArticles
           />
         ))}
       </div>
-    <LatestArticle articles={allArticles} />
+    <LatestArticle articles={articles} notes={notes} />
     </div>
 
     <!-- 右侧边栏 -->
