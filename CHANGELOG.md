@@ -2,6 +2,29 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)
 
+### [0.0.9](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.8...v0.0.9) (2025-10-23)
+
+
+### 💄 Styles | 风格
+
+* **layouts:** 更新分类页面样式使用主题色 ([d65b834](https://github.com/passwordgloo/astro-theme-starread/commit/d65b834a4bad1f06921ea4f0f563ae15f9a54218))
+* **tag:** 更新标签页面的颜色样式以匹配主题 ([560da81](https://github.com/passwordgloo/astro-theme-starread/commit/560da81e67653f9c9c09249fbb195c173f3822d4))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* 移除笔记功能并简化文章导航 ([3475c4c](https://github.com/passwordgloo/astro-theme-starread/commit/3475c4c28ff7f9dc840b77e98121667acb646367))
+
+
+### ✨ Features | 功能
+
+* **ArticleNav:** 添加 basePath 属性支持不同路径的文章导航 ([b56a2eb](https://github.com/passwordgloo/astro-theme-starread/commit/b56a2eb0b46fd5b65b20b85889aa975cea8d408f))
+* **layouts:** 添加canonical链接并支持多内容类型 ([2e27f7e](https://github.com/passwordgloo/astro-theme-starread/commit/2e27f7e8d52f26d34a93a119d78f57161ad93b2f))
+* **notes:** 添加笔记功能模块，包括配置和页面 ([8d54bba](https://github.com/passwordgloo/astro-theme-starread/commit/8d54bbaca6343e498d0222cb555dfcebe0b4f457))
+* 支持笔记集合并优化文章链接处理 ([ad4a062](https://github.com/passwordgloo/astro-theme-starread/commit/ad4a06236756dbda07b2be807814d0a06ae6419c))
+* 添加自动更新永久链接和索引功能 ([ce93888](https://github.com/passwordgloo/astro-theme-starread/commit/ce938885cb4a3c1b1a901208ae246a5fe8b9eda3))
+* **路由:** 添加随机permalink支持并实现动态路由 ([62568fa](https://github.com/passwordgloo/astro-theme-starread/commit/62568fa79b07ef538c2cb5c1115dfda51756d8e5))
+
 ### [0.0.8](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.7...v0.0.8) (2025-10-23)
 
 
