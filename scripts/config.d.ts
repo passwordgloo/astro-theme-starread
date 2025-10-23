@@ -360,4 +360,28 @@ export interface starreadthemeconfig {
     /** 轮播图标题 */
     title: string;
   };
+
+  /**
+   * Banner配置
+   * 首页头部横幅的配置
+   * 
+   * @example
+   * banner: {
+   *   title: "Star read 星阅主题",
+   *   backgroundImage: "https://picsum.photos/1200/300",
+   *   tags: [
+   *     "基于Vite+Tailwindcss",
+   *     "支持深色模式", 
+   *     "模块化组件"
+   *   ]
+   * }
+   */
+  banner: {
+    /** Banner标题 */
+    title: string;
+    /** 背景图片URL */
+    backgroundImage: string;
+    /** 标签列表 */
+    tags: string[];
+  };
 }
