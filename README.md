@@ -1,28 +1,76 @@
-# Star Read - Astro博客主题
+# Star Read - Astro Blog Theme
 
 ![NPM Version](https://img.shields.io/npm/v/astro-theme-starread?logo=npm)&emsp;![GitHub Tag](https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github)&emsp;![Created At](https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown)&emsp;![Last Commit](https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git)
 
-既有星光般的璀璨，又不失简洁和高端感的Astro主题
+A brilliant yet clean and sophisticated Astro theme with star-like quality
 
-## 📦 安装
+## 📦 Installation
 
-### 方法一：使用`astro`模版安装
+### Method 1: Initialize via CLI Tool
 
-| 包管理器       | 命令                                        |
+| Package Manager | Recommended Command                          |
+|----------------|-------------------------------------------|
+| pnpm / pnpx    | `pnpm dlx astro-theme-starread init` or `pnpx astro-theme-starread init` |
+| npm (npx)      | `npx astro-theme-starread init`           |
+| Yarn           | `yarn dlx astro-theme-starread init` (Requires Yarn v2+) |
+
+>[!note]
+>We provide a `create` command to facilitate creating a theme in a specified folder
+
+1. Create Project: Depending on your package manager, choose one of the following commands:
+
+```bash
+# Using pnpm
+pnpm create astro-theme-starread my-blog
+
+# Using npm
+npx create-astro-theme-starread my-blog
+
+# Using yarn
+yarn create astro-theme-starread my-blog
+
+# Using cnpm
+cnpm init astro-theme-starread my-blog
+
+```
+
+2. Enter Project Directory:
+
+```bash
+
+cd my-blog
+
+```
+
+3. Install Dependencies:
+
+```bash
+pnpm install
+```
+
+4. Start Development Server:
+
+```bash
+pnpm dev
+```
+
+### Method 2: Install using `astro` template
+
+>[!warning]
+>This method requires accessing the GitHub repository, ensure network connectivity.
+
+| Package Manager | Command                                        |
 |----------------|---------------------------------------------|
 | pnpm           | `pnpm create astro@latest --template passwordgloo/astro-theme-starread` |
 | npm            | `npm create astro@latest -- --template passwordgloo/astro-theme-starread` |
 | yarn           | `yarn create astro --template passwordgloo/astro-theme-starread` |
 
-### 方法二：通过CLI工具初始化
+### Method 3: Install from Source
 
-| 包管理器       | 建议命令                                  |
-|----------------|-------------------------------------------|
-| pnpm / pnpx    | `pnpm dlx astro-theme-starread init` 或 `pnpx astro-theme-starread init` |
-| npm (npx)      | `npx astro-theme-starread init`           |
-| Yarn           | `yarn dlx astro-theme-starread init`（需 Yarn v2+） |
+>[!warning]
+>This method requires accessing the GitHub repository, ensure network connectivity.
 
-### 方法三：源码安装
+
 ```bash
 git clone https://github.com/passwordgloo/astro-theme-starread
 cd astro-theme-starread
@@ -30,102 +78,102 @@ pnpm install
 ```
 
 >[!note]
->安装完成后，运行开发服务器：
+>After installation, run the development server:
 ```bash
 pnpm dev
 ```
 
-## 📂 项目结构
+## 📂 Project Structure
 
 ```text
 /
 ├── src/
-│   ├── components/     # 组件文件
-│   ├── content/        # 内容配置
-│   ├── layouts/        # 布局模板
-│   ├── pages/          # 页面路由
-│   └── styles/         # 样式文件
-├── public/             # 静态资源
-└── dist/               # 构建输出
+│   ├── components/     # Component files
+│   ├── content/        # Content configuration
+│   ├── layouts/        # Layout templates
+│   ├── pages/          # Page routes
+│   └── styles/         # Style files
+├── public/             # Static assets
+└── dist/               # Build output
 ```
 
-## 🚀 特性
+## 🚀 Features
 
-- 🎨 现代化UI设计
-- 🔍 支持本地搜索（Pagefind）和Algolia搜索
-- 📱 响应式设计
-- 🌙 深色/浅色主题切换
-- 🏷️ 标签和分类支持
-- 📊 文章统计和作者信息展示
+- 🎨 Modern UI Design
+- 🔍 Support for Local Search (Pagefind) and Algolia Search
+- 📱 Responsive Design
+- 🌙 Dark/Light Theme Toggle
+- 🏷️ Tag and Category Support
+- 📊 Article Statistics and Author Information Display
 
-## 🔍 搜索
+## 🔍 Search
 
-### 本地搜索
+### Local Search
 
-默认使用本地搜索，首次使用请运行`pnpm local` 建立本地索引
+Local search is used by default. For first-time use, run `pnpm local` to build local index
 
-### Algolia搜索
+### Algolia Search
 
 >[!important]
->生产环境中建议使用环境变量方式配置，避免敏感信息暴露在代码中。
+>It is recommended to use environment variables for configuration in production to avoid exposing sensitive information in code.
 
-1. 编辑`starread.config.ts` 选择Algolia搜索
+1. Edit `starread.config.ts` to select Algolia search
 ```ts
 export const themeConfig: starreadthemeconfig = {
   search: {
-    // 搜索服务提供商: 'local', 'algolia'
+    // Search provider: 'local', 'algolia'
       provider: 'algolia',
     }
 }
 ```
 
-2. 根目录创建并编辑 `.env`文件
+2. Create and edit `.env` file in root directory
 
 >[!note]
->Algolia搜索需要您的Algolia应用ID、搜索密钥、索引名称和管理员API密钥。
+>Algolia search requires your Algolia Application ID, Search Key, Index Name, and Admin API Key.
 
 >[!tip]
->如果您没有Algolia账号，需要先注册并创建一个应用。
+>If you don't have an Algolia account, you need to register and create an application first.
 
 ```env
-PUBLIC_ALGOLIA_APP_ID=您的Algolia应用ID
-PUBLIC_ALGOLIA_SEARCH_KEY=您的Algolia搜索密钥
-PUBLIC_ALGOLIA_INDEX_NAME=您的索引名称
-ALGOLIA_WRITE_API_KEY=您的管理员API密钥（用于索引上传）
+PUBLIC_ALGOLIA_APP_ID=Your Algolia Application ID
+PUBLIC_ALGOLIA_SEARCH_KEY=Your Algolia Search Key
+PUBLIC_ALGOLIA_INDEX_NAME=Your Index Name
+ALGOLIA_WRITE_API_KEY=Your Write API Key (for index upload)
 ```
 
-3. 推送索引到Algolia
+3. Push Index to Algolia
 
-运行`pnpm algolia` 推送本地索引到Algolia
+Run `pnpm algolia` to push local index to Algolia
 
-## ⚙️ 自定义配置
+## ⚙️ Custom Configuration
 
-您可以通过修改根目录下的 `starread.config.ts` 文件来自定义主题配置，包括网站标题、导航菜单、作者信息、侧边栏组件显示等。
+You can customize theme configuration by modifying the `starread.config.ts` file in the root directory, including website title, navigation menu, author information, sidebar component display, etc.
 
-示例配置项：
+Example configuration items:
 ```typescript
-// 修改网站标题
+// Modify website title
 site: {
-  title: '我的博客',
-  // ...其他配置
+  title: 'My Blog',
+  // ...other configurations
 }
 
-// 自定义导航菜单
+// Custom navigation menu
 nav: [
-  { name: '首页', href: '/' },
-  { name: '关于', href: '/about' },
-  // ...其他菜单项
+  { name: 'Home', href: '/' },
+  { name: 'About', href: '/about' },
+  // ...other menu items
 ]
 ```
 
-## 🧞 命令
+## 🧞 Commands
 
-| 命令                     | 描述                                           |
+| Command                 | Description                                       |
 | :----------------------- | :--------------------------------------------- |
-| `pnpm install`           | 安装依赖                                       |
-| `pnpm dev`               | 启动本地开发服务器 `localhost:4321`            |
-| `pnpm preview`           | 本地预览构建结果                               |
-| `pnpm local`             | 运行自动索引脚本并构建生产站点                 |
-| `pnpm algolia`           | 推送数据到Algolia搜索                          |
-| `pnpm changelog`         | 生成更新日志                                   |
-| `pnpm release`           | 版本管理（更新版本号、生成提交等）             |
+| `pnpm install`           | Install dependencies                           |
+| `pnpm dev`               | Start local development server `localhost:4321` |
+| `pnpm preview`           | Preview build results locally                   |
+| `pnpm local`             | Run automatic indexing script and build production site |
+| `pnpm algolia`           | Push data to Algolia search                      |
+| `pnpm changelog`         | Generate changelog                              |
+| `pnpm release`           | Version management (update version number, generate commits, etc.) |

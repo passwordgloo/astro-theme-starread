@@ -1,6 +1,18 @@
 import type { starreadthemeconfig } from './scripts/config';
 
 export const themeConfig: starreadthemeconfig = {
+
+  // Banner配置
+  banner: {
+    title: "Star read 星阅主题",
+    backgroundImage: "https://picsum.photos/1200/300",
+    tags: [
+      "基于Vite+Tailwindcss",
+      "支持深色模式",
+      "模块化组件"
+    ]
+  },
+  
   carousel: {
     title: "轮播"
   },
@@ -8,14 +20,14 @@ export const themeConfig: starreadthemeconfig = {
   // 网站配置
   site: {
     title: '星阅主题',
-    favicon: '/favicon.svg',
+    favicon: '/favicon.png',
     defaultCover: '/defaultCover.jpg',
     
     logo: {
       image: '/logo.svg',
       darkImage: '/logo-dark.svg',
-      text: 'Lovestu',
-      alt: 'Lovestu Logo',
+      text: '星阅主题',
+      alt: '星阅主题 Logo',
     },
   },
 
@@ -25,7 +37,7 @@ export const themeConfig: starreadthemeconfig = {
     description: '阳光明媚，微笑前行',
     avatar: 'https://picsum.photos/40/40?random=4',
     social: {
-      bilibili: '@伏案听潮',
+      bilibili: 'XXXXXX',
       qq: 'XXXXXXX',
     },
   },
@@ -111,10 +123,15 @@ export const themeConfig: starreadthemeconfig = {
 
   // 文章加载配置
   articleLoad: {
-    type: 'auto', // 'button' 或 'auto'
+    type: 'button', // 'button' 或 'auto'
     defaultLimit: 20, // 默认最大加载数量
     initialLoad: 8, // 初始加载数量
     loadMore: 4 // 每次加载数量
+  },
+
+  // 封面图片配置
+  coverImage: {
+    defaultAspectRatio: '16:9' // 默认宽高比，支持的比例：16:9, 4:3, 3:2
   },
 
   // 搜索配置
