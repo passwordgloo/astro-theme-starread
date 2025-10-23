@@ -1,0 +1,84 @@
+---
+import BaseLayout from "../layouts/home.astro";
+import { getCollection } from 'astro:content';
+import { themeConfig } from '../../../starread.config';
+
+// 获取所有笔记
+const allNotes = await getCollection('notes');
+
+// 按分类筛选笔记
+const categoryNotes = {};
+
+themeConfig.widget.categories.forEach(category => {
+  categoryNotes[category.name] = allNotes.filter(note => 
+    note.data.categories?.includes(category.name) || 
+    note.data.tags?.includes(category.name)
+  );
+});
+
+// 最新笔记（按日期排序）
+const latestNotes = [...allNotes]
+  .sort((a, b) => new Date(b.data.date || 0) - new Date(a.data.date || 0))
+  .slice(0, 5);
+
+// 轮播笔记（取前5篇有封面图的笔记）
+const carouselNotes = allNotes
+  .filter(note => note.data.cover)
+  .slice(0, 5);
+---
+
+<html lang="zh-CN" class="min-h-full antialiased">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/png" href={themeConfig.site.favicon} />
+    <meta name="generator" content={Astro.generator} />
+    <title>笔记 - {themeConfig.site.title}</title>
+  </head>
+  <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-slate-900 dark:text-neutral-100 transition-colors">
+    <main class="container mx-auto px-4 py-6">
+      <h1 class="text-3xl font-bold mb-6">笔记</h1>
+      
+      {allNotes.length === 0 ? (
+        <p class="text-gray-500">暂无笔记</p>
+      ) : (
+        <div class="space-y-8">
+          {allNotes.map(note => (
+            <article key={note.slug} class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-sm">
+              <h2 class="text-xl font-semibold mb-2">
+                <a href={`/notes/${note.slug}`} class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                  {note.data.title}
+                </a>
+              </h2>
+              <div class="flex items-center text-sm text-gray-500 dark:text-gray-400 mb-3">
+                {note.data.date && (
+                  <time>{new Date(note.data.date).toLocaleDateString()}</time>
+                )}
+                {note.data.categories && note.data.categories.length > 0 && (
+                  <div class="flex items-center ml-4">
+                    <span class="mr-1">分类:</span>
+                    {note.data.categories.map(category => (
+                      <span key={category} class="mr-2">{category}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {note.data.description && (
+                <p class="text-gray-600 dark:text-gray-300 mb-4">{note.data.description}</p>
+              )}
+              <a 
+                href={`/notes/${note.slug}`} 
+                class="inline-flex items-center text-blue-600 dark:text-blue-400 hover:underline"
+              >
+                阅读更多
+                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                </svg>
+              </a>
+            </article>
+          ))}
+        </div>
+      )}
+    </main>
+  </body>
+</html>
