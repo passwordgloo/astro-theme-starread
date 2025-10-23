@@ -3,7 +3,6 @@ import { getEntryBySlug, getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/article.astro';
 import { themeConfig } from '../../../starread.config';
 import ArticleNav from '../../components/ArticleNav.astro';
-import ArticleInfo from '../../components/ArticleInfo.jsx';
 
 export async function getStaticPaths() {
   const entries = await getCollection('articles');
@@ -135,27 +134,27 @@ const wordCount = countWords(entry.body);
 const adjacentArticles = await getAdjacentArticles(entry.slug);
 ---
 
-<BaseLayout title={entry.data.title}>
-  {/* 文章信息组件 */}
-  <div class="mb-8">
-    <ArticleInfo 
-      client:load
-      title={entry.data.title}
-      cover={entry.data.cover || themeConfig.site.defaultCover}
-      date={formatDate(entry.data.date)}
-      tags={entry.data.tags || []}
-      categories={entry.data.categories || []}
-      wordCount={wordCount}
-    />
-  </div>
+<BaseLayout 
+  title={entry.data.title}
+  entry={entry}
+  wordCount={wordCount}
+  formatDate={formatDate}
+  date={formatDate(entry.data.date)}
+  tags={entry.data.tags || []}
+  categories={entry.data.categories || []}
+  cover={getCoverImage(entry.data.cover)}
+>
 
   <article id="article-content" class="prose max-w-none dark:prose-invert p-4 rounded-lg shadow-sm bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)]">
     <Content />
   </article>
 
-  {/* 文章导航组件 */}
-  <ArticleNav 
+  <div class="mb-6">
+    <ArticleNav 
     prev={adjacentArticles.prev}
     next={adjacentArticles.next}
   />
+
+  </div>
+
 </BaseLayout>

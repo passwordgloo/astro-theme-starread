@@ -5,7 +5,7 @@
 // 以下是所有组件的导出声明
 export { default as AdWidget } from './AdWidget.astro';
 export { default as Algolia } from './Algolia.tsx';
-export { default as ArticleInfo } from './ArticleInfo.jsx';
+export { default as ArticleInfo } from './ArticleInfo.tsx';
 export { default as ArticleNav } from './ArticleNav.astro';
 export { default as ArticleSection } from './ArticleSection.astro';
 export { default as ArticleTOC } from './ArticleTOC.tsx';

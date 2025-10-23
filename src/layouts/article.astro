@@ -5,9 +5,12 @@ import AuthorWidget from "../components/AuthorWidget.astro";
 import ArticleTOC from "../components/ArticleTOC.tsx";
 import TagCloud from "../components/TagCloud.astro";
 import Comment from "../components/Comment.astro";
-import ArticleInfo from '../../components/ArticleInfo.jsx';
+import ArticleInfo from '../components/ArticleInfo.tsx';
 import { themeConfig } from '../../starread.config';
 import { ClientRouter } from "astro:transitions";
+
+// 从props接收必要的数据
+const { entry, wordCount, formatDate } = Astro.props;
 ---
 <html lang="zh-CN" class="min-h-full antialiased">
   <head>
@@ -20,13 +23,23 @@ import { ClientRouter } from "astro:transitions";
   </head>
   <body data-pagefind-body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-gray-950 dark:text-neutral-100 transition-colors">
     <NavBar title={Astro.props.title} />
+    <ArticleInfo 
+        client:load
+        title={entry?.data?.title || Astro.props.title}
+        cover={entry?.data?.cover || Astro.props.cover || themeConfig.site.defaultCover}
+        date={formatDate?.(entry?.data?.date) || Astro.props.date}
+        tags={entry?.data?.tags || Astro.props.tags || []}
+        categories={entry?.data?.categories || Astro.props.categories || []}
+        wordCount={wordCount || Astro.props.wordCount || 0}
+    />
     <main class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">
-    <div class="w-full md:w-2/3 space-y-6">
-      <slot />
-      <Comment/>
-    </div>
-    <!-- 右侧边栏 -->
-			<aside class="w-full md:w-1/3 space-y-6">
+      <!-- 左侧内容 -->
+      <div class="w-full md:w-2/3">
+        <slot />
+        <Comment/>
+      </div>
+      <!-- 右侧边栏 -->
+      <aside class="w-full md:w-1/3 space-y-6">
         	{themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
           {themeConfig.sidebar.article.tag && <TagCloud />}
         	{themeConfig.sidebar.article.toc && <ArticleTOC client:load />}
