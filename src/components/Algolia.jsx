@@ -11,27 +11,40 @@ import {
   Configure,
 } from 'react-instantsearch';
 
-// 🔹 原始 Algolia client
-const algoliaClient = algoliasearch(
-  import.meta.env.PUBLIC_ALGOLIA_APP_ID,
-  import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY
-);
+// 🔹 原始 Algolia client，添加错误处理防止环境变量缺失导致构建失败
+let algoliaClient;
+let searchClient;
 
-// 🔹 包一层，拦截空查询，避免请求 Algolia API
-const searchClient = {
-  ...algoliaClient,
-  search(requests) {
-    if (requests.every(({ params }) => !params.query)) {
-      return Promise.resolve({
-        results: requests.map(() => ({
-          hits: [],
-          nbHits: 0,
-          processingTimeMS: 0,
-        })),
-      });
-    }
-    return algoliaClient.search(requests);
-  },
+try {
+  algoliaClient = algoliasearch(
+    import.meta.env.PUBLIC_ALGOLIA_APP_ID,
+    import.meta.env.PUBLIC_ALGOLIA_SEARCH_KEY
+  );
+
+  // 🔹 包一层，拦截空查询，避免请求 Algolia API
+  searchClient = {
+    ...algoliaClient,
+    search(requests) {
+      if (requests.every(({ params }) => !params.query)) {
+        return Promise.resolve({
+          results: requests.map(() => ({
+            hits: [],
+            nbHits: 0,
+            processingTimeMS: 0,
+          })),
+        });
+      }
+      return algoliaClient.search(requests);
+    },
+  };
+} catch (error) {
+  // 环境变量缺失时提供默认的模拟客户端
+  console.warn('Algolia配置缺失，使用模拟客户端');
+  searchClient = {
+    search: () => Promise.resolve({
+      results: [{ hits: [], nbHits: 0, processingTimeMS: 0 }]
+    })
+  };
 };
 
 const renderTags = (tags) => {
