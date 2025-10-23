@@ -30,6 +30,7 @@
   "scripts": {
     "dev": "astro dev",
     "preview": "astro preview",
+    "build": "astro build",
     "local": "node scripts/autoindex.js && astro build",
     "algolia": "node scripts/pushAlgolia.js",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s --config scripts/changelog-updater.js -r 0"
@@ -57,6 +58,7 @@
     "standard-version": "^9.5.0"
   },
   "bin": {
+    "create-astro-theme-starread": "scripts/init.cjs",
     "astro-theme-starread": "scripts/init.cjs"
   }
 }
