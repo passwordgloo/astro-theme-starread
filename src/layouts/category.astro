@@ -44,7 +44,7 @@ const { title, categoryName, currentCategory, articles, allCategories } = Astro.
                   href={`/category/${encodeURIComponent(category)}`} 
                   class={`px-3 py-1 rounded-full text-sm transition-colors hover:opacity-90 ${ 
                     category === currentCategory 
-                      ? 'bg-blue-500 text-white' 
+                      ? 'bg-primary dark:bg-secondary text-white' 
                       : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200' 
                   }`}
                 >
@@ -77,7 +77,7 @@ const { title, categoryName, currentCategory, articles, allCategories } = Astro.
                     </div>
                   </div>
                   {/* 序号 */}
-                  <div class="ml-4 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
+                  <div class="ml-4 w-8 h-8 bg-primary dark:bg-secondary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
                     {index + 1}
                   </div>
                 </div>
