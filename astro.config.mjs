@@ -5,7 +5,7 @@ import autoUpdatePermalink from './scripts/autoUpdateFrontmatter.js';
 import autoIndex from './scripts/autoindex.js';
 
 export default defineConfig({
-  site: "https://star.iglooblog.top",
+  site: "https://www.example.com",
   vite: {
     plugins: [tailwindcss()],
   },
