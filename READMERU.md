@@ -1,8 +1,21 @@
+<div align="center">
+  <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
+  <p>
+    <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
+    <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
+    <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
+    <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
+</p>
+   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
+  🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
+  🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
+  🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
+</div>
+
 # Star Read - Тема для блога Astro
 
-![NPM Version](https://img.shields.io/npm/v/astro-theme-starread?logo=npm)&emsp;![GitHub Tag](https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github)&emsp;![Created At](https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown)&emsp;![Last Commit](https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git)
-
-Блестящая, но при этом простая и изысканная тема Astro со звездным качеством
+>Блестящая, но при этом простая и изысканная тема Astro со звездным качеством
 
 ## 📦 Установка
 
@@ -135,7 +148,7 @@ export const themeConfig: starreadthemeconfig = {
 >[!tip]
 >Если у вас нет аккаунта Algolia, вам нужно сначала зарегистрироваться и создать приложение.
 
-```env
+```txt
 PUBLIC_ALGOLIA_APP_ID=Идентификатор вашего приложения Algolia
 PUBLIC_ALGOLIA_SEARCH_KEY=Ключ поиска Algolia
 PUBLIC_ALGOLIA_INDEX_NAME=Название вашего индекса
@@ -166,6 +179,26 @@ nav: [
 ]
 ```
 
+## 🔧 Настройка комментариев Twikoo
+
+Чтобы включить систему комментариев Twikoo, измените значение `envId` в строке 13 файла `src/components/Comment.astro` на адрес [вашей среды Twikoo](https://twikoo.js.org/backend.html).
+
+```js
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.twikoo) {
+      window.twikoo.init({
+        envId: 'https://example.com',// Ваш адрес окружения
+        el: '#tcomment',
+        path: window.location.pathname
+      });
+    } else {
+      console.error('Не удалось загрузить Twikoo, проверьте местное расположение Twikoo или адрес CDN');
+    }
+  });
+</script>
+```
+
 ## 🧞 Команды
 
 | Команда                 | Описание                                       |
@@ -177,3 +210,5 @@ nav: [
 | `pnpm algolia`           | Отправить данные в поиск Algolia                |
 | `pnpm changelog`         | Сгенерировать журнал изменений                  |
 | `pnpm release`           | Управление версиями (обновление номера версии, создание коммитов и т.д.) |
+
+

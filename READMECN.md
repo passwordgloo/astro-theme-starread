@@ -1,8 +1,21 @@
+<div align="center">
+  <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
+  <p>
+    <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
+    <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
+    <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
+    <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
+</p>
+   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
+  🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
+  🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
+  🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
+</div>
+
 # Star Read - Astro博客主题
 
-![NPM Version](https://img.shields.io/npm/v/astro-theme-starread?logo=npm)&emsp;![GitHub Tag](https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github)&emsp;![Created At](https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown)&emsp;![Last Commit](https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git)
-
-既有星光般的璀璨，又不失简洁和高端感的Astro主题
+>既有星光般的璀璨，又不失简洁和高端感的Astro主题
 
 ## 📦 安装
 
@@ -31,15 +44,12 @@ yarn create astro-theme-starread my-blog
 
 # 使用 cnpm
 cnpm init astro-theme-starread my-blog
-
 ```
 
 2. 进入项目目录：
 
 ```bash
-
 cd my-blog
-
 ```
 
 3. 安装依赖：
@@ -135,7 +145,7 @@ export const themeConfig: starreadthemeconfig = {
 >[!tip]
 >如果您没有Algolia账号，需要先注册并创建一个应用。
 
-```env
+```txt
 PUBLIC_ALGOLIA_APP_ID=您的Algolia应用ID
 PUBLIC_ALGOLIA_SEARCH_KEY=您的Algolia搜索密钥
 PUBLIC_ALGOLIA_INDEX_NAME=您的索引名称
@@ -164,6 +174,26 @@ nav: [
   { name: '关于', href: '/about' },
   // ...其他菜单项
 ]
+```
+## 🔧 Twikoo 评论
+
+>[!tip]
+>如需启用twikoo，请修改`src/compponents/Comment.astros`中的第13行`envId`为您的[twikoo环境地址](https://twikoo.js.org/backend.html)。
+
+```js
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.twikoo) {
+      window.twikoo.init({
+        envId: 'https://example.com',// 你的环境地址
+        el: '#tcomment',
+        path: window.location.pathname
+      });
+    } else {
+      console.error('Twikoo 加载失败，请检查 twikoo本地位置或者CDN地址');
+    }
+  });
+</script>
 ```
 
 ## 🧞 命令

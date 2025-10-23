@@ -1,8 +1,21 @@
-# Star Read - Astro블로그 테마
+<div align="center">
+  <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
+  <p>
+    <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
+    <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
+    <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
+    <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
+</p>
+   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
+  🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
+  🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
+  🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
+</div>
 
-![NPM Version](https://img.shields.io/npm/v/astro-theme-starread?logo=npm)&emsp;![GitHub Tag](https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github)&emsp;![Created At](https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown)&emsp;![Last Commit](https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git)
+# Star Read - Astro 블로그 테마
 
-별과 같은 빛나는 품질을 지닌 우아하면서도 간결한 Astro 테마입니다
+>별과 같은 빛나는 품질을 지닌 우아하면서도 간결한 Astro 테마입니다
 
 ## 📦 설치
 
@@ -31,15 +44,12 @@ yarn create astro-theme-starread my-blog
 
 # cnpm 사용
 cnpm init astro-theme-starread my-blog
-
 ```
 
 2. 프로젝트 디렉토리로 이동：
 
 ```bash
-
 cd my-blog
-
 ```
 
 3. 의존성 설치：
@@ -135,7 +145,7 @@ export const themeConfig: starreadthemeconfig = {
 >[!tip]
 >Algolia 계정이 없는 경우 먼저 등록하고 애플리케이션을 생성해야 합니다.
 
-```env
+```txt
 PUBLIC_ALGOLIA_APP_ID=귀하의 Algolia 애플리케이션 ID
 PUBLIC_ALGOLIA_SEARCH_KEY=귀하의 Algolia 검색 키
 PUBLIC_ALGOLIA_INDEX_NAME=귀하의 인덱스 이름
@@ -166,6 +176,26 @@ nav: [
 ]
 ```
 
+## 🔧 Twikoo 댓글 설정
+
+Twikoo 댓글 시스템을 활성화하려면 `src/components/Comment.astro` 파일의 13행에 있는 `envId` 값을 귀하의 [Twikoo 환경 주소](https://twikoo.js.org/backend.html)로 수정해 주세요.
+
+```js
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.twikoo) {
+      window.twikoo.init({
+        envId: 'https://example.com',// 귀하의 환경 주소
+        el: '#tcomment',
+        path: window.location.pathname
+      });
+    } else {
+      console.error('Twikoo 로드에 실패했습니다. Twikoo의 로컬 위치 또는 CDN 주소를 확인해 주세요');
+    }
+  });
+</script>
+```
+
 ## 🧞 명령어
 
 | 명령어                   | 설명                                           |
@@ -177,3 +207,4 @@ nav: [
 | `pnpm algolia`           | Algolia 검색에 데이터 푸시                       |
 | `pnpm changelog`         | 변경 로그 생성                                 |
 | `pnpm release`           | 버전 관리 (버전 번호 업데이트, 커밋 생성 등)        |
+

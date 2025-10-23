@@ -1,8 +1,22 @@
+<div align="center">
+  <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
+  <p>
+    <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
+    <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
+    <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
+    <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
+</p>
+   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
+  🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
+  🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
+  🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
+</div>
+
+
 # Star Read - Astro Blog Theme
 
-![NPM Version](https://img.shields.io/npm/v/astro-theme-starread?logo=npm)&emsp;![GitHub Tag](https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github)&emsp;![Created At](https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown)&emsp;![Last Commit](https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git)
-
-A brilliant yet clean and sophisticated Astro theme with star-like quality
+>A brilliant yet clean and sophisticated Astro theme with star-like quality
 
 ## 📦 Installation
 
@@ -31,15 +45,12 @@ yarn create astro-theme-starread my-blog
 
 # Using cnpm
 cnpm init astro-theme-starread my-blog
-
 ```
 
 2. Enter Project Directory:
 
 ```bash
-
 cd my-blog
-
 ```
 
 3. Install Dependencies:
@@ -135,7 +146,7 @@ export const themeConfig: starreadthemeconfig = {
 >[!tip]
 >If you don't have an Algolia account, you need to register and create an application first.
 
-```env
+```txt
 PUBLIC_ALGOLIA_APP_ID=Your Algolia Application ID
 PUBLIC_ALGOLIA_SEARCH_KEY=Your Algolia Search Key
 PUBLIC_ALGOLIA_INDEX_NAME=Your Index Name
@@ -165,6 +176,27 @@ nav: [
   // ...other menu items
 ]
 ```
+
+## 🔧 Twikoo Comment Configuration
+
+To enable Twikoo comment system, please modify the `envId` value on line 13 of `src/components/Comment.astro` file to your [Twikoo environment address](https://twikoo.js.org/backend.html).
+
+```js
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.twikoo) {
+      window.twikoo.init({
+        envId: 'https://example.com',// Your environment address
+        el: '#tcomment',
+        path: window.location.pathname
+      });
+    } else {
+      console.error('Twikoo failed to load, please check the local Twikoo location or CDN address');
+    }
+  });
+</script>
+```
+
 
 ## 🧞 Commands
 

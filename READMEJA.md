@@ -1,8 +1,21 @@
+<div align="center">
+  <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
+  <p>
+    <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
+    <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
+    <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
+    <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
+</p>
+   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
+  🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
+  🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
+  🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
+</div>
+
 # Star Read - Astroブログテーマ
 
-![NPM Version](https://img.shields.io/npm/v/astro-theme-starread?logo=npm)&emsp;![GitHub Tag](https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github)&emsp;![Created At](https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown)&emsp;![Last Commit](https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git)
-
-星のように輝き、简洁かつ高級感のあるAstroテーマです
+>星のように輝き、简洁かつ高級感のあるAstroテーマです
 
 ## 📦 インストール
 
@@ -31,15 +44,12 @@ yarn create astro-theme-starread my-blog
 
 # cnpmを使用
 cnpm init astro-theme-starread my-blog
-
 ```
 
 2. プロジェクトディレクトリに入る：
 
 ```bash
-
 cd my-blog
-
 ```
 
 3. 依存関係をインストール：
@@ -135,7 +145,7 @@ export const themeConfig: starreadthemeconfig = {
 >[!tip]
 >Algoliaアカウントをお持ちでない場合は、先に登録してアプリケーションを作成する必要があります。
 
-```env
+```txt
 PUBLIC_ALGOLIA_APP_ID=あなたのAlgoliaアプリケーションID
 PUBLIC_ALGOLIA_SEARCH_KEY=あなたのAlgolia検索キー
 PUBLIC_ALGOLIA_INDEX_NAME=あなたのインデックス名
@@ -164,6 +174,26 @@ nav: [
   { name: '关于', href: '/about' },
   // ...その他のメニュー項目
 ]
+```
+
+## 🔧 Twikooコメント設定
+
+Twikooコメントシステムを有効にするには、`src/components/Comment.astro`ファイルの13行目の`envId`の値をあなたの[Twikoo環境アドレス](https://twikoo.js.org/backend.html)に変更してください。
+
+```js
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    if (window.twikoo) {
+      window.twikoo.init({
+        envId: 'https://example.com',// あなたの環境アドレス
+        el: '#tcomment',
+        path: window.location.pathname
+      });
+    } else {
+      console.error('Twikooのロードに失敗しました。Twikooのローカル位置またはCDNアドレスを確認してください');
+    }
+  });
+</script>
 ```
 
 ## 🧞 コマンド
