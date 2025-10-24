@@ -31,7 +31,11 @@
 * 在搜索文章中添加来源引用 ([4dbfbb6](https://github.com/passwordgloo/astro-theme-starread/commit/4dbfbb6f83766fcd428f49957032fc794f9679b8))
 * 更新版本配置文件中的项目站点描述 ([1b35d1b](https://github.com/passwordgloo/astro-theme-starread/commit/1b35d1b1138bf4f9baaaafd3dc878f9130621ee0))
 
-### [0.0.9](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.8...v0.0.9) (2025-10-23)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.1.027385e12a82387f7.png" alt="0.1.0" border="0">
+
+## [0.0.9](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.8...v0.0.9) (2025-10-23)
 
 
 ### 💄 Styles | 风格
@@ -54,7 +58,11 @@
 * 添加自动更新永久链接和索引功能 ([ce93888](https://github.com/passwordgloo/astro-theme-starread/commit/ce938885cb4a3c1b1a901208ae246a5fe8b9eda3))
 * **路由:** 添加随机permalink支持并实现动态路由 ([62568fa](https://github.com/passwordgloo/astro-theme-starread/commit/62568fa79b07ef538c2cb5c1115dfda51756d8e5))
 
-### [0.0.8](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.7...v0.0.8) (2025-10-23)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.9461d8def943d0629.png" alt="0.0.9" border="0">
+
+## [0.0.8](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.7...v0.0.8) (2025-10-23)
 
 
 ### ✨ Features | 功能
@@ -68,7 +76,11 @@
 * **ArticleInfo:** 重构文章信息组件并迁移至TSX格式 ([9467c8b](https://github.com/passwordgloo/astro-theme-starread/commit/9467c8b94e7f200331a9d5a9acd800ba4ba769ac))
 * **search:** 将搜索提供商从algolia切换为本地搜索 ([f506e51](https://github.com/passwordgloo/astro-theme-starread/commit/f506e51fb2bb5bd6b07ed6fc32afccfd912f6a4f))
 
-### [0.0.7](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.6...v0.0.7) (2025-10-23)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.8cd0c04a0b82a30c2.png" alt="0.0.8" border="0">
+
+## [0.0.7](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.6...v0.0.7) (2025-10-23)
 
 
 ### 🔨 Code Refactoring | 代码重构
@@ -95,7 +107,11 @@
 * **文章:** 更新GFM示例文章内容 ([b899671](https://github.com/passwordgloo/astro-theme-starread/commit/b89967159495ae6902e19ab9061f2f0b390fe163))
 * 更新多语言文档和主题配置结构 ([5845932](https://github.com/passwordgloo/astro-theme-starread/commit/5845932abc06fb0cc25b5aac08030649bb013446))
 
-### [0.0.6](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5...v0.0.6) (2025-10-23)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.7e923988f1ef07af6.png" alt="0.0.7" border="0">
+
+## [0.0.6](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5...v0.0.6) (2025-10-23)
 
 
 ### 🐛 Bug Fixes | 漏洞修复
@@ -112,7 +128,11 @@
 * **组件:** 优化文章列表显示逻辑和样式 ([bf3fc7a](https://github.com/passwordgloo/astro-theme-starread/commit/bf3fc7aa4bae6f156f32aefb48b78355bc81f254))
 * **统计:** 添加站点统计组件并移除文章页的浏览量显示 ([357c2ae](https://github.com/passwordgloo/astro-theme-starread/commit/357c2aeaaf158a6beee9292cf2cb740d2d147ae3))
 
-### [0.0.5](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.3...v0.0.5) (2025-10-23)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.67b903c4553fabc36.png" alt="0.0.6" border="0">
+
+## [0.0.5](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.3...v0.0.5) (2025-10-23)
 
 
 ### 💄 Styles | 风格
@@ -132,7 +152,11 @@
 
 * 修复busuanzi脚本路径并调整图片高度参数 ([8d09098](https://github.com/passwordgloo/astro-theme-starread/commit/8d09098dc04589de380b69dceaf848a043b22550))
 
-### [0.0.5-beta.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.2...v0.0.5-beta.3) (2025-10-23)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.527d9af12c152d0c2.png" alt="0.0.5" border="0">
+
+## [0.0.5-beta.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.2...v0.0.5-beta.3) (2025-10-23)
 
 
 ### ⏪ Reverts | 版本回退
@@ -165,7 +189,11 @@
 * **组件:** 添加文章导航和信息组件并优化目录样式 ([19fe465](https://github.com/passwordgloo/astro-theme-starread/commit/19fe465804bceba3d0d4c56e2d39bdb4dfbb419c))
 * **配置:** 添加首页banner配置类型定义 ([6bd06f8](https://github.com/passwordgloo/astro-theme-starread/commit/6bd06f8f99259178f61e72f48d34a383e471dd9b))
 
-### [0.0.5-beta.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.1...v0.0.5-beta.2) (2025-10-22)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.5-beta.3114bd733921956b8.png" alt="0.0.5 beta.3" border="0">
+
+## [0.0.5-beta.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.1...v0.0.5-beta.2) (2025-10-22)
 
 
 ### 📚 Documentation | 文档
@@ -187,7 +215,11 @@
 * **search:** 将搜索页从目录结构移动到根路径并重构 ([706c12c](https://github.com/passwordgloo/astro-theme-starread/commit/706c12cbca877ea8ef1daa7741deee1d5049302a))
 * **搜索:** 将 Algolia 搜索组件从 Astro 迁移到 React ([920e989](https://github.com/passwordgloo/astro-theme-starread/commit/920e989f7904aac51c982e1fe7a4b9b2ca504c6b))
 
-### [0.0.5-beta.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.0...v0.0.5-beta.1) (2025-10-22)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.5-beta.2eee9a3b88e3ba202.png" alt="0.0.5 beta.2" border="0">
+
+## [0.0.5-beta.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-beta.0...v0.0.5-beta.1) (2025-10-22)
 
 
 ### 🔨 Code Refactoring | 代码重构
@@ -209,7 +241,11 @@
 
 * 移除Algolia搜索的默认配置 ([d1919a7](https://github.com/passwordgloo/astro-theme-starread/commit/d1919a746318976e68e884626a23223791828c99))
 
-### [0.0.5-beta.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.3...v0.0.5-beta.0) (2025-10-22)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.5-beta.1e02c1c006f18d054.png" alt="0.0.5 beta.1" border="0">
+
+## [0.0.5-beta.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.3...v0.0.5-beta.0) (2025-10-22)
 
 
 ### 📦 Chores | 其他更新
@@ -230,7 +266,11 @@
 * **search:** 重构搜索组件并迁移到Algolia搜索方案 ([1cacd38](https://github.com/passwordgloo/astro-theme-starread/commit/1cacd3825960b0a770c50bf06db199219a569444))
 * 将搜索提供商改为本地并移除algolia相关配置 ([a07e701](https://github.com/passwordgloo/astro-theme-starread/commit/a07e7011bb53f78382deb08be996172c524e0cef))
 
-### [0.0.5-alpha.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.2...v0.0.5-alpha.3) (2025-10-22)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.5-beta.0e14c6009dc8388da.png" alt="0.0.5 beta.0" border="0">
+
+## [0.0.5-alpha.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.2...v0.0.5-alpha.3) (2025-10-22)
 
 
 ### ✨ Features | 功能
@@ -246,7 +286,11 @@
 * **search:** 重构搜索功能配置和实现 ([34dca09](https://github.com/passwordgloo/astro-theme-starread/commit/34dca09ef2f0cbdc8ae23daf82fef37c823edb59))
 * 重构项目为astro主题模板并移除algolia集成 ([a5723b7](https://github.com/passwordgloo/astro-theme-starread/commit/a5723b7cae7776382c18bd6b1c99958c05f82e0f))
 
-### [0.0.5-alpha.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.1...v0.0.5-alpha.2) (2025-10-22)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.5-alpha.3010320c57065939e.png" alt="0.0.5 alpha.3" border="0">
+
+## [0.0.5-alpha.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.1...v0.0.5-alpha.2) (2025-10-22)
 
 
 ### 🔨 Code Refactoring | 代码重构
@@ -263,7 +307,11 @@
 * 添加Algolia搜索支持并重构主题切换逻辑 ([036671e](https://github.com/passwordgloo/astro-theme-starread/commit/036671ed31e38c8036a45ee3f4c3b87fc062eebd))
 * **组件:** 为多个组件添加 client:load 指令以启用客户端交互 ([0c1385e](https://github.com/passwordgloo/astro-theme-starread/commit/0c1385ec612022f4790109506dfbe3587d214575))
 
-### [0.0.5-alpha.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.0...v0.0.5-alpha.1) (2025-10-22)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.5-alpha.2a37ea33b88425310.png" alt="0.0.5 alpha.2" border="0">
+
+## [0.0.5-alpha.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.5-alpha.0...v0.0.5-alpha.1) (2025-10-22)
 
 
 ### 📦 Chores | 其他更新
@@ -288,7 +336,11 @@
 * **changelog:** 添加自定义CHANGELOG更新器，将三级标题改为二级 ([ba3a49a](https://github.com/passwordgloo/astro-theme-starread/commit/ba3a49a69419a1c7f844d5ed7209b1d24fd4664c))
 * **search:** 添加本地搜索组件及交互逻辑 ([b102dd0](https://github.com/passwordgloo/astro-theme-starread/commit/b102dd0df890dac9cf190f5f05afe8703da84e45))
 
-### [0.0.5-alpha.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.4...v0.0.5-alpha.0) (2025-10-22)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.5-alpha.19232ed505a19b06e.png" alt="0.0.5 alpha.1" border="0">
+
+## [0.0.5-alpha.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.4...v0.0.5-alpha.0) (2025-10-22)
 
 
 ### 📦 Chores | 其他更新
@@ -302,7 +354,11 @@
 * **搜索:** 添加搜索组件并支持多种搜索后端 ([48bcb9d](https://github.com/passwordgloo/astro-theme-starread/commit/48bcb9da763db5cfe0843cab60c4da4656f6397e))
 * **文章:** 添加最新文章组件和文章加载配置 ([4d0df48](https://github.com/passwordgloo/astro-theme-starread/commit/4d0df48e47f6c7bdd115f6512942c704cdd9db96))
 
-### [0.0.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.3...v0.0.4) (2025-10-22)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.5-alpha.03f29716cef704c79.png" alt="0.0.5 alpha.0" border="0">
+
+## [0.0.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.3...v0.0.4) (2025-10-22)
 
 
 ### ⏪ Reverts | 版本回退
@@ -318,7 +374,11 @@
 * 更新公共资源文件，包括404图片、默认封面和图标 ([b3a2af4](https://github.com/passwordgloo/astro-theme-starread/commit/b3a2af4e9a3df3047c1495ad380bc7f57ea7a8e1))
 * **标签:** 添加标签页面和功能 ([168f816](https://github.com/passwordgloo/astro-theme-starread/commit/168f81649ae6740572edf06ca79536a73887f804))
 
-### [0.0.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.2...v0.0.3) (2025-10-21)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.44586b9baa84d1338.png" alt="0.0.4" border="0">
+
+## [0.0.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.2...v0.0.3) (2025-10-21)
 
 
 ### 📚 Documentation | 文档
@@ -347,7 +407,11 @@
 * 移除tailwind配置并更新astro的markdown配置 ([ff84eb6](https://github.com/passwordgloo/astro-theme-starread/commit/ff84eb6e92365652ce89ebb732afbf7c4985956c))
 * 移除无用文件并简化项目配置 ([e51dc64](https://github.com/passwordgloo/astro-theme-starread/commit/e51dc641d03e0eb90f2a917b415aa4624e514503))
 
-### [0.0.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1...v0.0.2) (2025-10-21)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.367c125404791bf7a.png" alt="0.0.3" border="0">
+
+## [0.0.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1...v0.0.2) (2025-10-21)
 
 
 ### 🔨 Code Refactoring | 代码重构
@@ -371,7 +435,11 @@
 
 * 统一文章日期格式为仅日期 ([edd2fc7](https://github.com/passwordgloo/astro-theme-starread/commit/edd2fc7470d3050765590146216687f8bab13012))
 
-### [0.0.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1-alpha.4...v0.0.1) (2025-10-21)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.250838dcbb8bab467.png" alt="0.0.2" border="0">
+
+## [0.0.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1-alpha.4...v0.0.1) (2025-10-21)
 
 
 ### 🚀 Build System | 构建
@@ -394,7 +462,11 @@
 
 * **content:** 添加示例文章并更新主题配置 ([251316b](https://github.com/passwordgloo/astro-theme-starread/commit/251316b3e2a27b6154ed1435badc8fe192febb6a))
 
-### [0.0.1-alpha.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1-alpha.3...v0.0.1-alpha.4) (2025-10-21)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.1c4b653bf559b49ce.png" alt="0.0.1" border="0">
+
+## [0.0.1-alpha.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.1-alpha.3...v0.0.1-alpha.4) (2025-10-21)
 
 
 ### 📚 Documentation | 文档
@@ -406,7 +478,11 @@
 
 * **theme:** 更新星阅主题样式和功能 ([6614f17](https://github.com/passwordgloo/astro-theme-starread/commit/6614f172706e0edaea576f15999b484e52b88b70))
 
-### [0.0.1-alpha.3](https://iglooblog.top:8090/foresee/astro/compare/v0.0.1-alpha.2...v0.0.1-alpha.3) (2025-10-21)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.1-alpha.43f300f4117e2bf12.png" alt="0.0.1 alpha.4" border="0">
+
+## [0.0.1-alpha.3](https://iglooblog.top:8090/foresee/astro/compare/v0.0.1-alpha.2...v0.0.1-alpha.3) (2025-10-21)
 
 
 ### 📚 Documentation | 文档
@@ -431,7 +507,11 @@
 
 * 更新 changelog 生成工具并删除无用组件 ([68b4661](https://github.com/passwordgloo/astro-theme-starread/commit/68b46617dae56ebcefed36543f1bd0a288a6788f))
 
-### [0.0.1-alpha.2](https://iglooblog.top:8090/foresee/astro/compare/v0.0.1-alpha.1...v0.0.1-alpha.2) (2025-10-21)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.1-alpha.32313e9cc223be07c.png" alt="0.0.1 alpha.3" border="0">
+
+## [0.0.1-alpha.2](https://iglooblog.top:8090/foresee/astro/compare/v0.0.1-alpha.1...v0.0.1-alpha.2) (2025-10-21)
 
 
 ### 👷‍ Build System | 构建
@@ -452,7 +532,11 @@
 
 * 更新.gitignore并添加.changelogrc配置文件 ([084656c](https://github.com/passwordgloo/astro-theme-starread/commit/084656c6587f78b582d0c6db79c9a497c76283d4))
 
-### [0.0.1-alpha.1](https://iglooblog.top:8090/foresee/astro/compare/v0.0.1-alpha.0...v0.0.1-alpha.1) (2025-10-21)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.1-alpha.29a522533b525efb9.png" alt="0.0.1 alpha.2" border="0">
+
+## [0.0.1-alpha.1](https://iglooblog.top:8090/foresee/astro/compare/v0.0.1-alpha.0...v0.0.1-alpha.1) (2025-10-21)
 
 
 ### 👷‍ Build System | 构建
@@ -469,9 +553,17 @@
 
 * 初始化Astro项目基础结构和样式 ([4c9c924](https://github.com/passwordgloo/astro-theme-starread/commit/4c9c924baf7f468cb08cf94aca047a65fb5620aa))
 
-### 0.0.1-alpha.0 (2025-10-21)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.1-alpha.14a334ba8ed26c2b5.png" alt="0.0.1 alpha.1" border="0">
+
+## 0.0.1-alpha.0 (2025-10-21)
 
 
 ### ✨ Features | 功能
 
 * 初始化 Astro 项目基础配置和文件结构 ([46bbb77](https://github.com/passwordgloo/astro-theme-starread/commit/46bbb779f4d016400311f2da34d8660abcba1dcc))
+
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/24/0.0.1-alpha.05b50fbeb0d2efad9.png" alt="0.0.1 alpha.0" border="0">
