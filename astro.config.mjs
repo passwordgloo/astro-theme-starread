@@ -1,9 +1,11 @@
 import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
-import react from "@astrojs/react";
 import remarkGithubAlerts from 'remark-github-blockquote-alert';
 import autoUpdatePermalink from './scripts/autoUpdateFrontmatter.js';
 import autoIndex from './scripts/autoindex.js';
+
+import sitemap from "@astrojs/sitemap";
+import vue from "@astrojs/vue";
 
 export default defineConfig({
   site: "https://www.example.com",
@@ -14,5 +16,5 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
   },
-  integrations: [react(), autoUpdatePermalink(), autoIndex()],
+  integrations: [autoUpdatePermalink(), autoIndex(), sitemap(), vue()],
 });

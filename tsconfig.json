@@ -2,13 +2,13 @@
   "extends": "astro/tsconfigs/strict",
   "include": [
     ".astro/types.d.ts",
-    "**/*"
-, "public/twikoo.min.js"  ],
+    "**/*",
+    "public/twikoo.min.js"
+  ],
   "exclude": [
     "dist"
   ],
   "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react"
+    "jsx": "preserve"
   }
 }

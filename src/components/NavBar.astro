@@ -1,11 +1,7 @@
 ---
 const { title } = Astro.props;
 import { themeConfig } from '../../starread.config';
-import LocalSearch from "./SwitchLocalSearch.astro";
-import AlgoliaSearch from "./SwitchAlgoliaSearch.astro";
-
-// 根据配置选择搜索组件
-const SearchComponent = themeConfig.plugin.search.provider === 'algolia' ? AlgoliaSearch : LocalSearch;
+import Search from "./search.astro";
 ---
 
 <header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md" client:load>
@@ -99,8 +95,8 @@ const SearchComponent = themeConfig.plugin.search.provider === 'algolia' ? Algol
       ))}
     </nav>
     <!-- 搜索和登录 -->
-    <div class="flex items-center space-x-2">
-      <SearchComponent />
+    <div class="flex items-center space-x-4">
+      <Search />
       <button class="hidden md:block rounded-lg bg-primary text-white hover:bg-primary/70 active:bg-primary/80
                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 dark:bg-secondary dark:text-slate-950 dark:hover:bg-secondary/70 dark:active:bg-secondary/60
                    dark:focus-visible:ring-sky-300/50 px-4 py-2 rounded-md transition-colors">登录</button>
@@ -124,6 +120,10 @@ const SearchComponent = themeConfig.plugin.search.provider === 'algolia' ? Algol
       </div>
     </div>
     <nav class="p-4 space-y-2">
+      <!-- 移动端搜索按钮 -->
+      <div class="p-3">
+        <Search />
+      </div>
       {themeConfig.navbar.map((item) => (
         <div key={item.name}>
           {item.href ? (
@@ -231,45 +231,8 @@ const SearchComponent = themeConfig.plugin.search.provider === 'algolia' ? Algol
 
     // 初始化时更新一次logo
     updateLogo();
-    const searchToggle = document.getElementById('search-toggle');
-    const searchContainer = document.getElementById('pagefind-search-container');
-    
-    if (searchToggle && searchContainer) {
-      // 切换搜索框显示/隐藏
-      searchToggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (searchContainer.classList.contains('invisible')) {
-          // 显示搜索框
-          searchContainer.classList.remove('invisible', 'opacity-0', 'scale-95');
-          searchContainer.classList.add('opacity-100', 'scale-100');
-          // 聚焦到搜索输入框
-          const searchInput = searchContainer.querySelector('.pagefind-ui__search-input');
-          if (searchInput) {
-            searchInput.focus();
-          }
-        } else {
-          // 隐藏搜索框
-          searchContainer.classList.add('invisible', 'opacity-0', 'scale-95');
-          searchContainer.classList.remove('opacity-100', 'scale-100');
-        }
-      });
-      
-      // 点击页面其他地方关闭搜索框
-      document.addEventListener('click', (e) => {
-        if (!searchToggle.contains(e.target) && !searchContainer.contains(e.target)) {
-          searchContainer.classList.add('invisible', 'opacity-0', 'scale-95');
-          searchContainer.classList.remove('opacity-100', 'scale-100');
-        }
-      });
-      
-      // ESC键关闭搜索框
-      document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && !searchContainer.classList.contains('invisible')) {
-          searchContainer.classList.add('invisible', 'opacity-0', 'scale-95');
-          searchContainer.classList.remove('opacity-100', 'scale-100');
-        }
-      });
-    }
+    // 移除可能导致冲突的旧搜索逻辑
+    // 搜索相关功能现在由导入的组件内部处理
 
     // 导航栏滚动逻辑
     let lastScrollY = window.scrollY;

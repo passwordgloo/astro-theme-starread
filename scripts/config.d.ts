@@ -159,17 +159,4 @@ export interface starreadthemeconfig {
       toc: boolean;
     };
   };
-
-  /**
-   * 插件配置
-   */
-  plugin: {
-    /**
-     * 搜索配置
-     */
-    search: {
-      /** 搜索服务提供商：'local' 本地搜索 或 'algolia' Algolia搜索 */
-      provider: 'local' | 'algolia';
-    }
-  }
 }
