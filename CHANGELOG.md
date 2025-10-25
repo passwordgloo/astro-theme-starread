@@ -2,6 +2,29 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
+### [0.1.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.0...v0.1.1) (2025-10-25)
+
+
+### 📚 Documentation | 文档
+
+* **CHANGELOG:** 添加版本预览图片并更新标题格式 ([ad65f53](https://github.com/passwordgloo/astro-theme-starread/commit/ad65f53e43dc39112ee98e7b1ce33b07cbb8cd80))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* **routing:** 添加保留路由检查避免冲突 ([264ba6b](https://github.com/passwordgloo/astro-theme-starread/commit/264ba6bc3cb47971ff2489868117c6e2be495201))
+* 将Twikoo评论系统的envId设置为'none' ([4974196](https://github.com/passwordgloo/astro-theme-starread/commit/4974196a8bc89eb6f9d10b300b9e7df6eb1a45c6))
+
+
+### 📦 Chores | 其他更新
+
+* 移除conventional-changelog相关依赖和脚本 ([a411333](https://github.com/passwordgloo/astro-theme-starread/commit/a4113334b45b9b735f7d5fbdd26bcef6e631e35d))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **components:** 迁移React组件到Vue并优化功能 ([35df978](https://github.com/passwordgloo/astro-theme-starread/commit/35df978f5b5e04ea326f20e1c81f99cb1626ac9c))
+
 ## [0.1.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.9...v0.1.0) (2025-10-23)
 
 
