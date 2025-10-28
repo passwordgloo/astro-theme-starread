@@ -212,17 +212,54 @@ const hasCompleteConfig = Boolean(
     }
   }
 
-  async function loadLocalSearchData() {
-    try {
-      const response = await fetch('/data.json');
-      if (!response.ok) throw new Error('无法加载数据');
-      localSearchData = await response.json();
-      console.log('✅ 本地搜索数据加载成功，共', localSearchData.length, '条');
-      return true;
-    } catch (error) {
-      console.error('❌ 加载本地数据失败:', error);
-      return false;
+  let localSearchDataPromise = null;
+  
+  function loadLocalSearchData() {
+    // 实现单例模式避免重复加载
+    if (!localSearchDataPromise) {
+      localSearchDataPromise = (async () => {
+        try {
+          // 尝试从localStorage读取缓存
+          const cachedData = localStorage.getItem('localSearchCache');
+          const cachedTime = localStorage.getItem('localSearchCacheTime');
+          const now = Date.now();
+          
+          // 如果缓存存在且在24小时内，使用缓存
+          if (cachedData && cachedTime && (now - parseInt(cachedTime)) < 24 * 60 * 60 * 1000) {
+            localSearchData = JSON.parse(cachedData);
+            console.log('✅ 从缓存加载本地搜索数据，共', localSearchData.length, '条');
+            return true;
+          }
+          
+          // 否则从服务器加载并压缩请求
+          const response = await fetch('/data.json', {
+            headers: {
+              'Accept-Encoding': 'gzip, deflate, br'
+            }
+          });
+          
+          if (!response.ok) throw new Error('无法加载数据');
+          
+          localSearchData = await response.json();
+          
+          // 缓存数据到localStorage
+          try {
+            localStorage.setItem('localSearchCache', JSON.stringify(localSearchData));
+            localStorage.setItem('localSearchCacheTime', now.toString());
+          } catch (e) {
+            console.warn('⚠️ 无法缓存搜索数据到localStorage');
+          }
+          
+          console.log('✅ 本地搜索数据加载成功，共', localSearchData.length, '条');
+          return true;
+        } catch (error) {
+          console.error('❌ 加载本地数据失败:', error);
+          return false;
+        }
+      })();
     }
+    
+    return localSearchDataPromise;
   }
 
   function localSearch(query, page = 0) {
@@ -572,14 +609,37 @@ const hasCompleteConfig = Boolean(
     }
   });
 
-  // 初始化
-  (async () => {
+  // 初始化 - 使用懒加载策略
+  let searchInitialized = false;
+  
+  async function initializeSearch() {
+    if (searchInitialized) return;
+    searchInitialized = true;
+    
     const algoliaOk = await initializeAlgolia();
     if (!algoliaOk) {
       await loadLocalSearchData();
       updateSearchProvider(false);
     }
-  })();
+  }
+  
+  // 只在打开搜索时初始化
+  searchToggle?.addEventListener('click', () => {
+    if (!searchInitialized) {
+      initializeSearch();
+    }
+    openSearch();
+  });
+  
+  // 键盘快捷键也触发初始化
+  document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k' && !isOpen && !searchInitialized) {
+      e.preventDefault();
+      initializeSearch();
+    }
+  });
+  
+  // 移除原有的初始化调用
 })();
 </script>
 
