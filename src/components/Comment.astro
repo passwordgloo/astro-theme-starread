@@ -8,42 +8,16 @@
 
 <!-- 合并脚本 -->
 <script is:inline>
-  // 首先引入 Twikoo - 使用CDN并优化加载
+  // 首先引入 Twikoo
   (function() {
-    // 仅在视口中或即将进入视口时加载
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const script = document.createElement('script');
-          // 使用CDN加载，体积更小且可能已被缓存
-          script.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.min.js';
-          script.defer = true;
-          script.onload = function() {
-            console.log('Twikoo 脚本加载完成');
-            initializeTwikoo();
-          };
-          document.head.appendChild(script);
-          observer.disconnect();
-        }
-      });
-    });
-    
-    const commentSection = document.querySelector('.bg-white\/70');
-    if (commentSection) {
-      observer.observe(commentSection);
-    } else {
-      // 降级方案：如果找不到元素，延迟加载
-      setTimeout(() => {
-        const script = document.createElement('script');
-        script.src = 'https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.min.js';
-        script.defer = true;
-        script.onload = function() {
-          console.log('Twikoo 脚本加载完成');
-          initializeTwikoo();
-        };
-        document.head.appendChild(script);
-      }, 1000);
-    }
+    const script = document.createElement('script');
+    script.src = '/twikoo.min.js';
+    script.async = true;
+    script.onload = function() {
+      console.log('Twikoo 脚本加载完成');
+      initializeTwikoo();
+    };
+    document.head.appendChild(script);
   })();
 
   // Twikoo 初始化逻辑
