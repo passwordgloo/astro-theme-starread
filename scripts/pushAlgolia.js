@@ -1,8 +1,14 @@
-import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+// 使用Node.js原生支持的.env文件加载（Node.js 20.6.0+）
+import { config } from 'node:process';
+import { existsSync } from 'node:fs';
+const envPath = path.resolve(__dirname, '../.env');
+if (existsSync(envPath)) {
+  config({ path: envPath });
+}
 import { algoliasearch } from 'algoliasearch';
 import fs from 'fs';
 import { generateIndex } from './autoindex.js';
