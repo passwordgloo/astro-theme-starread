@@ -327,15 +327,20 @@ const hasCompleteConfig = Boolean(
   }
 
   function renderResults(hits) {
-    resultsList.innerHTML = '';
-    hits.forEach((hit, index) => {
-      const div = document.createElement('div');
-      div.className = 'search-result-item p-3 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors border-l-2 border-transparent';
-      div.dataset.index = index;
-      div.dataset.url = hit.url || hit.objectID;
-      
-      const title = hit._highlightResult?.title?.value || hit.title || '无标题';
-      const content = hit._snippetResult?.content?.value || hit._highlightResult?.content?.value || hit.content || '';
+      resultsList.innerHTML = '';
+      hits.forEach((hit, index) => {
+        const div = document.createElement('div');
+        div.className = 'search-result-item p-3 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors border-l-2 border-transparent';
+        div.dataset.index = index;
+        div.dataset.url = hit.url || hit.objectID;
+        
+        // 关键修复：处理 Algolia 的 <em> 标签高亮
+        const title = (hit._highlightResult?.title?.value || hit.title || '无标题')
+          .replace(/<em>/g, '<mark class="bg-yellow-200 dark:bg-yellow-700 text-gray-900 dark:text-white">')
+          .replace(/<\/em>/g, '</mark>');
+        const content = (hit._snippetResult?.content?.value || hit._highlightResult?.content?.value || hit.content || '')
+          .replace(/<em>/g, '<mark class="bg-yellow-200 dark:bg-yellow-700 text-gray-900 dark:text-white">')
+          .replace(/<\/em>/g, '</mark>');
       const coverUrl = hit.cover || hit.image || '';
       
       div.innerHTML = `
@@ -680,4 +685,21 @@ const hasCompleteConfig = Boolean(
   .dark .overflow-y-auto::-webkit-scrollbar-thumb {
     background: rgba(75, 85, 99, 0.5);
   }
+
+    /* Algolia 高亮样式 - 确保 em 标签也能正确显示 */
+  .search-result-item em,
+  .search-result-item mark {
+    background-color: #fef08a;
+    color: #1f2937;
+    font-style: normal;
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  .dark .search-result-item em,
+  .dark .search-result-item mark {
+    background-color: #a16207;
+    color: #ffffff;
+  }
+
 </style>
