@@ -14,14 +14,13 @@
   }
 }
 
-
 @theme {
   /* 主题色
   文本  text-primary
   背景  bg-primary
   */
   --color-primary: #4f46e5;
-  --color-secondary: #2388f5;
+  --color-secondary: orange;
 }
 
 @layer base {
@@ -36,7 +35,6 @@
   }
 
   .dark code, 
-  .dark kbd, 
   .dark samp, 
   .dark pre {
     background-color: var(--color-secondary);
