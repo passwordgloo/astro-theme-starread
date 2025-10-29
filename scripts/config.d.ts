@@ -143,6 +143,8 @@ export interface starreadthemeconfig {
   sidebar: {
     /** 首页侧边栏配置 */
     home: {
+      /** 是否显示日历 */
+      calendar: boolean;
       /** 是否显示统计小部件（文章数、分类数等） */
       statsWidget: boolean;
       /** 是否显示作者信息 */

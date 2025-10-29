@@ -3,13 +3,13 @@ import "../styles/global.css";
 import NavBar from "../components/NavBar.astro";
 import Banner from "../components/Banner.astro";
 import Carousel from '../components/Carousel.astro';
-import StatsWidget from '../components/StatsWidget.astro';
 import AuthorWidget from '../components/AuthorWidget.astro';
 import AdWidget from '../components/AdWidget.astro';
 import TagCloud from "../components/TagCloud.astro";
 import ArticleSection from '../components/ArticleSection.astro';
 import LatestArticle from '../components/LatestArticle.astro';
 import Calendar from '../components/Calendar.astro';
+import Statistic from '../components/Statistic.astro'
 import { themeConfig } from '../../starread.config';
 import { getCollection } from 'astro:content';
 import { ClientRouter } from "astro:transitions";
@@ -72,11 +72,11 @@ const carouselArticles = allContent
 
     <!-- 右侧边栏 -->
 			<aside class="w-full md:w-1/3 space-y-6">
-         {themeConfig.sidebar.home.statsWidget && <StatsWidget />}
-         {themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
-         {themeConfig.sidebar.home.adWidget && <AdWidget />}
-         {themeConfig.sidebar.home.tag && <TagCloud />}
-        {themeConfig.sidebar.home.statistic && <Calendar />}
+          {themeConfig.sidebar.home.calendar && <Calendar/>}
+          {themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
+          {themeConfig.sidebar.home.adWidget && <AdWidget />}
+          {themeConfig.sidebar.home.tag && <TagCloud />}
+          {themeConfig.sidebar.home.statistic && <Statistic/>}
       </aside>
     </main>
 

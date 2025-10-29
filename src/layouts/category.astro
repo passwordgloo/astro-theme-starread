@@ -70,7 +70,7 @@ const { title, categoryName, currentCategory, articles, allCategories } = Astro.
                   </div>
                   {/* 文章信息 */}
                   <div class="flex-grow min-w-0">
-                    <a href={`/${article.collection}/${article.slug}`} class="text-lg font-medium hover:text-primary transition-colors line-clamp-1">{article.data.title}</a>
+                    <a href={`/${article.collection === 'articles' ? 'articles' : 'notes'}/${article.slug}`} class="text-lg font-medium hover:text-primary transition-colors line-clamp-1">{article.data.title}</a>
                     <div class="flex items-center mt-1 text-sm text-gray-500 space-x-3">
                       <span>{article.data.author || themeConfig.widget.author.name}</span>
                       <span>·</span>
