@@ -2,6 +2,40 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
+### [0.1.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.1...v0.1.2) (2025-10-29)
+
+
+### 📦 Chores | 其他更新
+
+* 移除未使用的依赖并更新环境变量加载方式 ([5865226](https://github.com/passwordgloo/astro-theme-starread/commit/5865226e6c6e95fa3a097cad24c012de13ba699d))
+
+
+### ⚡ Performance Improvements | 性能优化
+
+* **评论和搜索:** 优化脚本加载和搜索初始化性能 ([4f0702d](https://github.com/passwordgloo/astro-theme-starread/commit/4f0702d846c87a42d9b37815734410e74a42152d))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* **search:** 修复 Algolia 高亮标签的样式问题 ([9e9c097](https://github.com/passwordgloo/astro-theme-starread/commit/9e9c0978688da5577a3f723f161f135d5f00ef80))
+
+
+### 💄 Styles | 风格
+
+* **theme:** 更新主题颜色和键盘组件样式 ([f1e9f3e](https://github.com/passwordgloo/astro-theme-starread/commit/f1e9f3e56713d265d64e938feffa330aa1e8dffe))
+
+
+### ✨ Features | 功能
+
+* **calendar:** 添加多语言支持的日历组件并替换统计组件 ([a8476b2](https://github.com/passwordgloo/astro-theme-starread/commit/a8476b21c093e35f8149291f86b1774f0dbc0127))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **Comment:** 简化 Twikoo 脚本加载逻辑 ([b55dfa2](https://github.com/passwordgloo/astro-theme-starread/commit/b55dfa2ab057f886644df4dbfc3a4f51eb5d1d5e))
+* **search:** 移除Algolia搜索组件并重定向到主页 ([b6b1bbf](https://github.com/passwordgloo/astro-theme-starread/commit/b6b1bbf1bc01c483b8936e0b6cd0a49e37baf1c0))
+* 移除StatsWidget组件及其相关功能 ([af3de9f](https://github.com/passwordgloo/astro-theme-starread/commit/af3de9f3185c474910e50a47e6404c191a487cf9))
+
 ### [0.1.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.0...v0.1.1) (2025-10-25)
 
 
