@@ -36,6 +36,10 @@
 * **search:** 移除Algolia搜索组件并重定向到主页 ([b6b1bbf](https://github.com/passwordgloo/astro-theme-starread/commit/b6b1bbf1bc01c483b8936e0b6cd0a49e37baf1c0))
 * 移除StatsWidget组件及其相关功能 ([af3de9f](https://github.com/passwordgloo/astro-theme-starread/commit/af3de9f3185c474910e50a47e6404c191a487cf9))
 
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/29/0.1.2c40cbdc288205310.png" alt="0.1.2" border="0">
+
 ### [0.1.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.0...v0.1.1) (2025-10-25)
 
 
@@ -58,6 +62,10 @@
 ### 🔨 Code Refactoring | 代码重构
 
 * **components:** 迁移React组件到Vue并优化功能 ([35df978](https://github.com/passwordgloo/astro-theme-starread/commit/35df978f5b5e04ea326f20e1c81f99cb1626ac9c))
+
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/10/29/0.1.18d38b82564e6ea4a.png" alt="0.1.1" border="0">
 
 ## [0.1.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.0.9...v0.1.0) (2025-10-23)
 
