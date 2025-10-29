@@ -2,7 +2,7 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
-### [0.1.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.1...v0.1.2) (2025-10-29)
+## [0.1.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.1...v0.1.2) (2025-10-29)
 
 
 ### 📦 Chores | 其他更新
@@ -40,7 +40,7 @@
 
 <img src="https://origin.picgo.net/2025/10/29/0.1.2c40cbdc288205310.png" alt="0.1.2" border="0">
 
-### [0.1.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.0...v0.1.1) (2025-10-25)
+## [0.1.1](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.0...v0.1.1) (2025-10-25)
 
 
 ### 📚 Documentation | 文档
