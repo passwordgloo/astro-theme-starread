@@ -9,7 +9,7 @@ import AdWidget from '../components/AdWidget.astro';
 import TagCloud from "../components/TagCloud.astro";
 import ArticleSection from '../components/ArticleSection.astro';
 import LatestArticle from '../components/LatestArticle.astro';
-import Statistic from '../components/Statistic.astro';
+import Calendar from '../components/Calendar.astro';
 import { themeConfig } from '../../starread.config';
 import { getCollection } from 'astro:content';
 import { ClientRouter } from "astro:transitions";
@@ -76,7 +76,7 @@ const carouselArticles = allContent
          {themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
          {themeConfig.sidebar.home.adWidget && <AdWidget />}
          {themeConfig.sidebar.home.tag && <TagCloud />}
-        {themeConfig.sidebar.home.statistic && <Statistic />}
+        {themeConfig.sidebar.home.statistic && <Calendar />}
       </aside>
     </main>
 

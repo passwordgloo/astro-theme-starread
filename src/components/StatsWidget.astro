@@ -1,4 +1,6 @@
 ---
+import { themeConfig } from '../../starread.config';
+
 // 获取当前日期
 const now = new Date();
 const currentYear = now.getFullYear();
@@ -7,7 +9,23 @@ const currentWeek = Math.ceil(now.getDate() / 7); // 计算当前是第几周
 const daysInMonth = new Date(currentYear, currentMonth, 0).getDate(); // 获取当月天数
 const monthProgress = Math.round((now.getDate() / daysInMonth) * 100); // 计算月进度
 const yearProgress = Math.round(((now.getMonth() * 30 + now.getDate()) / 365) * 100); // 计算年进度
-const weekProgress = Math.round((now.getDay() / 6) * 100); // 计算周进度(周日为0，周六为6)
+
+// 根据配置选择一周起始日
+// zh: 一周从周一开始 (周一=1, 周二=2, ..., 周日=7)
+// en: 一周从周日开始 (周日=1, 周一=2, ..., 周六=7)
+const language = themeConfig.language || 'zh';
+let adjustedDay;
+let totalWeekDays = 7;
+
+if (language === 'zh') {
+  // 中文模式：周一为1，周日为7
+  adjustedDay = now.getDay() === 0 ? 7 : now.getDay();
+} else {
+  // 英文模式：周日为1，周六为7
+  adjustedDay = now.getDay() === 0 ? 1 : now.getDay() + 1;
+}
+
+const weekProgress = Math.round((adjustedDay / totalWeekDays) * 100);
 
 // 月份名称数组
 const monthNames = ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'];

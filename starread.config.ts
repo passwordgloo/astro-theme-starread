@@ -38,6 +38,11 @@ export const themeConfig: starreadthemeconfig = {
     }
   },
 
+  // 语言配置
+  // zh: 一周从周一开始
+  // en: 一周从周日开始
+  language: 'zh',
+
   // 小部件配置
   widget: {
     // Banner配置

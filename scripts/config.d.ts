@@ -6,6 +6,13 @@
  */
 export interface starreadthemeconfig {
   /**
+   * 语言配置
+   * zh: 中文（周一为周起始日）
+   * en: 英文（周日为周起始日）
+   */
+  language: 'zh' | 'en';
+  
+  /**
    * 网站基本信息配置
    */
   site: {

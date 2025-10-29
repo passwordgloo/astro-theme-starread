@@ -16,6 +16,6 @@ export { default as Search } from './Search.astro';
 export { default as Comment } from './Comment.astro';
 export { default as LatestArticle } from './LatestArticle.astro';
 export { default as NavBar } from './NavBar.astro';
-export { default as Statistic } from './Statistic.astro';
+export { default as Calendar } from './Calendar.astro';
 export { default as StatsWidget } from './StatsWidget.astro';
 export { default as TagCloud } from './TagCloud.astro';
