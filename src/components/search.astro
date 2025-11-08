@@ -22,11 +22,13 @@ const hasCompleteConfig = Boolean(
   >
     <span class="icon-[lucide--search] h-5 w-5 text-gray-700 dark:text-gray-300"></span>
   </button>
+</div>
 
-  <div 
-    id="search-modal" 
-    class="fixed inset-0 z-50 flex items-start justify-center pt-16 px-4 bg-black/60 hidden"
-  >
+<!-- 搜索模态框移到外层，确保它能覆盖整个页面 -->
+<div 
+  id="search-modal" 
+  class="fixed inset-0 z-100 flex items-start justify-center pt-16 px-4 hidden"
+>
     <div 
       class="w-full max-w-2xl bg-white dark:bg-gray-900 rounded-lg shadow-xl overflow-hidden flex flex-col"
     >
@@ -138,7 +140,6 @@ const hasCompleteConfig = Boolean(
       </div>
     </div>
   </div>
-</div>
 
 <script is:inline src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
 
