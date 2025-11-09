@@ -2,6 +2,29 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
+### [0.1.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.2...v0.1.3) (2025-11-09)
+
+
+### ✨ Features | 功能
+
+* **侧边栏:** 添加日历组件并重构统计信息显示 ([e9d7548](https://github.com/passwordgloo/astro-theme-starread/commit/e9d75483423afa99a42d453574fb62ed96d7e911))
+
+
+### 📚 Documentation | 文档
+
+* **CHANGELOG:** 修复版本标题的markdown格式 ([3c27705](https://github.com/passwordgloo/astro-theme-starread/commit/3c277056dafc6610499dbb6d5f26f2b5cfec92d0))
+* **CHANGELOG:** 更新变更日志添加预览图片 ([56c2902](https://github.com/passwordgloo/astro-theme-starread/commit/56c29029684112e267444fa88957eb1fc0b6d29e))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* 移除未使用的类型定义和今日访问统计组件 ([ffe0603](https://github.com/passwordgloo/astro-theme-starread/commit/ffe060335a87e8d2042c80dad23d74a711dcdbe9))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* **search:** 修复搜索模态框的DOM结构错误 ([03f9189](https://github.com/passwordgloo/astro-theme-starread/commit/03f91896f061aa547c03ffef76bf85ec9cf380cc))
+
 ## [0.1.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.1...v0.1.2) (2025-10-29)
 
 
