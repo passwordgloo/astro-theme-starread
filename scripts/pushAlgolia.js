@@ -2,12 +2,18 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// 使用Node.js原生支持的.env文件加载（Node.js 20.6.0+）
-import { config } from 'node:process';
-import { existsSync } from 'node:fs';
+// 使用Node.js原生方式读取.env文件
+import { existsSync, readFileSync } from 'node:fs';
 const envPath = path.resolve(__dirname, '../.env');
 if (existsSync(envPath)) {
-  config({ path: envPath });
+  const envContent = readFileSync(envPath, 'utf-8');
+  envContent.split('\n').forEach(line => {
+    const [key, value] = line.split('=').map(part => part.trim());
+    if (key && !key.startsWith('#')) {
+      process.env[key] = value;
+    }
+  });
+  console.log(`✅ 成功加载.env文件: ${envPath}`);
 }
 import { algoliasearch } from 'algoliasearch';
 import fs from 'fs';
