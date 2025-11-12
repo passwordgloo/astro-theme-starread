@@ -2,6 +2,7 @@
 title: Star Read Тема для блога Astro
 categories: [主题说明]
 tags: [主题安装]
+cover: /cover/IhpCWiWtAslLu1jzLabnE.jpg
 description: Это русскоязычная документация для блог-темы Star Read для Astro.
 permalink: /theme/602c2b/
 date: 2025-10-07 21:37:04
