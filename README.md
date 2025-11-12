@@ -243,7 +243,7 @@ ALGOLIA_WRITE_API_KEY=Your Write API Key (for index upload)
 
 3. Push Index to Algolia
 
-Run `pnpm algolia` to push local index to Algolia
+By default, local search is used, which is suitable for offline use on the local end and does not require user configuration.
 
 ## ⚙️ Custom Configuration
 
@@ -294,5 +294,4 @@ To enable Twikoo comment system, please modify the `envId` value on line 13 of `
 | `pnpm dev`               | Start local development server `localhost:4321` |
 | `pnpm preview`           | Preview build results locally                   |
 | `pnpm algolia`           | Push data to Algolia search                      |
-| `pnpm changelog`         | Generate changelog                              |
 | `pnpm release`           | Version management (update version number, generate commits, etc.) |
