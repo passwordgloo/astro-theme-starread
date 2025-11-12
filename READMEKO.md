@@ -285,6 +285,5 @@ Twikoo 댓글 시스템을 활성화하려면 `src/components/Comment.astro` 파
 | `pnpm dev`               | 로컬 개발 서버 `localhost:4321` 시작            |
 | `pnpm preview`           | 로컬에서 빌드 결과 미리보기                       |
 | `pnpm algolia`           | Algolia 검색에 데이터 푸시                       |
-| `pnpm changelog`         | 변경 로그 생성                                 |
 | `pnpm release`           | 버전 관리 (버전 번호 업데이트, 커밋 생성 등)        |
 

@@ -285,5 +285,4 @@ nav: [
 | `pnpm dev`               | 启动本地开发服务器 `localhost:4321`            |
 | `pnpm preview`           | 本地预览构建结果                               |
 | `pnpm algolia`           | 推送数据到Algolia搜索                          |
-| `pnpm changelog`         | 生成更新日志                                   |
 | `pnpm release`           | 版本管理（更新版本号、生成提交等）             |
