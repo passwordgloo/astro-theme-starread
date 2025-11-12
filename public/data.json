@@ -47,7 +47,7 @@
   {
     "title": "Star Read Astro博客主题",
     "description": "Star Read是一个出色、简洁且精致的Astro博客主题，提供多种安装方式，项目结构清晰，具备现代UI、搜索支持、响应式设计、主题切换等功能，还提供搜索、主题定制和评论系统的详细配置。",
-    "cover": "https://www.example.com/img/cover/eRq5UHTwBSmoSguZBTPjB.jpg",
+    "cover": "https://www.example.com/cover/eRq5UHTwBSmoSguZBTPjB.jpg",
     "categories": [
       "主题说明"
     ],
@@ -81,7 +81,7 @@
   {
     "title": "Star Read Astroブログテーマ",
     "description": "Star Read Astroブログテーマは、Astroを使用して作成されたブログテーマであり、インストール方法やプロジェクト構造、検索機能、カスタム設定、コメントシステムなどの使い方が説明されています。",
-    "cover": "https://www.example.com/img/cover/gR3r-wiiDPNh3kupY0hN5.jpg",
+    "cover": "https://www.example.com/cover/gR3r-wiiDPNh3kupY0hN5.jpg",
     "categories": [
       "主题说明"
     ],
@@ -98,7 +98,7 @@
   {
     "title": "Star ReadAstro 블로그 테마",
     "description": "Star Read Astro 블로그 테마의 설치 방법, 특징, 검색, 사용자 정의 구성, 댓글 설정 및 명령어 등에 대한 안내 문서입니다.",
-    "cover": "https://www.example.com/img/cover/NyYehQHfww_67cNm35rPO.jpg",
+    "cover": "https://www.example.com/cover/NyYehQHfww_67cNm35rPO.jpg",
     "categories": [
       "主题说明"
     ],
@@ -115,7 +115,7 @@
   {
     "title": "Star Read Тема для блога Astro",
     "description": "Это русскоязычная документация для блог-темы Star Read для Astro.",
-    "cover": "https://www.example.com/img/cover/IhpCWiWtAslLu1jzLabnE.jpg",
+    "cover": "https://www.example.com/cover/IhpCWiWtAslLu1jzLabnE.jpg",
     "categories": [
       "主题说明"
     ],

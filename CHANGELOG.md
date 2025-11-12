@@ -2,7 +2,7 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
-### [0.1.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.3...v0.1.4) (2025-11-12)
+## [0.1.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.3...v0.1.4) (2025-11-12)
 
 
 ### 🔨 Code Refactoring | 代码重构
@@ -19,7 +19,11 @@
 
 * **主题:** 为多语言主题文档添加封面图片并更新数据 ([0d2c2cd](https://github.com/passwordgloo/astro-theme-starread/commit/0d2c2cddcf1dd3ac6b4f0ee85e5b0edcd8ec6da3))
 
-### [0.1.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.2...v0.1.3) (2025-11-09)
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/11/12/0.1.49abfecf6f2f1bca5.png" alt="0.1.4" border="0">
+
+## [0.1.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.2...v0.1.3) (2025-11-09)
 
 
 ### ✨ Features | 功能
@@ -41,6 +45,10 @@
 ### 🐛 Bug Fixes | 漏洞修复
 
 * **search:** 修复搜索模态框的DOM结构错误 ([03f9189](https://github.com/passwordgloo/astro-theme-starread/commit/03f91896f061aa547c03ffef76bf85ec9cf380cc))
+
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/11/12/0.1.3770297c39363d091.png" alt="0.1.3" border="0">
 
 ## [0.1.2](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.1...v0.1.2) (2025-10-29)
 

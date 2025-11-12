@@ -662,6 +662,48 @@ const hasCompleteConfig = Boolean(
   });
   
   // 移除原有的初始化调用
+  
+  // 监听 Astro 页面切换事件
+  document.addEventListener('astro:page-load', function() {
+    console.log('Astro 页面切换，重新初始化搜索功能');
+    // 重置搜索状态，但保留搜索数据缓存
+    searchToggle = document.getElementById('search-toggle');
+    if (searchToggle) {
+      // 移除可能存在的旧事件监听器（避免重复绑定）
+      const newSearchToggle = searchToggle.cloneNode(true);
+      searchToggle.parentNode.replaceChild(newSearchToggle, searchToggle);
+      searchToggle = newSearchToggle;
+      
+      // 重新绑定事件
+      searchToggle.addEventListener('click', () => {
+        if (!searchInitialized) {
+          initializeSearch();
+        }
+        openSearch();
+      });
+    }
+  });
+  
+  // 支持 View Transitions
+  document.addEventListener('astro:after-swap', function() {
+    console.log('Astro 页面交换完成，重新初始化搜索功能');
+    // 重置搜索状态，但保留搜索数据缓存
+    searchToggle = document.getElementById('search-toggle');
+    if (searchToggle) {
+      // 移除可能存在的旧事件监听器（避免重复绑定）
+      const newSearchToggle = searchToggle.cloneNode(true);
+      searchToggle.parentNode.replaceChild(newSearchToggle, searchToggle);
+      searchToggle = newSearchToggle;
+      
+      // 重新绑定事件
+      searchToggle.addEventListener('click', () => {
+        if (!searchInitialized) {
+          initializeSearch();
+        }
+        openSearch();
+      });
+    }
+  });
 })();
 </script>
 
