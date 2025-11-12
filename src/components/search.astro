@@ -27,7 +27,7 @@ const hasCompleteConfig = Boolean(
 <!-- 搜索模态框移到外层，确保它能覆盖整个页面 -->
 <div 
   id="search-modal" 
-  class="fixed inset-0 z-100 flex items-start justify-center pt-16 px-4 hidden"
+  class="fixed inset-0 z-[9999] flex items-start justify-center pt-16 px-4 hidden bg-black/50 dark:bg-black/70 backdrop-blur-sm"
 >
     <div 
       class="w-full max-w-2xl bg-white dark:bg-gray-900 rounded-lg shadow-xl overflow-hidden flex flex-col"
@@ -147,6 +147,22 @@ const hasCompleteConfig = Boolean(
 (function() {
   if (window.__searchInitialized) return;
   window.__searchInitialized = true;
+
+  // ===== 新增代码开始 =====
+  // 将搜索模态框移动到 body 下
+  function moveModalToBody() {
+    const searchModal = document.getElementById('search-modal');
+    if (searchModal && searchModal.parentElement.tagName !== 'BODY') {
+      document.body.appendChild(searchModal);
+    }
+  }
+
+  // 在 DOM 加载完成后移动模态框
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', moveModalToBody);
+  } else {
+    moveModalToBody();
+  }
 
   const searchToggle = document.getElementById('search-toggle');
   const searchModal = document.getElementById('search-modal');
