@@ -1,7 +1,7 @@
 {
   "name": "astro-theme-starread",
   "type": "module",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "files": [
     "src",
     "scripts",

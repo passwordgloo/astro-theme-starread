@@ -2,6 +2,23 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
+### [0.1.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.3...v0.1.4) (2025-11-12)
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **pushAlgolia:** 改用原生方式读取.env文件并解析 ([8d2ecd5](https://github.com/passwordgloo/astro-theme-starread/commit/8d2ecd5e63cf8f538c2e74c4a1ea73176cb98e1e))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* **search:** 修复搜索模态框层级和背景样式问题 ([660acad](https://github.com/passwordgloo/astro-theme-starread/commit/660acad6dc0d7ac2a9e0f49ff1ae78d4d61bada5))
+
+
+### ✨ Features | 功能
+
+* **主题:** 为多语言主题文档添加封面图片并更新数据 ([0d2c2cd](https://github.com/passwordgloo/astro-theme-starread/commit/0d2c2cddcf1dd3ac6b4f0ee85e5b0edcd8ec6da3))
+
 ### [0.1.3](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.2...v0.1.3) (2025-11-09)
 
 
