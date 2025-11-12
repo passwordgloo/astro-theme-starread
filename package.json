@@ -31,6 +31,7 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "build": "astro build",
+    "release": "standard-version",
     "algolia": "node scripts/pushAlgolia.js"
   },
   "dependencies": {
