@@ -2,6 +2,34 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
+### [0.1.5](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.4...v0.1.5) (2025-11-15)
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* **search:** 修复页面切换时搜索功能失效问题 ([d883910](https://github.com/passwordgloo/astro-theme-starread/commit/d88391000897c68b3596d9d4a7ce850e8d15ac7f))
+
+
+### 📚 Documentation | 文档
+
+* 从多语言README中移除`pnpm changelog`命令 ([088adfc](https://github.com/passwordgloo/astro-theme-starread/commit/088adfc63c87ad61423cc1010e5e2932e0758c9f))
+* 更新多语言文档中的本地搜索说明 ([962bccc](https://github.com/passwordgloo/astro-theme-starread/commit/962bccc0c7661bbc13e93788e89a90948bfde9fb))
+
+
+### 📦 Chores | 其他更新
+
+* 添加 standard-version 发布脚本 ([10d9fd2](https://github.com/passwordgloo/astro-theme-starread/commit/10d9fd28a1a1c784ec701b064eccae259e761809))
+
+
+### ✨ Features | 功能
+
+* 添加 Astro Starread 主题安装器 ([8467b63](https://github.com/passwordgloo/astro-theme-starread/commit/8467b63d3e90db97891409a559c19e6441e0ff80))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **layouts:** 移除所有布局中的ClientRouter导入和使用 ([cf2b1c2](https://github.com/passwordgloo/astro-theme-starread/commit/cf2b1c27393f5ae415dfe58dba4e1b384d56e9f1))
+
 ## [0.1.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.3...v0.1.4) (2025-11-12)
 
 
