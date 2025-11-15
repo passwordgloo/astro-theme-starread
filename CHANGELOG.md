@@ -2,7 +2,7 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
-### [0.1.5](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.4...v0.1.5) (2025-11-15)
+## [0.1.5](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.4...v0.1.5) (2025-11-15)
 
 
 ### 🐛 Bug Fixes | 漏洞修复
@@ -29,6 +29,10 @@
 ### 🔨 Code Refactoring | 代码重构
 
 * **layouts:** 移除所有布局中的ClientRouter导入和使用 ([cf2b1c2](https://github.com/passwordgloo/astro-theme-starread/commit/cf2b1c27393f5ae415dfe58dba4e1b384d56e9f1))
+
+### 🔍 Preview | 预览
+
+ <img src="https://origin.picgo.net/2025/11/15/2025-11-15-21.27.0565ce7d7d25ff30aa.png" alt="截屏2025 11 15 21.27.05" border="0">
 
 ## [0.1.4](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.3...v0.1.4) (2025-11-12)
 
