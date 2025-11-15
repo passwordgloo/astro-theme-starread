@@ -12,7 +12,6 @@ import Calendar from '../components/Calendar.astro';
 import Statistic from '../components/Statistic.astro'
 import { themeConfig } from '../../starread.config';
 import { getCollection } from 'astro:content';
-import { ClientRouter } from "astro:transitions";
 
 // 获取所有文章和笔记
 const articles = await getCollection('articles');
@@ -47,7 +46,7 @@ const carouselArticles = allContent
     <link rel="icon" type="image/png" href={themeConfig.site.favicon} />
     <meta name="generator" content={Astro.generator} />
     <title>{ Astro.props.title || themeConfig.site.title }</title>
-    <ClientRouter />
+  
   </head>
   <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-slate-900 dark:text-neutral-100 transition-colors">
     <NavBar title={Astro.props.title} />

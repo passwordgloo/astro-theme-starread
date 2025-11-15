@@ -5,7 +5,6 @@ import AuthorWidget from "../components/AuthorWidget.astro";
 import AdWidget from "../components/AdWidget.astro";
 import TagCloud from "../components/TagCloud.astro";
 import { themeConfig } from '../../starread.config';
-import { ClientRouter } from "astro:transitions";
 
 
 interface Props {
@@ -26,7 +25,7 @@ const { title, categoryName, currentCategory, articles, allCategories } = Astro.
 		<link rel="icon" type="image/png" href={themeConfig.site.favicon} />
     <meta name="generator" content={Astro.generator} />
     <title>{ title || themeConfig.site.title }</title>
-    <ClientRouter />
+   
   </head>
   <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-gray-950 dark:text-neutral-100 transition-colors">
     <NavBar title={title} />
