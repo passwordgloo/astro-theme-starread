@@ -2,7 +2,6 @@
 
 import fs from 'fs';
 import path from 'path';
-import matter from 'gray-matter';
 import { fileURLToPath } from 'url';
 
 // 为了支持作为 Astro 插件使用
@@ -23,6 +22,118 @@ try {
   }
 } catch (error) {
   console.error('读取astro.config.mjs文件失败:', error);
+}
+
+// 原生解析 frontmatter 的函数
+function parseFrontmatter(fileContent) {
+  const frontmatterRegex = /^---\n([\s\S]*?)\n---\n([\s\S]*)$/;
+  const match = fileContent.match(frontmatterRegex);
+  
+  if (match) {
+    const frontmatterText = match[1];
+    const content = match[2];
+    const data = {};
+    
+    // 简单的 YAML 解析，支持基本的键值对
+    const lines = frontmatterText.split('\n');
+    let currentKey = '';
+    let currentValue = '';
+    let inMultiline = false;
+    
+    for (const line of lines) {
+      const trimmedLine = line.trim();
+      
+      // 跳过空行和注释
+      if (!trimmedLine || trimmedLine.startsWith('#')) {
+        continue;
+      }
+      
+      // 检查多行值（使用 | 或 >）
+      if (inMultiline) {
+        if (trimmedLine.startsWith('-') || trimmedLine.includes(':')) {
+          // 新的键值对开始，保存当前值
+          data[currentKey] = currentValue.trim();
+          currentKey = '';
+          currentValue = '';
+          inMultiline = false;
+        } else {
+          // 继续添加到多行值
+          currentValue += '\n' + line;
+          continue;
+        }
+      }
+      
+      // 检查数组
+      if (trimmedLine.startsWith('- ')) {
+        const arrayItem = trimmedLine.substring(2).trim();
+        if (Array.isArray(data[currentKey])) {
+          data[currentKey].push(arrayItem);
+        } else if (currentKey) {
+          data[currentKey] = [data[currentKey], arrayItem];
+        }
+        continue;
+      }
+      
+      // 检查键值对
+      const colonIndex = trimmedLine.indexOf(':');
+      if (colonIndex !== -1) {
+        currentKey = trimmedLine.substring(0, colonIndex).trim();
+        const valuePart = trimmedLine.substring(colonIndex + 1).trim();
+        
+        // 检查多行值标记
+        if (valuePart === '|' || valuePart === '>') {
+          inMultiline = true;
+          currentValue = '';
+        } 
+        // 检查数组
+        else if (valuePart.startsWith('[')) {
+          // 简单的数组解析，处理 YAML 数组的简写形式
+          try {
+            // 替换 YAML 的单引号为双引号，以便 JSON.parse 能解析
+            const jsonArrayStr = valuePart.replace(/'/g, '"');
+            data[currentKey] = JSON.parse(jsonArrayStr);
+          } catch (e) {
+            // 解析失败，尝试手动解析
+            const arrayContent = valuePart.slice(1, -1).trim();
+            if (arrayContent) {
+              data[currentKey] = arrayContent.split(',').map(item => item.trim().replace(/['"]/g, ''));
+            } else {
+              data[currentKey] = [];
+            }
+          }
+        } 
+        // 检查布尔值
+        else if (valuePart.toLowerCase() === 'true') {
+          data[currentKey] = true;
+        } else if (valuePart.toLowerCase() === 'false') {
+          data[currentKey] = false;
+        }
+        // 检查数字
+        else if (!isNaN(valuePart) && valuePart !== '') {
+          data[currentKey] = Number(valuePart);
+        }
+        // 检查字符串
+        else if ((valuePart.startsWith('"') && valuePart.endsWith('"')) || 
+                 (valuePart.startsWith("'") && valuePart.endsWith("'"))) {
+          data[currentKey] = valuePart.substring(1, valuePart.length - 1);
+        }
+        // 其他情况作为字符串
+        else {
+          data[currentKey] = valuePart;
+        }
+      }
+    }
+    
+    // 保存最后一个多行值
+    if (inMultiline && currentKey) {
+      data[currentKey] = currentValue.trim();
+    }
+    
+    return { data, content };
+  }
+  
+  // 没有 frontmatter 的情况
+  return { data: {}, content: fileContent };
 }
 
 // 进度条工具函数
@@ -97,8 +208,8 @@ export function generateIndex() {
           } else if (path.extname(item).toLowerCase() === '.md') {
             const fileContent = fs.readFileSync(itemPath, 'utf8');
             
-            // 解析 frontmatter
-            const { data, content } = matter(fileContent);
+            // 解析 frontmatter (原生实现)
+            const { data, content } = parseFrontmatter(fileContent);
             
             // 处理cover路径，添加siteUrl前缀
             let coverPath = data.cover || '/defaultCover.jpg';
