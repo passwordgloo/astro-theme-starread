@@ -1,12 +1,12 @@
 <div align="center">
-  <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
+ <img src="https://origin.picgo.net/2025/11/15/starread5c2f382da65ddf2c.png" alt="starread" border="0">
   <p>
     <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
     <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
     <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
     <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
 </p>
-   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🏴󠁧󠁢󠁥󠁮󠁧󠁿 English Document | 
   🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
   🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
   🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
@@ -17,6 +17,30 @@
 # Star Read - Astro Blog Theme
 
 >A brilliant yet clean and sophisticated Astro theme with star-like quality
+
+## 🚀 Features
+
+- 🎨 modern UI design
+- 🔍 automatically creates local indexes, supporting both local offline search and Algolia network search
+- 📱 responsive design, compatible with mobile phones and PCS
+- 🌙 dark/light themes switch automatically
+- 🏷️ tag and category support
+- 📊 article statistics and author information display
+
+
+## 📂 Project Structure
+
+```text
+/
+├── src/
+│   ├── components/     # Component files
+│   ├── content/        # Content configuration
+│   ├── layouts/        # Layout templates
+│   ├── pages/          # Page routes
+│   └── styles/         # Style files
+├── public/             # Static assets
+└── dist/               # Build output
+```
 
 ## 📦 Installation
 
@@ -180,30 +204,15 @@ export const content = {
 </main>
 ```
 
+## 🧞 Commands
 
-
-## 📂 Project Structure
-
-```text
-/
-├── src/
-│   ├── components/     # Component files
-│   ├── content/        # Content configuration
-│   ├── layouts/        # Layout templates
-│   ├── pages/          # Page routes
-│   └── styles/         # Style files
-├── public/             # Static assets
-└── dist/               # Build output
-```
-
-## 🚀 Features
-
-- 🎨 Modern UI Design
-- 🔍 Support for Local Search (Pagefind) and Algolia Search
-- 📱 Responsive Design
-- 🌙 Dark/Light Theme Toggle
-- 🏷️ Tag and Category Support
-- 📊 Article Statistics and Author Information Display
+| Command                 | Description                                       |
+| :----------------------- | :--------------------------------------------- |
+| `pnpm install`           | Install dependencies                           |
+| `pnpm dev`               | Start local development server `localhost:4321` |
+| `pnpm preview`           | Preview build results locally                   |
+| `pnpm algolia`           | Push data to Algolia search                      |
+| `pnpm release`           | Version management (update version number, generate commits, etc.) |
 
 ## 🔍 Search
 
@@ -284,14 +293,3 @@ To enable Twikoo comment system, please modify the `envId` value on line 13 of `
   });
 </script>
 ```
-
-
-## 🧞 Commands
-
-| Command                 | Description                                       |
-| :----------------------- | :--------------------------------------------- |
-| `pnpm install`           | Install dependencies                           |
-| `pnpm dev`               | Start local development server `localhost:4321` |
-| `pnpm preview`           | Preview build results locally                   |
-| `pnpm algolia`           | Push data to Algolia search                      |
-| `pnpm release`           | Version management (update version number, generate commits, etc.) |

@@ -1,13 +1,13 @@
 <div align="center">
-  <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
+  <img src="https://origin.picgo.net/2025/11/15/starread5c2f382da65ddf2c.png" alt="starread" border="0">
   <p>
     <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
     <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
     <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
     <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
 </p>
-   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
-  🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
+  🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🇨🇳 中文文档 | 
   🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
   🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
   🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
@@ -16,6 +16,29 @@
 # Star Read - Astro博客主题
 
 >既有星光般的璀璨，又不失简洁和高端感的Astro主题
+
+## 🚀 特性
+
+- 🎨 现代化UI设计
+- 🔍 自动创建本地索引，支持本地离线搜索和Algolia联网搜索
+- 📱 响应式设计，适配手机、PC
+- 🌙 深色/浅色主题自动切换
+- 🏷️ 标签和分类支持
+- 📊 文章统计和作者信息展示
+
+## 📂 项目结构
+
+```text
+/
+├── src/
+│   ├── components/     # 组件文件
+│   ├── content/        # 内容配置
+│   ├── layouts/        # 布局模板
+│   ├── pages/          # 页面路由
+│   └── styles/         # 样式文件
+├── public/             # 静态资源
+└── dist/               # 构建输出
+```
 
 ## 📦 安装
 
@@ -174,28 +197,17 @@ export const content = {
 </main>
 ```
 
-## 📂 项目结构
+## 🧞 命令
 
-```text
-/
-├── src/
-│   ├── components/     # 组件文件
-│   ├── content/        # 内容配置
-│   ├── layouts/        # 布局模板
-│   ├── pages/          # 页面路由
-│   └── styles/         # 样式文件
-├── public/             # 静态资源
-└── dist/               # 构建输出
-```
+| 命令                     | 描述                                           |
+| :----------------------- | :--------------------------------------------- |
+| `pnpm install`           | 安装依赖                                       |
+| `pnpm dev`               | 启动本地开发服务器 `localhost:4321`            |
+| `pnpm preview`           | 本地预览构建结果                               |
+| `pnpm algolia`           | 推送数据到Algolia搜索                          |
+| `pnpm release`           | 版本管理（更新版本号、生成提交等）             |
 
-## 🚀 特性
 
-- 🎨 现代化UI设计
-- 🔍 支持本地搜索（Pagefind）和Algolia搜索
-- 📱 响应式设计
-- 🌙 深色/浅色主题切换
-- 🏷️ 标签和分类支持
-- 📊 文章统计和作者信息展示
 
 ## 🔍 搜索
 
@@ -276,13 +288,3 @@ nav: [
   });
 </script>
 ```
-
-## 🧞 命令
-
-| 命令                     | 描述                                           |
-| :----------------------- | :--------------------------------------------- |
-| `pnpm install`           | 安装依赖                                       |
-| `pnpm dev`               | 启动本地开发服务器 `localhost:4321`            |
-| `pnpm preview`           | 本地预览构建结果                               |
-| `pnpm algolia`           | 推送数据到Algolia搜索                          |
-| `pnpm release`           | 版本管理（更新版本号、生成提交等）             |

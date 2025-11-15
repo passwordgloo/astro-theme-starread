@@ -1,14 +1,14 @@
 <div align="center">
-  <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
+  <img src="https://origin.picgo.net/2025/11/15/starread5c2f382da65ddf2c.png" alt="starread" border="0">
   <p>
     <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
     <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
     <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
     <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
 </p>
-   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
   🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
-  🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
+  🇯🇵 日本語ドキュメント | 
   🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
   🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
 </div>
@@ -16,6 +16,29 @@
 # Star Read - Astroブログテーマ
 
 >星のように輝き、简洁かつ高級感のあるAstroテーマです
+
+## 🚀 特徴
+
+- 🎨 現代的なUIデザインです
+- 🔍 自働的にローカルインデックスを作成し、ローカルオフライン検索とAlgoliaネット検索をサポートします。
+- 📱レスポンシブデザインで携帯電話やPCにも対応します
+- 🌙 ダーク/パステルカラーのテーマが自働的に切り替えられます
+− 🏷️ ラベルと分類支持
+- 📊 記事の統計と著者情報を表示します。
+
+## 📂 プロジェクト構造
+
+```text
+/
+├── src/
+│   ├── components/     # コンポーネントファイル
+│   ├── content/        # コンテンツ設定
+│   ├── layouts/        # レイアウトテンプレート
+│   ├── pages/          # ページルート
+│   └── styles/         # スタイルファイル
+├── public/             # 静的資産
+└── dist/               # ビルド出力
+```
 
 ## 📦 インストール
 
@@ -174,28 +197,15 @@ export const content = {
 </main>
 ```
 
-## 📂 プロジェクト構造
+## 🧞 コマンド
 
-```text
-/
-├── src/
-│   ├── components/     # コンポーネントファイル
-│   ├── content/        # コンテンツ設定
-│   ├── layouts/        # レイアウトテンプレート
-│   ├── pages/          # ページルート
-│   └── styles/         # スタイルファイル
-├── public/             # 静的資産
-└── dist/               # ビルド出力
-```
-
-## 🚀 特徴
-
-- 🎨 現代的なUIデザイン
-- 🔍 ローカル検索（Pagefind）とAlgolia検索をサポート
-- 📱 レスポンシブデザイン
-- 🌙 ダーク/ライトテーマ切り替え
-- 🏷️ タグとカテゴリーのサポート
-- 📊 記事統計と作者情報の表示
+| コマンド                 | 説明                                           |
+| :----------------------- | :--------------------------------------------- |
+| `pnpm install`           | 依存関係をインストール                           |
+| `pnpm dev`               | ローカル開発サーバー `localhost:4321` を起動する |
+| `pnpm preview`           | ローカルでビルド結果をプレビューする               |
+| `pnpm algolia`           | データをAlgolia検索にプッシュする                  |
+| `pnpm release`           | バージョン管理（バージョン番号の更新、コミットの生成など） |
 
 ## 🔍 検索
 
@@ -276,13 +286,3 @@ Twikooコメントシステムを有効にするには、`src/components/Comment
   });
 </script>
 ```
-
-## 🧞 コマンド
-
-| コマンド                 | 説明                                           |
-| :----------------------- | :--------------------------------------------- |
-| `pnpm install`           | 依存関係をインストール                           |
-| `pnpm dev`               | ローカル開発サーバー `localhost:4321` を起動する |
-| `pnpm preview`           | ローカルでビルド結果をプレビューする               |
-| `pnpm algolia`           | データをAlgolia検索にプッシュする                  |
-| `pnpm release`           | バージョン管理（バージョン番号の更新、コミットの生成など） |

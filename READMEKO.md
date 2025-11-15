@@ -1,21 +1,53 @@
 <div align="center">
-  <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
+  <img src="https://origin.picgo.net/2025/11/15/starread5c2f382da65ddf2c.png" alt="starread" border="0">
   <p>
     <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
     <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
     <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
     <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
 </p>
-   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
   🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
   🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
-  🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
+  🇰🇷 한국어 문서 | 
   🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
 </div>
 
 # Star Read - Astro 블로그 테마
 
 >별과 같은 빛나는 품질을 지닌 우아하면서도 간결한 Astro 테마입니다
+
+## 🚀 특징
+
+-🎨 현대화 ui 디자인
+-🔍 자동 로컬 생성을 지지하 며 현지 오프 라인 검색과 algolia 인터넷 검색
+-📱 디자인에 호응 해 적정 배치 휴대전화 · pc
+-🌙 짙은 옅은 색의 주제/자동 전환
+-🏷 ️ 라벨과 분류 지지
+-글 📊 통계와 저자 정보 전시
+
+## 📂 프로젝트 구조
+
+```text
+/
+├── src/
+│   ├── components/     # 컴포넌트 파일
+│   ├── content/        # 콘텐츠 설정
+│   ├── layouts/        # 레이아웃 템플릿
+│   ├── pages/          # 페이지 라우트
+│   └── styles/         # 스타일 파일
+├── public/             # 정적 자산
+└── dist/               # 빌드 출력
+```
+
+## 🚀 특징
+
+- 🎨 현대적인 UI 디자인
+- 🔍 로컬 검색(Pagefind) 및 Algolia 검색 지원
+- 📱 반응형 디자인
+- 🌙 다크/라이트 테마 전환
+- 🏷️ 태그 및 카테고리 지원
+- 📊 글 통계 및 작성자 정보 표시
 
 ## 📦 설치
 
@@ -174,28 +206,15 @@ export const content = {
 </main>
 ```
 
-## 📂 프로젝트 구조
+## 🧞 명령어
 
-```text
-/
-├── src/
-│   ├── components/     # 컴포넌트 파일
-│   ├── content/        # 콘텐츠 설정
-│   ├── layouts/        # 레이아웃 템플릿
-│   ├── pages/          # 페이지 라우트
-│   └── styles/         # 스타일 파일
-├── public/             # 정적 자산
-└── dist/               # 빌드 출력
-```
-
-## 🚀 특징
-
-- 🎨 현대적인 UI 디자인
-- 🔍 로컬 검색(Pagefind) 및 Algolia 검색 지원
-- 📱 반응형 디자인
-- 🌙 다크/라이트 테마 전환
-- 🏷️ 태그 및 카테고리 지원
-- 📊 글 통계 및 작성자 정보 표시
+| 명령어                   | 설명                                           |
+| :----------------------- | :--------------------------------------------- |
+| `pnpm install`           | 의존성 설치                                   |
+| `pnpm dev`               | 로컬 개발 서버 `localhost:4321` 시작            |
+| `pnpm preview`           | 로컬에서 빌드 결과 미리보기                       |
+| `pnpm algolia`           | Algolia 검색에 데이터 푸시                       |
+| `pnpm release`           | 버전 관리 (버전 번호 업데이트, 커밋 생성 등)        |
 
 ## 🔍 검색
 
@@ -276,14 +295,3 @@ Twikoo 댓글 시스템을 활성화하려면 `src/components/Comment.astro` 파
   });
 </script>
 ```
-
-## 🧞 명령어
-
-| 명령어                   | 설명                                           |
-| :----------------------- | :--------------------------------------------- |
-| `pnpm install`           | 의존성 설치                                   |
-| `pnpm dev`               | 로컬 개발 서버 `localhost:4321` 시작            |
-| `pnpm preview`           | 로컬에서 빌드 결과 미리보기                       |
-| `pnpm algolia`           | Algolia 검색에 데이터 푸시                       |
-| `pnpm release`           | 버전 관리 (버전 번호 업데이트, 커밋 생성 등)        |
-
