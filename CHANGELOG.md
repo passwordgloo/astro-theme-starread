@@ -2,6 +2,37 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
+### [0.1.6](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.5...v0.1.6) (2025-11-16)
+
+
+### 📚 Documentation | 文档
+
+* **CHANGELOG:** 更新变更日志并添加预览截图 ([4929cb9](https://github.com/passwordgloo/astro-theme-starread/commit/4929cb9e4e076d6b9dd446088dfeac7c3d3188f5))
+* 更新多语言文档内容和结构 ([ad042fc](https://github.com/passwordgloo/astro-theme-starread/commit/ad042fc162ebea36e6693167cd9da605d7848516))
+
+
+### 📦 Chores | 其他更新
+
+* 移除未使用的依赖 dotenv 和 typescript ([8b626c7](https://github.com/passwordgloo/astro-theme-starread/commit/8b626c7f820e7ddb26bddafc5c0da0d6bae2d2e8))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **components:** 将 ArticleInfo 从 Vue 迁移到 Astro 组件 ([a9e2d5f](https://github.com/passwordgloo/astro-theme-starread/commit/a9e2d5fc3c603c52373bbe0bb72bfa808581839e))
+* **components:** 将 ArticleTOC 从 Vue 迁移到 Astro 组件 ([d3c47e4](https://github.com/passwordgloo/astro-theme-starread/commit/d3c47e414e4f79d58bbe5b645a798d77edd645ae))
+* **components:** 将部分组件从框架特定格式迁移至 Astro 格式 ([1ed7e3f](https://github.com/passwordgloo/astro-theme-starread/commit/1ed7e3f51f7835cce2b03a81a8ccdc93a83ddf5f))
+* **LatestArticle:** 优化文章列表布局和图片处理 ([85ba02f](https://github.com/passwordgloo/astro-theme-starread/commit/85ba02f67c3e682800d7a5e13a200e4d30dcad0c))
+* **layouts:** 提取基础布局组件并重构各页面布局 ([5afc4a3](https://github.com/passwordgloo/astro-theme-starread/commit/5afc4a3a2ff7ffa703ae284516216d9f0d98bc37))
+* 移除gray-matter依赖并实现原生frontmatter解析 ([00797c0](https://github.com/passwordgloo/astro-theme-starread/commit/00797c0ac45f2341f5c1bbfa951c4785d8778bc1))
+* 移除未使用的Vue相关依赖和配置 ([70b14ec](https://github.com/passwordgloo/astro-theme-starread/commit/70b14ec265950229c42577a6f8949ee7609b5a9c))
+* 移除组件中多余的client:load指令 ([1669e52](https://github.com/passwordgloo/astro-theme-starread/commit/1669e5236bcd2932c61d32f596742c1b5201c2eb))
+
+
+### ✨ Features | 功能
+
+* **主题:** 添加暗黑模式切换功能 ([c7b38d5](https://github.com/passwordgloo/astro-theme-starread/commit/c7b38d5ef60c5d17fcaf2e01a1dd5e7202e9eea8))
+* **轮播组件:** 实现无缝轮播效果并优化交互体验 ([a947b75](https://github.com/passwordgloo/astro-theme-starread/commit/a947b75c65c8e7ad9eab29cfcaa3cd6c5bcda36a))
+
 ## [0.1.5](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.4...v0.1.5) (2025-11-15)
 
 
