@@ -14,8 +14,6 @@
   }
 }
 
-@custom-variant dark (&:where(.dark, .dark *)); 
-
 @theme {
   /* 主题色
   文本  text-primary

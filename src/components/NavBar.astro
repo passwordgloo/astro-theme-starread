@@ -1,12 +1,10 @@
 ---
 const { title } = Astro.props;
 import { themeConfig } from '../../starread.config';
-import ThemeToggle from "./ThemeToggle.astro";
 import Search from "./Search.astro";
 ---
 
 <header id="navbar" class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 bg-white/5 dark:backdrop-blur-xl dark:border dark:border-cyan-600/20 shadow-sm sticky top-0 z-50 transition-all duration-300 backdrop-blur-md" client:load>
-  <!-- 移除移动端主题切换按钮 -->
   <div class="container mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex items-center space-x-2 nav-content">
       <div id="logo-container">
@@ -98,7 +96,6 @@ import Search from "./Search.astro";
     <!-- 搜索和登录 -->
     <div class="flex items-center space-x-4">
       <Search />
-      <ThemeToggle />
       <button class="hidden md:block rounded-lg bg-primary text-white hover:bg-primary/70 active:bg-primary/80
                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 dark:bg-secondary dark:text-slate-950 dark:hover:bg-secondary/70 dark:active:bg-secondary/60
                    dark:focus-visible:ring-sky-300/50 px-4 py-2 rounded-md transition-colors">登录</button>
@@ -206,12 +203,9 @@ import Search from "./Search.astro";
       logoImages.forEach(logoImage => {
         if (logoImage && logoImage.dataset.darkSrc && logoImage.dataset.lightSrc) {
           const newSrc = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
-          // 使用requestAnimationFrame确保DOM更新完成
-          requestAnimationFrame(() => {
-            if (logoImage.src !== newSrc) {
-              logoImage.src = newSrc;
-            }
-          });
+              if (logoImage.src !== newSrc) {
+            logoImage.src = newSrc;
+          }
         }
       });
     };
@@ -233,8 +227,6 @@ import Search from "./Search.astro";
 
     // 初始化时更新一次logo
     updateLogo();
-    // 移除可能导致冲突的旧搜索逻辑
-    // 搜索相关功能现在由导入的组件内部处理
 
     // 导航栏滚动逻辑
     let lastScrollY = window.scrollY;
@@ -246,18 +238,14 @@ import Search from "./Search.astro";
 
       const currentScrollY = window.scrollY;
       
-      // 向下滚动时显示标题
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         navbar.classList.add('show-title');
         navbar.classList.remove('hide-nav');
-      } 
-      // 向上滚动时显示完整导航栏
-      else if (currentScrollY < lastScrollY) {
+      } else if (currentScrollY < lastScrollY) {
         navbar.classList.remove('show-title');
         navbar.classList.remove('hide-nav');
       }
       
-      // 滚动到顶部时重置
       if (currentScrollY <= 10) {
         navbar.classList.remove('show-title');
         navbar.classList.remove('hide-nav');
@@ -277,11 +265,12 @@ import Search from "./Search.astro";
     // 移动端侧边栏交互
     const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
     const mobileSidebar = document.getElementById('mobile-sidebar');
-    const mobileSidebarOverlay = document.getElementById('mobile-sidebar-overlay');
-    const mobileSidebarClose = document.getElementById('mobile-sidebar-close');
-    const mobileSidebarContent = document.getElementById('mobile-sidebar-content');
 
     if (mobileMenuToggle && mobileSidebar) {
+      const mobileSidebarOverlay = mobileSidebar.querySelector('#mobile-sidebar-overlay');
+      const mobileSidebarClose = mobileSidebar.querySelector('#mobile-sidebar-close');
+      const mobileSidebarContent = mobileSidebar.querySelector('#mobile-sidebar-content');
+
       // 打开侧边栏
       mobileMenuToggle.addEventListener('click', () => {
         mobileSidebar.classList.remove('hidden');
@@ -302,8 +291,8 @@ import Search from "./Search.astro";
         }, 300);
       };
 
-      if (mobileSidebarClose) mobileSidebarClose.addEventListener('click', closeSidebar);
-      if (mobileSidebarOverlay) mobileSidebarOverlay.addEventListener('click', closeSidebar);
+      mobileSidebarClose.addEventListener('click', closeSidebar);
+      mobileSidebarOverlay.addEventListener('click', closeSidebar);
 
       // ESC键关闭侧边栏
       document.addEventListener('keydown', (e) => {
