@@ -1,0 +1,116 @@
+<button id="theme-toggle" class="hidden md:block p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" title="切换主题" client:load>
+  <span class="icon-[lucide--moon] h-5 w-5 nav-theme-icon"></span>
+</button>
+
+<script>
+  // 主题切换和logo同步脚本
+  document.addEventListener('DOMContentLoaded', () => {
+    const htmlElement = document.documentElement;
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    // 初始化logo根据当前主题
+    const updateLogo = () => {
+      const logoImages = document.querySelectorAll('.logo-image');
+      const isDarkMode = htmlElement.classList.contains('dark');
+      
+      logoImages.forEach(logoImage => {
+        if (logoImage && logoImage.dataset.darkSrc && logoImage.dataset.lightSrc) {
+          const newSrc = isDarkMode ? logoImage.dataset.darkSrc : logoImage.dataset.lightSrc;
+          // 使用requestAnimationFrame确保DOM更新完成
+          requestAnimationFrame(() => {
+            if (logoImage.src !== newSrc) {
+              logoImage.src = newSrc;
+            }
+          });
+        }
+      });
+    };
+
+    // 更新主题图标
+    const updateThemeIcon = () => {
+      const themeIcons = document.querySelectorAll('.nav-theme-icon');
+      const isDarkMode = htmlElement.classList.contains('dark');
+      const iconClass = isDarkMode ? 'icon-[lucide--sun]' : 'icon-[lucide--moon]';
+      
+      themeIcons.forEach(icon => {
+        if (icon) {
+          icon.className = `${iconClass} h-5 w-5 nav-theme-icon`;
+        }
+      });
+    };
+
+    // 完整的主题更新
+    const updateTheme = () => {
+      const isDark = localStorage.theme === 'dark' || 
+                   (!('theme' in localStorage) && mediaQuery.matches);
+      
+      if (isDark) {
+        htmlElement.classList.add('dark');
+      } else {
+        htmlElement.classList.remove('dark');
+      }
+      
+      updateThemeIcon();
+      updateLogo();
+    };
+
+    // 监听主题变化
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.attributeName === 'class') {
+          updateLogo();
+          updateThemeIcon();
+        }
+      });
+    });
+
+    observer.observe(htmlElement, { 
+      attributes: true, 
+      attributeFilter: ['class'] 
+    });
+
+    // 主题切换处理
+    const handleThemeToggle = () => {
+      const isDark = htmlElement.classList.contains('dark');
+      localStorage.theme = isDark ? 'light' : 'dark';
+      updateTheme();
+    };
+
+    // 设置主题切换按钮
+    const setupThemeButtons = () => {
+      const themeToggle = document.getElementById('theme-toggle');
+      const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
+      
+      [themeToggle, mobileThemeToggle].forEach(btn => {
+        if (btn) {
+          btn.addEventListener('click', handleThemeToggle);
+        }
+      });
+    };
+
+    // 初始化
+    updateTheme();
+    setupThemeButtons();
+
+    // 监听系统主题变化
+    mediaQuery.addEventListener('change', updateTheme);
+
+    // 导航栏滚动效果
+    const header = document.querySelector('header');
+    let lastScrollTop = 0;
+
+    window.addEventListener('scroll', () => {
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+      if (header) {
+        if (scrollTop > 100) {
+          header.classList.add('show-title');
+        } else {
+          header.classList.remove('show-title');
+        }
+      }
+
+      lastScrollTop = scrollTop;
+    });
+  });
+</script>
