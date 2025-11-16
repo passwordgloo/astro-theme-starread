@@ -23,10 +23,8 @@ export async function getStaticPaths() {
   const isReservedRoute = (path) => {
     // 检查是否以保留路由开头或完全匹配保留路由
     return reservedRoutes.some(route => 
-      path === route || path.startsWith(`${route}/`)
-    );
+      path === route || path.startsWith(`${route}/`));
   };
-  
   const paths = [];
   
   // 处理文章条目

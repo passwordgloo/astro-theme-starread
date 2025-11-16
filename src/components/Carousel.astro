@@ -94,7 +94,7 @@ const processedArticles = articles.map(article => ({
     {processedArticles.map((_, index) => (
       <button 
         key={index} 
-        class={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === 0 ? 'bg-blue-600 dark:bg-blue-500 w-8' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'}`} 
+        class={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === 0 ? 'bg-primary dark:bg-secondary w-8' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'}`} 
         aria-label={`切换到第 ${index + 1} 张幻灯片`} 
         data-index={index}
       ></button>

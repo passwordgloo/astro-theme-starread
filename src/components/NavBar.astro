@@ -238,14 +238,18 @@ import Search from "./Search.astro";
 
       const currentScrollY = window.scrollY;
       
+      // 向下滚动时显示标题
       if (currentScrollY > lastScrollY && currentScrollY > 100) {
         navbar.classList.add('show-title');
         navbar.classList.remove('hide-nav');
-      } else if (currentScrollY < lastScrollY) {
+      } 
+      // 向上滚动时显示完整导航栏
+      else if (currentScrollY < lastScrollY) {
         navbar.classList.remove('show-title');
         navbar.classList.remove('hide-nav');
       }
       
+      // 滚动到顶部时重置
       if (currentScrollY <= 10) {
         navbar.classList.remove('show-title');
         navbar.classList.remove('hide-nav');
