@@ -10,17 +10,40 @@ date: 2025-10-07 21:37:04
 
 <div align="center">
   <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
-   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🏴󠁧󠁢󠁥󠁮󠁧󠁿 English Document | 
   🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
   🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
   🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
   🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
 </div>
 
-
 # Star Read - Astro Blog Theme
 
 >A brilliant yet clean and sophisticated Astro theme with star-like quality
+
+## 🚀 Features
+
+- 🎨 modern UI design
+- 🔍 automatically creates local indexes, supporting both local offline search and Algolia network search
+- 📱 responsive design, compatible with mobile phones and PCS
+- 🌙 dark/light themes switch automatically
+- 🏷️ tag and category support
+- 📊 article statistics and author information display
+
+
+## 📂 Project Structure
+
+```text
+/
+├── src/
+│   ├── components/     # Component files
+│   ├── content/        # Content configuration
+│   ├── layouts/        # Layout templates
+│   ├── pages/          # Page routes
+│   └── styles/         # Style files
+├── public/             # Static assets
+└── dist/               # Build output
+```
 
 ## 📦 Installation
 
@@ -98,28 +121,101 @@ pnpm install
 pnpm dev
 ```
 
-## 📂 Project Structure
+### Method 4: As a dependency in existing Astro project
 
-```text
-/
-├── src/
-│   ├── components/     # Component files
-│   ├── content/        # Content configuration
-│   ├── layouts/        # Layout templates
-│   ├── pages/          # Page routes
-│   └── styles/         # Style files
-├── public/             # Static assets
-└── dist/               # Build output
+You can install the theme as a dependency in your existing Astro project and use its components, layouts, and pages directly from node_modules. This is the recommended way to use the theme in Astro 5 projects.
+
+1. **Install the theme package**:
+
+```bash
+# Using pnpm
+pnpm add astro-theme-starread
+
+# Using npm
+npm install astro-theme-starread
+
+# Using yarn
+yarn add astro-theme-starread
 ```
 
-## 🚀 Features
+**Direct access to theme components and layouts in node_modules:**
 
-- 🎨 Modern UI Design
-- 🔍 Support for Local Search (Pagefind) and Algolia Search
-- 📱 Responsive Design
-- 🌙 Dark/Light Theme Toggle
-- 🏷️ Tag and Category Support
-- 📊 Article Statistics and Author Information Display
+After installation, you can directly import and use components and layouts from the theme package in your Astro files. The components and layouts are accessible through the package's main entry point, making it easy to integrate them into your project.
+
+2. **Import and use components directly from node_modules**:
+
+```astro
+---
+// Import components directly from the theme in node_modules
+import { NavBar, ThemeToggle, ArticleInfo, AuthorWidget, TagCloud } from 'astro-theme-starread';
+---
+
+<html>
+  <head>
+    <title>My Astro Blog</title>
+    <!-- Import theme styles if needed -->
+    <link rel="stylesheet" href="node_modules/astro-theme-starread/src/styles/global.css" />
+  </head>
+  <body>
+    <!-- Use the NavBar component from node_modules -->
+    <NavBar />
+    
+    <!-- Use the ThemeToggle component from node_modules -->
+    <ThemeToggle />
+    
+    <article>
+      <!-- Use the ArticleInfo component with props -->
+      <ArticleInfo 
+        title="My Article"
+        date="2024-01-01"
+        author="Author Name"
+      />
+      <p>Article content here...</p>
+    </article>
+    
+    <aside>
+      <!-- Use sidebar components -->
+      <AuthorWidget />
+      <TagCloud />
+    </aside>
+  </body>
+</html>
+```
+
+3. **Use layouts directly from node_modules**:
+
+```astro
+---
+// Import layout directly from the theme in node_modules
+import { article as ArticleLayout } from 'astro-theme-starread';
+
+// Apply the layout from node_modules
+export const layout = ArticleLayout;
+
+// Your content
+export const content = {
+  title: "My Blog Post",
+  date: "2024-01-01",
+  author: "Author Name",
+  tags: ["tech", "blogging"]
+};
+---
+
+<!-- This content will be rendered inside the layout from node_modules -->
+<main>
+  <p>This is the content of my blog post. It will be rendered inside the article layout from the theme.</p>
+</main>
+```
+
+## 🧞 Commands
+
+| Command                 | Description                                       |
+| :----------------------- | :--------------------------------------------- |
+| `pnpm install`           | Install dependencies                           |
+| `pnpm dev`               | Start local development server `localhost:4321` |
+| `pnpm preview`           | Preview build results locally                   |
+| `pnpm algolia`           | Push data to Algolia search                      |
+| `pnpm release`           | Version management (update version number, generate commits, etc.) |
 
 ## 🔍 Search
 
@@ -159,7 +255,7 @@ ALGOLIA_WRITE_API_KEY=Your Write API Key (for index upload)
 
 3. Push Index to Algolia
 
-Run `pnpm algolia` to push local index to Algolia
+By default, local search is used, which is suitable for offline use on the local end and does not require user configuration.
 
 ## ⚙️ Custom Configuration
 
@@ -200,16 +296,3 @@ To enable Twikoo comment system, please modify the `envId` value on line 13 of `
   });
 </script>
 ```
-
-
-## 🧞 Commands
-
-| Command                 | Description                                       |
-| :----------------------- | :--------------------------------------------- |
-| `pnpm install`           | Install dependencies                           |
-| `pnpm dev`               | Start local development server `localhost:4321` |
-| `pnpm preview`           | Preview build results locally                   |
-| `pnpm local`             | Run automatic indexing script and build production site |
-| `pnpm algolia`           | Push data to Algolia search                      |
-| `pnpm changelog`         | Generate changelog                              |
-| `pnpm release`           | Version management (update version number, generate commits, etc.) |

@@ -10,15 +10,39 @@ date: 2025-10-07 21:37:04
 
 <div align="center">
   <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
-   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
   🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
-  🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
+  🇯🇵 日本語ドキュメント | 
   🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
   🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
 </div>
+
 # Star Read - Astroブログテーマ
 
 >星のように輝き、简洁かつ高級感のあるAstroテーマです
+
+## 🚀 特徴
+
+- 🎨 現代的なUIデザインです
+- 🔍 自働的にローカルインデックスを作成し、ローカルオフライン検索とAlgoliaネット検索をサポートします。
+- 📱レスポンシブデザインで携帯電話やPCにも対応します
+- 🌙 ダーク/パステルカラーのテーマが自働的に切り替えられます
+− 🏷️ ラベルと分類支持
+- 📊 記事の統計と著者情報を表示します。
+
+## 📂 プロジェクト構造
+
+```text
+/
+├── src/
+│   ├── components/     # コンポーネントファイル
+│   ├── content/        # コンテンツ設定
+│   ├── layouts/        # レイアウトテンプレート
+│   ├── pages/          # ページルート
+│   └── styles/         # スタイルファイル
+├── public/             # 静的資産
+└── dist/               # ビルド出力
+```
 
 ## 📦 インストール
 
@@ -81,8 +105,7 @@ pnpm dev
 ### 方法3：ソースコードからインストール
 
 >[!warning]
->该方式需访问Github仓库，确保网络畅通。
-
+>この方法ではGithubリポジトリへのアクセスが必要です。ネットワーク接続が正常であることを確認してください。
 
 ```bash
 git clone https://github.com/passwordgloo/astro-theme-starread
@@ -96,34 +119,103 @@ pnpm install
 pnpm dev
 ```
 
-## 📂 プロジェクト構造
+### 方法4：既存の Astro プロジェクトに依存関係としてインストール
 
-```text
-/
-├── src/
-│   ├── components/     # コンポーネントファイル
-│   ├── content/        # コンテンツ設定
-│   ├── layouts/        # レイアウトテンプレート
-│   ├── pages/          # ページルート
-│   └── styles/         # スタイルファイル
-├── public/             # 静的資産
-└── dist/               # ビルド出力
+テーマを既存の Astro プロジェクトに依存関係としてインストールし、node_modules から直接コンポーネント、レイアウト、ページを使用することができます。
+
+1. **テーマパッケージをインストール**：
+
+```bash
+# pnpm を使用
+pnpm add astro-theme-starread
+
+# npm を使用
+npm install astro-theme-starread
+
+# yarn を使用
+yarn add astro-theme-starread
 ```
 
-## 🚀 特徴
+2. **node_modules から直接コンポーネントをインポートして使用**：
 
-- 🎨 現代的なUIデザイン
-- 🔍 ローカル検索（Pagefind）とAlgolia検索をサポート
-- 📱 レスポンシブデザイン
-- 🌙 ダーク/ライトテーマ切り替え
-- 🏷️ タグとカテゴリーのサポート
-- 📊 記事統計と作者情報の表示
+```astro
+---
+// node_modules のテーマからコンポーネントを直接インポート
+import { NavBar, ThemeToggle, ArticleInfo, AuthorWidget, TagCloud } from 'astro-theme-starread';
+---
+
+<html>
+  <head>
+    <title>私の Astro ブログ</title>
+    <!-- テーマのスタイルを使用する場合 -->
+    <link rel="stylesheet" href="node_modules/astro-theme-starread/src/styles/global.css" />
+  </head>
+  <body>
+    <!-- node_modules の NavBar コンポーネントを使用 -->
+    <NavBar />
+    
+    <!-- node_modules の ThemeToggle コンポーネントを使用 -->
+    <ThemeToggle />
+    
+    <article>
+      <!-- 属性を持つ ArticleInfo コンポーネントを使用 -->
+      <ArticleInfo 
+        title="私の記事"
+        date="2024-01-01"
+        author="作者名"
+      />
+      <p>記事の内容...</p>
+    </article>
+    
+    <aside>
+      <!-- サイドバーコンポーネントを使用 -->
+      <AuthorWidget />
+      <TagCloud />
+    </aside>
+  </body>
+</html>
+```
+
+3. **node_modules から直接レイアウトを使用**：
+
+```astro
+---
+// node_modules のテーマからレイアウトを直接インポート
+import { article as ArticleLayout } from 'astro-theme-starread';
+
+// node_modules からのレイアウトを適用
+export const layout = ArticleLayout;
+
+// コンテンツ
+export const content = {
+  title: "私のブログ記事",
+  date: "2024-01-01",
+  author: "作者名",
+  tags: ["技術", "ブログ"]
+};
+---
+
+<!-- このコンテンツは node_modules のレイアウト内でレンダリングされます -->
+<main>
+  <p>これは私のブログ記事の内容です。テーマの記事レイアウト内でレンダリングされます。</p>
+</main>
+```
+
+## 🧞 コマンド
+
+| コマンド                 | 説明                                           |
+| :----------------------- | :--------------------------------------------- |
+| `pnpm install`           | 依存関係をインストール                           |
+| `pnpm dev`               | ローカル開発サーバー `localhost:4321` を起動する |
+| `pnpm preview`           | ローカルでビルド結果をプレビューする               |
+| `pnpm algolia`           | データをAlgolia検索にプッシュする                  |
+| `pnpm release`           | バージョン管理（バージョン番号の更新、コミットの生成など） |
 
 ## 🔍 検索
 
 ### ローカル検索
 
-デフォルトではローカル検索が使用されます。初回使用時は`pnpm local`を実行してローカルインデックスを作成してください
+デフォルトはローカルサーチを使用して、ローカル端のオフライン使用に適して、ユーザーの配置が必要ありません。
 
 ### Algolia検索
 
@@ -198,15 +290,3 @@ Twikooコメントシステムを有効にするには、`src/components/Comment
   });
 </script>
 ```
-
-## 🧞 コマンド
-
-| コマンド                 | 説明                                           |
-| :----------------------- | :--------------------------------------------- |
-| `pnpm install`           | 依存関係をインストール                           |
-| `pnpm dev`               | ローカル開発サーバー `localhost:4321` を起動する |
-| `pnpm preview`           | ローカルでビルド結果をプレビューする               |
-| `pnpm local`             | 自動インデックススクリプトを実行して本番サイトを構築する |
-| `pnpm algolia`           | データをAlgolia検索にプッシュする                  |
-| `pnpm changelog`         | 変更ログを生成する                              |
-| `pnpm release`           | バージョン管理（バージョン番号の更新、コミットの生成など） |

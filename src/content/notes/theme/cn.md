@@ -10,14 +10,41 @@ permalink: /theme/f0d2f4/
 
 <div align="center">
   <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
-   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
-  🇨🇳 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMECN.md">中文文档</a> | 
+  🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
+  🇨🇳 中文文档 | 
   🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
   🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
   🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
 </div>
 
 >既有星光般的璀璨，又不失简洁和高端感的Astro主题
+
+# Star Read - Astro博客主题
+
+>既有星光般的璀璨，又不失简洁和高端感的Astro主题
+
+## 🚀 特性
+
+- 🎨 现代化UI设计
+- 🔍 自动创建本地索引，支持本地离线搜索和Algolia联网搜索
+- 📱 响应式设计，适配手机、PC
+- 🌙 深色/浅色主题自动切换
+- 🏷️ 标签和分类支持
+- 📊 文章统计和作者信息展示
+
+## 📂 项目结构
+
+```text
+/
+├── src/
+│   ├── components/     # 组件文件
+│   ├── content/        # 内容配置
+│   ├── layouts/        # 布局模板
+│   ├── pages/          # 页面路由
+│   └── styles/         # 样式文件
+├── public/             # 静态资源
+└── dist/               # 构建输出
+```
 
 ## 📦 安装
 
@@ -82,7 +109,6 @@ pnpm dev
 >[!warning]
 >该方式需访问Github仓库，确保网络畅通。
 
-
 ```bash
 git clone https://github.com/passwordgloo/astro-theme-starread
 cd astro-theme-starread
@@ -95,34 +121,105 @@ pnpm install
 pnpm dev
 ```
 
-## 📂 项目结构
+### 方法四：作为依赖安装到现有 Astro 项目
 
-```text
-/
-├── src/
-│   ├── components/     # 组件文件
-│   ├── content/        # 内容配置
-│   ├── layouts/        # 布局模板
-│   ├── pages/          # 页面路由
-│   └── styles/         # 样式文件
-├── public/             # 静态资源
-└── dist/               # 构建输出
+您可以将主题作为依赖安装到现有的 Astro 项目中，并直接从 node_modules 使用其组件、布局和页面。
+
+1. **安装主题包**：
+
+```bash
+# 使用 pnpm
+pnpm add astro-theme-starread
+
+# 使用 npm
+npm install astro-theme-starread
+
+# 使用 yarn
+yarn add astro-theme-starread
 ```
 
-## 🚀 特性
+2. **直接从 node_modules 导入并使用组件**：
 
-- 🎨 现代化UI设计
-- 🔍 支持本地搜索（Pagefind）和Algolia搜索
-- 📱 响应式设计
-- 🌙 深色/浅色主题切换
-- 🏷️ 标签和分类支持
-- 📊 文章统计和作者信息展示
+```astro
+---
+// 直接从 node_modules 中的主题导入组件
+import { NavBar, ThemeToggle, ArticleInfo, AuthorWidget, TagCloud } from 'astro-theme-starread';
+---
+
+<html>
+  <head>
+    <title>我的 Astro 博客</title>
+    <!-- 如需使用主题样式 -->
+    <link rel="stylesheet" href="node_modules/astro-theme-starread/src/styles/global.css" />
+  </head>
+  <body>
+    <!-- 使用 node_modules 中的 NavBar 组件 -->
+    <NavBar />
+    
+    <!-- 使用 node_modules 中的 ThemeToggle 组件 -->
+    <ThemeToggle />
+    
+    <article>
+      <!-- 使用带属性的 ArticleInfo 组件 -->
+      <ArticleInfo 
+        title="我的文章"
+        date="2024-01-01"
+        author="作者名称"
+      />
+      <p>文章内容...</p>
+    </article>
+    
+    <aside>
+      <!-- 使用侧边栏组件 -->
+      <AuthorWidget />
+      <TagCloud />
+    </aside>
+  </body>
+</html>
+```
+
+3. **直接从 node_modules 使用布局**：
+
+```astro
+---
+// 直接从 node_modules 中的主题导入布局
+import { article as ArticleLayout } from 'astro-theme-starread';
+
+// 应用来自 node_modules 的布局
+export const layout = ArticleLayout;
+
+// 您的内容
+export const content = {
+  title: "我的博客文章",
+  date: "2024-01-01",
+  author: "作者名称",
+  tags: ["技术", "博客"]
+};
+---
+
+<!-- 此内容将在 node_modules 的布局中渲染 -->
+<main>
+  <p>这是我博客文章的内容。它将在主题的文章布局中渲染。</p>
+</main>
+```
+
+## 🧞 命令
+
+| 命令                     | 描述                                           |
+| :----------------------- | :--------------------------------------------- |
+| `pnpm install`           | 安装依赖                                       |
+| `pnpm dev`               | 启动本地开发服务器 `localhost:4321`            |
+| `pnpm preview`           | 本地预览构建结果                               |
+| `pnpm algolia`           | 推送数据到Algolia搜索                          |
+| `pnpm release`           | 版本管理（更新版本号、生成提交等）             |
+
+
 
 ## 🔍 搜索
 
 ### 本地搜索
 
-默认使用本地搜索，首次使用请运行`pnpm local` 建立本地索引
+默认使用本地搜索，适合本地端离线使用，无需用户配置。
 
 ### Algolia搜索
 
@@ -197,14 +294,3 @@ nav: [
   });
 </script>
 ```
-
-## 🧞 命令
-
-| 命令                     | 描述                                           |
-| :----------------------- | :--------------------------------------------- |
-| `pnpm install`           | 安装依赖                                       |
-| `pnpm dev`               | 启动本地开发服务器 `localhost:4321`            |
-| `pnpm preview`           | 本地预览构建结果                               |
-| `pnpm algolia`           | 推送数据到Algolia搜索                          |
-| `pnpm changelog`         | 生成更新日志                                   |
-| `pnpm release`           | 版本管理（更新版本号、生成提交等）             |
