@@ -2,10 +2,11 @@
   <img src="https://origin.picgo.net/2025/11/15/starread5c2f382da65ddf2c.png" alt="starread" border="0">
   <p>
     <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
-    <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=github" alt="GitHub Tag">
-    <img src="https://img.shields.io/npm/dy/astro-theme-starread?logo=npm" alt="NPM Downloads">
-    <img src="https://img.shields.io/github/created-at/passwordgloo/astro-theme-starread?logo=markdown" alt="Created At">
-    <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=Git" alt="Last Commit">
+    <img src="https://img.shields.io/npm/dy/astro-theme-starread?logo=npm&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fastro-theme-starread
+" alt="NPM Downloads">
+    <img src="https://img.shields.io/github/last-commit/passwordgloo/astro-theme-starread?logo=github&labelColor=purple&link=https%3A%2F%2Fgithub.com%2Fpasswordgloo%2Fastro-theme-starread
+" alt="Last Commit">
+    <img src="https://img.shields.io/github/v/tag/passwordgloo/astro-theme-starread?logo=git" alt="GitHub Tag">
     <img src="https://img.shields.io/github/license/passwordgloo/astro-theme-starread?logo=github" alt="License">
 </p>
   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
