@@ -2,7 +2,7 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
-### [0.1.6](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.5...v0.1.6) (2025-11-16)
+## [0.1.6](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.5...v0.1.6) (2025-11-16)
 
 
 ### 📚 Documentation | 文档
@@ -32,6 +32,10 @@
 
 * **主题:** 添加暗黑模式切换功能 ([c7b38d5](https://github.com/passwordgloo/astro-theme-starread/commit/c7b38d5ef60c5d17fcaf2e01a1dd5e7202e9eea8))
 * **轮播组件:** 实现无缝轮播效果并优化交互体验 ([a947b75](https://github.com/passwordgloo/astro-theme-starread/commit/a947b75c65c8e7ad9eab29cfcaa3cd6c5bcda36a))
+
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/11/16/2025-11-16-11.45.293b8ae16ada6b39dd.png" alt="截屏2025 11 16 11.45.29" border="0">
 
 ## [0.1.5](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.4...v0.1.5) (2025-11-15)
 
