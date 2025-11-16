@@ -38,26 +38,50 @@ const processedArticles = articles.map(article => ({
   </div>
 
   <div class="p-4 overflow-hidden" id="carousel-container">
-    <div id="carousel-track" class="flex transition-transform duration-500 ease-out space-x-4">
+    <div id="carousel-track" class="flex transition-transform duration-700 ease-in-out space-x-4" data-total-slides={processedArticles.length}>
       {processedArticles.length > 0 ? (
-        processedArticles.map((article, index) => (
-          <a href={article.data.permalink || `/${article.collection}/${article.slug}`} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
-              <div class="h-40 bg-gray-200 overflow-hidden">
-                <Image src={article.processed.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={imageHeight} />
-              </div>
-              <div class="p-3 flex-1 flex flex-col">
-                <div class="mb-2">
-                  <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full transform group-hover:scale-105 transition-transform duration-200">{article.processed.category}</span>
+        // 根据文章数量决定是否使用无缝轮播
+        processedArticles.length > 1 ? (
+          // 无缝轮播：在开头添加最后一个项目，在结尾添加第一个项目
+          [...processedArticles.slice(-1), ...processedArticles, ...processedArticles.slice(0, 1)].map((article, index) => (
+            <a href={article.data.permalink || `/${article.collection}/${article.slug}`} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
+                <div class="h-40 bg-gray-200 overflow-hidden">
+                  <Image src={article.processed.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={imageHeight} />
                 </div>
-                <h3 class="font-medium mb-2 line-clamp-2 h-12 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">{article.data.title}</h3>
-                <div class="mt-auto flex items-center text-xs text-gray-500">
-                  <span>{article.processed.author.name}</span>
-                  <span class="mx-1">·</span>
-                  <span>{article.processed.date}</span>
+                <div class="p-3 flex-1 flex flex-col">
+                  <div class="mb-2">
+                    <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full transform group-hover:scale-105 transition-transform duration-200">{article.processed.category}</span>
+                  </div>
+                  <h3 class="font-medium mb-2 line-clamp-2 h-12 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">{article.data.title}</h3>
+                  <div class="mt-auto flex items-center text-xs text-gray-500">
+                    <span>{article.processed.author.name}</span>
+                    <span class="mx-1">·</span>
+                    <span>{article.processed.date}</span>
+                  </div>
                 </div>
-              </div>
-          </a>
-        ))
+            </a>
+          ))
+        ) : (
+          // 只有一篇文章时，不使用无缝轮播，直接显示
+          processedArticles.map((article) => (
+            <a href={article.data.permalink || `/${article.collection}/${article.slug}`} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
+                <div class="h-40 bg-gray-200 overflow-hidden">
+                  <Image src={article.processed.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={imageHeight} />
+                </div>
+                <div class="p-3 flex-1 flex flex-col">
+                  <div class="mb-2">
+                    <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full transform group-hover:scale-105 transition-transform duration-200">{article.processed.category}</span>
+                  </div>
+                  <h3 class="font-medium mb-2 line-clamp-2 h-12 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">{article.data.title}</h3>
+                  <div class="mt-auto flex items-center text-xs text-gray-500">
+                    <span>{article.processed.author.name}</span>
+                    <span class="mx-1">·</span>
+                    <span>{article.processed.date}</span>
+                  </div>
+                </div>
+            </a>
+          ))
+        )
       ) : (
         <div class="flex-1 text-center py-12 text-gray-500">
           暂无文章数据
@@ -70,7 +94,7 @@ const processedArticles = articles.map(article => ({
     {processedArticles.map((_, index) => (
       <button 
         key={index} 
-        class={`w-2.5 h-2.5 rounded-full bg-primary dark:bg-secondary transition-all duration-300 ${index === 0 ? 'bg-blue-600 w-8' : 'bg-gray-300'}`} 
+        class={`w-2.5 h-2.5 rounded-full transition-all duration-300 ${index === 0 ? 'bg-blue-600 dark:bg-blue-500 w-8' : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'}`} 
         aria-label={`切换到第 ${index + 1} 张幻灯片`} 
         data-index={index}
       ></button>
@@ -79,79 +103,171 @@ const processedArticles = articles.map(article => ({
 </div>
 
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const track = document.getElementById('carousel-track');
-    const slides = document.querySelectorAll('#carousel-track > a');
-    const indicators = document.querySelectorAll('[data-index]');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
-    const slideWidth = slides[0].offsetWidth + 16; // 宽度 + margin
-    let currentIndex = 0;
-    let timer;
-    const autoplayInterval = 3000;
+    document.addEventListener('DOMContentLoaded', () => {
+      const track = document.getElementById('carousel-track');
+      const slides = document.querySelectorAll('#carousel-track > a');
+      const indicators = document.querySelectorAll('[data-index]');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      const totalSlides = parseInt(track.dataset.totalSlides);
+      const isSingleSlide = totalSlides === 1;
+      let slideWidth;
+      let currentIndex = 1; // 初始位置是第一个真实幻灯片（因为开头添加了一个复制的最后一张）
+      let timer;
+      const autoplayInterval = 4000;
+      let isTransitioning = false;
 
-    // 初始化自动播放
-    function startAutoplay() {
-      timer = setInterval(() => {
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateCarousel();
-      }, autoplayInterval);
-    }
+      // 初始化函数
+      function initCarousel() {
+        if (slides.length === 0) return;
+        
+        // 计算幻灯片宽度和间距
+        slideWidth = slides[0].offsetWidth;
+        const computedStyle = window.getComputedStyle(slides[0]);
+        const marginRight = parseInt(computedStyle.marginRight) || 0;
+        const marginLeft = parseInt(computedStyle.marginLeft) || 0;
+        slideWidth += marginRight + marginLeft;
 
-    // 停止自动播放
-    function stopAutoplay() {
-      clearInterval(timer);
-    }
-
-    // 更新轮播
-    function updateCarousel() {
-      track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-
-      // 更新指示器
-      indicators.forEach((indicator, index) => {
-        if (index === currentIndex) {
-          indicator.classList.add('bg-blue-600', 'w-8');
-          indicator.classList.remove('bg-gray-300');
-        } else {
-          indicator.classList.remove('bg-blue-600', 'w-8');
-          indicator.classList.add('bg-gray-300');
+        // 如果只有一张幻灯片，禁用无缝轮播
+        if (isSingleSlide) {
+          currentIndex = 0;
+          track.style.transform = 'translateX(0)';
+          // 禁用控制按钮
+          prevBtn.disabled = true;
+          nextBtn.disabled = true;
+          prevBtn.classList.add('opacity-50', 'cursor-not-allowed');
+          nextBtn.classList.add('opacity-50', 'cursor-not-allowed');
+          return;
         }
-      });
-    }
 
-    // 事件监听
-    prevBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex - 1 + slides.length) % slides.length;
-      updateCarousel();
-      stopAutoplay();
-      startAutoplay();
-    });
+        // 初始化：将轮播定位到第一个真实幻灯片
+        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+      }
 
-    nextBtn.addEventListener('click', () => {
-      currentIndex = (currentIndex + 1) % slides.length;
-      updateCarousel();
-      stopAutoplay();
-      startAutoplay();
-    });
+      // 初始化自动播放
+      function startAutoplay() {
+        // 只有多张幻灯片时才启用自动播放
+        if (isSingleSlide) return;
+        
+        timer = setInterval(() => {
+          moveToNext();
+        }, autoplayInterval);
+      }
 
-    indicators.forEach((indicator) => {
-      indicator.addEventListener('click', () => {
-        currentIndex = parseInt(indicator.dataset.index);
+      // 停止自动播放
+      function stopAutoplay() {
+        clearInterval(timer);
+      }
+
+      // 更新轮播
+      function updateCarousel() {
+        if (isTransitioning || isSingleSlide) return;
+        
+        isTransitioning = true;
+        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+        
+        // 延迟后重置isTransitioning，确保过渡完成
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 700);
+
+        // 更新指示器
+        let indicatorIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+        indicators.forEach((indicator, index) => {
+          if (index === indicatorIndex) {
+            indicator.classList.add('bg-blue-600', 'dark:bg-blue-500', 'w-8');
+            indicator.classList.remove('bg-gray-300', 'dark:bg-gray-600');
+          } else {
+            indicator.classList.remove('bg-blue-600', 'dark:bg-blue-500', 'w-8');
+            indicator.classList.add('bg-gray-300', 'dark:bg-gray-600');
+          }
+        });
+      }
+
+      // 移动到下一张
+      function moveToNext() {
+        if (isTransitioning || isSingleSlide) return;
+        
+        currentIndex++;
         updateCarousel();
+        
+        // 无缝衔接：当滑动到最后一个复制的幻灯片时，瞬间重置到真实的第一个幻灯片
+        setTimeout(() => {
+          if (currentIndex >= slides.length - 1) {
+            currentIndex = 1;
+            track.style.transition = 'none';
+            track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            // 恢复过渡效果
+            setTimeout(() => {
+              track.style.transition = 'transform duration-700 ease-in-out';
+            }, 50);
+          }
+        }, 700);
+      }
+
+      // 移动到上一张
+      function moveToPrev() {
+        if (isTransitioning || isSingleSlide) return;
+        
+        currentIndex--;
+        updateCarousel();
+        
+        // 无缝衔接：当滑动到开头复制的幻灯片时，瞬间重置到真实的最后一个幻灯片
+        setTimeout(() => {
+          if (currentIndex <= 0) {
+            currentIndex = slides.length - 2;
+            track.style.transition = 'none';
+            track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+            // 恢复过渡效果
+            setTimeout(() => {
+              track.style.transition = 'transform duration-700 ease-in-out';
+            }, 50);
+          }
+        }, 700);
+      }
+
+      // 事件监听
+      prevBtn.addEventListener('click', () => {
+        moveToPrev();
         stopAutoplay();
         startAutoplay();
       });
+
+      nextBtn.addEventListener('click', () => {
+        moveToNext();
+        stopAutoplay();
+        startAutoplay();
+      });
+
+      indicators.forEach((indicator) => {
+        indicator.addEventListener('click', () => {
+          if (isSingleSlide) return;
+          
+          const targetIndex = parseInt(indicator.dataset.index);
+          currentIndex = targetIndex + 1; // +1 是因为开头有一个复制的幻灯片
+          updateCarousel();
+          stopAutoplay();
+          startAutoplay();
+        });
+      });
+
+      // 鼠标悬停停止自动播放
+      const container = document.getElementById('carousel-container');
+      container.addEventListener('mouseenter', stopAutoplay);
+      container.addEventListener('mouseleave', startAutoplay);
+
+      // 窗口大小改变时重新初始化
+      window.addEventListener('resize', () => {
+        initCarousel();
+      });
+
+      // 初始化轮播
+      initCarousel();
+      
+      // 开始自动播放
+      startAutoplay();
     });
-
-    // 鼠标悬停停止自动播放
-    const container = document.getElementById('carousel-container');
-    container.addEventListener('mouseenter', stopAutoplay);
-    container.addEventListener('mouseleave', startAutoplay);
-
-    // 开始自动播放
-    startAutoplay();
-  });
-</script>
+  </script>
 <style>
   #carousel-container::-webkit-scrollbar {
     display: none;
