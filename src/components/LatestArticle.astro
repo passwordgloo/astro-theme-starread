@@ -2,7 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import { themeConfig } from '../../starread.config';
-import { formatDate, getCoverImage, getAuthorInfo, sortEntriesByDate, processEntryData } from '../components/frontmatter';
+import { getCoverImage, sortEntriesByDate, processEntryData } from '../components/frontmatter';
 
 interface Props {
   articles?: CollectionEntry<'articles'>[];
@@ -14,8 +14,7 @@ const { articles = [], notes = [] } = Astro.props;
 const allContent = [...articles, ...notes];
 const { article: { articleLoad, coverImage } } = themeConfig.site;
 const { type: loadType, initialLoad, loadMore, defaultLimit } = articleLoad;
-const [widthRatio, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
-const imageHeight = Math.round(384 * heightRatio / widthRatio);
+const [, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
 
 // 处理所有内容数据
   const processedArticles = processEntryData(allContent, 'articles');
@@ -31,7 +30,7 @@ const imageHeight = Math.round(384 * heightRatio / widthRatio);
       <span class="icon-[lucide--newspaper] w-5 h-5"></span>
       <h2 class="text-accent font-bold text-lg">最新文章</h2>
     </div>
-    <div id="articles-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-4">
+    <div id="articles-container" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 mt-4">
       {sortedArticles.slice(0, initialLoad).map((article) => (
         <div key={article.slug} class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-white/5 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
           {/* 左上角分类标签 */}
@@ -46,9 +45,11 @@ const imageHeight = Math.round(384 * heightRatio / widthRatio);
             <Image
               src={article.processed.cover}
               alt={article.data.title}
-              class="w-full h-48 object-cover"
-              width={384}
-              height={imageHeight}
+              class="w-full h-auto max-h-96 object-cover"
+              width={128} {/* 放大到原来的2倍 */}
+              height={heightRatio * 128} {/* 使用配置的高度比例，基于宽度 128 计算 */}
+              loading="lazy"
+              inferSize={true} {/* 对于远程图片，自动推断原始尺寸 */}
             />
           </div>
 
@@ -105,7 +106,7 @@ const imageHeight = Math.round(384 * heightRatio / widthRatio);
   </div>
 
 
-<script is:inline define:vars={{ articleLoadConfig: { initialLoad, loadMore, defaultLimit }, articles: sortedArticles, loadType, imageHeight }}>
+<script is:inline define:vars={{ articleLoadConfig: { initialLoad, loadMore, defaultLimit }, articles: sortedArticles, loadType, heightRatio }}>
   const container = document.getElementById('articles-container');
   const trigger = loadType === 'button' ? document.getElementById('load-more-btn') : document.getElementById('load-trigger');
 
@@ -140,11 +141,12 @@ const imageHeight = Math.round(384 * heightRatio / widthRatio);
       const tags = processed.processed?.tags || article.data.tags || [];
       const cover = processed.processed?.cover || article.data.cover || '/defaultCover.jpg';
       const date = processed.processed?.date || (article.data.date ? new Date(article.data.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]);
+      const calculatedHeight = heightRatio * 64; // 使用配置的高度比例，基于宽度 64 计算
       
       articleCard.innerHTML = `
-        ${categories.length ? `<div class="absolute top-2 left-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded z-10">${categories[0]}</div>` : ''}
+        ${categories.length ? `<div class="absolute top-3 left-3 bg-primary text-white text-sm font-bold px-3 py-1 rounded z-10">${categories[0]}</div>` : ''}
         <div class="relative">
-          <img src="${cover}" alt="${article.data.title}" class="w-full h-48 object-cover" loading="lazy" width="384" height="${imageHeight}">
+          <img src="${cover}" alt="${article.data.title}" class="w-full h-auto max-h-96 object-cover" loading="lazy" height="${calculatedHeight * 2}">
         </div>
         <div class="p-4">
           ${tags.length ? `
