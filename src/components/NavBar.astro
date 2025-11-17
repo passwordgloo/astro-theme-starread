@@ -44,7 +44,7 @@ import Search from "./Search.astro";
             </button>
           ) : (
             // 普通链接
-            <a href={item.href} class="nav-link transition-colors flex items-center space-x-2.5 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md">
+            <a href={item.href} class="nav-link transition-colors flex items-center space-x-2.5 p-2 hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md" data-astro-prefetch>
               {item.icon && (
                 <span class="nav-icon w-5 h-5 flex-shrink-0">
                   <span class={`${item.icon} h-5 w-5`}></span>
@@ -77,6 +77,7 @@ import Search from "./Search.astro";
                       href={subSubItem.link}
                       class="block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
                       key={subSubItem.text}
+                      data-astro-prefetch
                     >
                       {subSubItem.icon && (
                         <span class="nav-icon w-5 h-5 mr-2 flex-shrink-0">
@@ -126,7 +127,7 @@ import Search from "./Search.astro";
       {themeConfig.navbar.map((item) => (
         <div key={item.name}>
           {item.href ? (
-            <a href={item.href} class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
+            <a href={item.href} class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors" data-astro-prefetch>
               {item.icon && <span class={`${item.icon} h-5 w-5`}></span>}
               <span>{item.name}</span>
             </a>
@@ -140,7 +141,7 @@ import Search from "./Search.astro";
                 <div key={subItem.text} class="ml-8 space-y-1">
                   {subItem.text && <div class="text-sm text-gray-600 dark:text-gray-400 py-1">{subItem.text}</div>}
                   {subItem.items && subItem.items.map((subSubItem) => (
-                    <a key={subSubItem.text} href={subSubItem.link} class="block py-1 text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400">
+                    <a key={subSubItem.text} href={subSubItem.link} class="block py-1 text-sm text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400" data-astro-prefetch>
                       {subSubItem.text}
                     </a>
                   ))}

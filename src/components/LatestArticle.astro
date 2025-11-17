@@ -67,7 +67,7 @@ const [, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
 
             {/* 文章标题 */}
             <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary dark:hover:text-secondary transition-colors">
-                <a href={article.data.permalink || `/${article.collection}/${article.slug}`}>{article.data.title}</a>
+                <a href={article.data.permalink || `/${article.collection}/${article.slug}`} data-astro-prefetch>{article.data.title}</a>
               </h3>
 
             {/* 底部信息 - 日期 */}
@@ -155,7 +155,7 @@ const [, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
             </div>
           ` : ''}
           <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary transition-colors">
-            <a href="${article.data.permalink}">${article.data.title}</a>
+            <a href="${article.data.permalink}" data-astro-prefetch>${article.data.title}</a>
           </h3>
           <div class="flex items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
             <span>${date}</span>

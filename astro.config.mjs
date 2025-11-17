@@ -15,4 +15,9 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   integrations: [autoUpdatePermalink(), autoIndex(), sitemap()],
+  // 启用预获取功能，加快页面导航速度
+  prefetch: {
+    defaultStrategy: 'hover', // 鼠标悬停时预获取
+    prefetchAll: false // 不默认预获取所有链接
+  }
 });

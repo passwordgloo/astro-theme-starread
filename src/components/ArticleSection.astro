@@ -17,7 +17,7 @@ const { title, articles, category } = Astro.props;
       <span class="icon-[lucide--file-text] w-5 h-5"></span>
       <h2 class="font-bold text-lg text-dark">{title}</h2>
     </div>
-    <a href={`/category/${encodeURIComponent(category)}`} class="text-sm hover:text-primary dark:hover:text-secondary transition-colors">更多</a>
+    <a href={`/category/${encodeURIComponent(category)}`} class="text-sm hover:text-primary dark:hover:text-secondary transition-colors" data-astro-prefetch>更多</a>
   </div>
   
   <div class="p-4 space-y-4">
@@ -28,7 +28,7 @@ const { title, articles, category } = Astro.props;
             {index + 1}
           </div>
           <div class="flex-1 min-w-0">
-            <a href={article.data.permalink || `/${article.collection}/${article.slug}`} class="hover:text-primary dark:hover:text-secondary transition-colors line-clamp-1">{article.data.title}</a>
+            <a href={article.data.permalink || `/${article.collection}/${article.slug}`} class="hover:text-primary dark:hover:text-secondary transition-colors line-clamp-1" data-astro-prefetch>{article.data.title}</a>
             <div class="flex items-center mt-1 text-xs text-gray-500 space-x-2">
               <span>{article.data.author || themeConfig.widget.author.name}</span>
               <span>·</span>

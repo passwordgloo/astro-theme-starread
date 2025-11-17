@@ -81,7 +81,7 @@ const carouselArticles = allContent
       <div class="flex items-center justify-around">
         {themeConfig.navbar.map((item) => (
           item.href && (
-            <a href={item.href} class="flex flex-col items-center space-y-1 text-xs text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex-1 py-2">
+            <a href={item.href} class="flex flex-col items-center space-y-1 text-xs text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex-1 py-2" data-astro-prefetch>
               {item.icon && <span class={`${item.icon} h-5 w-5`}></span>}
               <span>{item.name}</span>
             </a>
