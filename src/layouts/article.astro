@@ -1,14 +1,26 @@
 ---
 import Base from './Base.astro';
-import AuthorWidget from "../components/AuthorWidget.astro";
-import ArticleTOC from "../components/ArticleTOC.astro";
-import TagCloud from "../components/TagCloud.astro";
-import Comment from "../components/Comment.astro";
 import ArticleInfo from '../components/ArticleInfo.astro';
 import { themeConfig } from '../../starread.config';
 
 // 从props接收必要的数据
 const { entry, wordCount, formatDate } = Astro.props;
+
+// 导入动态组件加载工具函数
+import { loadDynamicComponents } from '../utils/dynamicComponents';
+
+// 组件映射配置
+const widgetComponents = {
+  authorWidget: () => import('../components/AuthorWidget.astro'),
+  tag: () => import('../components/TagCloud.astro'),
+  toc: () => import('../components/ArticleTOC.astro')
+};
+
+// 动态加载启用的组件
+const loadedWidgets = await loadDynamicComponents(widgetComponents, themeConfig.sidebar.article);
+
+// 加载评论组件（始终加载）
+const { default: Comment } = await import('../components/Comment.astro');
 ---
 
 <Base title={Astro.props.title}>
@@ -35,8 +47,8 @@ const { entry, wordCount, formatDate } = Astro.props;
   
   <!-- 右侧边栏 -->
   <Fragment slot="sidebar">
-    {themeConfig.sidebar.article.authorWidget && <AuthorWidget />}
-    {themeConfig.sidebar.article.tag && <TagCloud />}
-    {themeConfig.sidebar.article.toc && <ArticleTOC />}
+    {loadedWidgets.map(({ key, component: Component }) => (
+      <Component key={key} />
+    ))}
   </Fragment>
 </Base>

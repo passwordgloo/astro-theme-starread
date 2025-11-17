@@ -1,8 +1,17 @@
 ---
 import Base from './Base.astro';
-import AuthorWidget from "../components/AuthorWidget.astro";
 import { themeConfig } from '../../starread.config';
 
+// 导入动态组件加载工具函数
+import { loadDynamicComponents } from '../utils/dynamicComponents';
+
+// 组件映射配置
+const widgetComponents = {
+  authorWidget: () => import('../components/AuthorWidget.astro')
+};
+
+// 动态加载启用的组件
+const loadedWidgets = await loadDynamicComponents(widgetComponents, themeConfig.sidebar.home);
 ---
 
 <Base title={Astro.props.title}>
@@ -53,6 +62,8 @@ import { themeConfig } from '../../starread.config';
 
   <!-- 右侧边栏 -->
   <Fragment slot="sidebar">
-    {themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
+    {loadedWidgets.map(({ key, component: Component }) => (
+      <Component key={key} />
+    ))}
   </Fragment>
 </Base>

@@ -87,7 +87,7 @@ export const themeConfig: starreadthemeconfig = {
     ]
   },
 
-  // 导航菜单配置（重命名为navbar）- 支持嵌套结构，修改图标集合名请一定要在global.css中添加
+  // 导航菜单配置，修改图标集合名请一定要在global.css中添加
   navbar: [
     { name: '主页', href: '/', icon: 'icon-[mdi-light--home]' },
     { 
