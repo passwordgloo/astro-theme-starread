@@ -132,7 +132,7 @@ export const themeConfig: starreadthemeconfig = {
   sidebar: {
     // 首页侧边栏组件
     home: {
-      calendar: true,
+      progress: true,
       statsWidget: true,
       authorWidget: true,
       adWidget: true,

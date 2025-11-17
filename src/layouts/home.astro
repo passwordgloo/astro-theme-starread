@@ -7,7 +7,7 @@ import AdWidget from '../components/AdWidget.astro';
 import TagCloud from "../components/TagCloud.astro";
 import ArticleSection from '../components/ArticleSection.astro';
 import LatestArticle from '../components/LatestArticle.astro';
-import Calendar from '../components/Calendar.astro';
+import Progress from '../widget/Progress.astro';
 import Statistic from '../components/Statistic.astro'
 import { themeConfig } from '../../starread.config';
 import { getCollection } from 'astro:content';
@@ -60,7 +60,7 @@ const carouselArticles = allContent
 
   <!-- 右侧边栏 -->
   <Fragment slot="sidebar">
-    {themeConfig.sidebar.home.calendar && <Calendar/>}
+    {themeConfig.sidebar.home.progress && <Progress/>}
     {themeConfig.sidebar.home.authorWidget && <AuthorWidget />}
     {themeConfig.sidebar.home.adWidget && <AdWidget />}
     {themeConfig.sidebar.home.tag && <TagCloud />}
