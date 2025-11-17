@@ -2,6 +2,32 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
+### [0.1.7](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.6...v0.1.7) (2025-11-17)
+
+
+### 📚 Documentation | 文档
+
+* **CHANGELOG:** 更新变更日志并添加预览截图 ([76125fb](https://github.com/passwordgloo/astro-theme-starread/commit/76125fb61ad8da00d6e6e53e77ba7a6349a97483))
+* 更新README和主题文档的多语言版本 ([ed0feb7](https://github.com/passwordgloo/astro-theme-starread/commit/ed0feb7ca1e816c4ef6132a7aecd48cde9b32266))
+* 更新README文件中的徽章样式和链接 ([e7060ef](https://github.com/passwordgloo/astro-theme-starread/commit/e7060efca92b1ec6815daf284f4e74a35c751655))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **主题:** 移除主题切换功能及相关代码 ([8b09022](https://github.com/passwordgloo/astro-theme-starread/commit/8b090222b3ec6287ae3a7c131ef7df789f679583))
+
+
+### 💄 Styles | 风格
+
+* 优化代码格式和样式 ([c9eeb0c](https://github.com/passwordgloo/astro-theme-starread/commit/c9eeb0c3a6e3cd959d8a0cf6c389d0002dc79515))
+
+
+### ✨ Features | 功能
+
+* 实现组件动态加载功能并添加进度组件 ([3eba272](https://github.com/passwordgloo/astro-theme-starread/commit/3eba27286103f20d86b2e5c87cf7260a566ba2a6))
+* 添加页面链接预获取功能以提升导航速度 ([c1e6829](https://github.com/passwordgloo/astro-theme-starread/commit/c1e6829903e68a2218c2fc3157084de4275fb955))
+* **首页侧边栏:** 用进度统计组件替换日历组件 ([ad11839](https://github.com/passwordgloo/astro-theme-starread/commit/ad11839e8c8e096a0d4b080dd10ecba079597842))
+
 ## [0.1.6](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.5...v0.1.6) (2025-11-16)
 
 
