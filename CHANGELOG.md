@@ -2,7 +2,7 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
-### [0.1.7](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.6...v0.1.7) (2025-11-17)
+## [0.1.7](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.6...v0.1.7) (2025-11-17)
 
 
 ### 📚 Documentation | 文档
@@ -27,6 +27,10 @@
 * 实现组件动态加载功能并添加进度组件 ([3eba272](https://github.com/passwordgloo/astro-theme-starread/commit/3eba27286103f20d86b2e5c87cf7260a566ba2a6))
 * 添加页面链接预获取功能以提升导航速度 ([c1e6829](https://github.com/passwordgloo/astro-theme-starread/commit/c1e6829903e68a2218c2fc3157084de4275fb955))
 * **首页侧边栏:** 用进度统计组件替换日历组件 ([ad11839](https://github.com/passwordgloo/astro-theme-starread/commit/ad11839e8c8e096a0d4b080dd10ecba079597842))
+
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/11/17/0.1.7439e4099d9258cc6.png" alt="0.1.7" border="0">
 
 ## [0.1.6](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.5...v0.1.6) (2025-11-16)
 
