@@ -3,8 +3,8 @@ title: GFM语法
 categories: [帮助]
 cover: https://www.dmoe.cc/random.php
 description: 这是一篇示例文章，展示了如何使用frontmatter配置文章属性。
-permalink: /articles/52412d/
 date: 2025-10-07 21:33:22
+permalink: /articles/544f46/
 ---
 
 ## 列表
