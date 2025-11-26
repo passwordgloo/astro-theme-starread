@@ -17,10 +17,10 @@ const { type: loadType, initialLoad, loadMore, defaultLimit } = articleLoad;
 const [, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
 
 // 处理所有内容数据
-  const processedArticles = processEntryData(allContent, 'articles');
+const processedArticles = processEntryData(allContent, 'articles');
 
-  // 按日期排序并限制总数
-  const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimit);
+// 按日期排序并限制总数
+const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimit);
 ---
 
 <div class="relative" client:load>
@@ -46,10 +46,10 @@ const [, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
               src={article.processed.cover}
               alt={article.data.title}
               class="w-full h-auto max-h-96 object-cover"
-              width={128} {/* 放大到原来的2倍 */}
-              height={heightRatio * 128} {/* 使用配置的高度比例，基于宽度 128 计算 */}
+              width={256} {/* 优化宽度设置 */}
+              height={heightRatio * 128} {/* 使用配置的高度比例 */}
               loading="lazy"
-              inferSize={true} {/* 对于远程图片，自动推断原始尺寸 */}
+              inferSize={true}
             />
           </div>
 
@@ -67,7 +67,7 @@ const [, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
 
             {/* 文章标题 */}
             <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary dark:hover:text-secondary transition-colors">
-                <a href={article.data.permalink || `/${article.collection}/${article.slug}`} data-astro-prefetch>{article.data.title}</a>
+                <a href={article.processed.permalink} data-astro-prefetch>{article.data.title}</a>
               </h3>
 
             {/* 底部信息 - 日期 */}
@@ -78,75 +78,57 @@ const [, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
         </div>
       ))}
     </div>
-        {/* 加载更多按钮 */}
-        {loadType === 'button' && sortedArticles.length > initialLoad && (
-        <div class="flex justify-center mt-8">
-          <button
-            id="load-more-btn"
-            class="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
-            data-loaded={initialLoad}
-            data-total={sortedArticles.length}
-          >
-            加载更多
-          </button>
-        </div>
-      )}
-
-      {/* 自动加载触发器 */}
-      {loadType === 'auto' && (
-        <div
-          id="load-trigger"
-          class="h-10 w-full"
-          data-loaded={initialLoad}
-          data-total={sortedArticles.length}
-        ></div>
-      )}
+    
+    {/* 加载更多按钮 */}
+    {loadType === 'button' && sortedArticles.length > initialLoad && (
+    <div class="flex justify-center mt-8">
+      <button
+        id="load-more-btn"
+        class="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+        data-loaded={initialLoad}
+        data-total={sortedArticles.length}
+      >
+        加载更多
+      </button>
     </div>
+  )}
 
-  </div>
+  {/* 自动加载触发器 */}
+  {loadType === 'auto' && (
+    <div
+      id="load-trigger"
+      class="h-10 w-full"
+      data-loaded={initialLoad}
+      data-total={sortedArticles.length}
+    ></div>
+  )}
+</div>
+</div>
 
 
 <script is:inline define:vars={{ articleLoadConfig: { initialLoad, loadMore, defaultLimit }, articles: sortedArticles, loadType, heightRatio }}>
   const container = document.getElementById('articles-container');
   const trigger = loadType === 'button' ? document.getElementById('load-more-btn') : document.getElementById('load-trigger');
 
-  // 处理文章数据的工具函数
-  function processArticleData(article) {
-    const date = article.data.date ? new Date(article.data.date) : new Date();
-    const cover = article.data.cover || '/defaultCover.jpg';
-    const categories = article.data.categories || [];
-    const tags = article.data.tags || [];
-    
-    return {
-      ...article,
-      processed: {
-        date: date.toISOString().split('T')[0],
-        cover,
-        categories,
-        tags
-      }
-    };
-  }
-
   // 渲染文章卡片
   function renderArticles(startIndex, endIndex) {
     const fragment = document.createDocumentFragment();
     
     articles.slice(startIndex, endIndex).forEach(article => {
-      const processed = processArticleData(article);
       const articleCard = document.createElement('div');
       articleCard.className = 'bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden';
-      // 确保_processed属性已正确设置
-      const categories = processed.processed?.categories || article.data.categories || [];
-      const tags = processed.processed?.tags || article.data.tags || [];
-      const cover = processed.processed?.cover || article.data.cover || '/defaultCover.jpg';
-      const date = processed.processed?.date || (article.data.date ? new Date(article.data.date).toISOString().split('T')[0] : new Date().toISOString().split('T')[0]);
-      const calculatedHeight = heightRatio * 64; // 使用配置的高度比例，基于宽度 64 计算
+      // 使用已处理的数据
+      const categories = article.processed?.categories || [];
+      const tags = article.processed?.tags || [];
+      const cover = article.processed?.cover || '/defaultCover.jpg';
+      const date = article.processed?.date;
+      const permalink = article.processed?.permalink;
+      const calculatedHeight = heightRatio * 128; // 与模板保持一致的高度计算
       
       articleCard.innerHTML = `
         ${categories.length ? `<div class="absolute top-3 left-3 bg-primary text-white text-sm font-bold px-3 py-1 rounded z-10">${categories[0]}</div>` : ''}
         <div class="relative">
-          <img src="${cover}" alt="${article.data.title}" class="w-full h-auto max-h-96 object-cover" loading="lazy" height="${calculatedHeight * 2}">
+          <img src="${cover}" alt="${article.data.title}" class="w-full h-auto max-h-96 object-cover" loading="lazy" height="${calculatedHeight}">
         </div>
         <div class="p-4">
           ${tags.length ? `
@@ -155,7 +137,7 @@ const [, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
             </div>
           ` : ''}
           <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary transition-colors">
-            <a href="${article.data.permalink}" data-astro-prefetch>${article.data.title}</a>
+            <a href="${permalink}" data-astro-prefetch>${article.data.title}</a>
           </h3>
           <div class="flex items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
             <span>${date}</span>
