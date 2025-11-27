@@ -2,6 +2,24 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
+### [0.1.8](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.7...v0.1.8) (2025-11-27)
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **article:** 优化文章相关组件和工具函数 ([6dbb445](https://github.com/passwordgloo/astro-theme-starread/commit/6dbb4450b8b661fe0096895bdd737473769808be))
+* **Carousel:** 优化轮播组件代码结构和无缝轮播逻辑 ([9162dc3](https://github.com/passwordgloo/astro-theme-starread/commit/9162dc34e36c6be792bb0321a969b1a89983838a))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* **搜索:** 优化搜索组件以支持Astro 5的View Transitions ([15d95d5](https://github.com/passwordgloo/astro-theme-starread/commit/15d95d501238e98122fa14d9e6bcb7e26a695fcc))
+
+
+### 📦 Chores | 其他更新
+
+* 更新依赖包版本 ([db9950c](https://github.com/passwordgloo/astro-theme-starread/commit/db9950ce84b9159620d2bcfa2d4ccb1bc7d4da13))
+
 ## [0.1.7](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.6...v0.1.7) (2025-11-17)
 
 
