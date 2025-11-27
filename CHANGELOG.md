@@ -2,7 +2,7 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
-### [0.1.8](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.7...v0.1.8) (2025-11-27)
+## [0.1.8](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.7...v0.1.8) (2025-11-27)
 
 
 ### 🔨 Code Refactoring | 代码重构
@@ -19,6 +19,10 @@
 ### 📦 Chores | 其他更新
 
 * 更新依赖包版本 ([db9950c](https://github.com/passwordgloo/astro-theme-starread/commit/db9950ce84b9159620d2bcfa2d4ccb1bc7d4da13))
+
+### 🔍 Preview | 预览
+
+<img src="https://origin.picgo.net/2025/11/27/0.1.8e7d57a8babea6799.png" alt="0.1.8" border="0">
 
 ## [0.1.7](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.6...v0.1.7) (2025-11-17)
 

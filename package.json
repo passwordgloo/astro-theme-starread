@@ -6,6 +6,7 @@
     "src",
     "scripts",
     "public",
+    "CHANGELOG.md",
     "astro.config.mjs",
     "tsconfig.json",
     "starread.config.ts"
