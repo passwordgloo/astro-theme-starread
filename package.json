@@ -37,7 +37,7 @@
   "dependencies": {
     "@astrojs/sitemap": "^3.6.0",
     "algoliasearch": "^5.40.0",
-    "astro": "^5.15.5",
+    "astro": "^5.16.1",
     "remark-github-blockquote-alert": "^2.0.0",
     "tailwindcss": "^4.1.14"
   },
