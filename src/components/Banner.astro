@@ -4,7 +4,7 @@ import { themeConfig } from '../../starread.config.ts';
 
 <!-- 头部横幅 -->
 <div class="relative bg-gradient-to-r from-blue-600 to-indigo-700 rounded-lg overflow-hidden shadow-md mb-6">
-    <div class="absolute inset-0 opacity-20" style={`background-image: url('${themeConfig.widget.banner.backgroundImage}'); background-size: cover; background-position: center;`}></div>
+    <div class="absolute inset-0 opacity-20 bg-gray-200" id="banner-background"></div>
     <div class="relative px-6 py-12 md:px-12 text-center text-white">
         <h1 class="text-4xl md:text-5xl font-bold mb-4 tracking-tight">{themeConfig.widget.banner.title}</h1>
         <div class="flex flex-wrap justify-center gap-4 mt-6">
@@ -16,3 +16,26 @@ import { themeConfig } from '../../starread.config.ts';
         </div>
     </div>
 </div>
+
+<script>
+    // 背景图片懒加载
+    document.addEventListener('DOMContentLoaded', () => {
+        const bannerBackground = document.getElementById('banner-background');
+        if (bannerBackground) {
+            // 使用 Intersection Observer 实现懒加载
+            const observer = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    bannerBackground.style.backgroundImage = `url('${themeConfig.widget.banner.backgroundImage}')`;
+                    bannerBackground.style.backgroundSize = 'cover';
+                    bannerBackground.style.backgroundPosition = 'center';
+                    // 加载完成后停止观察
+                    observer.disconnect();
+                }
+            }, {
+                threshold: 0.1
+            });
+            
+            observer.observe(bannerBackground);
+        }
+    });
+</script>

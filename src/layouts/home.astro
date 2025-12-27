@@ -22,29 +22,50 @@ const widgetComponents = {
 // 动态加载启用的组件
 const loadedWidgets = await loadDynamicComponents(widgetComponents, themeConfig.sidebar.home);
 
-// 获取所有文章和笔记
-const articles = await getCollection('articles');
-const notes = await getCollection('notes');
+// 获取所有文章和笔记 - 只获取必要字段
+const articles = await getCollection('articles', {
+  filter: () => true,
+  projection: {
+    data: { title: true, date: true, categories: true, tags: true, cover: true, permalink: true },
+    collection: true,
+    slug: true
+  }
+});
+const notes = await getCollection('notes', {
+  filter: () => true,
+  projection: {
+    data: { title: true, date: true, categories: true, tags: true, cover: true, permalink: true },
+    collection: true,
+    slug: true
+  }
+});
 const allContent = [...articles, ...notes];
+
+// 预计算日期以避免重复计算
+const contentWithDates = allContent.map(item => ({
+  ...item,
+  _sortDate: new Date(item.data.date || 0).getTime()
+}));
 
 // 按分类筛选内容
 const categoryArticles = {};
 
 themeConfig.widget.categories.forEach(category => {
-  categoryArticles[category.name] = allContent.filter(item => 
+  categoryArticles[category.name] = contentWithDates.filter(item => 
     item.data.categories?.includes(category.name) || 
     item.data.tags?.includes(category.name)
   );
 });
 
 // 最新内容（按日期排序）
-const latestArticles = [...allContent]
-  .sort((a, b) => new Date(b.data.date || 0) - new Date(a.data.date || 0))
+const latestArticles = [...contentWithDates]
+  .sort((a, b) => b._sortDate - a._sortDate)
   .slice(0, 5);
 
 // 轮播文章（取前5篇有封面图的内容）
-const carouselArticles = allContent
+const carouselArticles = contentWithDates
   .filter(item => item.data.cover)
+  .sort((a, b) => b._sortDate - a._sortDate)
   .slice(0, 5);
 ---
 

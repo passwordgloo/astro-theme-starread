@@ -50,6 +50,8 @@ const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimi
               height={heightRatio * 128} {/* 使用配置的高度比例 */}
               loading="lazy"
               inferSize={true}
+              placeholder="blur"
+              blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='192' viewBox='0 0 256 192'%3E%3Crect width='256' height='192' fill='%23f3f4f6'/%3E%3C/svg%3E"
             />
           </div>
 

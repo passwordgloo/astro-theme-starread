@@ -1,17 +1,5 @@
 ---
-import BaseLayout from "../layouts/home.astro";
-import { themeConfig } from '../../starread.config';
+import HomeLayout from "../layouts/home.astro";
 ---
 
-<html lang="zh-CN" class="min-h-full antialiased">
-  <head>
-   	<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<link rel="icon" type="image/png" href={themeConfig.site.favicon} />
-    <meta name="generator" content={Astro.generator} />
-		<title>{ Astro.props.title || themeConfig.site.title }</title>
-  </head>
-  <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-slate-900 dark:text-neutral-100 transition-colors">
-      <BaseLayout title="首页"></BaseLayout>
-  </body>
-</html>
+<HomeLayout title="首页" />

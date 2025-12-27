@@ -46,7 +46,7 @@ const processedArticles = articles.map(article => ({
           [...processedArticles.slice(-1), ...processedArticles, ...processedArticles.slice(0, 1)].map((article, index) => (
             <a href={article.data.permalink || `/${article.collection}/${article.slug}`} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
                 <div class="h-40 bg-gray-200 overflow-hidden">
-                  <Image src={article.processed.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={imageHeight} />
+                  <Image src={article.processed.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={imageHeight} loading="lazy" placeholder="blur" blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150' viewBox='0 0 200 150'%3E%3Crect width='200' height='150' fill='%23f3f4f6'/%3E%3C/svg%3E" />
                 </div>
                 <div class="p-3 flex-1 flex flex-col">
                   <div class="mb-2">
@@ -66,7 +66,7 @@ const processedArticles = articles.map(article => ({
           processedArticles.map((article) => (
             <a href={article.data.permalink || `/${article.collection}/${article.slug}`} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
                 <div class="h-40 bg-gray-200 overflow-hidden">
-                  <Image src={article.processed.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={imageHeight} />
+                  <Image src={article.processed.cover} alt={article.data.title} class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width={200} height={imageHeight} loading="lazy" placeholder="blur" blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='150' viewBox='0 0 200 150'%3E%3Crect width='200' height='150' fill='%23f3f4f6'/%3E%3C/svg%3E" />
                 </div>
                 <div class="p-3 flex-1 flex flex-col">
                   <div class="mb-2">
