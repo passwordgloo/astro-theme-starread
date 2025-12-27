@@ -53,39 +53,23 @@ const loadedWidgets = await loadDynamicComponents(widgetComponents, themeConfig.
       )}
 
       <!-- 文章列表 -->
-      <div class="space-y-4">
-        {articles.length > 0 ? (
-          articles.map((article, index) => (
-            <div key={article.slug} class="flex items-center p-4 border border-gray-100 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-              {/* 封面图 */}
-              <div class="w-20 h-20 rounded-md overflow-hidden mr-4 flex-shrink-0">
-                <img 
-                  src={article.data.cover || '/defaultCover.jpg'} 
-                  alt={article.data.title} 
-                  class="w-full h-full object-cover"
-                />
+      {articles.length > 0 ? (
+        <div class="space-y-4">
+          <h2 class="text-xl font-bold mb-4">{currentCategory}</h2>
+          <div class="space-y-1">
+            {articles.map((article) => (
+              <div key={article.slug} class="flex justify-between items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
+                <h3 class="font-medium text-base"><a href={`/${article.collection === 'articles' ? 'articles' : 'notes'}/${article.slug}`} class="hover:text-primary dark:hover:text-secondary transition-colors">{article.data.title}</a></h3>
+                <span class="text-sm text-gray-500 dark:text-gray-400">{typeof article.data.date === 'string' ? article.data.date.split(' ')[0] : article.data.date?.toISOString().split('T')[0]}</span>
               </div>
-              {/* 文章信息 */}
-              <div class="flex-grow min-w-0">
-                <a href={`/${article.collection === 'articles' ? 'articles' : 'notes'}/${article.slug}`} class="text-lg font-medium hover:text-primary transition-colors line-clamp-1">{article.data.title}</a>
-                <div class="flex items-center mt-1 text-sm text-gray-500 space-x-3">
-                  <span>{article.data.author || themeConfig.widget.author.name}</span>
-                  <span>·</span>
-                  <span>{typeof article.data.date === 'string' ? article.data.date.split(' ')[0] : article.data.date?.toISOString().split('T')[0]}</span>
-                </div>
-              </div>
-              {/* 序号 */}
-              <div class="ml-4 w-8 h-8 bg-primary dark:bg-secondary text-white rounded-full flex items-center justify-center font-bold flex-shrink-0">
-                {index + 1}
-              </div>
-            </div>
-          ))
-        ) : (
-          <div class="text-center py-8 text-gray-500">
-            暂无该分类下的内容
+            ))}
           </div>
-        )}
-      </div>
+        </div>
+      ) : (
+        <div class="text-center py-8 text-gray-500">
+          暂无该分类下的内容
+        </div>
+      )}
     </div>
   </div>
 
