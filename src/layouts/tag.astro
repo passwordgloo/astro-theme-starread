@@ -45,7 +45,9 @@ const loadedWidgets = await loadDynamicComponents(widgetComponents, themeConfig.
       <!-- 动态显示当前标签下的文章列表 -->
       {Astro.props.articles?.length > 0 ? (
         <div class="space-y-4">
-          <h2 class="text-xl font-bold mb-4">{Astro.props.currentTag}</h2>
+          {Astro.props.currentTag && (
+            <h2 class="text-xl font-bold mb-4">{Astro.props.currentTag}</h2>
+          )}
           <div class="space-y-1">
             {Astro.props.articles.map((article) => (
               <div key={article.slug} class="flex justify-between items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">

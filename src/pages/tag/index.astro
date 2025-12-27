@@ -2,13 +2,15 @@
 import { getCollection } from 'astro:content';
 import TagLayout from '../../layouts/tag.astro';
 
-// 获取所有文章
+// 获取所有文章和笔记
 const articles = await getCollection('articles');
+const notes = await getCollection('notes');
+const allContent = [...articles, ...notes];
 
 // 计算所有标签的计数
 const tagCounts: Record<string, number> = {};
-articles.forEach(article => {
-  article.data.tags?.forEach(tag => {
+allContent.forEach(item => {
+  item.data.tags?.forEach(tag => {
     tagCounts[tag] = (tagCounts[tag] || 0) + 1;
   });
 });
