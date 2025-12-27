@@ -2,6 +2,54 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
+### [0.1.9](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.6...v0.1.9) (2025-12-27)
+
+
+### 💄 Styles | 风格
+
+* 优化代码格式和样式 ([c9eeb0c](https://github.com/passwordgloo/astro-theme-starread/commit/c9eeb0c3a6e3cd959d8a0cf6c389d0002dc79515))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **article:** 优化文章相关组件和工具函数 ([6dbb445](https://github.com/passwordgloo/astro-theme-starread/commit/6dbb4450b8b661fe0096895bdd737473769808be))
+* **Carousel:** 优化轮播组件代码结构和无缝轮播逻辑 ([9162dc3](https://github.com/passwordgloo/astro-theme-starread/commit/9162dc34e36c6be792bb0321a969b1a89983838a))
+* **主题:** 移除主题切换功能及相关代码 ([8b09022](https://github.com/passwordgloo/astro-theme-starread/commit/8b090222b3ec6287ae3a7c131ef7df789f679583))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* **搜索:** 优化搜索组件以支持Astro 5的View Transitions ([15d95d5](https://github.com/passwordgloo/astro-theme-starread/commit/15d95d501238e98122fa14d9e6bcb7e26a695fcc))
+
+
+### 📦 Chores | 其他更新
+
+* **release:** 0.1.7 ([bd74f45](https://github.com/passwordgloo/astro-theme-starread/commit/bd74f45970260b030c6803c3b049654ad7217037))
+* **release:** 0.1.8 ([c27333b](https://github.com/passwordgloo/astro-theme-starread/commit/c27333b87b1c4a34ab1bc8f5b77a07661b2ab157))
+* 更新依赖包版本 ([db9950c](https://github.com/passwordgloo/astro-theme-starread/commit/db9950ce84b9159620d2bcfa2d4ccb1bc7d4da13))
+
+
+### 📚 Documentation | 文档
+
+* **CHANGELOG:** 更新变更日志并添加预览截图 ([76125fb](https://github.com/passwordgloo/astro-theme-starread/commit/76125fb61ad8da00d6e6e53e77ba7a6349a97483))
+* 更新 CHANGELOG.md 并添加至构建配置 ([e40589c](https://github.com/passwordgloo/astro-theme-starread/commit/e40589ce034604a95d2fee32b6a3860740712c05))
+* 更新README和主题文档的多语言版本 ([ed0feb7](https://github.com/passwordgloo/astro-theme-starread/commit/ed0feb7ca1e816c4ef6132a7aecd48cde9b32266))
+* 更新README文件中的徽章样式和链接 ([e7060ef](https://github.com/passwordgloo/astro-theme-starread/commit/e7060efca92b1ec6815daf284f4e74a35c751655))
+
+
+### ⚡ Performance Improvements | 性能优化
+
+* 优化图片加载和页面性能 ([20478d1](https://github.com/passwordgloo/astro-theme-starread/commit/20478d17ee3a153141996bdfd53ad4c3c3737800))
+
+
+### ✨ Features | 功能
+
+* **layouts:** 优化分类和标签页面的文章列表展示样式 ([eb3b21a](https://github.com/passwordgloo/astro-theme-starread/commit/eb3b21aab4f3d8c9ae515941879a3bc750b9c8e0))
+* 实现组件动态加载功能并添加进度组件 ([3eba272](https://github.com/passwordgloo/astro-theme-starread/commit/3eba27286103f20d86b2e5c87cf7260a566ba2a6))
+* **标签页:** 添加笔记内容到标签统计和显示 ([930733d](https://github.com/passwordgloo/astro-theme-starread/commit/930733d076b28d4063cd4596ca1d80632d868103))
+* 添加页面链接预获取功能以提升导航速度 ([c1e6829](https://github.com/passwordgloo/astro-theme-starread/commit/c1e6829903e68a2218c2fc3157084de4275fb955))
+* **首页侧边栏:** 用进度统计组件替换日历组件 ([ad11839](https://github.com/passwordgloo/astro-theme-starread/commit/ad11839e8c8e096a0d4b080dd10ecba079597842))
+
 ## [0.1.8](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.7...v0.1.8) (2025-11-27)
 
 
