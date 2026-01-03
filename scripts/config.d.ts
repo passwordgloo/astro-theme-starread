@@ -138,6 +138,14 @@ export interface starreadthemeconfig {
   }>;
 
   /**
+   * 动态效果配置
+   */
+  dynamicEffect?: {
+    /** 文章顶部波浪效果 */
+    postTopWave: boolean;
+  };
+
+  /**
    * 侧边栏组件显示控制
    */
   sidebar: {

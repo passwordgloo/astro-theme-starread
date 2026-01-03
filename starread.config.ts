@@ -43,6 +43,11 @@ export const themeConfig: starreadthemeconfig = {
   // en: 一周从周日开始
   language: 'zh',
 
+  // 动态效果配置
+  dynamicEffect: {
+    postTopWave: true
+  },
+
   // 小部件配置
   widget: {
     // Banner配置
