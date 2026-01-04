@@ -21,6 +21,7 @@ export const themeConfig: starreadthemeconfig = {
       // 文章加载配置
       articleLoad: {
         type: 'button', // 'button' 或 'auto'
+        layout: 'horizontal', // 'horizontal' 或 'vertical'
         defaultLimit: 20, // 默认最大加载数量
         initialLoad: 4, // 初始加载数量
         loadMore: 4 // 每次加载数量
@@ -63,7 +64,8 @@ export const themeConfig: starreadthemeconfig = {
     
     // 轮播图配置
     carousel: {
-      title: "轮播"
+      title: "轮播",
+      layout: "vertical" // 'horizontal' 或 'vertical'
     },
     
     // 作者信息

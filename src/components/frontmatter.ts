@@ -22,6 +22,7 @@ export interface ProcessedEntry {
     cover: string;
     author: { name: string; avatar: string };
     categories: string[];
+    category: string;
     tags: string[];
     views: number;
     permalink: string;
@@ -131,6 +132,7 @@ export function processEntryData(entries: any[], collection: string): ProcessedE
       cover: getCoverImage(entry.data.cover),
       author: getAuthorInfo(entry.data.author),
       categories: entry.data.categories || [],
+      category: entry.data.categories?.[0] || '未分类',
       tags: entry.data.tags || [],
       views: entry.data.views || 0,
       permalink: entry.data.permalink

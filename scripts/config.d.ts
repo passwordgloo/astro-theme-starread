@@ -41,6 +41,8 @@ export interface starreadthemeconfig {
       articleLoad: {
         /** 加载类型：'button' 按钮加载 或 'auto' 自动加载 */
         type: 'button' | 'auto';
+        /** 封面布局类型：'horizontal' 或 'vertical' */
+        layout: 'horizontal' | 'vertical';
         /** 默认最大加载数量 */
         defaultLimit: number;
         /** 初始加载数量 */
@@ -98,6 +100,8 @@ export interface starreadthemeconfig {
     carousel: {
       /** 轮播图标题 */
       title: string;
+      /** 封面布局类型：'horizontal' 或 'vertical' */
+      layout: 'horizontal' | 'vertical';
     };
     /** Banner配置 */
     banner: {

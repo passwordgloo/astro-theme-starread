@@ -3,6 +3,8 @@ import type { CollectionEntry } from 'astro:content';
 import { Image } from 'astro:assets';
 import { themeConfig } from '../../starread.config';
 import { getCoverImage, sortEntriesByDate, processEntryData } from '../components/frontmatter';
+import PostCover from '../layouts/postcover.astro';
+import PostCover2 from '../layouts/postcover2.astro';
 
 interface Props {
   articles?: CollectionEntry<'articles'>[];
@@ -13,7 +15,7 @@ const { articles = [], notes = [] } = Astro.props;
 // 合并并按日期排序
 const allContent = [...articles, ...notes];
 const { article: { articleLoad, coverImage } } = themeConfig.site;
-const { type: loadType, initialLoad, loadMore, defaultLimit } = articleLoad;
+const { type: loadType, layout = 'vertical', initialLoad, loadMore, defaultLimit } = articleLoad;
 const [, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
 
 // 处理所有内容数据
@@ -32,51 +34,12 @@ const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimi
     </div>
     <div id="articles-container" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 mt-4">
       {sortedArticles.slice(0, initialLoad).map((article) => (
-        <div key={article.slug} class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-white/5 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
-          {/* 左上角分类标签 */}
-          {article.processed.categories.length > 0 && (
-            <div class="absolute top-2 left-2 bg-primary dark:bg-secondary text-white text-xs font-bold px-2 py-1 rounded z-10">
-              {article.processed.categories[0]}
-            </div>
+        <div key={article.data.permalink}>
+          {layout === 'horizontal' ? (
+            <PostCover2 article={article} />
+          ) : (
+            <PostCover article={article} />
           )}
-
-          {/* 文章封面 */}
-          <div class="relative">
-            <Image
-              src={article.processed.cover}
-              alt={article.data.title}
-              class="w-full h-auto max-h-96 object-cover"
-              width={256} {/* 优化宽度设置 */}
-              height={heightRatio * 128} {/* 使用配置的高度比例 */}
-              loading="lazy"
-              inferSize={true}
-              placeholder="blur"
-              blurDataURL="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='192' viewBox='0 0 256 192'%3E%3Crect width='256' height='192' fill='%23f3f4f6'/%3E%3C/svg%3E"
-            />
-          </div>
-
-          <div class="p-4">
-            {/* 标签 */}
-            {article.processed.tags.length > 0 && (
-              <div class="flex flex-wrap gap-2 mb-2">
-                {article.processed.tags.map((tag) => (
-                  <span key={tag} class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2 py-1 rounded">
-                    {tag}
-                  </span>
-                ))}
-              </div>
-            )}
-
-            {/* 文章标题 */}
-            <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary dark:hover:text-secondary transition-colors">
-                <a href={article.processed.permalink} data-astro-prefetch>{article.data.title}</a>
-              </h3>
-
-            {/* 底部信息 - 日期 */}
-            <div class="flex items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
-              <span>{article.processed.date}</span>
-            </div>
-          </div>
         </div>
       ))}
     </div>
@@ -108,45 +71,107 @@ const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimi
 </div>
 
 
-<script is:inline define:vars={{ articleLoadConfig: { initialLoad, loadMore, defaultLimit }, articles: sortedArticles, loadType, heightRatio }}>
+<script is:inline define:vars={{ articleLoadConfig: { initialLoad, loadMore, defaultLimit }, articles: sortedArticles, loadType, heightRatio, layout }}>
   const container = document.getElementById('articles-container');
   const trigger = loadType === 'button' ? document.getElementById('load-more-btn') : document.getElementById('load-trigger');
+
+  // 渲染垂直布局文章卡片
+  function renderVerticalCard(article) {
+    const categories = article.processed?.categories || [];
+    const tags = article.processed?.tags || [];
+    const cover = article.processed?.cover || '/defaultCover.jpg';
+    const date = article.processed?.date;
+    const permalink = article.processed?.permalink;
+    const authorName = article.processed?.author?.name || '未知作者';
+    const category = categories[0] || '未分类';
+    
+    const articleCard = document.createElement('a');
+    articleCard.href = permalink;
+    articleCard.className = 'min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline';
+    
+    articleCard.innerHTML = `
+      <div class="h-40 bg-gray-200 overflow-hidden">
+        <img src="${cover}" alt="${article.data.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="200" height="150" loading="lazy" />
+      </div>
+      <div class="p-3 flex-1 flex flex-col">
+        <div class="mb-2">
+          <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full transform group-hover:scale-105 transition-transform duration-200">${category}</span>
+        </div>
+        <h3 class="font-medium mb-2 line-clamp-2 h-12 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">${article.data.title}</h3>
+        <div class="mt-auto flex items-center text-xs text-gray-500">
+          <span>${authorName}</span>
+          <span class="mx-1">·</span>
+          <span>${date}</span>
+        </div>
+      </div>
+    `;
+    
+    return articleCard;
+  }
+
+  // 渲染水平布局文章卡片
+  function renderHorizontalCard(article) {
+    const categories = article.processed?.categories || [];
+    const tags = article.processed?.tags || [];
+    const cover = article.processed?.cover || '/defaultCover.jpg';
+    const date = article.processed?.date;
+    const permalink = article.processed?.permalink;
+    const authorName = article.processed?.author?.name || '未知作者';
+    const category = categories[0] || '未分类';
+    
+    const articleCard = document.createElement('a');
+    articleCard.href = permalink;
+    articleCard.className = 'flex flex-row bg-white/70 dark:bg-cyan-950/30 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group';
+    
+    articleCard.innerHTML = `
+      <!-- 左侧图片 -->
+      <div class="w-1/3 bg-gray-200 overflow-hidden">
+        <img src="${cover}" alt="${article.data.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="120" height="90" loading="lazy" />
+      </div>
+      
+      <!-- 右侧内容 -->
+      <div class="w-2/3 p-4 flex flex-col justify-between">
+        <!-- 分类标签 -->
+        <div class="mb-2">
+          <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full transform group-hover:scale-105 transition-transform duration-200">
+            ${category}
+          </span>
+        </div>
+        
+        <!-- 文章标题 -->
+        <h3 class="font-medium line-clamp-2 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">
+          ${article.data.title}
+        </h3>
+        
+        <!-- 底部信息 -->
+        <div class="mt-4 flex items-center text-xs text-gray-500 dark:text-gray-400">
+          <span>${authorName}</span>
+          <span class="mx-1">·</span>
+          <span>${date}</span>
+        </div>
+      </div>
+    `;
+    
+    return articleCard;
+  }
 
   // 渲染文章卡片
   function renderArticles(startIndex, endIndex) {
     const fragment = document.createDocumentFragment();
     
     articles.slice(startIndex, endIndex).forEach(article => {
-      const articleCard = document.createElement('div');
-      articleCard.className = 'bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden';
-      // 使用已处理的数据
-      const categories = article.processed?.categories || [];
-      const tags = article.processed?.tags || [];
-      const cover = article.processed?.cover || '/defaultCover.jpg';
-      const date = article.processed?.date;
-      const permalink = article.processed?.permalink;
-      const calculatedHeight = heightRatio * 128; // 与模板保持一致的高度计算
+      const cardWrapper = document.createElement('div');
+      cardWrapper.className = 'min-w-[200px]';
       
-      articleCard.innerHTML = `
-        ${categories.length ? `<div class="absolute top-3 left-3 bg-primary text-white text-sm font-bold px-3 py-1 rounded z-10">${categories[0]}</div>` : ''}
-        <div class="relative">
-          <img src="${cover}" alt="${article.data.title}" class="w-full h-auto max-h-96 object-cover" loading="lazy" height="${calculatedHeight}">
-        </div>
-        <div class="p-4">
-          ${tags.length ? `
-            <div class="flex flex-wrap gap-2 mb-2">
-              ${tags.map(tag => `<span class="text-xs bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-300 px-2 py-1 rounded">${tag}</span>`).join('')}
-            </div>
-          ` : ''}
-          <h3 class="font-bold text-lg mb-3 line-clamp-2 hover:text-primary transition-colors">
-            <a href="${permalink}" data-astro-prefetch>${article.data.title}</a>
-          </h3>
-          <div class="flex items-center text-xs text-gray-500 mt-4 pt-3 border-t border-gray-100 dark:border-gray-800">
-            <span>${date}</span>
-          </div>
-        </div>
-      `;
-      fragment.appendChild(articleCard);
+      let articleCard;
+      if (layout === 'horizontal') {
+        articleCard = renderHorizontalCard(article);
+      } else {
+        articleCard = renderVerticalCard(article);
+      }
+      
+      cardWrapper.appendChild(articleCard);
+      fragment.appendChild(cardWrapper);
     });
     
     container.appendChild(fragment);
