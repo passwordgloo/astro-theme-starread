@@ -14,7 +14,6 @@ export interface EntryData {
 }
 
 export interface ProcessedEntry {
-  slug: string;
   data: EntryData;
   body: string;
   _collection: string;
@@ -31,7 +30,6 @@ export interface ProcessedEntry {
 
 // 相邻文章接口定义
 export interface AdjacentEntry {
-  slug: string;
   title: string;
   cover: string;
   date: string;
@@ -39,12 +37,12 @@ export interface AdjacentEntry {
 }
 
 // 获取相邻文章信息工具函数
-export async function getAdjacentEntries(currentSlug: string, collection: 'articles' | 'notes'): Promise<{ prev: AdjacentEntry | null; next: AdjacentEntry | null }> {
+export async function getAdjacentEntries(currentPermalink: string, collection: 'articles' | 'notes'): Promise<{ prev: AdjacentEntry | null; next: AdjacentEntry | null }> {
   const entries = await getCollection(collection);
   // 使用优化后的泛型排序函数
   const sortedEntries = sortEntriesByDate(entries);
   
-  const currentIndex = sortedEntries.findIndex(entry => entry.slug === currentSlug);
+  const currentIndex = sortedEntries.findIndex(entry => entry.data.permalink === currentPermalink);
   
   if (currentIndex === -1) {
     return { prev: null, next: null };
@@ -56,11 +54,10 @@ export async function getAdjacentEntries(currentSlug: string, collection: 'artic
   
   // 使用更现代的可选链操作符和空值合并运算符
   const formatAdjacentEntry = (entry: typeof sortedEntries[0] | null): AdjacentEntry | null => entry ? {
-    slug: entry.slug,
     title: entry.data.title || 'Untitled',
     cover: getCoverImage(entry.data.cover),
     date: formatDate(entry.data.date),
-    permalink: entry.data.permalink ?? entry.slug
+    permalink: entry.data.permalink
   } : null;
   
   return {
@@ -75,12 +72,6 @@ export function generateHexString(length: number = 6): string {
   const array = new Uint8Array(length / 2);
   crypto.getRandomValues(array);
   return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('').slice(0, length);
-}
-
-// 生成永久链接
-export function generatePermalink(collection: string, slug: string): string {
-  // 直接使用slug作为永久链接，保持简洁
-  return slug;
 }
 
 // 日期格式化工具函数
@@ -142,7 +133,7 @@ export function processEntryData(entries: any[], collection: string): ProcessedE
       categories: entry.data.categories || [],
       tags: entry.data.tags || [],
       views: entry.data.views || 0,
-      permalink: entry.data.permalink || entry.slug
+      permalink: entry.data.permalink
     }
   }));
 }
@@ -169,11 +160,11 @@ export async function generateStaticPaths(collection: 'articles' | 'notes') {
   const sortedEntries = [...sortEntriesByDate(entries)].reverse();
   
   return sortedEntries.map((entry, index) => {
-    const prev = index > 0 ? sortedEntries[index - 1].slug : null;
-    const next = index < sortedEntries.length - 1 ? sortedEntries[index + 1].slug : null;
+    const prev = index > 0 ? sortedEntries[index - 1].data.permalink : null;
+    const next = index < sortedEntries.length - 1 ? sortedEntries[index + 1].data.permalink : null;
     
     return {
-      params: { slug: entry.slug },
+      params: { permalink: entry.data.permalink.replace(/^\//, '').replace(/\/$/, '') },
       props: { 
         entry,
         prev,

@@ -61,6 +61,9 @@ const data = JSON.parse(raw);
     // 截断content字段，保留搜索所需的前1000个字符
     const truncatedContent = item.content ? item.content.substring(0, 1000) : '';
     
+    // 计算完整URL
+    const fullUrl = item.permalink && `${siteUrl || 'http://localhost:4321'}${item.permalink}`;
+    
     return {
       objectID: item.objectID || `${i + 1}_${item.collection || 'articles'}`,
       title: item.title || 'Untitled',
@@ -70,9 +73,8 @@ const data = JSON.parse(raw);
       tags: item.tags,
       date: item.date || '',
       content: truncatedContent, // 使用截断后的内容
-      slug: item.slug,
-      url: item.url || (item.permalink && `${siteUrl || 'http://localhost:4321'}${item.permalink}`) || `http://localhost:4321/${item.slug}/`,
-      route: item.permalink || `/${item.slug}/`,
+      url: fullUrl,
+      route: item.permalink,
       permalink: item.permalink,
       collection: item.collection || 'articles'
     };

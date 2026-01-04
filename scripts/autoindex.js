@@ -217,9 +217,9 @@ export function generateIndex() {
               coverPath = siteUrl + coverPath;
             }
             
-            // 确定URL - 优先使用永久链接
-            let url = data.permalink;
-            if (!url && siteUrl) {
+            // 确定permalink - 如果没有提供则使用默认格式
+            let permalink = data.permalink;
+            if (!permalink) {
               // 对于notes目录，检查是否在子文件夹中
               if (collection === 'notes') {
                 const relativePath = path.relative(notesDir, itemPath);
@@ -227,12 +227,12 @@ export function generateIndex() {
                 if (pathParts.length > 1) {
                   // 如果文件在子文件夹中，使用子文件夹名称
                   const folderName = pathParts[0];
-                  url = `${siteUrl}/notes/${folderName}/${path.basename(item, '.md')}/`;
+                  permalink = `/notes/${folderName}/${path.basename(item, '.md')}/`;
                 } else {
-                  url = `${siteUrl}/notes/${path.basename(item, '.md')}/`;
+                  permalink = `/notes/${path.basename(item, '.md')}/`;
                 }
               } else {
-                url = `${siteUrl}/${collection}/${path.basename(item, '.md')}/`;
+                permalink = `/${collection}/${path.basename(item, '.md')}/`;
               }
             }
             
@@ -252,9 +252,7 @@ export function generateIndex() {
                 : [],
               date: data.date || '',
               content: content.trim(),
-              slug: `${collection}/${path.basename(item, '.md')}`,
-              url: url,
-              permalink: data.permalink,
+              permalink: permalink,
               collection: collection
             });
             
