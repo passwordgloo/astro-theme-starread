@@ -59,7 +59,7 @@ const loadedWidgets = await loadDynamicComponents(widgetComponents, themeConfig.
           <div class="space-y-1">
             {articles.map((article) => (
               <div key={article.slug} class="flex justify-between items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-                <h3 class="font-medium text-base"><a href={`/${article.collection === 'articles' ? 'articles' : 'notes'}/${article.slug}`} class="hover:text-primary dark:hover:text-secondary transition-colors">{article.data.title}</a></h3>
+                <h3 class="font-medium text-base"><a href={article.data.permalink} class="hover:text-primary dark:hover:text-secondary transition-colors">{article.data.title}</a></h3>
                 <span class="text-sm text-gray-500 dark:text-gray-400">{typeof article.data.date === 'string' ? article.data.date.split(' ')[0] : article.data.date?.toISOString().split('T')[0]}</span>
               </div>
             ))}
