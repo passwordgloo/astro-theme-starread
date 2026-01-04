@@ -2,6 +2,27 @@
 
 项目站点 [星阅主题](https://star.iglooblog.top)，喜欢的朋友给仓库点赞收藏👍
 
+## [0.2.0](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.9...v0.2.0) (2026-01-04)
+
+
+### ✨ Features | 功能
+
+* **主题配置:** 添加文章顶部波浪效果配置及实现 ([35d7f72](https://github.com/passwordgloo/astro-theme-starread/commit/35d7f7274c9c9bfac392fc7179cc8dd6f38a9f58))
+* **文章卡片:** 添加水平和垂直布局选项并优化卡片组件 ([f131649](https://github.com/passwordgloo/astro-theme-starread/commit/f131649e4360a1e5de40b399457a942eb2b58d0c))
+
+
+### 🐛 Bug Fixes | 漏洞修复
+
+* **Banner:** 修复横幅背景图片懒加载问题 ([3cf1a1d](https://github.com/passwordgloo/astro-theme-starread/commit/3cf1a1ddcec6e2e7f2f6fa295920270b93d190c4))
+* 统一使用 article.data.permalink 作为文章链接 ([d7941d0](https://github.com/passwordgloo/astro-theme-starread/commit/d7941d0c0958d9681cdb9f5f957871eeb843f829))
+
+
+### 🔨 Code Refactoring | 代码重构
+
+* **algolia:** 统一使用permalink作为文章标识并优化URL生成 ([bdf6cf3](https://github.com/passwordgloo/astro-theme-starread/commit/bdf6cf36f3048a239f38ec3946e7fd902f836e7a))
+* **comment:** 优化 Twikoo 评论组件加载逻辑 ([cb6a90e](https://github.com/passwordgloo/astro-theme-starread/commit/cb6a90ec0d20a959c2be9b2c634deeced651f375))
+* **主题配置:** 重构最新文章组件配置结构 ([1e46a0c](https://github.com/passwordgloo/astro-theme-starread/commit/1e46a0cd0d2d36553ee9343bd594851cc5490337))
+
 ### [0.1.9](https://github.com/passwordgloo/astro-theme-starread/compare/v0.1.6...v0.1.9) (2025-12-27)
 
 
