@@ -16,21 +16,16 @@ export const themeConfig: starreadthemeconfig = {
       alt: '星阅主题 Logo',
     },
     
-    // 文章相关配置
-    article: {
-      // 文章加载配置
-      articleLoad: {
-        type: 'button', // 'button' 或 'auto'
-        layout: 'horizontal', // 'horizontal' 或 'vertical'
-        defaultLimit: 20, // 默认最大加载数量
-        initialLoad: 4, // 初始加载数量
-        loadMore: 4 // 每次加载数量
-      },
-      
-      // 封面图片配置
-      coverImage: {
-        defaultAspectRatio: '16:9' // 默认宽高比，支持的比例：16:9, 4:3, 3:2
-      }
+    // 最新文章组件配置
+    LatestArticle: {
+      type: 'button', // 'button' 或 'auto'
+      layout: 'vertical', // 'horizontal' 或 'vertical'
+      defaultLimit: 20, // 默认最大加载数量
+      initialLoad: 4, // 初始加载数量
+      loadMore: 4, // 每次加载数量
+      columns: 2, // 分栏数，默认2
+      defaultAspectRatio: '16:9', // 默认宽高比，支持的比例：16:9, 4:3, 3:2
+      horizontalHeight: '160px' // 横版封面高度限制
     },
     
     // 底部文字配置

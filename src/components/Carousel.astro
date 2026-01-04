@@ -6,9 +6,9 @@ import PostCover2 from '../layouts/postcover2.astro';
 
 // 轮播卡片文章组件
 const { articles = [] } = Astro.props;
-const { coverImage } = themeConfig.site.article;
+const { LatestArticle } = themeConfig.site;
 const { layout = 'vertical' } = themeConfig.widget.carousel;
-const [widthRatio, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
+const [widthRatio, heightRatio] = LatestArticle.defaultAspectRatio.split(':').map(Number);
 const imageHeight = Math.round(200 * heightRatio / widthRatio);
 import { Image } from 'astro:assets';
 

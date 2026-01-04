@@ -14,9 +14,9 @@ interface Props {
 const { articles = [], notes = [] } = Astro.props;
 // 合并并按日期排序
 const allContent = [...articles, ...notes];
-const { article: { articleLoad, coverImage } } = themeConfig.site;
-const { type: loadType, layout = 'vertical', initialLoad, loadMore, defaultLimit } = articleLoad;
-const [, heightRatio] = coverImage.defaultAspectRatio.split(':').map(Number);
+const latestArticleConfig = themeConfig.site.LatestArticle;
+const { type: loadType, layout = 'vertical', initialLoad, loadMore, defaultLimit, columns = 2, defaultAspectRatio } = latestArticleConfig;
+const [, heightRatio] = defaultAspectRatio.split(':').map(Number);
 
 // 处理所有内容数据
 const processedArticles = processEntryData(allContent, 'articles');
@@ -32,7 +32,7 @@ const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimi
       <span class="icon-[lucide--newspaper] w-5 h-5"></span>
       <h2 class="text-accent font-bold text-lg">最新文章</h2>
     </div>
-    <div id="articles-container" class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-2 gap-8 mt-4">
+    <div id="articles-container" class={`grid grid-cols-1 md:grid-cols-1 lg:grid-cols-${columns} gap-8 mt-4`}>
       {sortedArticles.slice(0, initialLoad).map((article) => (
         <div key={article.data.permalink}>
           {layout === 'horizontal' ? (

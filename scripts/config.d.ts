@@ -35,26 +35,24 @@ export interface starreadthemeconfig {
       /** Logo 的 alt 文本 */
       alt: string;
     };
-    /** 文章相关配置 */
-    article: {
-      /** 文章加载配置 */
-      articleLoad: {
-        /** 加载类型：'button' 按钮加载 或 'auto' 自动加载 */
-        type: 'button' | 'auto';
-        /** 封面布局类型：'horizontal' 或 'vertical' */
-        layout: 'horizontal' | 'vertical';
-        /** 默认最大加载数量 */
-        defaultLimit: number;
-        /** 初始加载数量 */
-        initialLoad: number;
-        /** 每次加载更多时的数量 */
-        loadMore: number;
-      };
-      /** 封面图片配置 */
-      coverImage: {
-        /** 默认宽高比，支持的比例：16:9, 4:3, 3:2 */
-        defaultAspectRatio: string;
-      };
+    /** 最新文章组件配置 */
+    LatestArticle: {
+      /** 加载类型：'button' 按钮加载 或 'auto' 自动加载 */
+      type: 'button' | 'auto';
+      /** 封面布局类型：'horizontal' 或 'vertical' */
+      layout: 'horizontal' | 'vertical';
+      /** 默认最大加载数量 */
+      defaultLimit: number;
+      /** 初始加载数量 */
+      initialLoad: number;
+      /** 每次加载更多时的数量 */
+      loadMore: number;
+      /** 分栏数，默认2 */
+      columns: number;
+      /** 默认宽高比，支持的比例：16:9, 4:3, 3:2 */
+      defaultAspectRatio: string;
+      /** 横版封面高度限制 */
+      horizontalHeight: string;
     };
     /** 底部版权信息 */
     footer: {
