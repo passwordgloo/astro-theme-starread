@@ -1,14 +1,15 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "include": [
-    ".astro/types.d.ts",
-    "**/*",
-    "public/twikoo.min.js"
-  ],
-  "exclude": [
-    "dist"
-  ],
-  "compilerOptions": {
-    "jsx": "preserve"
-  }
+	"extends": "astro/tsconfigs/strict",
+	"include": [
+		".astro/types.d.ts",
+		"**/*",
+		"public/twikoo.min.js",
+		"./worker-configuration.d.ts"
+	],
+	"exclude": [
+		"dist"
+	],
+	"compilerOptions": {
+		"jsx": "preserve"
+	}
 }

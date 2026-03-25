@@ -30,12 +30,15 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "preview": "astro preview",
+    "preview": "pnpm run build && wrangler dev",
     "build": "astro build",
     "release": "standard-version",
-    "algolia": "node scripts/pushAlgolia.js"
+    "algolia": "node scripts/pushAlgolia.js",
+    "deploy": "pnpm run build && wrangler deploy",
+    "cf-typegen": "wrangler types"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "12",
     "@astrojs/sitemap": "^3.6.0",
     "algoliasearch": "^5.40.0",
     "astro": "^5.16.1",
@@ -47,7 +50,8 @@
     "@iconify/tailwind4": "^1.0.6",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.14",
-    "standard-version": "^9.5.0"
+    "standard-version": "^9.5.0",
+    "wrangler": "^4.77.0"
   },
   "bin": {
     "create-astro-theme-starread": "scripts/init.cjs",
