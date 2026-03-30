@@ -1,5 +1,6 @@
 ---
 import { themeConfig } from '../../starread.config';
+import { Search, X, ChevronLeft, ChevronRight, CircleQuestionMark } from "@lucide/astro";
 
 const algoliaConfig = {
   appId: import.meta.env.PUBLIC_ALGOLIA_APP_ID || '',
@@ -8,19 +9,19 @@ const algoliaConfig = {
 };
 
 const hasCompleteConfig = Boolean(
-  algoliaConfig.appId && 
-  algoliaConfig.apiKey && 
+  algoliaConfig.appId &&
+  algoliaConfig.apiKey &&
   algoliaConfig.indexName
 );
 ---
 
 <div class="docsearch-container">
-  <button 
+  <button
     id="search-toggle"
     class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
     aria-label="搜索"
   >
-    <span class="icon-[lucide--search] h-5 w-5 text-gray-700 dark:text-gray-300"></span>
+    <Search class="h-5 w-5 text-gray-700 dark:text-gray-300" />
   </button>
 </div>
 
@@ -35,7 +36,7 @@ const hasCompleteConfig = Boolean(
       <div class="p-4 border-b dark:border-gray-800 flex items-center justify-between">
         <div class="relative w-full">
           <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-            <span class="icon-[lucide--search] h-5 w-5"></span>
+            <Search class="h-5 w-5" />
           </span>
           <input
             id="search-input"
@@ -44,12 +45,12 @@ const hasCompleteConfig = Boolean(
             class="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border-0 rounded-md text-gray-900 dark:text-white text-base focus:ring-2 focus:ring-blue-500 outline-none"
           />
         </div>
-        <button 
+        <button
           id="search-close"
           class="ml-2 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
           aria-label="关闭"
         >
-          <span class="icon-[lucide--x] h-5 w-5"></span>
+          <X class="h-5 w-5" />
         </button>
       </div>
 
@@ -57,7 +58,7 @@ const hasCompleteConfig = Boolean(
         <div id="search-initial" class="search-initial-state">
           <div class="text-center py-12">
             <div class="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-blue-100 dark:bg-blue-900/30">
-              <span class="icon-[lucide--search] h-8 w-8 text-blue-600 dark:text-blue-400"></span>
+              <Search class="h-8 w-8 text-blue-600 dark:text-blue-400" />
             </div>
             <p class="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
               支持使用键盘进行导航，Windows用户请用Ctrl 替换 ⌘
@@ -81,11 +82,11 @@ const hasCompleteConfig = Boolean(
           
           <div id="search-pagination" class="mt-3 pb-3 flex justify-center items-center gap-2 hidden">
             <button id="prev-page" class="px-3 py-1 rounded bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed" disabled>
-              <span class="icon-[lucide--chevron-left] h-4 w-4"></span>
+              <ChevronLeft class="h-4 w-4" />
             </button>
             <div id="page-numbers" class="flex gap-1"></div>
             <button id="next-page" class="px-3 py-1 rounded bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 disabled:opacity-50 disabled:cursor-not-allowed">
-              <span class="icon-[lucide--chevron-right] h-4 w-4"></span>
+              <ChevronRight class="h-4 w-4" />
             </button>
           </div>
         </div>
@@ -93,7 +94,7 @@ const hasCompleteConfig = Boolean(
         <div id="search-no-results" class="search-no-results hidden">
           <div class="text-center py-12 px-4">
             <div class="inline-flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-gray-100 dark:bg-gray-800">
-              <span class="icon-[lucide--circle-help] h-8 w-8 text-gray-500 dark:text-gray-400"></span>
+              <CircleQuestionMark class="h-8 w-8 text-gray-500 dark:text-gray-400" />
             </div>
             <p class="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
               没有找到与 "<span id="search-no-results-query" class="font-medium"></span>" 相关的内容，请尝试其他关键词
@@ -208,7 +209,7 @@ const hasCompleteConfig = Boolean(
       `;
     } else {
       searchProvider.innerHTML = `
-        <span class="icon-[lucide--hard-drive] h-4 w-4 text-gray-500 dark:text-gray-400"></span>
+        <svg class="h-4 w-4 text-gray-500 dark:text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 7h-9"/><path d="M14 17H5"/><circle cx="17" cy="17" r="3"/><circle cx="7" cy="7" r="3"/></svg>
         <span class="text-gray-600 dark:text-gray-400">本地离线搜索</span>
       `;
     }
@@ -388,12 +389,12 @@ const hasCompleteConfig = Boolean(
                 onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
               />
               <div class="w-20 h-20 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center hidden">
-                <span class="icon-[lucide--file-text] h-8 w-8 text-gray-400"></span>
+                <svg class="h-8 w-8 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
               </div>
             </div>
           ` : `
             <div class="flex-shrink-0 w-20 h-20 bg-gray-100 dark:bg-gray-800 rounded-md flex items-center justify-center">
-              <span class="icon-[lucide--file-text] h-8 w-8 text-gray-400"></span>
+              <svg class="h-8 w-8 text-gray-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/><line x1="10" x2="8" y1="9" y2="9"/></svg>
             </div>
           `}
           <div class="flex-1 min-w-0">
@@ -402,7 +403,7 @@ const hasCompleteConfig = Boolean(
             ${hit.url ? `
               <span class="text-xs text-blue-500 hover:text-blue-600 inline-flex items-center gap-1">
                 查看详情
-                <span class="icon-[lucide--arrow-right] h-3 w-3"></span>
+                <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </span>
             ` : ''}
           </div>

@@ -1,7 +1,7 @@
 {
   "name": "astro-theme-starread",
   "type": "module",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "files": [
     "src",
     "scripts",
@@ -32,22 +32,21 @@
     "dev": "astro dev",
     "preview": "astro preview",
     "build": "astro build",
-    "release": "standard-version",
     "algolia": "node scripts/pushAlgolia.js"
   },
   "dependencies": {
-    "@astrojs/sitemap": "^3.6.0",
-    "algoliasearch": "^5.40.0",
-    "astro": "^5.16.1",
-    "remark-github-blockquote-alert": "^2.0.0",
-    "tailwindcss": "^4.1.14"
+    "@astrojs/mdx": "^5.0.3",
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
+    "@lucide/astro": "^1.7.0",
+    "astro": "^6.1.1",
+    "sharp": "^0.34.3"
   },
   "devDependencies": {
-    "@iconify/json": "^2.2.394",
-    "@iconify/tailwind4": "^1.0.6",
     "@tailwindcss/typography": "^0.5.19",
-    "@tailwindcss/vite": "^4.1.14",
-    "standard-version": "^9.5.0"
+    "@tailwindcss/vite": "^4.2.2",
+    "algoliasearch": "^5.50.0",
+    "tailwindcss": "^4.2.2"
   },
   "bin": {
     "create-astro-theme-starread": "scripts/init.cjs",

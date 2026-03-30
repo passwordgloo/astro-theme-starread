@@ -1,4 +1,6 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
 
 // 生成6位16进制随机字符串
 function generateHexString(length = 6): string {
@@ -13,35 +15,37 @@ function generateHexString(length = 6): string {
 // 文章内容集合定义
 export const collections = {
   articles: defineCollection({
-    type: 'content',
-    schema: z.object({
-      title: z.string(),
-      description: z.string().optional(),
-      date: z.date().optional(),
-      categories: z.array(z.string()).optional(),
-      cover: z.string().default('/defaultCover.jpg'),
-      tags: z.array(z.string()).optional(),
-      prev: z.string().nullable().optional(),
-      next: z.string().nullable().optional(),
-      permalink: z.string().default(() => `/articles/${generateHexString(6)}/`),
-    }),
+    loader: glob({ base: './src/content/articles', pattern: '**/*.{md,mdx}' }),
+    schema: ({ image }) =>
+      z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        date: z.coerce.date().optional(),
+        categories: z.array(z.string()).optional(),
+        cover: z.string().default('/defaultCover.jpg'),
+        tags: z.array(z.string()).optional(),
+        prev: z.string().nullable().optional(),
+        next: z.string().nullable().optional(),
+        permalink: z.string().default(() => `/articles/${generateHexString(6)}/`),
+      }),
   }),
   notes: defineCollection({
-    type: 'content',
-    schema: z.object({
-      title: z.string(),
-      description: z.string().optional(),
-      date: z.date().optional(),
-      categories: z.array(z.string()).optional(),
-      cover: z.string().default('/defaultCover.jpg'),
-      tags: z.array(z.string()).optional(),
-      prev: z.string().nullable().optional(),
-      next: z.string().nullable().optional(),
-      permalink: z.string().default(() => {
-        // 注意：这里无法直接获取文件路径信息，
-        // 在Astro构建时，会使用脚本中的逻辑来处理文件夹结构
-        return `/notes/${generateHexString(6)}/`;
+    loader: glob({ base: './src/content/notes', pattern: '**/*.{md,mdx}' }),
+    schema: ({ image }) =>
+      z.object({
+        title: z.string(),
+        description: z.string().optional(),
+        date: z.coerce.date().optional(),
+        categories: z.array(z.string()).optional(),
+        cover: z.string().default('/defaultCover.jpg'),
+        tags: z.array(z.string()).optional(),
+        prev: z.string().nullable().optional(),
+        next: z.string().nullable().optional(),
+        permalink: z.string().default(() => {
+          // 注意：这里无法直接获取文件路径信息，
+          // 在Astro构建时，会使用脚本中的逻辑来处理文件夹结构
+          return `/notes/${generateHexString(6)}/`;
+        }),
       }),
-    }),
   }),
 };

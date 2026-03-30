@@ -23,11 +23,11 @@ export async function getStaticPaths() {
 
 // 获取当前页面的标签和相关文章
 const { tag } = Astro.props;
-const articles = await getCollection('articles', ({ data }) => 
-  data.tags?.includes(tag) || false
+const articles = await getCollection('articles', ({ data }) =>
+  data.tags?.includes(tag) ?? false
 );
-const notes = await getCollection('notes', ({ data }) => 
-  data.tags?.includes(tag) || false
+const notes = await getCollection('notes', ({ data }) =>
+  data.tags?.includes(tag) ?? false
 );
 // 合并并按日期排序
 const allContent = [...articles, ...notes].sort((a, b) => 

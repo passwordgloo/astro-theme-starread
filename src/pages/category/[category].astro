@@ -23,22 +23,14 @@ export async function getStaticPaths() {
 
 // 获取当前分类和相关文章
 const { category } = Astro.props;
-const articles = await getCollection('articles', ({ data }) => 
-  data.categories?.includes(category) || false
+const articles = await getCollection('articles', ({ data }) =>
+  data.categories?.includes(category) ?? false
 );
-const notes = await getCollection('notes', ({ data }) => 
-  data.categories?.includes(category) || false
+const notes = await getCollection('notes', ({ data }) =>
+  data.categories?.includes(category) ?? false
 );
-// 合并并按日期排序，确保每个项目有正确的永久链接
-const allContent = [...articles, ...notes].map(item => ({
-  ...item,
-  // 确保有正确的永久链接
-  data: {
-    ...item.data,
-    permalink: item.data.permalink || 
-      (item.collection === 'notes' ? `/notes/${item.slug}` : `/articles/${item.slug}`)
-  }
-})).sort((a, b) => 
+// 合并并按日期排序
+const allContent = [...articles, ...notes].sort((a, b) =>
   new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 

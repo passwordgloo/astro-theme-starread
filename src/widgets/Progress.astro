@@ -1,5 +1,6 @@
 ---
 import { themeConfig } from '../../starread.config';
+import { Calendar } from "@lucide/astro";
 
 // 获取当前日期和日历相关信息
 const now = new Date();
@@ -38,7 +39,7 @@ const yearProgress = Math.round(((now.getMonth() * 30 + now.getDate()) / 365) * 
 
 <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4">
   <div class="flex items-center space-x-2 mb-4">
-    <span class="icon-[lucide--calendar] w-5 h-5 text-accent"></span>
+    <Calendar class="w-5 h-5 text-accent" />
     <span class="text-accent font-bold text-lg">日历统计</span>
   </div>
 

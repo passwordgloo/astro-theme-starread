@@ -3,6 +3,7 @@ import { themeConfig } from '../../starread.config';
 import { formatDate, getCoverImage, getAuthorInfo } from '../components/frontmatter';
 import PostCover from '../layouts/postcover.astro';
 import PostCover2 from '../layouts/postcover2.astro';
+import { LayoutGrid, ChevronLeft, ChevronRight } from "@lucide/astro";
 
 // 轮播卡片文章组件
 const { articles = [] } = Astro.props;
@@ -27,15 +28,15 @@ const processedArticles = articles.map(article => ({
 <div class="relative bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
   <div class="px-4 py-3 border-b border-gray-200 dark:border-white/10 flex justify-between items-center">
     <div class="flex items-center space-x-2">
-      <span class="icon-[lucide--grid] w-5 h-5"></span>
+      <LayoutGrid class="w-5 h-5" />
       <h2 class="font-bold text-lg text-dark">{themeConfig.widget.carousel.title}</h2>
     </div>
     <div class="flex space-x-2">
       <button id="prev-btn" class="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-white/15" aria-label="上一张">
-        <span class="icon-[lucide--chevron-left] h-5 w-5 text-gray-500"></span>
+        <ChevronLeft class="h-5 w-5 text-gray-500" />
       </button>
-      <button id="next-btn" class="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-white/15"" aria-label="下一张">
-        <span class="icon-[lucide--chevron-right] h-5 w-5 text-gray-500"></span>
+      <button id="next-btn" class="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-white/15" aria-label="下一张">
+        <ChevronRight class="h-5 w-5 text-gray-500" />
       </button>
     </div>
   </div>

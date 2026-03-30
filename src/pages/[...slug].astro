@@ -1,10 +1,10 @@
 ---
-import { getEntryBySlug, getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BaseLayout from '../layouts/article.astro';
 import ArticleNav from '../components/ArticleNav.astro';
-import { 
-  formatDate, 
-  getCoverImage, 
+import {
+  formatDate,
+  getCoverImage,
   countWords
 } from '../components/frontmatter.ts';
 
@@ -21,54 +21,48 @@ export async function getStaticPaths() {
   
   // 检查路径是否是保留路由
   const isReservedRoute = (path) => {
+    // 确保 path 是字符串
+    if (!path || typeof path !== 'string') {
+      return false;
+    }
     // 检查是否以保留路由开头或完全匹配保留路由
-    return reservedRoutes.some(route => 
+    return reservedRoutes.some(route =>
       path === route || path.startsWith(`${route}/`));
   };
+
+  // 验证路径是否有效
+  const isValidPath = (path) => {
+    if (!path || typeof path !== 'string') {
+      return false;
+    }
+    // 移除首尾斜杠后不能为空
+    const trimmed = path.replace(/^\/|\/$/g, '');
+    if (!trimmed || trimmed.length === 0) {
+      return false;
+    }
+    // 不能包含 undefined 或 null
+    if (trimmed.includes('undefined') || trimmed.includes('null')) {
+      return false;
+    }
+    return true;
+  };
+
   const paths = [];
-  
+
   // 处理文章条目
-  const sortedArticles = [...articles].sort((a, b) => 
+  const sortedArticles = [...articles].sort((a, b) =>
     new Date(a.data.date || 0).getTime() - new Date(b.data.date || 0).getTime()
   );
-  
+
   sortedArticles.forEach((entry, index) => {
-    // 添加带有 /articles/ 前缀的路径
-    const articlesPath = `articles/${entry.slug}`;
-    if (!isReservedRoute(articlesPath)) {
-      paths.push({
-        params: { slug: articlesPath },
-        props: { 
-          entry,
-          prev: index > 0 ? sortedArticles[index - 1] : null,
-          next: index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null,
-          basePath: '/articles'
-        },
-      });
-    }
-    
-    // 添加不带前缀的slug路径（兼容原路径）
-    if (!isReservedRoute(entry.slug)) {
-      paths.push({
-        params: { slug: entry.slug },
-        props: { 
-          entry,
-          prev: index > 0 ? sortedArticles[index - 1] : null,
-          next: index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null,
-          basePath: '/articles'
-        },
-      });
-    }
-    
-    // 添加基于permalink的路径
+    // 只使用 permalink 作为路径
     if (entry.data.permalink) {
-      // 移除可能的首尾斜杠
       let permalink = entry.data.permalink.replace(/^\/|\/$/g, '');
-      
-      if (!isReservedRoute(permalink)) {
+
+      if (isValidPath(permalink) && !isReservedRoute(permalink)) {
         paths.push({
           params: { slug: permalink },
-          props: { 
+          props: {
             entry,
             prev: index > 0 ? sortedArticles[index - 1] : null,
             next: index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null,
@@ -78,48 +72,21 @@ export async function getStaticPaths() {
       }
     }
   });
-  
+
   // 处理笔记条目
-  const sortedNotes = [...notes].sort((a, b) => 
+  const sortedNotes = [...notes].sort((a, b) =>
     new Date(a.data.date || 0).getTime() - new Date(b.data.date || 0).getTime()
   );
-  
+
   sortedNotes.forEach((entry, index) => {
-    // 添加带有 /notes/ 前缀的路径
-    // 注意：'notes/' 前缀本身是保留路由，但这是我们需要的路径格式
-    const notesPath = `notes/${entry.slug}`;
-    paths.push({
-      params: { slug: notesPath },
-      props: { 
-        entry,
-        prev: index > 0 ? sortedNotes[index - 1] : null,
-        next: index < sortedNotes.length - 1 ? sortedNotes[index + 1] : null,
-        basePath: '/notes'
-      },
-    });
-    
-    // 添加不带前缀的slug路径（兼容原路径）
-    if (!isReservedRoute(entry.slug)) {
-      paths.push({
-        params: { slug: entry.slug },
-        props: { 
-          entry,
-          prev: index > 0 ? sortedNotes[index - 1] : null,
-          next: index < sortedNotes.length - 1 ? sortedNotes[index + 1] : null,
-          basePath: '/notes'
-        },
-      });
-    }
-    
-    // 添加基于permalink的路径
+    // 只使用 permalink 作为路径
     if (entry.data.permalink) {
-      // 移除可能的首尾斜杠
       let permalink = entry.data.permalink.replace(/^\/|\/$/g, '');
-      
-      if (!isReservedRoute(permalink)) {
+
+      if (isValidPath(permalink) && !isReservedRoute(permalink)) {
         paths.push({
           params: { slug: permalink },
-          props: { 
+          props: {
             entry,
             prev: index > 0 ? sortedNotes[index - 1] : null,
             next: index < sortedNotes.length - 1 ? sortedNotes[index + 1] : null,
@@ -136,13 +103,16 @@ export async function getStaticPaths() {
 const { entry, prev, next, basePath } = Astro.props;
 // 从URL参数中获取slug数组（嵌套路径）
 const { slug } = Astro.params;
-const { Content } = await entry.render();
 
 // 使用entry的permalink或直接使用slug
 const permalink = entry.data.permalink || entry.slug;
 
-// 计算内容字数
-const wordCount = countWords(entry.body);
+// 先渲染获取内容用于字数统计
+const rendered = await render(entry);
+const wordCount = countWords(rendered.code);
+
+// 再解构获取Content组件
+const { Content } = rendered;
 
 // 使用从props传递的相邻文章信息
 const adjacentArticles = {

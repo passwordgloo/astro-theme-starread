@@ -1,5 +1,7 @@
 ---
 // ArticleTOC.astro
+import { ListTree } from "@lucide/astro";
+
 interface Props {
   isSticky?: boolean;
 }
@@ -17,14 +19,14 @@ const { isSticky = true } = Astro.props;
   ]}
 >
   <div class="flex items-center space-x-2 mb-4">
-    <span class="icon-[lucide--list-tree] w-5 h-5 text-accent"></span>
+    <ListTree class="w-5 h-5 text-accent" />
     <span class="text-accent font-bold text-lg">文章目录</span>
   </div>
-  
+
   <!-- 无目录占位符 -->
   <div id="toc-placeholder" class="text-center py-8">
     <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-slate-800 mb-3">
-      <span class="icon-[lucide--list-tree] w-5 h-5 transition-colors duration-300"></span>
+      <ListTree class="w-5 h-5 transition-colors duration-300" />
     </div>
     <p class="text-gray-500 dark:text-slate-400 italic">暂无目录</p>
   </div>

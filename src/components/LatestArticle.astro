@@ -5,6 +5,7 @@ import { themeConfig } from '../../starread.config';
 import { getCoverImage, sortEntriesByDate, processEntryData } from '../components/frontmatter';
 import PostCover from '../layouts/postcover.astro';
 import PostCover2 from '../layouts/postcover2.astro';
+import { Newspaper } from "@lucide/astro";
 
 interface Props {
   articles?: CollectionEntry<'articles'>[];
@@ -29,7 +30,7 @@ const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimi
   <!-- 顶部标题栏 -->
   <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4 mb-6">
     <div class="flex items-center space-x-2">
-      <span class="icon-[lucide--newspaper] w-5 h-5"></span>
+      <Newspaper class="w-5 h-5" />
       <h2 class="text-accent font-bold text-lg">最新文章</h2>
     </div>
     <div id="articles-container" class={`grid grid-cols-1 md:grid-cols-1 lg:grid-cols-${columns} gap-8 mt-4`}>

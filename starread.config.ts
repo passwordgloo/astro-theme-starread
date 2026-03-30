@@ -89,45 +89,45 @@ export const themeConfig: starreadthemeconfig = {
     ]
   },
 
-  // 导航菜单配置，修改图标集合名请一定要在global.css中添加
+  // 导航菜单配置，图标名称对应 @lucide/astro 的组件名
   navbar: [
-    { name: '主页', href: '/', icon: 'icon-[mdi-light--home]' },
-    { 
+    { name: '主页', href: '/', icon: 'Home' },
+    {
       name: '软件资源',
-      icon: 'icon-[lucide--database]',
+      icon: 'Database',
       items: [
         {
           items: [
-            { text: 'Windows工具', link: '#', icon: 'icon-[lucide--database]' },
-            { text: 'Mac工具', link: '#', icon: 'icon-[lucide--database]' },
-            { text: 'Linux工具', link: '#', icon: 'icon-[lucide--database]' },
-            { text: '移动工具', link: '#', icon: 'icon-[lucide--database]' }
+            { text: 'Windows工具', link: '#', icon: 'Database' },
+            { text: 'Mac工具', link: '#', icon: 'Database' },
+            { text: 'Linux工具', link: '#', icon: 'Database' },
+            { text: '移动工具', link: '#', icon: 'Database' }
           ]
         }
       ]
     },
     {
       name: '教程指南',
-      icon: 'icon-[lucide--book]',
+      icon: 'Book',
       items: [
         {
           text: '开发教程',
           items: [
-            { text: '前端开发', link: '#', icon: 'icon-[lucide--code]' },
-            { text: '后端开发', link: '#', icon: 'icon-[lucide--server]' }
+            { text: '前端开发', link: '#', icon: 'Code' },
+            { text: '后端开发', link: '#', icon: 'Server' }
           ]
         },
         {
           text: '技巧分享',
           items: [
-            { text: '效率工具', link: '#', icon: 'icon-[lucide--circle-help]' },
-            { text: '实用脚本', link: '#', icon: 'icon-[lucide--code]' }
+            { text: '效率工具', link: '#', icon: 'HelpCircle' },
+            { text: '实用脚本', link: '#', icon: 'Code' }
           ]
         }
       ]
     },
-    { name: '代码编程', href: '#', icon: 'icon-[lucide--code]' },
-    { name: '汇编逆向', href: '#', icon: 'icon-[lucide--lock]' },
+    { name: '代码编程', href: '#', icon: 'Code' },
+    { name: '汇编逆向', href: '#', icon: 'Lock' },
   ],
 
   // 侧边栏组件显示控制 - 保持不变

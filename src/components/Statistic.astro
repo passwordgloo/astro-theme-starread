@@ -2,6 +2,7 @@
 import { themeConfig } from '../../starread.config';
 import { getCollection } from 'astro:content';
 import { countWords } from './frontmatter.ts';
+import { ChartBar, Files, FileText, Pen, CalendarDays, Eye, Users } from "@lucide/astro";
 
 // 获取所有内容集合
 const articles = await getCollection('articles');
@@ -45,7 +46,7 @@ const siteDays = getSiteDays();
 
 <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4">
   <div class="flex items-center space-x-2 mb-4">
-    <span class="icon-[lucide--bar-chart-3] w-5 h-5 text-accent"></span>
+    <ChartBar class="w-5 h-5 text-accent" />
     <span class="text-accent font-bold text-lg">站点统计</span>
   </div>
 
@@ -53,43 +54,43 @@ const siteDays = getSiteDays();
     <!-- 总文件数 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <span class="icon-[lucide--files] w-4 h-4 text-gray-500 dark:text-slate-400"></span>
+        <Files class="w-4 h-4 text-gray-500 dark:text-slate-400" />
         <span class="text-gray-600 dark:text-slate-400">总文件数</span>
       </div>
       <span class="font-medium text-primary dark:text-secondary">{totalFileCount} 个</span>
     </div>
-    
+
     <!-- 文章总数 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <span class="icon-[lucide--file-text] w-4 h-4 text-gray-500 dark:text-slate-400"></span>
+        <FileText class="w-4 h-4 text-gray-500 dark:text-slate-400" />
         <span class="text-gray-600 dark:text-slate-400">文章总数</span>
       </div>
       <span class="font-medium text-primary dark:text-secondary">{articleCount} 篇</span>
     </div>
-    
+
     <!-- 笔记总数 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <span class="icon-[lucide--file-text] w-4 h-4 text-gray-500 dark:text-slate-400"></span>
+        <FileText class="w-4 h-4 text-gray-500 dark:text-slate-400" />
         <span class="text-gray-600 dark:text-slate-400">笔记总数</span>
       </div>
       <span class="font-medium text-primary dark:text-secondary">{noteCount} 篇</span>
     </div>
-    
+
     <!-- 全站字数 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <span class="icon-[lucide--edit-3] w-4 h-4 text-gray-500 dark:text-slate-400"></span>
+        <Pen class="w-4 h-4 text-gray-500 dark:text-slate-400" />
         <span class="text-gray-600 dark:text-slate-400">全站字数</span>
       </div>
       <span class="font-medium text-primary dark:text-secondary">{totalWords} 字</span>
     </div>
-    
+
     <!-- 建站天数 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <span class="icon-[lucide--calendar-days] w-4 h-4 text-gray-500 dark:text-slate-400"></span>
+        <CalendarDays class="w-4 h-4 text-gray-500 dark:text-slate-400" />
         <span class="text-gray-600 dark:text-slate-400">建站天数</span>
       </div>
       <span class="font-medium text-primary dark:text-secondary">{siteDays} 天</span>
@@ -98,7 +99,7 @@ const siteDays = getSiteDays();
     <!-- 总访问量 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <span class="icon-[lucide--eye] w-4 h-4 text-gray-500 dark:text-slate-400"></span>
+        <Eye class="w-4 h-4 text-gray-500 dark:text-slate-400" />
         <span class="text-gray-600 dark:text-slate-400">总访问量</span>
       </div>
       <span id="busuanzi_site_pv" class="font-medium text-primary dark:text-secondary">加载中...</span>
@@ -107,7 +108,7 @@ const siteDays = getSiteDays();
     <!-- 总访客数 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <span class="icon-[lucide--users] w-4 h-4 text-gray-500 dark:text-slate-400"></span>
+        <Users class="w-4 h-4 text-gray-500 dark:text-slate-400" />
         <span class="text-gray-600 dark:text-slate-400">总访客数</span>
       </div>
       <span id="busuanzi_site_uv" class="font-medium text-primary dark:text-secondary">加载中...</span>
