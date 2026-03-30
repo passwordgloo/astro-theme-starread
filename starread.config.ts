@@ -8,7 +8,8 @@ export const themeConfig: starreadthemeconfig = {
     favicon: '/favicon.png',
     defaultCover: '/defaultCover.jpg',
     foundedDate: '2025-10-01',
-    
+    loginUrl: '/config',  // 登录按钮跳转链接，指向配置生成页面
+
     logo: {
       image: '/logo.svg',
       darkImage: '/logo-dark.svg',

@@ -24,6 +24,8 @@ export interface starreadthemeconfig {
     defaultCover: string;
     /** 建站日期，格式：YYYY-MM-DD，用于计算建站天数 */
     foundedDate?: string;
+    /** 登录页面链接，点击导航栏登录按钮跳转的地址 */
+    loginUrl?: string;
     /** Logo 配置 */
     logo: {
       /** 亮色模式下的 logo 路径 */

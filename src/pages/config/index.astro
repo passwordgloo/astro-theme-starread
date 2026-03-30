@@ -1,0 +1,2285 @@
+---
+import ConfigLayout from "../../layouts/ConfigLayout.astro";
+import { 
+  Settings, Home, FileText, Palette, Target, Image, User, Megaphone, 
+  FolderOpen, Menu, LayoutGrid, Plus, Trash2, GripVertical, Download, 
+  RotateCcw, Copy, Check, X, ChevronRight, Upload
+} from "@lucide/astro";
+---
+
+<ConfigLayout title="主题配置生成器">
+  <!-- 顶部导航栏 -->
+
+  
+  <div class="config-page-wrapper">
+    <!-- 左侧边栏 -->
+    <aside class="config-sidebar">
+      <div class="sidebar-header">
+        <div class="logo-glass">
+          <Settings class="w-6 h-6" />
+        </div>
+        <h1 class="sidebar-title">配置中心</h1>
+      </div>
+
+      <nav class="sidebar-nav">
+        <div class="nav-section">
+          <span class="nav-label">基础配置</span>
+          <a href="#site" class="nav-item active" data-section="site">
+            <Home class="nav-icon" />
+            <span>网站信息</span>
+          </a>
+          <a href="#article" class="nav-item" data-section="article">
+            <FileText class="nav-icon" />
+            <span>文章设置</span>
+          </a>
+          <a href="#appearance" class="nav-item" data-section="appearance">
+            <Palette class="nav-icon" />
+            <span>外观效果</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <span class="nav-label">组件配置</span>
+          <a href="#banner" class="nav-item" data-section="banner">
+            <Target class="nav-icon" />
+            <span>Banner</span>
+          </a>
+          <a href="#carousel" class="nav-item" data-section="carousel">
+            <Image class="nav-icon" />
+            <span>轮播图</span>
+          </a>
+          <a href="#author" class="nav-item" data-section="author">
+            <User class="nav-icon" />
+            <span>作者信息</span>
+          </a>
+          <a href="#ad" class="nav-item" data-section="ad">
+            <Megaphone class="nav-icon" />
+            <span>广告配置</span>
+          </a>
+        </div>
+
+        <div class="nav-section">
+          <span class="nav-label">结构配置</span>
+          <a href="#categories" class="nav-item" data-section="categories">
+            <FolderOpen class="nav-icon" />
+            <span>文章分类</span>
+          </a>
+          <a href="#navbar" class="nav-item" data-section="navbar">
+            <Menu class="nav-icon" />
+            <span>导航菜单</span>
+          </a>
+          <a href="#sidebar" class="nav-item" data-section="sidebar">
+            <LayoutGrid class="nav-icon" />
+            <span>侧边栏组件</span>
+          </a>
+        </div>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="btn-generate" id="btn-generate">
+          <span>生成配置</span>
+          <ChevronRight class="w-4 h-4" />
+        </button>
+      </div>
+    </aside>
+
+    <!-- 右侧内容区 -->
+    <main class="config-main">
+      <!-- 顶部标题栏 -->
+      <header class="main-header">
+        <div class="header-content">
+          <h2 class="header-title">Starread 主题配置</h2>
+          <p class="header-desc">通过可视化界面自定义您的博客主题</p>
+        </div>
+        <div class="header-actions">
+          <button class="btn-secondary" id="btn-reset">
+            <RotateCcw class="w-4 h-4 mr-1" />
+            重置
+          </button>
+          <button class="btn-primary" id="btn-download">
+            <Download class="w-4 h-4 mr-1" />
+            下载配置
+          </button>
+        </div>
+      </header>
+
+      <!-- 表单内容 -->
+      <div class="form-content">
+        <!-- 网站信息 -->
+        <section id="site" class="form-section active">
+          <div class="section-header">
+            <span class="section-badge">01</span>
+            <div>
+              <h3 class="section-title">网站信息</h3>
+              <p class="section-subtitle">配置网站的基本信息和品牌标识</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="field-label">
+                  网站标题
+                  <span class="field-required">*</span>
+                </label>
+                <input type="text" name="site.title" value="星阅主题" class="field-input" placeholder="请输入网站标题" />
+                <span class="field-hint">显示在浏览器标签和首页</span>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">网站图标</label>
+                <div class="field-input-group">
+                  <input type="text" name="site.favicon" value="/favicon.png" class="field-input" placeholder="/favicon.png" readonly />
+                  <button class="input-action" type="button" data-upload="favicon" title="选择文件">
+                    <Upload class="w-4 h-4" />
+                  </button>
+                </div>
+                <span class="field-hint">请手动将图片放到 /public/cover/ 目录，然后填写路径如 /cover/favicon.png</span>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">默认封面</label>
+                <div class="field-input-group">
+                  <input type="text" name="site.defaultCover" value="/defaultCover.jpg" class="field-input" placeholder="/defaultCover.jpg" readonly />
+                  <button class="input-action" type="button" data-upload="defaultCover" title="选择文件">
+                    <Upload class="w-4 h-4" />
+                  </button>
+                </div>
+                <span class="field-hint">用于没有设置封面的文章</span>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">建站日期</label>
+                <input type="date" name="site.foundedDate" value="2025-10-01" class="field-input" />
+                <span class="field-hint">用于计算建站天数</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h4 class="card-subtitle">Logo 配置</h4>
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="field-label">Logo 图片</label>
+                <div class="field-input-group">
+                  <input type="text" name="site.logo.image" value="/logo.svg" class="field-input" placeholder="/logo.svg" readonly />
+                  <button class="input-action" type="button" data-upload="logo">
+                    <Upload class="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">暗色模式 Logo</label>
+                <div class="field-input-group">
+                  <input type="text" name="site.logo.darkImage" value="/logo-dark.svg" class="field-input" placeholder="/logo-dark.svg" readonly />
+                  <button class="input-action" type="button" data-upload="darkLogo">
+                    <Upload class="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">Logo 文字</label>
+                <input type="text" name="site.logo.text" value="星阅主题" class="field-input" placeholder="星阅主题" />
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">Alt 文本</label>
+                <input type="text" name="site.logo.alt" value="星阅主题 Logo" class="field-input" placeholder="Logo 描述" />
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h4 class="card-subtitle">页脚配置</h4>
+            <div class="form-field">
+              <label class="field-label">版权信息</label>
+              <input type="text" name="site.footer.text" value="© 2025 风雅中华 - 阳光明媚，微笑前行" class="field-input" placeholder="© 2025 版权所有" />
+            </div>
+          </div>
+        </section>
+
+        <!-- 文章设置 -->
+        <section id="article" class="form-section">
+          <div class="section-header">
+            <span class="section-badge">02</span>
+            <div>
+              <h3 class="section-title">文章设置</h3>
+              <p class="section-subtitle">配置最新文章组件的展示方式</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="field-label">加载类型</label>
+                <div class="field-radio-group">
+                  <label class="radio-card">
+                    <input type="radio" name="site.LatestArticle.type" value="button" checked class="radio-input" />
+                    <span class="radio-label">
+                      <span class="radio-title">按钮加载</span>
+                      <span class="radio-desc">点击按钮加载更多文章</span>
+                    </span>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="site.LatestArticle.type" value="auto" class="radio-input" />
+                    <span class="radio-label">
+                      <span class="radio-title">自动加载</span>
+                      <span class="radio-desc">滚动时自动加载</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">布局类型</label>
+                <div class="field-radio-group">
+                  <label class="radio-card">
+                    <input type="radio" name="site.LatestArticle.layout" value="vertical" checked class="radio-input" />
+                    <span class="radio-label">
+                      <span class="radio-title">垂直布局</span>
+                      <span class="radio-desc">纵向排列文章</span>
+                    </span>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="site.LatestArticle.layout" value="horizontal" class="radio-input" />
+                    <span class="radio-label">
+                      <span class="radio-title">水平布局</span>
+                      <span class="radio-desc">横向排列文章</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">默认最大加载数量</label>
+                <input type="number" name="site.LatestArticle.defaultLimit" value="20" class="field-input" min="1" max="100" />
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">初始加载数量</label>
+                <input type="number" name="site.LatestArticle.initialLoad" value="4" class="field-input" min="1" max="20" />
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">每次加载数量</label>
+                <input type="number" name="site.LatestArticle.loadMore" value="4" class="field-input" min="1" max="20" />
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">分栏数</label>
+                <input type="number" name="site.LatestArticle.columns" value="2" class="field-input" min="1" max="4" />
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">默认宽高比</label>
+                <select name="site.LatestArticle.defaultAspectRatio" class="field-select">
+                  <option value="16:9" selected>16:9 宽屏</option>
+                  <option value="4:3">4:3 标准</option>
+                  <option value="3:2">3:2 照片</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">横版封面高度</label>
+                <input type="text" name="site.LatestArticle.horizontalHeight" value="160px" class="field-input" placeholder="160px" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 外观效果 -->
+        <section id="appearance" class="form-section">
+          <div class="section-header">
+            <span class="section-badge">03</span>
+            <div>
+              <h3 class="section-title">外观效果</h3>
+              <p class="section-subtitle">配置语言和动态效果</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="field-label">语言设置</label>
+                <select name="language" class="field-select">
+                  <option value="zh" selected>中文（周一为周起始日）</option>
+                  <option value="en">English（周日为周起始日）</option>
+                </select>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">动态效果</label>
+                <label class="switch-card">
+                  <input type="checkbox" name="dynamicEffect.postTopWave" checked class="switch-input" />
+                  <span class="switch-slider"></span>
+                  <span class="switch-label">
+                    <span class="switch-title">文章顶部波浪效果</span>
+                    <span class="switch-desc">在文章页面顶部显示波浪动画</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Banner 配置 -->
+        <section id="banner" class="form-section">
+          <div class="section-header">
+            <span class="section-badge">04</span>
+            <div>
+              <h3 class="section-title">Banner 配置</h3>
+              <p class="section-subtitle">配置首页顶部横幅区域</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-field">
+              <label class="field-label">Banner 标题</label>
+              <input type="text" name="widget.banner.title" value="Star read 星阅主题" class="field-input" placeholder="输入 Banner 标题" />
+            </div>
+
+            <div class="form-field">
+              <label class="field-label">背景图片</label>
+              <div class="field-input-group">
+                <input type="text" name="widget.banner.backgroundImage" value="https://picsum.photos/1200/300" class="field-input" placeholder="图片 URL" readonly />
+                <button class="input-action" type="button" data-upload="bannerBg">
+                  <Upload class="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+            <div class="form-field">
+              <label class="field-label">标签列表</label>
+              <div class="tag-input-container" id="banner-tags">
+                <div class="tag-item">
+                  <span class="tag-text">基于Vite+Tailwindcss</span>
+                  <button class="tag-remove" type="button">
+                    <X class="w-3 h-3" />
+                  </button>
+                </div>
+                <div class="tag-item">
+                  <span class="tag-text">支持深色模式</span>
+                  <button class="tag-remove" type="button">
+                    <X class="w-3 h-3" />
+                  </button>
+                </div>
+                <div class="tag-item">
+                  <span class="tag-text">模块化组件</span>
+                  <button class="tag-remove" type="button">
+                    <X class="w-3 h-3" />
+                  </button>
+                </div>
+                <input type="text" class="tag-input" placeholder="输入标签后按回车" />
+              </div>
+              <textarea name="widget.banner.tags" class="hidden">基于Vite+Tailwindcss
+支持深色模式
+模块化组件</textarea>
+            </div>
+          </div>
+        </section>
+
+        <!-- 轮播图配置 -->
+        <section id="carousel" class="form-section">
+          <div class="section-header">
+            <span class="section-badge">05</span>
+            <div>
+              <h3 class="section-title">轮播图配置</h3>
+              <p class="section-subtitle">配置首页文章轮播展示</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="field-label">轮播标题</label>
+                <input type="text" name="widget.carousel.title" value="轮播" class="field-input" />
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">布局方向</label>
+                <div class="field-radio-group">
+                  <label class="radio-card">
+                    <input type="radio" name="widget.carousel.layout" value="vertical" checked class="radio-input" />
+                    <span class="radio-label">
+                      <span class="radio-title">垂直布局</span>
+                    </span>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="widget.carousel.layout" value="horizontal" class="radio-input" />
+                    <span class="radio-label">
+                      <span class="radio-title">水平布局</span>
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 作者信息 -->
+        <section id="author" class="form-section">
+          <div class="section-header">
+            <span class="section-badge">06</span>
+            <div>
+              <h3 class="section-title">作者信息</h3>
+              <p class="section-subtitle">配置侧边栏作者卡片</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="field-label">作者姓名</label>
+                <input type="text" name="widget.author.name" value="风雅中华" class="field-input" />
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">作者简介</label>
+                <input type="text" name="widget.author.description" value="阳光明媚，微笑前行" class="field-input" />
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">头像地址</label>
+                <div class="field-input-group">
+                  <input type="text" name="widget.author.avatar" value="https://picsum.photos/40/40?random=4" class="field-input" readonly />
+                  <button class="input-action" type="button" data-upload="avatar">
+                    <Upload class="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 广告配置 -->
+        <section id="ad" class="form-section">
+          <div class="section-header">
+            <span class="section-badge">07</span>
+            <div>
+              <h3 class="section-title">广告配置</h3>
+              <p class="section-subtitle">配置侧边栏广告小部件</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="field-label">广告标题</label>
+                <input type="text" name="widget.ad.title" value="黑曜石博客" class="field-input" />
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">按钮文字</label>
+                <input type="text" name="widget.ad.buttonText" value="了解详情" class="field-input" />
+              </div>
+
+              <div class="form-field col-span-2">
+                <label class="field-label">广告描述</label>
+                <input type="text" name="widget.ad.description" value="支持评论弹幕、粒子动画效果、分类" class="field-input" />
+              </div>
+
+              <div class="form-field col-span-2">
+                <label class="field-label">链接地址</label>
+                <input type="text" name="widget.ad.link" value="https://example.com" class="field-input" placeholder="https://" />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 文章分类 -->
+        <section id="categories" class="form-section">
+          <div class="section-header">
+            <span class="section-badge">08</span>
+            <div>
+              <h3 class="section-title">文章分类</h3>
+              <p class="section-subtitle">配置首页展示的文章分类</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="category-help">
+              <p class="help-text">
+                <strong>说明：</strong>此处配置的是您博客中已有的文章分类展示区。每个分类包含标识（URL路径）和标题（显示名称）。
+                例如：标识填 "theme" 对应 /category/theme 页面，标题填 "主题说明" 将在页面上显示为该名称。
+              </p>
+            </div>
+            <div class="list-header">
+              <span class="list-title">分类展示列表</span>
+              <button class="btn-add" type="button" id="btn-add-category">
+                <Plus class="w-4 h-4" />
+                添加分类
+              </button>
+            </div>
+            <div class="category-list" id="categories-list">
+              <div class="category-item">
+                <div class="category-inputs">
+                  <div class="input-wrapper">
+                    <label class="input-label">分类标识（URL）</label>
+                    <input type="text" class="field-input-sm" value="theme" placeholder="如：tech、life" data-field="name" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">分类标题（显示名称）</label>
+                    <input type="text" class="field-input-sm" value="主题说明" placeholder="如：科技资讯、生活随笔" data-field="title" />
+                  </div>
+                </div>
+                <button class="btn-icon-danger" type="button">
+                  <Trash2 class="w-4 h-4" />
+                </button>
+              </div>
+              <div class="category-item">
+                <div class="category-inputs">
+                  <div class="input-wrapper">
+                    <label class="input-label">分类标识（URL）</label>
+                    <input type="text" class="field-input-sm" value="help" placeholder="如：tech、life" data-field="name" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">分类标题（显示名称）</label>
+                    <input type="text" class="field-input-sm" value="帮助" placeholder="如：科技资讯、生活随笔" data-field="title" />
+                  </div>
+                </div>
+                <button class="btn-icon-danger" type="button">
+                  <Trash2 class="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 导航菜单 -->
+        <section id="navbar" class="form-section">
+          <div class="section-header">
+            <span class="section-badge">09</span>
+            <div>
+              <h3 class="section-title">导航菜单</h3>
+              <p class="section-subtitle">配置顶部导航栏菜单项</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="category-help">
+              <p class="help-text">
+                <strong>提示：</strong>导航名称显示在菜单上，链接地址可以是相对路径（如：/about）或绝对URL（如：https://example.com）。
+                图标名称参考 Lucide 图标库，如：Home、Book、User、Settings 等。
+              </p>
+            </div>
+            <div class="list-header">
+              <span class="list-title">导航项</span>
+              <button class="btn-add" type="button" id="btn-add-nav">
+                <Plus class="w-4 h-4" />
+                添加导航
+              </button>
+            </div>
+            <div class="nav-list" id="nav-list">
+              <!-- 导航项将通过 JS 渲染 -->
+            </div>
+          </div>
+        </section>
+
+        <!-- 侧边栏组件 -->
+        <section id="sidebar" class="form-section">
+          <div class="section-header">
+            <span class="section-badge">10</span>
+            <div>
+              <h3 class="section-title">侧边栏组件</h3>
+              <p class="section-subtitle">拖拽排序并启用/禁用组件</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h4 class="card-subtitle">首页侧边栏</h4>
+            <div class="widget-list" id="sidebar-home">
+              <!-- 可拖拽组件列表 -->
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h4 class="card-subtitle">文章页侧边栏</h4>
+            <div class="widget-list" id="sidebar-article">
+              <!-- 文章页组件列表 -->
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- 代码预览 -->
+      <div class="code-preview">
+        <div class="code-header">
+          <div class="code-header-left">
+            <span class="code-title">生成的配置代码</span>
+            <span class="code-hint">复制代码覆盖 starread.config.ts，或点击顶部下载配置</span>
+          </div>
+          <button class="btn-copy" type="button" id="btn-copy">
+            <Copy class="w-4 h-4 mr-1" />
+            复制
+          </button>
+        </div>
+        <div class="code-content-wrapper">
+          <pre class="code-content"><code id="config-output" class="language-typescript">// 点击"生成配置"按钮查看结果</code></pre>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- 隐藏的文件输入 -->
+  <input type="file" id="file-input" class="hidden" accept="image/*" />
+</ConfigLayout>
+
+<style>
+  /* ===== 配置页面样式 - 使用主题背景 ===== */
+
+  /* CSS 变量 - 适配深色模式 */
+  :root {
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.5);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    --glass-blur: blur(20px);
+    --primary: #4f46e5;
+    --primary-light: #6366f1;
+    --text-main: #1f2937;
+    --text-secondary: #6b7280;
+    --text-muted: #9ca3af;
+    --bg-hover: rgba(79, 70, 229, 0.05);
+    --danger: #ef4444;
+    --success: #10b981;
+    --card-bg: rgba(255, 255, 255, 0.8);
+  }
+
+  :global(.dark) {
+    --glass-bg: rgba(17, 24, 39, 0.7);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    --text-main: #f9fafb;
+    --text-secondary: #d1d5db;
+    --text-muted: #9ca3af;
+    --bg-hover: rgba(99, 102, 241, 0.1);
+    --card-bg: rgba(17, 24, 39, 0.6);
+  }
+
+  /* 页面包装器 - 移除顶部padding，由ConfigLayout统一控制 */
+  .config-page-wrapper {
+    display: flex;
+    width: 100%;
+    min-height: 100%;
+  }
+
+  /* ===== 左侧边栏 ===== */
+  .config-sidebar {
+    width: 280px;
+    min-width: 280px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    position: sticky;
+    top: 0;
+    height: fit-content;
+    max-height: calc(100vh - 64px - 3rem);
+    z-index: 40; /* 低于导航栏的z-50 */
+    overflow-y: auto;
+    margin-right: 1.5rem;
+  }
+
+  .sidebar-header {
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid var(--glass-border);
+    flex-shrink: 0;
+  }
+
+  .logo-glass {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+    flex-shrink: 0;
+  }
+
+  .sidebar-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    padding: 16px 12px;
+    overflow-y: auto;
+  }
+
+  .nav-section {
+    margin-bottom: 24px;
+  }
+
+  .nav-label {
+    display: block;
+    padding: 0 12px;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 10px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    margin-bottom: 2px;
+    cursor: pointer;
+  }
+
+  .nav-item:hover {
+    background: var(--bg-hover);
+    color: var(--primary);
+  }
+
+  .nav-item.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+  }
+
+  .nav-icon {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-footer {
+    padding: 16px;
+    border-top: 1px solid var(--glass-border);
+    flex-shrink: 0;
+  }
+
+  .btn-generate {
+    width: 100%;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+  }
+
+  .btn-generate:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+  }
+
+  /* ===== 右侧主内容区 ===== */
+  .config-main {
+    flex: 1;
+    padding: 0;
+    min-width: 0; /* 允许flex子项收缩 */
+    overflow-x: hidden;
+  }
+
+  /* 顶部标题栏 */
+  .main-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    margin-bottom: 24px;
+    background: var(--glass-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow);
+  }
+
+  .header-title {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 4px;
+  }
+
+  .header-desc {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .header-actions {
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn-primary {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+  }
+
+  .btn-secondary {
+    padding: 10px 20px;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: all 0.2s ease;
+  }
+
+  .btn-secondary:hover {
+    background: var(--bg-hover);
+    color: var(--primary);
+  }
+
+  /* ===== 表单区域 ===== */
+  .form-section {
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .form-section.active {
+    display: block;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+
+  .section-badge {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+    flex-shrink: 0;
+  }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 4px;
+  }
+
+  .section-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  .form-card {
+    padding: 24px;
+    margin-bottom: 20px;
+    background: var(--card-bg);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--glass-border);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow);
+  }
+
+  .card-subtitle {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--glass-border);
+  }
+
+  .form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  .col-span-2 {
+    grid-column: span 2;
+  }
+
+  @media (max-width: 1024px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+    .col-span-2 {
+      grid-column: span 1;
+    }
+  }
+
+  /* 表单字段 */
+  .form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .field-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .field-required {
+    color: var(--danger);
+  }
+
+  .field-input,
+  .field-select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+    outline: none;
+  }
+
+  :global(.dark) .field-input,
+  :global(.dark) .field-select {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .field-input:focus,
+  .field-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  }
+
+  .field-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  .field-hint {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  .field-input-group {
+    display: flex;
+    gap: 8px;
+  }
+
+  .field-input-group .field-input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .input-action {
+    padding: 12px 16px;
+    background: var(--bg-hover);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+  }
+
+  .input-action:hover {
+    background: var(--primary);
+    color: white;
+  }
+
+  /* 单选卡片 */
+  .field-radio-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .radio-card {
+    flex: 1;
+    min-width: 120px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+  }
+
+  :global(.dark) .radio-card {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .radio-card:hover {
+    border-color: var(--primary-light);
+  }
+
+  .radio-input {
+    display: none;
+  }
+
+  .radio-input:checked + .radio-label .radio-title {
+    color: var(--primary);
+  }
+
+  .radio-input:checked + .radio-label::before {
+    content: '✓';
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    width: 20px;
+    height: 20px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+  }
+
+  .radio-label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .radio-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  .radio-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* 开关卡片 */
+  .switch-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  :global(.dark) .switch-card {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .switch-input {
+    display: none;
+  }
+
+  .switch-slider {
+    width: 48px;
+    height: 26px;
+    background: var(--text-muted);
+    border-radius: 13px;
+    position: relative;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  .switch-slider::after {
+    content: '';
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .switch-input:checked + .switch-slider {
+    background: var(--primary);
+  }
+
+  .switch-input:checked + .switch-slider::after {
+    left: 24px;
+  }
+
+  .switch-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .switch-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  .switch-desc {
+    font-size: 12px;
+    color: var(--text-muted);
+  }
+
+  /* 标签输入 */
+  .tag-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 10px;
+    min-height: 48px;
+    align-items: center;
+  }
+
+  :global(.dark) .tag-input-container {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .tag-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: 13px;
+    animation: tagIn 0.2s ease;
+  }
+
+  @keyframes tagIn {
+    from { opacity: 0; transform: scale(0.8); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .tag-remove {
+    width: 18px;
+    height: 18px;
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .tag-remove:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+
+  .tag-input {
+    flex: 1;
+    min-width: 120px;
+    padding: 8px 12px;
+    border: 1px solid var(--glass-border);
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.8);
+    outline: none;
+    font-size: 13px;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+  }
+
+  :global(.dark) .tag-input {
+    background: rgba(30, 41, 59, 0.8);
+  }
+
+  .tag-input:focus {
+    border-color: var(--primary);
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  }
+
+  :global(.dark) .tag-input:focus {
+    background: rgba(30, 41, 59, 1);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
+  }
+
+  .tag-input::placeholder {
+    color: var(--text-muted);
+  }
+
+  /* 列表样式 */
+  .list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .list-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  .btn-add {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--bg-hover);
+    color: var(--primary);
+    border: 1px dashed var(--primary-light);
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .btn-add:hover {
+    background: var(--primary);
+    color: white;
+    border-style: solid;
+  }
+
+  /* 帮助提示 */
+  .category-help {
+    background: rgba(79, 70, 229, 0.05);
+    border: 1px solid rgba(79, 70, 229, 0.2);
+    border-radius: 10px;
+    padding: 12px 16px;
+    margin-bottom: 16px;
+  }
+
+  :global(.dark) .category-help {
+    background: rgba(99, 102, 241, 0.1);
+    border-color: rgba(99, 102, 241, 0.3);
+  }
+
+  .help-text {
+    font-size: 13px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .help-text strong {
+    color: var(--primary);
+  }
+
+  /* 分类列表 */
+  .category-list,
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .category-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+
+  :global(.dark) .category-item {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .category-item:hover {
+    border-color: var(--primary-light);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+  }
+
+  .category-inputs {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .input-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .field-input-sm {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-main);
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  :global(.dark) .field-input-sm {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .field-input-sm:focus {
+    border-color: var(--primary);
+  }
+
+  .btn-icon-danger {
+    padding: 10px;
+    background: transparent;
+    color: var(--danger);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-icon-danger:hover {
+    background: rgba(239, 68, 68, 0.1);
+  }
+
+  /* 组件列表（可拖拽）- 优化样式 */
+  .widget-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .widget-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(229, 231, 235, 0.8);
+    border-radius: 12px;
+    cursor: move;
+    transition: all 0.2s ease;
+    flex-wrap: nowrap;
+  }
+
+  :global(.dark) .widget-item {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: rgba(55, 65, 81, 0.8);
+  }
+
+  .widget-item:hover {
+    border-color: #818cf8;
+    background: rgba(255, 255, 255, 0.7);
+    transform: translateX(4px);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+  }
+
+  :global(.dark) .widget-item:hover {
+    background: rgba(17, 24, 39, 0.4);
+  }
+
+  .widget-item.dragging {
+    opacity: 0.5;
+    transform: scale(1.02);
+    border-color: #6366f1;
+  }
+
+  .widget-item.selected {
+    border-color: #6366f1;
+    background: rgba(79, 70, 229, 0.1);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  }
+
+  .widget-drag-handle {
+    color: #9ca3af;
+    cursor: move;
+    user-select: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  :global(.dark) .widget-drag-handle {
+    color: #6b7280;
+  }
+
+  .widget-drag-handle:hover {
+    background: rgba(79, 70, 229, 0.1);
+    color: #6366f1;
+  }
+
+  .widget-toggle {
+    appearance: none;
+    width: 44px;
+    height: 24px;
+    background: #9ca3af;
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+  }
+
+  :global(.dark) .widget-toggle {
+    background: #4b5563;
+  }
+
+  .widget-toggle::after {
+    content: '';
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    top: 2px;
+    left: 2px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  .widget-toggle:checked {
+    background: #6366f1;
+  }
+
+  .widget-toggle:checked::after {
+    left: 22px;
+  }
+
+  .widget-name {
+    flex: 1;
+    font-size: 14px;
+    font-weight: 500;
+    color: #111827;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  :global(.dark) .widget-name {
+    color: #f3f4f6;
+  }
+
+  .widget-key {
+    font-size: 12px;
+    color: #6b7280;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    background: rgba(0, 0, 0, 0.05);
+    padding: 2px 8px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  :global(.dark) .widget-key {
+    color: #9ca3af;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  /* 代码预览 - Shiki风格 */
+  .code-preview {
+    margin-top: 32px;
+    background: #f6f8fa;
+    border: 1px solid #d1d9e0;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    overflow: hidden;
+  }
+
+  :global(.dark) .code-preview {
+    background: #0d1117;
+    border-color: #30363d;
+  }
+
+  .code-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: #f3f4f6;
+    border-bottom: 1px solid #d1d9e0;
+  }
+
+  :global(.dark) .code-header {
+    background: #161b22;
+    border-color: #30363d;
+  }
+
+  .code-header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .code-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: #24292f;
+  }
+
+  :global(.dark) .code-title {
+    color: #c9d1d9;
+  }
+
+  .code-hint {
+    font-size: 12px;
+    color: #656d76;
+  }
+
+  :global(.dark) .code-hint {
+    color: #8b949e;
+  }
+
+  .btn-copy {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    background: #ffffff;
+    color: #24292f;
+    border: 1px solid #d1d9e0;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+
+  :global(.dark) .btn-copy {
+    background: #21262d;
+    color: #c9d1d9;
+    border-color: #30363d;
+  }
+
+  .btn-copy:hover {
+    background: #f3f4f6;
+    border-color: #afb8c1;
+  }
+
+  :global(.dark) .btn-copy:hover {
+    background: #30363d;
+    border-color: #8b949e;
+  }
+
+  .code-content-wrapper {
+  
+    overflow: auto;
+    max-height: 500px;
+  }
+
+  :global(.dark) .code-content-wrapper {
+    background: #0d1117;
+  }
+
+  .code-content {
+    padding: 16px;
+    margin: 0;
+    background: transparent;
+    overflow-x: auto;
+  }
+
+  .code-content code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', 'Monaco', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+
+    padding: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  :global(.dark) .code-content code {
+    color: #e6edf3 !important;
+    background: transparent !important;
+  }
+
+  /* 隐藏元素 */
+  .hidden {
+    display: none !important;
+  }
+
+  /* 响应式 - 平板及以下 */
+  @media (max-width: 1024px) {
+    .config-page-wrapper {
+      flex-direction: column;
+    }
+
+    .config-sidebar {
+      width: 100%;
+      min-width: auto;
+      position: relative;
+      margin-right: 0;
+      margin-bottom: 1.5rem;
+      max-height: none;
+    }
+
+    .config-main {
+      padding: 0;
+    }
+
+    .main-header {
+      flex-direction: column;
+      gap: 16px;
+      align-items: flex-start;
+    }
+  }
+
+  /* 小屏幕优化 */
+  @media (max-width: 640px) {
+    .form-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .col-span-2 {
+      grid-column: span 1;
+    }
+
+    .category-inputs {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<script>
+  // 侧边栏组件定义
+  const homeWidgets = [
+    { key: 'progress', label: '进度统计', enabled: true },
+    { key: 'statsWidget', label: '统计小部件', enabled: true },
+    { key: 'authorWidget', label: '作者信息', enabled: true },
+    { key: 'adWidget', label: '广告小部件', enabled: true },
+    { key: 'tag', label: '标签云', enabled: true },
+    { key: 'recommendedArticles', label: '推荐文章', enabled: true },
+    { key: 'statistic', label: '站点统计', enabled: true },
+  ];
+
+  const articleWidgets = [
+    { key: 'authorWidget', label: '作者信息', enabled: true },
+    { key: 'tag', label: '标签', enabled: true },
+    { key: 'toc', label: '文章目录', enabled: true },
+  ];
+
+  // 导航项数据
+  let navItems = [
+    { name: '主页', href: '/', icon: 'Home' },
+  ];
+
+  // 当前上传字段
+  let currentUploadField = null;
+
+  // 初始化
+  document.addEventListener('DOMContentLoaded', () => {
+    initSidebarWidgets();
+    initNavigation();
+    initTagInput();
+    initCategoryList();
+    initNavList();
+    initFileUpload();
+    bindButtonEvents();
+  });
+
+  // 初始化文件上传
+  function initFileUpload() {
+    const fileInput = document.getElementById('file-input');
+    const uploadButtons = document.querySelectorAll('[data-upload]');
+
+    uploadButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        currentUploadField = btn.dataset.upload;
+        fileInput.click();
+      });
+    });
+
+    fileInput.addEventListener('change', async (e) => {
+      const file = e.target.files[0];
+      if (!file || !currentUploadField) return;
+
+      // 模拟上传到 public/cover 目录
+      const fileName = `cover_${Date.now()}_${file.name}`;
+      const relativePath = `/cover/${fileName}`;
+
+      // 更新对应的输入框
+      updateImageField(currentUploadField, relativePath);
+
+      // 显示上传成功提示
+      showToast(`图片已上传: ${fileName}`);
+
+      // 清空文件输入
+      fileInput.value = '';
+      currentUploadField = null;
+    });
+  }
+
+  function updateImageField(field, path) {
+    const fieldMap = {
+      'favicon': 'site.favicon',
+      'defaultCover': 'site.defaultCover',
+      'logo': 'site.logo.image',
+      'darkLogo': 'site.logo.darkImage',
+      'bannerBg': 'widget.banner.backgroundImage',
+      'avatar': 'widget.author.avatar'
+    };
+
+    const inputName = fieldMap[field];
+    if (inputName) {
+      const input = document.querySelector(`input[name="${inputName}"]`);
+      if (input) {
+        input.value = path;
+      }
+    }
+  }
+
+  function showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast-message';
+    toast.textContent = message;
+    toast.style.cssText = `
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      background: linear-gradient(135deg, #4f46e5 0%, #6366f1 100%);
+      color: white;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+      z-index: 1000;
+      animation: slideIn 0.3s ease;
+    `;
+    document.body.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.animation = 'slideOut 0.3s ease';
+      setTimeout(() => toast.remove(), 300);
+    }, 3000);
+  }
+
+  // 初始化侧边栏组件列表
+  function initSidebarWidgets() {
+    const homeContainer = document.getElementById('sidebar-home');
+    const articleContainer = document.getElementById('sidebar-article');
+
+    if (homeContainer) {
+      homeContainer.innerHTML = homeWidgets.map((widget, index) => `
+        <div class="widget-item" draggable="true" data-key="${widget.key}" data-index="${index}">
+          <span class="widget-drag-handle flex items-center justify-center">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0;"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+          </span>
+          <input type="checkbox" class="widget-toggle" ${widget.enabled ? 'checked' : ''} />
+          <span class="widget-name">${widget.label}</span>
+          <span class="widget-key">${widget.key}</span>
+        </div>
+      `).join('');
+
+      // 添加点击选中效果
+      homeContainer.querySelectorAll('.widget-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          if (e.target.type !== 'checkbox') {
+            homeContainer.querySelectorAll('.widget-item').forEach(i => i.classList.remove('selected'));
+            item.classList.add('selected');
+          }
+        });
+      });
+    }
+
+    if (articleContainer) {
+      articleContainer.innerHTML = articleWidgets.map((widget, index) => `
+        <div class="widget-item" data-key="${widget.key}">
+          <span class="widget-drag-handle flex items-center justify-center" style="opacity: 0;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;flex-shrink:0;"><circle cx="9" cy="12" r="1"/><circle cx="9" cy="5" r="1"/><circle cx="9" cy="19" r="1"/><circle cx="15" cy="12" r="1"/><circle cx="15" cy="5" r="1"/><circle cx="15" cy="19" r="1"/></svg>
+          </span>
+          <input type="checkbox" class="widget-toggle" ${widget.enabled ? 'checked' : ''} />
+          <span class="widget-name">${widget.label}</span>
+          <span class="widget-key">${widget.key}</span>
+        </div>
+      `).join('');
+    }
+
+    initDragAndDrop();
+  }
+
+  // 拖拽排序功能
+  function initDragAndDrop() {
+    const container = document.getElementById('sidebar-home');
+    if (!container) return;
+
+    let draggedItem = null;
+
+    container.addEventListener('dragstart', (e) => {
+      draggedItem = e.target.closest('.widget-item');
+      if (draggedItem) {
+        draggedItem.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+      }
+    });
+
+    container.addEventListener('dragend', (e) => {
+      const item = e.target.closest('.widget-item');
+      if (item) {
+        item.classList.remove('dragging');
+      }
+      draggedItem = null;
+    });
+
+    container.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      const afterElement = getDragAfterElement(container, e.clientY);
+      if (draggedItem) {
+        if (afterElement == null) {
+          container.appendChild(draggedItem);
+        } else {
+          container.insertBefore(draggedItem, afterElement);
+        }
+      }
+    });
+  }
+
+  function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('.widget-item:not(.dragging)')];
+
+    return draggableElements.reduce((closest, child) => {
+      const box = child.getBoundingClientRect();
+      const offset = y - box.top - box.height / 2;
+      if (offset < 0 && offset > closest.offset) {
+        return { offset: offset, element: child };
+      } else {
+        return closest;
+      }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
+  }
+
+  // 导航功能
+  function initNavigation() {
+    const navItems = document.querySelectorAll('.nav-item');
+    const sections = document.querySelectorAll('.form-section');
+
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const targetId = item.getAttribute('href').slice(1);
+
+        // 更新导航状态
+        navItems.forEach(n => n.classList.remove('active'));
+        item.classList.add('active');
+
+        // 显示对应区域
+        sections.forEach(s => s.classList.remove('active'));
+        const targetSection = document.getElementById(targetId);
+        if (targetSection) {
+          targetSection.classList.add('active');
+        }
+      });
+    });
+  }
+
+  // 标签输入功能
+  function initTagInput() {
+    const container = document.getElementById('banner-tags');
+    if (!container) return;
+
+    const input = container.querySelector('.tag-input');
+    if (input) {
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          const value = input.value.trim();
+          if (value) {
+            const tagDiv = document.createElement('div');
+            tagDiv.className = 'tag-item';
+            // 使用与HTML模板一致的图标结构
+            tagDiv.innerHTML = `
+              <span class="tag-text">${escapeHtml(value)}</span>
+              <button class="tag-remove" type="button" aria-label="删除标签">
+                <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>
+              </button>
+            `;
+            container.insertBefore(tagDiv, input);
+            input.value = '';
+            updateTagsTextarea();
+
+            // 绑定删除事件
+            tagDiv.querySelector('.tag-remove').addEventListener('click', () => {
+              tagDiv.remove();
+              updateTagsTextarea();
+            });
+          }
+        }
+      });
+    }
+
+    // 绑定已有标签的删除事件
+    container.querySelectorAll('.tag-remove').forEach(btn => {
+      btn.addEventListener('click', () => {
+        btn.closest('.tag-item').remove();
+        updateTagsTextarea();
+      });
+    });
+  }
+
+  // HTML转义函数，防止XSS
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function updateTagsTextarea() {
+    const container = document.getElementById('banner-tags');
+    if (!container) return;
+    const tags = Array.from(container.querySelectorAll('.tag-text')).map(t => t.textContent);
+    const textarea = document.querySelector('textarea[name="widget.banner.tags"]');
+    if (textarea) {
+      textarea.value = tags.join('\n');
+    }
+  }
+
+  // 分类列表功能
+  function initCategoryList() {
+    const container = document.getElementById('categories-list');
+    if (!container) return;
+
+    // 绑定删除按钮
+    container.addEventListener('click', (e) => {
+      const btn = e.target.closest('.btn-icon-danger');
+      if (btn) {
+        btn.closest('.category-item').remove();
+      }
+    });
+  }
+
+  // 导航列表功能
+  function initNavList() {
+    renderNavItems();
+  }
+
+  function renderNavItems() {
+    const container = document.getElementById('nav-list');
+    if (!container) return;
+
+    container.innerHTML = navItems.map((item, index) => `
+      <div class="category-item" data-index="${index}">
+        <div class="category-inputs" style="grid-template-columns: 1fr 1fr 1fr;">
+          <div class="input-wrapper">
+            <label class="input-label">导航名称</label>
+            <input type="text" class="field-input-sm" value="${item.name}" placeholder="如：首页" data-field="name" />
+          </div>
+          <div class="input-wrapper">
+            <label class="input-label">链接地址</label>
+            <input type="text" class="field-input-sm" value="${item.href}" placeholder="如：/ 或 https://" data-field="href" />
+          </div>
+          <div class="input-wrapper">
+            <label class="input-label">图标</label>
+            <input type="text" class="field-input-sm" value="${item.icon}" placeholder="如：Home" data-field="icon" />
+          </div>
+        </div>
+        <button class="btn-icon-danger" type="button" data-action="remove-nav" data-index="${index}">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+        </button>
+      </div>
+    `).join('');
+
+    // 绑定删除事件
+    container.querySelectorAll('[data-action="remove-nav"]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const index = parseInt(btn.dataset.index);
+        navItems.splice(index, 1);
+        renderNavItems();
+      });
+    });
+  }
+
+  // 绑定按钮事件
+  function bindButtonEvents() {
+    // 生成配置按钮
+    const btnGenerate = document.getElementById('btn-generate');
+    if (btnGenerate) {
+      btnGenerate.addEventListener('click', generateConfig);
+    }
+
+    // 下载配置按钮
+    const btnDownload = document.getElementById('btn-download');
+    if (btnDownload) {
+      btnDownload.addEventListener('click', downloadConfig);
+    }
+
+    // 重置按钮
+    const btnReset = document.getElementById('btn-reset');
+    if (btnReset) {
+      btnReset.addEventListener('click', resetConfig);
+    }
+
+    // 复制按钮
+    const btnCopy = document.getElementById('btn-copy');
+    if (btnCopy) {
+      btnCopy.addEventListener('click', copyConfig);
+    }
+
+    // 添加分类按钮
+    const btnAddCategory = document.getElementById('btn-add-category');
+    if (btnAddCategory) {
+      btnAddCategory.addEventListener('click', addCategory);
+    }
+
+    // 添加导航按钮
+    const btnAddNav = document.getElementById('btn-add-nav');
+    if (btnAddNav) {
+      btnAddNav.addEventListener('click', () => {
+        navItems.push({ name: '', href: '', icon: '' });
+        renderNavItems();
+      });
+    }
+  }
+
+  // 添加分类
+  function addCategory() {
+    const container = document.getElementById('categories-list');
+    if (!container) return;
+
+    const div = document.createElement('div');
+    div.className = 'category-item';
+    div.innerHTML = `
+      <div class="category-inputs">
+        <div class="input-wrapper">
+          <label class="input-label">分类标识（URL）</label>
+          <input type="text" class="field-input-sm" placeholder="如：tech、life" data-field="name" />
+        </div>
+        <div class="input-wrapper">
+          <label class="input-label">分类标题（显示名称）</label>
+          <input type="text" class="field-input-sm" placeholder="如：科技资讯、生活随笔" data-field="title" />
+        </div>
+      </div>
+      <button class="btn-icon-danger" type="button" aria-label="删除分类">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+      </button>
+    `;
+    container.appendChild(div);
+  }
+
+  // 生成配置
+  function generateConfig() {
+    const config = collectConfigData();
+    const configCode = `import type { starreadthemeconfig } from './scripts/config';\n\nexport const themeConfig: starreadthemeconfig = ${JSON.stringify(config, null, 2).replace(/"([^"]+)":/g, '$1:').replace(/true/g, 'true').replace(/false/g, 'false')};\n`;
+
+    const output = document.getElementById('config-output');
+    if (output) {
+      // 直接显示代码文本（不使用高亮）
+      output.textContent = configCode;
+    }
+    return configCode;
+  }
+
+  function collectConfigData() {
+    const formData = new FormData();
+    document.querySelectorAll('input[name], select[name], textarea[name]').forEach(el => {
+      if (el.type === 'checkbox') {
+        formData.append(el.name, el.checked);
+      } else {
+        formData.append(el.name, el.value);
+      }
+    });
+
+    return {
+      site: {
+        title: formData.get('site.title'),
+        favicon: formData.get('site.favicon'),
+        defaultCover: formData.get('site.defaultCover'),
+        foundedDate: formData.get('site.foundedDate'),
+        loginUrl: '/config',
+        logo: {
+          image: formData.get('site.logo.image'),
+          darkImage: formData.get('site.logo.darkImage'),
+          text: formData.get('site.logo.text'),
+          alt: formData.get('site.logo.alt'),
+        },
+        LatestArticle: {
+          type: formData.get('site.LatestArticle.type'),
+          layout: formData.get('site.LatestArticle.layout'),
+          defaultLimit: parseInt(formData.get('site.LatestArticle.defaultLimit')),
+          initialLoad: parseInt(formData.get('site.LatestArticle.initialLoad')),
+          loadMore: parseInt(formData.get('site.LatestArticle.loadMore')),
+          columns: parseInt(formData.get('site.LatestArticle.columns')),
+          defaultAspectRatio: formData.get('site.LatestArticle.defaultAspectRatio'),
+          horizontalHeight: formData.get('site.LatestArticle.horizontalHeight'),
+        },
+        footer: {
+          text: formData.get('site.footer.text'),
+        }
+      },
+      language: formData.get('language'),
+      dynamicEffect: {
+        postTopWave: formData.get('dynamicEffect.postTopWave') === 'true',
+      },
+      widget: {
+        banner: {
+          title: formData.get('widget.banner.title'),
+          backgroundImage: formData.get('widget.banner.backgroundImage'),
+          tags: formData.get('widget.banner.tags').split('\n').filter(t => t.trim()),
+        },
+        carousel: {
+          title: formData.get('widget.carousel.title'),
+          layout: formData.get('widget.carousel.layout'),
+        },
+        author: {
+          name: formData.get('widget.author.name'),
+          description: formData.get('widget.author.description'),
+          avatar: formData.get('widget.author.avatar'),
+          social: {},
+        },
+        ad: {
+          title: formData.get('widget.ad.title'),
+          description: formData.get('widget.ad.description'),
+          buttonText: formData.get('widget.ad.buttonText'),
+          link: formData.get('widget.ad.link'),
+        },
+        categories: Array.from(document.querySelectorAll('#categories-list .category-item')).map(item => ({
+          name: item.querySelector('[data-field="name"]')?.value,
+          title: item.querySelector('[data-field="title"]')?.value,
+        })).filter(c => c.name && c.title),
+      },
+      navbar: collectNavbarConfig(),
+      sidebar: {
+        home: collectSidebarConfig('sidebar-home'),
+        article: collectSidebarConfig('sidebar-article'),
+      },
+    };
+  }
+
+  function collectNavbarConfig() {
+    const items = [];
+    document.querySelectorAll('#nav-list .category-item').forEach(el => {
+      const name = el.querySelector('[data-field="name"]')?.value;
+      const href = el.querySelector('[data-field="href"]')?.value;
+      const icon = el.querySelector('[data-field="icon"]')?.value;
+      if (name) {
+        items.push({ name, href: href || '/', icon: icon || 'Home' });
+      }
+    });
+    return items.length > 0 ? items : [{ name: '主页', href: '/', icon: 'Home' }];
+  }
+
+  function collectSidebarConfig(containerId) {
+    const container = document.getElementById(containerId);
+    const result = {};
+    if (!container) return result;
+
+    container.querySelectorAll('.widget-item').forEach(item => {
+      const key = item.dataset.key;
+      const toggle = item.querySelector('.widget-toggle');
+      if (key && toggle) {
+        result[key] = toggle.checked;
+      }
+    });
+    return result;
+  }
+
+  function downloadConfig() {
+    const code = generateConfig();
+    const blob = new Blob([code], { type: 'text/typescript' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'starread.config.ts';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  function copyConfig() {
+    const code = document.getElementById('config-output')?.textContent;
+    if (!code) return;
+
+    navigator.clipboard.writeText(code).then(() => {
+      const btn = document.getElementById('btn-copy');
+      if (btn) {
+        const originalText = btn.innerHTML;
+        btn.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-4 h-4 mr-1"><path d="M20 6 9 17l-5-5"/></svg>已复制';
+        setTimeout(() => {
+          btn.innerHTML = originalText;
+        }, 2000);
+      }
+    });
+  }
+
+  function resetConfig() {
+    if (confirm('确定要重置所有配置吗？这将恢复默认值。')) {
+      location.reload();
+    }
+  }
+</script>
+

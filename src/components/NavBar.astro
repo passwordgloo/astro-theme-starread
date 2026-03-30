@@ -109,12 +109,12 @@ function getIcon(iconName: string | undefined) {
         );
       })}
     </nav>
-    <!-- 搜索和登录 -->
+    <!-- 搜索和配置 -->
     <div class="flex items-center space-x-4">
       <Search />
-      <button class="hidden md:block rounded-lg bg-primary text-white hover:bg-primary/70 active:bg-primary/80
+      <a href={themeConfig.site.loginUrl || '/config'} class="hidden md:block rounded-lg bg-primary text-white hover:bg-primary/70 active:bg-primary/80
                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 dark:bg-secondary dark:text-slate-950 dark:hover:bg-secondary/70 dark:active:bg-secondary/60
-                   dark:focus-visible:ring-sky-300/50 px-4 py-2 rounded-md transition-colors">登录</button>
+                   dark:focus-visible:ring-sky-300/50 px-4 py-2 rounded-md transition-colors">配置</a>
       <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">
         <Menu class="h-5 w-5 nav-menu-icon" />
       </button>
