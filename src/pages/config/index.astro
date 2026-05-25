@@ -9,27 +9,6 @@ import {
 const isDev = import.meta.env.DEV;
 ---
 
-{!isDev && (
-  <div class="env-warning-overlay">
-    <div class="env-warning-modal">
-      <div class="warning-icon">
-        <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3"/>
-          <path d="M12 9v4"/>
-          <path d="M12 17h.01"/>
-        </svg>
-      </div>
-      <h2>配置页面仅限本地开发使用</h2>
-      <p>检测到您正在以生产模式访问此页面。</p>
-      <p class="highlight">请在本地使用 <code>pnpm dev</code> 运行开发服务器来访问配置页面。</p>
-      <div class="warning-footer">
-        <span class="env-badge production">生产环境</span>
-        <span class="env-badge dev">开发环境</span>
-      </div>
-    </div>
-  </div>
-)}
-
 <ConfigLayout title="主题配置生成器">
   <!-- 顶部导航栏 -->
 

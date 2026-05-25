@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import TagLayout from '../../layouts/tag.astro';
 
+export const prerender = true;
+
 // 生成所有标签页的静态路径
 export async function getStaticPaths() {
   const articles = await getCollection('articles');

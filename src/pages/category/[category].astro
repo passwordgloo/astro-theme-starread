@@ -2,6 +2,8 @@
 import { getCollection } from 'astro:content';
 import CategoryLayout from '../../layouts/category.astro';
 
+export const prerender = true;
+
 // 生成所有分类页面的静态路径
 export async function getStaticPaths() {
   const articles = await getCollection('articles');

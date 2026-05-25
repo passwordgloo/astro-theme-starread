@@ -8,6 +8,8 @@ import {
   countWords
 } from '../components/frontmatter.ts';
 
+export const prerender = true;
+
 // 导出静态路径生成函数
 export async function getStaticPaths() {
   // 获取所有文章和笔记
