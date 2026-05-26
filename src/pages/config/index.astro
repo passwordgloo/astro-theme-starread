@@ -130,30 +130,14 @@ const isDev = import.meta.env.DEV;
 
               <div class="form-field">
                 <label class="field-label">网站图标</label>
-                <div class="field-input-group">
-                  <input type="text" name="site.favicon" value="/favicon.png" class="field-input" placeholder="/favicon.png" readonly />
-                  <button class="input-action" type="button" data-upload="favicon" title="选择文件">
-                    <Upload class="w-4 h-4" />
-                  </button>
-                  <button class="input-action input-action-danger" type="button" data-clear="favicon" title="清除文件" style="display: none;">
-                    <Trash2 class="w-4 h-4" />
-                  </button>
-                </div>
-                <span class="field-hint">点击上传按钮选择图片文件</span>
+                <input type="text" name="site.favicon" value="/favicon.png" class="field-input" placeholder="/favicon.png" />
+                <span class="field-hint">请手动将文件放置在 public/ 目录，然后在此处填写路径</span>
               </div>
 
               <div class="form-field">
                 <label class="field-label">默认封面</label>
-                <div class="field-input-group">
-                  <input type="text" name="site.defaultCover" value="/defaultCover.jpg" class="field-input" placeholder="/defaultCover.jpg" readonly />
-                  <button class="input-action" type="button" data-upload="defaultCover" title="选择文件">
-                    <Upload class="w-4 h-4" />
-                  </button>
-                  <button class="input-action input-action-danger" type="button" data-clear="defaultCover" title="清除文件" style="display: none;">
-                    <Trash2 class="w-4 h-4" />
-                  </button>
-                </div>
-                <span class="field-hint">用于没有设置封面的文章</span>
+                <input type="text" name="site.defaultCover" value="/defaultCover.jpg" class="field-input" placeholder="/defaultCover.jpg" />
+                <span class="field-hint">用于没有设置封面的文章，请手动将文件放置在 public/ 目录</span>
               </div>
 
               <div class="form-field">
