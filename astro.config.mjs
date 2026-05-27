@@ -12,13 +12,7 @@ export default defineConfig({
 	site: 'https://star.iglooblog.top',
 	output: 'static',
 	vite: {
-		plugins: [tailwindcss()],
-		build: {
-			charset: 'utf-8',
-		},
-	},
-	integrations: [mdx(), sitemap(), autoIndex(), autoUpdatePermalink()],
-});
+		plugins: [tailwindcss()]
 	},
 	integrations: [mdx(), sitemap(), autoIndex(), autoUpdatePermalink()],
 });
