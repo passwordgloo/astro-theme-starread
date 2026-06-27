@@ -1,0 +1,60 @@
+---
+import { themeConfig } from '../../starread.config';
+
+const heroConfig = themeConfig.hero;
+const bgImage = heroConfig?.backgroundImage || '/cover/NyYehQHfww_67cNm35rPO.jpg';
+const showJinrishici = heroConfig?.jinrishici?.enabled !== false;
+---
+
+<div class="relative w-full h-screen overflow-hidden -mt-16">
+  <div class="absolute inset-0">
+    <img 
+      src={bgImage} 
+      alt="首页壁纸" 
+      class="w-full h-full object-cover"
+      onerror="this.src='/img/2256c4860b3d6be29e7044728d371b33.png'"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-gray-900 via-white/60 dark:via-gray-900/60 to-transparent"></div>
+  </div>
+  
+  <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 text-gray-900 dark:text-white">
+      {heroConfig?.title || 'Starread'}
+    </h1>
+    {showJinrishici && (
+      <div id="jinrishici" class="text-gray-800 dark:text-gray-200 text-sm md:text-base italic">
+        <span class="animate-pulse">诗词加载中...</span>
+      </div>
+    )}
+  </div>
+  
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
+    <svg class="w-6 h-6 text-gray-600 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</div>
+
+{showJinrishici && (
+  <script client:idle>
+    (() => {
+      const jinrishici = document.getElementById('jinrishici');
+      if (!jinrishici) return;
+      
+      fetch('https://v2.jinrishici.com/one.json?client=browser-sdk/1.2')
+        .then(res => res.json())
+        .then(data => {
+          if (data && data.data) {
+            const { content, origin } = data.data;
+            jinrishici.innerHTML = `
+              <span class="text-lg">"${content}"</span>
+              <span class="block mt-2 text-sm text-gray-600 dark:text-gray-400">—— ${origin?.title || '未知'} · ${origin?.dynasty || ''} · ${origin?.author || '佚名'}</span>
+            `;
+          }
+        })
+        .catch(() => {
+          jinrishici.innerHTML = '<span>"行到水穷处，坐看云起时"</span><span class="block mt-2 text-sm text-gray-600 dark:text-gray-400">—— 终南别业 · 唐 · 王维</span>';
+        });
+    })();
+  </script>
+)}

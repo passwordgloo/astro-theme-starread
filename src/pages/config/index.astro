@@ -26,7 +26,11 @@ const isDev = import.meta.env.DEV;
       <nav class="sidebar-nav">
         <div class="nav-section">
           <span class="nav-label">基础配置</span>
-          <a href="#site" class="nav-item active" data-section="site">
+          <a href="#hero" class="nav-item active" data-section="hero">
+            <Image class="nav-icon" />
+            <span>Hero 区域</span>
+          </a>
+          <a href="#site" class="nav-item" data-section="site">
             <Home class="nav-icon" />
             <span>网站信息</span>
           </a>
@@ -108,9 +112,56 @@ const isDev = import.meta.env.DEV;
       <!-- 表单内容 -->
       <div class="form-content">
         <!-- 网站信息 -->
-        <section id="site" class="form-section active">
+        <!-- Hero 区域配置 -->
+        <section id="hero" class="form-section active">
           <div class="section-header">
             <span class="section-badge">01</span>
+            <div>
+              <h3 class="section-title">Hero 区域</h3>
+              <p class="section-subtitle">配置首页全屏壁纸展示区域</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-grid">
+              <div class="form-field">
+                <label class="field-label">背景图片</label>
+                <div class="field-input-group">
+                  <input type="text" name="hero.backgroundImage" value="/cover/NyYehQHfww_67cNm35rPO.jpg" class="field-input" placeholder="/cover/hero-bg.jpg" readonly />
+                  <button class="input-action" type="button" data-upload="heroBg">
+                    <Upload class="w-4 h-4" />
+                  </button>
+                  <button class="input-action input-action-danger" type="button" data-clear="heroBg" title="清除文件" style="display: none;">
+                    <Trash2 class="w-4 h-4" />
+                  </button>
+                </div>
+                <span class="field-hint">首页全屏背景图片，建议尺寸 1920x1080</span>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">标题文字</label>
+                <input type="text" name="hero.title" value="Starread" class="field-input" placeholder="请输入标题" />
+                <span class="field-hint">显示在背景图片中央的大标题</span>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">诗词显示</label>
+                <label class="switch-card">
+                  <input type="checkbox" name="hero.jinrishici.enabled" checked class="switch-input" />
+                  <span class="switch-slider"></span>
+                  <span class="switch-label">
+                    <span class="switch-title">启用今日诗词</span>
+                    <span class="switch-desc">在标题下方显示随机诗词</span>
+                  </span>
+                </label>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="site" class="form-section">
+          <div class="section-header">
+            <span class="section-badge">02</span>
             <div>
               <h3 class="section-title">网站信息</h3>
               <p class="section-subtitle">配置网站的基本信息和品牌标识</p>
@@ -201,7 +252,7 @@ const isDev = import.meta.env.DEV;
         <!-- 文章设置 -->
         <section id="article" class="form-section">
           <div class="section-header">
-            <span class="section-badge">02</span>
+            <span class="section-badge">03</span>
             <div>
               <h3 class="section-title">文章设置</h3>
               <p class="section-subtitle">配置最新文章组件的展示方式</p>
@@ -290,7 +341,7 @@ const isDev = import.meta.env.DEV;
         <!-- 外观效果 -->
         <section id="appearance" class="form-section">
           <div class="section-header">
-            <span class="section-badge">03</span>
+            <span class="section-badge">04</span>
             <div>
               <h3 class="section-title">外观效果</h3>
               <p class="section-subtitle">配置语言和动态效果</p>
@@ -325,7 +376,7 @@ const isDev = import.meta.env.DEV;
         <!-- Banner 配置 -->
         <section id="banner" class="form-section">
           <div class="section-header">
-            <span class="section-badge">04</span>
+            <span class="section-badge">05</span>
             <div>
               <h3 class="section-title">Banner 配置</h3>
               <p class="section-subtitle">配置首页顶部横幅区域</p>
@@ -384,7 +435,7 @@ const isDev = import.meta.env.DEV;
         <!-- 轮播图配置 -->
         <section id="carousel" class="form-section">
           <div class="section-header">
-            <span class="section-badge">05</span>
+            <span class="section-badge">06</span>
             <div>
               <h3 class="section-title">轮播图配置</h3>
               <p class="section-subtitle">配置首页文章轮播展示</p>
@@ -422,7 +473,7 @@ const isDev = import.meta.env.DEV;
         <!-- 作者信息 -->
         <section id="author" class="form-section">
           <div class="section-header">
-            <span class="section-badge">06</span>
+            <span class="section-badge">07</span>
             <div>
               <h3 class="section-title">作者信息</h3>
               <p class="section-subtitle">配置侧边栏作者卡片</p>
@@ -460,7 +511,7 @@ const isDev = import.meta.env.DEV;
         <!-- 广告配置 -->
         <section id="ad" class="form-section">
           <div class="section-header">
-            <span class="section-badge">07</span>
+            <span class="section-badge">08</span>
             <div>
               <h3 class="section-title">广告配置</h3>
               <p class="section-subtitle">配置侧边栏广告小部件</p>
@@ -495,7 +546,7 @@ const isDev = import.meta.env.DEV;
         <!-- 文章分类 -->
         <section id="categories" class="form-section">
           <div class="section-header">
-            <span class="section-badge">08</span>
+            <span class="section-badge">09</span>
             <div>
               <h3 class="section-title">文章分类</h3>
               <p class="section-subtitle">配置首页展示的文章分类</p>
@@ -554,7 +605,7 @@ const isDev = import.meta.env.DEV;
         <!-- 导航菜单 -->
         <section id="navbar" class="form-section">
           <div class="section-header">
-            <span class="section-badge">09</span>
+            <span class="section-badge">10</span>
             <div>
               <h3 class="section-title">导航菜单</h3>
               <p class="section-subtitle">配置顶部导航栏菜单项</p>
@@ -584,7 +635,7 @@ const isDev = import.meta.env.DEV;
         <!-- 侧边栏组件 -->
         <section id="sidebar" class="form-section">
           <div class="section-header">
-            <span class="section-badge">10</span>
+            <span class="section-badge">11</span>
             <div>
               <h3 class="section-title">侧边栏组件</h3>
               <p class="section-subtitle">拖拽排序并启用/禁用组件</p>

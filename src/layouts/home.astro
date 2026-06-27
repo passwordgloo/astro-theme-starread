@@ -1,6 +1,7 @@
 ---
 import Base from './Base.astro';
 import Banner from "../components/Banner.astro";
+import HeroSection from "../components/HeroSection.astro";
 import Carousel from '../components/Carousel.astro';
 import ArticleSection from '../components/ArticleSection.astro';
 import LatestArticle from '../components/LatestArticle.astro';
@@ -81,6 +82,10 @@ const carouselArticles = contentWithDates
 ---
 
 <Base title={Astro.props.title}>
+  <Fragment slot="hero">
+    <HeroSection />
+  </Fragment>
+
   <!-- 左侧内容区域 -->
   <div class="space-y-6">
     <Banner />

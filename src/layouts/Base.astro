@@ -31,6 +31,7 @@ const { title } = Astro.props;
   <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-gray-950 dark:text-neutral-100 transition-colors">
     <NavBar title={title} />
     
+    <slot name="hero"></slot>
     <slot name="header"></slot>
     
     <main class="container mx-auto px-4 py-6 flex flex-col md:flex-row gap-6">

@@ -1,6 +1,16 @@
-import type { starreadthemeconfig } from './scripts/config';
+import type { StarreadThemeConfig } from './scripts/config';
 
-export const themeConfig: starreadthemeconfig = {
+export const themeConfig: StarreadThemeConfig = {
+
+  // Hero 区域配置
+  hero: {
+    backgroundImage: '/cover/NyYehQHfww_67cNm35rPO.jpg',
+    title: 'Starread',
+    subtitle: '记录生活，分享思考',
+    jinrishici: {
+      enabled: true,
+    },
+  },
 
   // 网站配置
   site: {

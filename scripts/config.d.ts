@@ -1,6 +1,15 @@
 export interface StarreadThemeConfig {
   language: 'zh' | 'en';
 
+  hero?: {
+    backgroundImage?: string;
+    title?: string;
+    subtitle?: string;
+    jinrishici?: {
+      enabled?: boolean;
+    };
+  };
+
   site: {
     title: string;
     favicon: string;
