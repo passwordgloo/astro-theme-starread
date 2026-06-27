@@ -17,26 +17,19 @@ import { themeConfig } from '../../starread.config.ts';
     </div>
 </div>
 
-<script>
-    // 背景图片懒加载
-    document.addEventListener('DOMContentLoaded', () => {
-        const bannerBackground = document.getElementById('banner-background');
-        if (bannerBackground) {
-            // 使用 Intersection Observer 实现懒加载
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    const backgroundImage = bannerBackground.dataset.backgroundImage;
-                    bannerBackground.style.backgroundImage = `url('${backgroundImage}')`;
-                    bannerBackground.style.backgroundSize = 'cover';
-                    bannerBackground.style.backgroundPosition = 'center';
-                    // 加载完成后停止观察
-                    observer.disconnect();
-                }
-            }, {
-                threshold: 0.1
-            });
-            
-            observer.observe(bannerBackground);
-        }
-    });
+<script client:idle>
+    const bannerBackground = document.getElementById('banner-background');
+    if (bannerBackground) {
+        const observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                const backgroundImage = bannerBackground.dataset.backgroundImage;
+                bannerBackground.style.backgroundImage = `url('${backgroundImage}')`;
+                bannerBackground.style.backgroundSize = 'cover';
+                bannerBackground.style.backgroundPosition = 'center';
+                observer.disconnect();
+            }
+        }, { threshold: 0.1 });
+        
+        observer.observe(bannerBackground);
+    }
 </script>

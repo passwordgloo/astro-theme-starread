@@ -1,7 +1,9 @@
 ---
 import Base from './Base.astro';
+import AuthorWidget from '../components/AuthorWidget.astro';
+import AdWidget from '../components/AdWidget.astro';
+import TagCloud from '../components/TagCloud.astro';
 import { themeConfig } from '../../starread.config';
-
 
 interface Props {
   title: string;
@@ -12,19 +14,14 @@ interface Props {
 }
 
 const { title, categoryName, currentCategory, articles, allCategories } = Astro.props;
+const sidebarConfig = themeConfig.sidebar.home;
 
-// 导入动态组件加载工具函数
-import { loadDynamicComponents } from '../utils/dynamicComponents';
-
-// 组件映射配置
-const widgetComponents = {
-  authorWidget: () => import('../components/AuthorWidget.astro'),
-  adWidget: () => import('../components/AdWidget.astro'),
-  tag: () => import('../components/TagCloud.astro')
-};
-
-// 动态加载启用的组件
-const loadedWidgets = await loadDynamicComponents(widgetComponents, themeConfig.sidebar.home);
+const tagCounts: Record<string, number> = {};
+articles.forEach(item => {
+  item.data.tags?.forEach(tag => {
+    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+  });
+});
 ---
 
 <Base title={title}>
@@ -75,8 +72,8 @@ const loadedWidgets = await loadDynamicComponents(widgetComponents, themeConfig.
 
   <!-- 右侧边栏 -->
   <Fragment slot="sidebar">
-    {loadedWidgets.map(({ key, component: Component }) => (
-      <Component key={key} />
-    ))}
+    {sidebarConfig.authorWidget && <AuthorWidget />}
+    {sidebarConfig.adWidget && <AdWidget />}
+    {sidebarConfig.tag && <TagCloud tagCounts={tagCounts} />}
   </Fragment>
 </Base>

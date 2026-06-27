@@ -91,29 +91,29 @@ const processedArticles = articles.map(article => ({
   </div>
 </div>
 
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
+<script client:idle>
+    (() => {
       const track = document.getElementById('carousel-track');
       const slides = document.querySelectorAll('#carousel-track > a');
       const indicators = document.querySelectorAll('[data-index]');
       const prevBtn = document.getElementById('prev-btn');
       const nextBtn = document.getElementById('next-btn');
+      
+      if (!track || !prevBtn || !nextBtn) return;
+      
       const totalSlides = parseInt(track.dataset.totalSlides);
       const isSingleSlide = totalSlides === 1;
       let slideWidth;
-      let currentIndex = 1; // 初始位置是第一个真实幻灯片
+      let currentIndex = 1;
       let timer;
       const autoplayInterval = 4000;
       let isTransitioning = false;
 
-      // 初始化函数
       function initCarousel() {
         if (slides.length === 0) return;
         
-        // 计算幻灯片宽度（包含间距）
-        slideWidth = slides[0].offsetWidth + 16; // 16px 是 space-x-4 的间距
+        slideWidth = slides[0].offsetWidth + 16;
 
-        // 单张幻灯片处理
         if (isSingleSlide) {
           currentIndex = 0;
           track.style.transform = 'translateX(0)';
@@ -124,11 +124,9 @@ const processedArticles = articles.map(article => ({
           return;
         }
 
-        // 初始定位
         track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
       }
 
-      // 自动播放控制
       function startAutoplay() {
         if (isSingleSlide) return;
         timer = setInterval(moveToNext, autoplayInterval);
@@ -138,7 +136,6 @@ const processedArticles = articles.map(article => ({
         clearInterval(timer);
       }
 
-      // 更新指示器
       function updateIndicators() {
         const activeIndex = (currentIndex - 1 + totalSlides) % totalSlides;
         indicators.forEach((indicator, index) => {
@@ -152,14 +149,12 @@ const processedArticles = articles.map(article => ({
         });
       }
 
-      // 更新轮播位置
       function updateCarousel() {
         if (isTransitioning || isSingleSlide) return;
         
         isTransitioning = true;
         track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
         
-        // 延迟重置过渡状态
         setTimeout(() => {
           isTransitioning = false;
         }, 700);
@@ -167,10 +162,8 @@ const processedArticles = articles.map(article => ({
         updateIndicators();
       }
 
-      // 无缝轮播重置
       function resetCarouselPosition() {
         if (currentIndex >= slides.length - 1) {
-          // 滑动到末尾复制项，重置到真实第一项
           currentIndex = 1;
           track.style.transition = 'none';
           track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
@@ -178,7 +171,6 @@ const processedArticles = articles.map(article => ({
             track.style.transition = 'transform duration-700 ease-in-out';
           }, 50);
         } else if (currentIndex <= 0) {
-          // 滑动到开头复制项，重置到真实最后一项
           currentIndex = slides.length - 2;
           track.style.transition = 'none';
           track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
@@ -188,7 +180,6 @@ const processedArticles = articles.map(article => ({
         }
       }
 
-      // 移动到下一张
       function moveToNext() {
         if (isTransitioning || isSingleSlide) return;
         
@@ -197,7 +188,6 @@ const processedArticles = articles.map(article => ({
         setTimeout(resetCarouselPosition, 700);
       }
 
-      // 移动到上一张
       function moveToPrev() {
         if (isTransitioning || isSingleSlide) return;
         
@@ -206,7 +196,6 @@ const processedArticles = articles.map(article => ({
         setTimeout(resetCarouselPosition, 700);
       }
 
-      // 事件监听
       prevBtn.addEventListener('click', () => {
         moveToPrev();
         stopAutoplay();
@@ -231,20 +220,19 @@ const processedArticles = articles.map(article => ({
         });
       });
 
-      // 鼠标悬停控制
       const container = document.getElementById('carousel-container');
-      container.addEventListener('mouseenter', stopAutoplay);
-      container.addEventListener('mouseleave', startAutoplay);
+      if (container) {
+        container.addEventListener('mouseenter', stopAutoplay);
+        container.addEventListener('mouseleave', startAutoplay);
+      }
 
-      // 窗口大小改变重新计算
       window.addEventListener('resize', () => {
         initCarousel();
       });
 
-      // 初始化
       initCarousel();
       startAutoplay();
-    });
+    })();
   </script>
 <style>
   #carousel-container::-webkit-scrollbar {

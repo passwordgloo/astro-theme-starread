@@ -1,8 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { Image } from 'astro:assets';
 import { themeConfig } from '../../starread.config';
-import { getCoverImage, sortEntriesByDate, processEntryData } from '../components/frontmatter';
+import { sortEntriesByDate, processEntryData } from '../components/frontmatter';
 import PostCover from '../layouts/postcover.astro';
 import PostCover2 from '../layouts/postcover2.astro';
 import { Newspaper } from "@lucide/astro";
@@ -13,21 +12,24 @@ interface Props {
 }
 
 const { articles = [], notes = [] } = Astro.props;
-// 合并并按日期排序
 const allContent = [...articles, ...notes];
 const latestArticleConfig = themeConfig.site.LatestArticle;
-const { type: loadType, layout = 'vertical', initialLoad, loadMore, defaultLimit, columns = 2, defaultAspectRatio } = latestArticleConfig;
-const [, heightRatio] = defaultAspectRatio.split(':').map(Number);
+const { type: loadType, layout = 'vertical', initialLoad, loadMore, defaultLimit, columns = 2 } = latestArticleConfig;
 
-// 处理所有内容数据
 const processedArticles = processEntryData(allContent, 'articles');
-
-// 按日期排序并限制总数
 const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimit);
+
+const articlesForClient = sortedArticles.map(article => ({
+  title: article.data.title,
+  permalink: article.processed?.permalink || '',
+  cover: article.processed?.cover || '/defaultCover.jpg',
+  date: article.processed?.date || '',
+  categories: article.processed?.categories || [],
+  author: article.processed?.author?.name || '未知作者'
+}));
 ---
 
-<div class="relative" client:load>
-  <!-- 顶部标题栏 -->
+<div class="relative">
   <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4 mb-6">
     <div class="flex items-center space-x-2">
       <Newspaper class="w-5 h-5" />
@@ -45,64 +47,62 @@ const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimi
       ))}
     </div>
     
-    {/* 加载更多按钮 */}
     {loadType === 'button' && sortedArticles.length > initialLoad && (
-    <div class="flex justify-center mt-8">
-      <button
-        id="load-more-btn"
-        class="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+      <div class="flex justify-center mt-8">
+        <button
+          id="load-more-btn"
+          class="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
+          data-loaded={initialLoad}
+          data-total={sortedArticles.length}
+          data-load-more={loadMore}
+          data-default-limit={defaultLimit}
+          data-layout={layout}
+        >
+          加载更多
+        </button>
+      </div>
+    )}
+
+    {loadType === 'auto' && (
+      <div
+        id="load-trigger"
+        class="h-10 w-full"
         data-loaded={initialLoad}
         data-total={sortedArticles.length}
-      >
-        加载更多
-      </button>
-    </div>
-  )}
-
-  {/* 自动加载触发器 */}
-  {loadType === 'auto' && (
-    <div
-      id="load-trigger"
-      class="h-10 w-full"
-      data-loaded={initialLoad}
-      data-total={sortedArticles.length}
-    ></div>
-  )}
-</div>
+        data-load-more={loadMore}
+        data-default-limit={defaultLimit}
+        data-layout={layout}
+      ></div>
+    )}
+  </div>
 </div>
 
-
-<script is:inline define:vars={{ articleLoadConfig: { initialLoad, loadMore, defaultLimit }, articles: sortedArticles, loadType, heightRatio, layout }}>
+<script client:idle define:vars={{ articlesForClient }}>
+  const articlesData = articlesForClient;
   const container = document.getElementById('articles-container');
-  const trigger = loadType === 'button' ? document.getElementById('load-more-btn') : document.getElementById('load-trigger');
+  const loadType = articlesData.length > 0 ? 'button' : 'none';
+  const trigger = document.getElementById('load-more-btn') || document.getElementById('load-trigger');
 
-  // 渲染垂直布局文章卡片
   function renderVerticalCard(article) {
-    const categories = article.processed?.categories || [];
-    const tags = article.processed?.tags || [];
-    const cover = article.processed?.cover || '/defaultCover.jpg';
-    const date = article.processed?.date;
-    const permalink = article.processed?.permalink;
-    const authorName = article.processed?.author?.name || '未知作者';
-    const category = categories[0] || '未分类';
+    const category = article.categories?.[0] || '未分类';
     
     const articleCard = document.createElement('a');
-    articleCard.href = permalink;
+    articleCard.href = article.permalink;
     articleCard.className = 'min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline';
     
     articleCard.innerHTML = `
       <div class="h-40 bg-gray-200 overflow-hidden">
-        <img src="${cover}" alt="${article.data.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="200" height="150" loading="lazy" />
+        <img src="${article.cover}" alt="${article.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="200" height="150" loading="lazy" />
       </div>
       <div class="p-3 flex-1 flex flex-col">
         <div class="mb-2">
           <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full transform group-hover:scale-105 transition-transform duration-200">${category}</span>
         </div>
-        <h3 class="font-medium mb-2 line-clamp-2 h-12 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">${article.data.title}</h3>
+        <h3 class="font-medium mb-2 line-clamp-2 h-12 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">${article.title}</h3>
         <div class="mt-auto flex items-center text-xs text-gray-500">
-          <span>${authorName}</span>
+          <span>${article.author}</span>
           <span class="mx-1">·</span>
-          <span>${date}</span>
+          <span>${article.date}</span>
         </div>
       </div>
     `;
@@ -110,45 +110,26 @@ const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimi
     return articleCard;
   }
 
-  // 渲染水平布局文章卡片
   function renderHorizontalCard(article) {
-    const categories = article.processed?.categories || [];
-    const tags = article.processed?.tags || [];
-    const cover = article.processed?.cover || '/defaultCover.jpg';
-    const date = article.processed?.date;
-    const permalink = article.processed?.permalink;
-    const authorName = article.processed?.author?.name || '未知作者';
-    const category = categories[0] || '未分类';
+    const category = article.categories?.[0] || '未分类';
     
     const articleCard = document.createElement('a');
-    articleCard.href = permalink;
+    articleCard.href = article.permalink;
     articleCard.className = 'flex flex-row bg-white/70 dark:bg-cyan-950/30 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group';
     
     articleCard.innerHTML = `
-      <!-- 左侧图片 -->
       <div class="w-1/3 bg-gray-200 overflow-hidden">
-        <img src="${cover}" alt="${article.data.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="120" height="90" loading="lazy" />
+        <img src="${article.cover}" alt="${article.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="120" height="90" loading="lazy" />
       </div>
-      
-      <!-- 右侧内容 -->
       <div class="w-2/3 p-4 flex flex-col justify-between">
-        <!-- 分类标签 -->
         <div class="mb-2">
-          <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full transform group-hover:scale-105 transition-transform duration-200">
-            ${category}
-          </span>
+          <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full transform group-hover:scale-105 transition-transform duration-200">${category}</span>
         </div>
-        
-        <!-- 文章标题 -->
-        <h3 class="font-medium line-clamp-2 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">
-          ${article.data.title}
-        </h3>
-        
-        <!-- 底部信息 -->
+        <h3 class="font-medium line-clamp-2 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">${article.title}</h3>
         <div class="mt-4 flex items-center text-xs text-gray-500 dark:text-gray-400">
-          <span>${authorName}</span>
+          <span>${article.author}</span>
           <span class="mx-1">·</span>
-          <span>${date}</span>
+          <span>${article.date}</span>
         </div>
       </div>
     `;
@@ -156,20 +137,15 @@ const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimi
     return articleCard;
   }
 
-  // 渲染文章卡片
   function renderArticles(startIndex, endIndex) {
     const fragment = document.createDocumentFragment();
+    const layout = trigger?.dataset.layout || 'vertical';
     
-    articles.slice(startIndex, endIndex).forEach(article => {
+    articlesData.slice(startIndex, endIndex).forEach(article => {
       const cardWrapper = document.createElement('div');
       cardWrapper.className = 'min-w-[200px]';
       
-      let articleCard;
-      if (layout === 'horizontal') {
-        articleCard = renderHorizontalCard(article);
-      } else {
-        articleCard = renderVerticalCard(article);
-      }
+      const articleCard = layout === 'horizontal' ? renderHorizontalCard(article) : renderVerticalCard(article);
       
       cardWrapper.appendChild(articleCard);
       fragment.appendChild(cardWrapper);
@@ -178,50 +154,43 @@ const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimi
     container.appendChild(fragment);
   }
 
-  // 加载更多文章
   function loadMoreArticles() {
+    if (!trigger) return;
+    
     const loaded = parseInt(trigger.dataset.loaded);
     const total = parseInt(trigger.dataset.total);
-    const newLoaded = Math.min(loaded + articleLoadConfig.loadMore, total, articleLoadConfig.defaultLimit);
+    const loadMore = parseInt(trigger.dataset.loadMore);
+    const defaultLimit = parseInt(trigger.dataset.defaultLimit);
+    const newLoaded = Math.min(loaded + loadMore, total, defaultLimit);
 
     if (newLoaded > loaded) {
       renderArticles(loaded, newLoaded);
       trigger.dataset.loaded = newLoaded;
 
-      // 如果已经加载全部，隐藏触发器
-      if (newLoaded >= total || newLoaded >= articleLoadConfig.defaultLimit) {
-        if (loadType === 'button' && trigger) {
-          trigger.style.display = 'none';
-        } else if (loadType === 'auto' && trigger) {
-          trigger.style.display = 'none';
+      if (newLoaded >= total || newLoaded >= defaultLimit) {
+        trigger.style.display = 'none';
+      }
+    }
+  }
+
+  if (trigger) {
+    const loaded = parseInt(trigger.dataset.loaded);
+    const total = parseInt(trigger.dataset.total);
+    const defaultLimit = parseInt(trigger.dataset.defaultLimit);
+    
+    if (loaded >= total || loaded >= defaultLimit) {
+      trigger.style.display = 'none';
+    }
+
+    if (trigger.id === 'load-more-btn') {
+      trigger.addEventListener('click', loadMoreArticles);
+    } else if (trigger.id === 'load-trigger') {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          loadMoreArticles();
         }
-      }
-    }
-  }
-
-  // 按钮加载模式
-  if (loadType === 'button' && trigger) {
-    trigger.addEventListener('click', loadMoreArticles);
-
-    // 初始检查是否需要隐藏按钮
-    if (parseInt(trigger.dataset.loaded) >= parseInt(trigger.dataset.total) || parseInt(trigger.dataset.loaded) >= articleLoadConfig.defaultLimit) {
-      trigger.style.display = 'none';
-    }
-  }
-
-  // 自动加载模式
-  if (loadType === 'auto' && trigger) {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        loadMoreArticles();
-      }
-    }, { threshold: 0.1 });
-
-    observer.observe(trigger);
-
-    // 初始检查是否需要隐藏触发器
-    if (parseInt(trigger.dataset.loaded) >= parseInt(trigger.dataset.total) || parseInt(trigger.dataset.loaded) >= articleLoadConfig.defaultLimit) {
-      trigger.style.display = 'none';
+      }, { threshold: 0.1 });
+      observer.observe(trigger);
     }
   }
 </script>

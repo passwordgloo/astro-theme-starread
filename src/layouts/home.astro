@@ -4,25 +4,17 @@ import Banner from "../components/Banner.astro";
 import Carousel from '../components/Carousel.astro';
 import ArticleSection from '../components/ArticleSection.astro';
 import LatestArticle from '../components/LatestArticle.astro';
+import Progress from '../widgets/Progress.astro';
+import AuthorWidget from '../components/AuthorWidget.astro';
+import AdWidget from '../components/AdWidget.astro';
+import TagCloud from '../components/TagCloud.astro';
+import Statistic from '../components/Statistic.astro';
 import { themeConfig } from '../../starread.config';
 import { getCollection } from 'astro:content';
+import { countWords } from '../components/frontmatter';
 
-// 导入动态组件加载工具函数
-import { loadDynamicComponents } from '../utils/dynamicComponents';
+const sidebarConfig = themeConfig.sidebar.home;
 
-// 组件映射配置
-const widgetComponents = {
-  progress: () => import('../widgets/Progress.astro'),
-  authorWidget: () => import('../components/AuthorWidget.astro'),
-  adWidget: () => import('../components/AdWidget.astro'),
-  tag: () => import('../components/TagCloud.astro'),
-  statistic: () => import('../components/Statistic.astro')
-};
-
-// 动态加载启用的组件
-const loadedWidgets = await loadDynamicComponents(widgetComponents, themeConfig.sidebar.home);
-
-// 获取所有文章和笔记 - 只获取必要字段
 const articles = await getCollection('articles', {
   filter: () => true,
   projection: {
@@ -39,15 +31,36 @@ const notes = await getCollection('notes', {
     slug: true
   }
 });
+
+const articlesWithBody = await getCollection('articles');
+const notesWithBody = await getCollection('notes', ({ data }) => data.published !== false);
+
+let totalWords = 0;
+for (const article of articlesWithBody) {
+  totalWords += countWords(article.body);
+}
+for (const note of notesWithBody) {
+  totalWords += countWords(note.body);
+}
+
+const totalFileCount = articles.length + notes.length;
+const articleCount = articles.length;
+const noteCount = notes.length;
+
+const tagCounts: Record<string, number> = {};
+[...articles, ...notes].forEach(item => {
+  item.data.tags?.forEach(tag => {
+    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+  });
+});
+
 const allContent = [...articles, ...notes];
 
-// 预计算日期以避免重复计算
 const contentWithDates = allContent.map(item => ({
   ...item,
   _sortDate: new Date(item.data.date || 0).getTime()
 }));
 
-// 按分类筛选内容
 const categoryArticles = {};
 
 themeConfig.widget.categories.forEach(category => {
@@ -57,12 +70,10 @@ themeConfig.widget.categories.forEach(category => {
   );
 });
 
-// 最新内容（按日期排序）
 const latestArticles = [...contentWithDates]
   .sort((a, b) => b._sortDate - a._sortDate)
   .slice(0, 5);
 
-// 轮播文章（取前5篇有封面图的内容）
 const carouselArticles = contentWithDates
   .filter(item => item.data.cover)
   .sort((a, b) => b._sortDate - a._sortDate)
@@ -91,9 +102,11 @@ const carouselArticles = contentWithDates
 
   <!-- 右侧边栏 -->
   <Fragment slot="sidebar">
-    {loadedWidgets.map(({ key, component: Component }) => (
-      <Component key={key} />
-    ))}
+    {sidebarConfig.progress && <Progress />}
+    {sidebarConfig.authorWidget && <AuthorWidget />}
+    {sidebarConfig.adWidget && <AdWidget />}
+    {sidebarConfig.tag && <TagCloud tagCounts={tagCounts} />}
+    {sidebarConfig.statistic && <Statistic totalFileCount={totalFileCount} articleCount={articleCount} noteCount={noteCount} totalWords={totalWords} />}
   </Fragment>
 
   <!-- 移动端底部Tab栏 -->

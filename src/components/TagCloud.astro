@@ -1,21 +1,12 @@
 ---
-import { getCollection } from 'astro:content';
 import { Tag } from "@lucide/astro";
 
-// 获取所有文章和笔记
-const articles = await getCollection('articles');
-const notes = await getCollection('notes');
-const allContent = [...articles, ...notes];
+interface Props {
+  tagCounts: Record<string, number>;
+}
 
-// 计算每个标签的内容数量
-const tagCounts: Record<string, number> = {};
-allContent.forEach(item => {
-  item.data.tags?.forEach(tag => {
-    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-  });
-});
+const { tagCounts } = Astro.props;
 
-// 将标签按数量排序
 const sortedTags = Object.entries(tagCounts).sort(([, a], [, b]) => b - a);
 ---
 

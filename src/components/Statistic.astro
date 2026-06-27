@@ -1,36 +1,16 @@
 ---
 import { themeConfig } from '../../starread.config';
-import { getCollection } from 'astro:content';
-import { countWords } from './frontmatter.ts';
 import { ChartBar, Files, FileText, Pen, CalendarDays, Eye, Users } from "@lucide/astro";
 
-// 获取所有内容集合
-const articles = await getCollection('articles');
-const notes = await getCollection('notes', ({ data }) => {
-  return data.published !== false;
-});
-
-// 计算总文件数
-const totalFileCount = articles.length + notes.length;
-
-// 计算全站总字数
-let totalWords = 0;
-
-// 统计文章字数
-for (const article of articles) {
-  totalWords += countWords(article.body);
+interface Props {
+  totalFileCount: number;
+  articleCount: number;
+  noteCount: number;
+  totalWords: number;
 }
 
-// 统计笔记字数
-for (const note of notes) {
-  totalWords += countWords(note.body);
-}
+const { totalFileCount, articleCount, noteCount, totalWords } = Astro.props;
 
-// 单独统计各类型文件数
-const articleCount = articles.length;
-const noteCount = notes.length;
-
-// 计算建站天数
 function getSiteDays() {
   if (!themeConfig.site.foundedDate) return 0;
   
