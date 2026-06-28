@@ -2,10 +2,30 @@
 import { themeConfig } from '../../starread.config';
 
 const heroConfig = themeConfig.hero;
+const heroEnabled = heroConfig?.enabled !== false;
 const bgImage = heroConfig?.backgroundImage || '/cover/NyYehQHfww_67cNm35rPO.jpg';
-const showJinrishici = heroConfig?.jinrishici?.enabled !== false;
+const titleConfig = heroConfig?.title;
+const effectConfig = heroConfig?.effect;
+
+const isJinrishiciMode = titleConfig?.mode === 'jinrishici';
+const customContent = titleConfig?.content || 'Starread';
+
+const gradientEnabled = effectConfig?.gradient?.enabled !== false;
+const gradientColors = effectConfig?.gradient?.colors || ['#2563eb', '#9333ea', '#ec4899'];
+
+const typingEnabled = effectConfig?.typing?.enabled !== false;
+const typingRepeat = effectConfig?.typing?.repeat === true;
+const cursorEnabled = effectConfig?.typing?.cursor !== false;
+const cursorStyle = effectConfig?.typing?.cursorStyle || 'line';
+
+const particlesEnabled = effectConfig?.particles?.enabled !== false;
+
+const titleStyle = gradientEnabled 
+  ? `background: linear-gradient(90deg, ${gradientColors.join(', ')}); background-size: 200% 200%; -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; animation: gradient-flow 4s ease infinite;`
+  : 'color: rgb(17 24 39);';
 ---
 
+{heroEnabled && (
 <div class="relative w-full h-screen overflow-hidden -mt-16">
   <div class="absolute inset-0">
     <img 
@@ -14,18 +34,33 @@ const showJinrishici = heroConfig?.jinrishici?.enabled !== false;
       class="w-full h-full object-cover"
       onerror="this.src='/img/2256c4860b3d6be29e7044728d371b33.png'"
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-white dark:from-gray-900 via-white/60 dark:via-gray-900/60 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-slate-100 dark:from-gray-950 via-slate-100/70 dark:via-gray-950/70 to-transparent"></div>
   </div>
   
+  {particlesEnabled && (
+    <canvas id="hero-particles" class="absolute inset-0 pointer-events-none"></canvas>
+  )}
+  
   <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
-    <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-4 text-gray-900 dark:text-white">
-      {heroConfig?.title || 'Starread'}
+    <h1 
+      id="hero-title" 
+      class="text-4xl md:text-6xl lg:text-7xl font-bold"
+      data-mode={isJinrishiciMode ? 'jinrishici' : 'text'}
+      data-content={customContent}
+      data-animate={typingEnabled ? 'true' : 'false'}
+      data-repeat={typingRepeat ? 'true' : 'false'}
+      data-cursor={cursorEnabled ? 'true' : 'false'}
+      data-cursor-style={cursorStyle}
+      data-gradient={gradientEnabled ? 'true' : 'false'}
+      data-gradient-colors={gradientColors.join(',')}
+      data-particles={particlesEnabled ? 'true' : 'false'}
+      style={titleStyle}
+    >
+      {isJinrishiciMode ? <span class="animate-pulse">诗词加载中...</span> : (typingEnabled ? '' : customContent)}
+      {cursorEnabled && !isJinrishiciMode && !typingEnabled && (
+        <span id="hero-cursor" class={`inline-block ml-1 ${cursorStyle === 'block' ? 'w-[0.2em] h-[0.9em]' : 'w-[0.05em] h-[0.85em]'} bg-current`} style={{ animation: 'cursor-blink 1s step-end infinite' }}></span>
+      )}
     </h1>
-    {showJinrishici && (
-      <div id="jinrishici" class="text-gray-800 dark:text-gray-200 text-sm md:text-base italic">
-        <span class="animate-pulse">诗词加载中...</span>
-      </div>
-    )}
   </div>
   
   <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
@@ -34,27 +69,178 @@ const showJinrishici = heroConfig?.jinrishici?.enabled !== false;
     </svg>
   </div>
 </div>
+)}
 
-{showJinrishici && (
-  <script client:idle>
-    (() => {
-      const jinrishici = document.getElementById('jinrishici');
-      if (!jinrishici) return;
+<script client:idle>
+  (() => {
+    const titleEl = document.getElementById('hero-title');
+    if (!titleEl) return;
+    
+    const mode = titleEl.dataset.mode;
+    const content = titleEl.dataset.content;
+    const animate = titleEl.dataset.animate === 'true';
+    const repeat = titleEl.dataset.repeat === 'true';
+    const cursor = titleEl.dataset.cursor === 'true';
+    const cursorStyle = titleEl.dataset.cursorStyle;
+    const gradient = titleEl.dataset.gradient === 'true';
+    const gradientColors = titleEl.dataset.gradientColors.split(',');
+    const particles = titleEl.dataset.particles === 'true';
+    
+    let particlesCtx = null;
+    let particlesArr = [];
+    let particlesAnimationId = null;
+    
+    if (particles) {
+      const canvas = document.getElementById('hero-particles');
+      if (canvas) {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        particlesCtx = canvas.getContext('2d');
+        
+        window.addEventListener('resize', () => {
+          canvas.width = window.innerWidth;
+          canvas.height = window.innerHeight;
+        });
+      }
+    }
+    
+    function createParticle(x, y) {
+      return {
+        x: x,
+        y: y,
+        vx: (Math.random() - 0.5) * 4,
+        vy: (Math.random() - 0.5) * 4,
+        life: 1,
+        decay: Math.random() * 0.02 + 0.01,
+        size: Math.random() * 3 + 1,
+        color: gradientColors[Math.floor(Math.random() * gradientColors.length)]
+      };
+    }
+    
+    function updateParticles() {
+      if (!particlesCtx) return;
+      particlesCtx.clearRect(0, 0, particlesCtx.canvas.width, particlesCtx.canvas.height);
       
+      particlesArr = particlesArr.filter(p => p.life > 0);
+      
+      particlesArr.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        p.life -= p.decay;
+        
+        particlesCtx.beginPath();
+        particlesCtx.arc(p.x, p.y, p.size * p.life, 0, Math.PI * 2);
+        particlesCtx.fillStyle = p.color;
+        particlesCtx.globalAlpha = p.life;
+        particlesCtx.fill();
+        particlesCtx.globalAlpha = 1;
+      });
+      
+      particlesAnimationId = requestAnimationFrame(updateParticles);
+    }
+    
+    function emitParticles(x, y) {
+      if (!particles) return;
+      for (let i = 0; i < 5; i++) {
+        particlesArr.push(createParticle(x, y));
+      }
+    }
+    
+    if (particles) {
+      updateParticles();
+    }
+    
+    if (mode === 'jinrishici') {
       fetch('https://v2.jinrishici.com/one.json?client=browser-sdk/1.2')
         .then(res => res.json())
         .then(data => {
           if (data && data.data) {
-            const { content, origin } = data.data;
-            jinrishici.innerHTML = `
-              <span class="text-lg">"${content}"</span>
-              <span class="block mt-2 text-sm text-gray-600 dark:text-gray-400">—— ${origin?.title || '未知'} · ${origin?.dynasty || ''} · ${origin?.author || '佚名'}</span>
-            `;
+            const poemContent = data.data.content;
+            const displayText = `"${poemContent}"`;
+            if (animate) {
+              typeText(displayText);
+            } else {
+              titleEl.textContent = displayText;
+              if (cursor) addCursor();
+            }
           }
         })
         .catch(() => {
-          jinrishici.innerHTML = '<span>"行到水穷处，坐看云起时"</span><span class="block mt-2 text-sm text-gray-600 dark:text-gray-400">—— 终南别业 · 唐 · 王维</span>';
+          const fallback = '"行到水穷处，坐看云起时"';
+          if (animate) {
+            typeText(fallback);
+          } else {
+            titleEl.textContent = fallback;
+            if (cursor) addCursor();
+          }
         });
-    })();
-  </script>
-)}
+    } else if (content) {
+      if (animate) {
+        typeText(content);
+      } else {
+        titleEl.textContent = content;
+        if (cursor) addCursor();
+      }
+    }
+    
+    function typeText(text) {
+      let index = 0;
+      titleEl.textContent = '';
+      
+      const typeInterval = setInterval(() => {
+        if (index < text.length) {
+          titleEl.textContent += text[index];
+          
+          if (particles) {
+            const rect = titleEl.getBoundingClientRect();
+            const charWidth = rect.width / (index + 1);
+            const x = rect.left + index * charWidth + charWidth / 2;
+            const y = rect.top + rect.height / 2;
+            emitParticles(x, y);
+          }
+          
+          index++;
+        } else {
+          clearInterval(typeInterval);
+          if (cursor) addCursor();
+          if (repeat) {
+            setTimeout(() => {
+              typeText(text);
+            }, 2000);
+          }
+        }
+      }, 100);
+    }
+    
+    function addCursor() {
+      const cursorEl = document.createElement('span');
+      cursorEl.id = 'hero-cursor';
+      cursorEl.className = `inline-block ml-1 ${cursorStyle === 'block' ? 'w-[0.2em] h-[0.9em]' : 'w-[0.05em] h-[0.85em]'} bg-current`;
+      cursorEl.style.animation = 'cursor-blink 1s step-end infinite';
+      titleEl.appendChild(cursorEl);
+    }
+  })();
+</script>
+
+<style>
+  @keyframes gradient-flow {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  @keyframes cursor-blink {
+    0%, 100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0;
+    }
+  }
+</style>

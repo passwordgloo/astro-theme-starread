@@ -2,11 +2,26 @@ export interface StarreadThemeConfig {
   language: 'zh' | 'en';
 
   hero?: {
+    enabled?: boolean;
     backgroundImage?: string;
-    title?: string;
-    subtitle?: string;
-    jinrishici?: {
-      enabled?: boolean;
+    title?: {
+      mode?: 'text' | 'jinrishici';
+      content?: string;
+    };
+    effect?: {
+      gradient?: {
+        enabled?: boolean;
+        colors?: string[];
+      };
+      typing?: {
+        enabled?: boolean;
+        repeat?: boolean;
+        cursor?: boolean;
+        cursorStyle?: 'line' | 'block';
+      };
+      particles?: {
+        enabled?: boolean;
+      };
     };
   };
 

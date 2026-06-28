@@ -4,11 +4,26 @@ export const themeConfig: StarreadThemeConfig = {
 
   // Hero 区域配置
   hero: {
-    backgroundImage: '/cover/NyYehQHfww_67cNm35rPO.jpg',
-    title: 'Starread',
-    subtitle: '记录生活，分享思考',
-    jinrishici: {
-      enabled: true,
+    enabled: true,
+    backgroundImage: '/cover/eRq5UHTwBSmoSguZBTPjB.jpg',
+    title: {
+      mode: 'jinrishici',
+      content: 'Starread',
+    },
+    effect: {
+      gradient: {
+        enabled: true,
+        colors: ['#2563eb', '#9333ea', '#ec4899'],
+      },
+      typing: {
+        enabled: true,
+        repeat: true,
+        cursor: true,
+        cursorStyle: 'line',
+      },
+      particles: {
+        enabled: true,
+      },
     },
   },
 

@@ -5,8 +5,10 @@ import {
   FolderOpen, Menu, LayoutGrid, Plus, Trash2, GripVertical, Download,
   RotateCcw, Copy, Check, X, ChevronRight, Upload
 } from "@lucide/astro";
+import { themeConfig } from "../../../starread.config";
 
 const isDev = import.meta.env.DEV;
+const navbarConfig = themeConfig.navbar || [];
 ---
 
 <ConfigLayout title="主题配置生成器">
@@ -124,7 +126,17 @@ const isDev = import.meta.env.DEV;
 
           <div class="form-card">
             <div class="form-grid">
-              <div class="form-field">
+              <div class="form-field col-span-2">
+                <label class="switch-card">
+                  <input type="checkbox" name="hero.enabled" checked class="switch-input" />
+                  <span class="switch-slider"></span>
+                  <span class="switch-label">
+                    <span class="switch-title">显示 Hero 区域</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="form-field col-span-2">
                 <label class="field-label">背景图片</label>
                 <div class="field-input-group">
                   <input type="text" name="hero.backgroundImage" value="/cover/NyYehQHfww_67cNm35rPO.jpg" class="field-input" placeholder="/cover/hero-bg.jpg" readonly />
@@ -137,23 +149,124 @@ const isDev = import.meta.env.DEV;
                 </div>
                 <span class="field-hint">首页全屏背景图片，建议尺寸 1920x1080</span>
               </div>
+            </div>
+          </div>
 
+          <div class="form-card">
+            <h4 class="card-subtitle">文字内容</h4>
+            <div class="form-grid">
+              <div class="form-field col-span-2">
+                <label class="field-label">显示内容</label>
+                <div class="field-radio-group">
+                  <label class="radio-card">
+                    <input type="radio" name="hero.title.mode" value="jinrishici" checked class="radio-input" />
+                    <span class="radio-label">
+                      <span class="radio-title">今日诗词</span>
+                      <span class="radio-desc">自动加载每日诗词</span>
+                    </span>
+                  </label>
+                  <label class="radio-card radio-card-with-input">
+                    <input type="radio" name="hero.title.mode" value="text" class="radio-input" />
+                    <span class="radio-label">
+                      <span class="radio-title">自定义文字</span>
+                      <span class="radio-desc">手动输入标题内容</span>
+                      <input type="text" name="hero.title.content" value="Starread" class="radio-inline-input" placeholder="请输入标题内容" />
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <h4 class="card-subtitle">文字效果</h4>
+            <div class="form-grid">
               <div class="form-field">
-                <label class="field-label">标题文字</label>
-                <input type="text" name="hero.title" value="Starread" class="field-input" placeholder="请输入标题" />
-                <span class="field-hint">显示在背景图片中央的大标题</span>
+                <label class="field-label">渐变样式</label>
+                <label class="switch-card">
+                  <input type="checkbox" name="hero.effect.gradient.enabled" checked class="switch-input" />
+                  <span class="switch-slider"></span>
+                  <span class="switch-label">
+                    <span class="switch-title">启用渐变效果</span>
+                    <span class="switch-desc">标题显示动态渐变颜色</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="form-field col-span-2">
+                <label class="field-label">自定义配色</label>
+                <div class="flex gap-2">
+                  <input type="color" name="hero.effect.gradient.colors[0]" value="#2563eb" class="w-12 h-10 rounded cursor-pointer border-0" />
+                  <input type="color" name="hero.effect.gradient.colors[1]" value="#9333ea" class="w-12 h-10 rounded cursor-pointer border-0" />
+                  <input type="color" name="hero.effect.gradient.colors[2]" value="#ec4899" class="w-12 h-10 rounded cursor-pointer border-0" />
+                </div>
+                <span class="field-hint">从左到右的渐变色，支持3种颜色自定义</span>
               </div>
 
               <div class="form-field">
-                <label class="field-label">诗词显示</label>
+                <label class="field-label">打字效果</label>
                 <label class="switch-card">
-                  <input type="checkbox" name="hero.jinrishici.enabled" checked class="switch-input" />
+                  <input type="checkbox" name="hero.effect.typing.enabled" checked class="switch-input" />
                   <span class="switch-slider"></span>
                   <span class="switch-label">
-                    <span class="switch-title">启用今日诗词</span>
-                    <span class="switch-desc">在标题下方显示随机诗词</span>
+                    <span class="switch-title">启用打字动画</span>
+                    <span class="switch-desc">文字逐字显示的动画效果</span>
                   </span>
                 </label>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">动画重复</label>
+                <label class="switch-card">
+                  <input type="checkbox" name="hero.effect.typing.repeat" class="switch-input" />
+                  <span class="switch-slider"></span>
+                  <span class="switch-label">
+                    <span class="switch-title">启用重复播放</span>
+                    <span class="switch-desc">打字完成后自动重新播放</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">粒子华丽效果</label>
+                <label class="switch-card">
+                  <input type="checkbox" name="hero.effect.particles.enabled" checked class="switch-input" />
+                  <span class="switch-slider"></span>
+                  <span class="switch-label">
+                    <span class="switch-title">启用粒子特效</span>
+                    <span class="switch-desc">打字时有彩色粒子飞散效果</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">光标闪烁</label>
+                <label class="switch-card">
+                  <input type="checkbox" name="hero.effect.typing.cursor" checked class="switch-input" />
+                  <span class="switch-slider"></span>
+                  <span class="switch-label">
+                    <span class="switch-title">启用光标</span>
+                    <span class="switch-desc">显示输入|反复闪烁效果</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">光标样式</label>
+                <div class="field-radio-group">
+                  <label class="radio-card">
+                    <input type="radio" name="hero.effect.typing.cursorStyle" value="line" checked class="radio-input" />
+                    <span class="radio-label">
+                      <span class="radio-title">竖线 |</span>
+                    </span>
+                  </label>
+                  <label class="radio-card">
+                    <input type="radio" name="hero.effect.typing.cursorStyle" value="block" class="radio-input" />
+                    <span class="radio-label">
+                      <span class="radio-title">方块 █</span>
+                    </span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -616,11 +729,11 @@ const isDev = import.meta.env.DEV;
             <div class="category-help">
               <p class="help-text">
                 <strong>提示：</strong>导航名称显示在菜单上，链接地址可以是相对路径（如：/about）或绝对URL（如：https://example.com）。
-                图标名称参考 Lucide 图标库，如：Home、Book、User、Settings 等。
+                图标名称参考 Lucide 图标库，如：Home、Book、User、Settings 等。点击导航项可展开编辑详情。
               </p>
             </div>
             <div class="list-header">
-              <span class="list-title">导航项</span>
+              <span class="list-title">导航项列表</span>
               <button class="btn-add" type="button" id="btn-add-nav">
                 <Plus class="w-4 h-4" />
                 添加导航
@@ -628,6 +741,10 @@ const isDev = import.meta.env.DEV;
             </div>
             <div class="nav-list" id="nav-list">
               <!-- 导航项将通过 JS 渲染 -->
+            </div>
+            <div id="nav-empty-hint" class="empty-hint" style="display: none;">
+              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-3 opacity-50"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+              <p>暂无导航项，点击上方"添加导航"按钮开始配置</p>
             </div>
           </div>
         </section>
@@ -679,7 +796,256 @@ const isDev = import.meta.env.DEV;
 
   <!-- 隐藏的文件输入 -->
   <input type="file" id="file-input" class="hidden" accept="image/*" />
+  
+  <!-- 传递 navbar 配置给客户端脚本 -->
+  <script id="navbar-config-data" type="application/json">
+    {JSON.stringify(navbarConfig)}
+  </script>
 </ConfigLayout>
+
+<style is:global>
+  .category-list,
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nav-item-card {
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+
+  .dark .nav-item-card {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: #4b5563;
+  }
+
+  .nav-item-card:hover {
+    border-color: var(--primary-light);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+  }
+
+  .nav-item-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 16px;
+    cursor: pointer;
+    transition: background 0.2s ease;
+  }
+
+  .nav-item-header:hover {
+    background: rgba(79, 70, 229, 0.05);
+  }
+
+  .dark .nav-item-header:hover {
+    background: rgba(99, 102, 241, 0.1);
+  }
+
+  .nav-item-icon-wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .nav-item-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .nav-item-name {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-main);
+  }
+
+  .dark .nav-item-name {
+    color: #f3f4f6;
+  }
+
+  .nav-item-href {
+    display: block;
+    font-size: 12px;
+    color: var(--text-muted);
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    margin-top: 2px;
+  }
+
+  .dark .nav-item-href {
+    color: #9ca3af;
+  }
+
+  .nav-item-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .nav-item-arrow {
+    color: var(--text-muted);
+    transition: transform 0.2s ease;
+  }
+
+  .nav-item-details {
+    padding: 0 16px 16px;
+  }
+
+  .nav-item-form {
+    background: rgba(0, 0, 0, 0.02);
+    border-radius: 8px;
+    padding: 12px;
+  }
+
+  .dark .nav-item-form {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .nav-form-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+  }
+
+  .nav-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .nav-form-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .dark .nav-form-label {
+    color: #9ca3af;
+  }
+
+  .empty-hint {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--text-muted);
+  }
+
+  .dark .empty-hint {
+    color: #9ca3af;
+  }
+
+  .empty-hint p {
+    margin: 0;
+    font-size: 14px;
+  }
+
+  .category-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+
+  .dark .category-item {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .category-item:hover {
+    border-color: var(--primary-light);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+  }
+
+  .category-inputs {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    min-width: 0;
+  }
+
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .input-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .dark .input-label {
+    color: #9ca3af;
+  }
+
+  .field-input-sm {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 14px;
+    background: rgba(255, 255, 255, 0.5);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-main);
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  .dark .field-input-sm {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .field-input-sm:focus {
+    border-color: var(--primary);
+  }
+
+  .btn-icon-danger {
+    padding: 10px;
+    background: transparent;
+    color: var(--danger);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-icon-danger:hover {
+    background: rgba(239, 68, 68, 0.1);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>
 
 <style>
   /* ===== 环境警告弹窗 ===== */
@@ -1249,6 +1615,30 @@ const isDev = import.meta.env.DEV;
     border-color: var(--primary-light);
   }
 
+  /* 未选中的 radio-card 标灰 */
+  .radio-card:not(:has(.radio-input:checked)) {
+    opacity: 0.65;
+    border-color: #d1d5db;
+  }
+
+  :global(.dark) .radio-card:not(:has(.radio-input:checked)) {
+    opacity: 0.65;
+    border-color: #4b5563;
+  }
+
+  /* 选中的 radio-card 突出显示 */
+  .radio-card:has(.radio-input:checked) {
+    opacity: 1;
+    border-color: var(--primary);
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.15);
+  }
+
+  :global(.dark) .radio-card:has(.radio-input:checked) {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, rgba(139, 92, 246, 0.2) 100%);
+    box-shadow: 0 2px 8px rgba(99, 102, 241, 0.25);
+  }
+
   .radio-input {
     display: none;
   }
@@ -1257,20 +1647,24 @@ const isDev = import.meta.env.DEV;
     color: var(--primary);
   }
 
+  /* 选中的确认符号 */
   .radio-input:checked + .radio-label::before {
     content: '✓';
     position: absolute;
-    top: -8px;
-    right: -8px;
-    width: 20px;
-    height: 20px;
-    background: var(--primary);
+    top: -10px;
+    right: -10px;
+    width: 24px;
+    height: 24px;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
     color: white;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 12px;
+    font-size: 14px;
+    font-weight: bold;
+    box-shadow: 0 2px 6px rgba(99, 102, 241, 0.4);
+    z-index: 10;
   }
 
   .radio-label {
@@ -1278,6 +1672,7 @@ const isDev = import.meta.env.DEV;
     display: flex;
     flex-direction: column;
     gap: 4px;
+    padding-right: 8px;
   }
 
   .radio-title {
@@ -1293,6 +1688,34 @@ const isDev = import.meta.env.DEV;
 
   :global(.dark) .radio-desc {
     color: #9ca3af;
+  }
+
+  /* 带输入框的 radio-card */
+  .radio-card-with-input {
+    padding-bottom: 8px;
+  }
+
+  .radio-inline-input {
+    margin-top: 8px;
+    padding: 10px 12px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.8);
+    outline: none;
+    font-size: 13px;
+    color: var(--text-main);
+    transition: all 0.2s ease;
+    width: 100%;
+  }
+
+  :global(.dark) .radio-inline-input {
+    background: rgba(30, 41, 59, 0.8);
+    border-color: #4b5563;
+  }
+
+  .radio-inline-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.2);
   }
 
   /* 开关卡片 */
@@ -1509,99 +1932,6 @@ const isDev = import.meta.env.DEV;
 
   .help-text strong {
     color: var(--primary);
-  }
-
-  /* 分类列表 */
-  .category-list,
-  .nav-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .category-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 16px;
-    background: rgba(255, 255, 255, 0.3);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    transition: all 0.2s ease;
-  }
-
-  :global(.dark) .category-item {
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .category-item:hover {
-    border-color: var(--primary-light);
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
-  }
-
-  .category-inputs {
-    flex: 1;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    min-width: 0;
-  }
-
-  .input-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .input-label {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  :global(.dark) .input-label {
-    color: #9ca3af;
-  }
-
-  .field-input-sm {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 10px 14px;
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid var(--glass-border);
-    border-radius: 8px;
-    font-size: 14px;
-    color: var(--text-main);
-    outline: none;
-    transition: all 0.2s ease;
-  }
-
-  :global(.dark) .field-input-sm {
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .field-input-sm:focus {
-    border-color: var(--primary);
-  }
-
-  .btn-icon-danger {
-    padding: 10px;
-    background: transparent;
-    color: var(--danger);
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .btn-icon-danger:hover {
-    background: rgba(239, 68, 68, 0.1);
   }
 
   /* 组件列表（可拖拽）- 优化样式 */
@@ -1922,10 +2252,24 @@ const isDev = import.meta.env.DEV;
     { key: 'toc', label: '文章目录', enabled: true },
   ];
 
-  // 导航项数据
-  let navItems = [
-    { name: '主页', href: '/', icon: 'Home' },
-  ];
+  // 导航项数据 - 从配置文件读取
+  let navItems = [];
+  try {
+    const configData = document.getElementById('navbar-config-data');
+    if (configData) {
+      const config = JSON.parse(configData.textContent);
+      if (Array.isArray(config)) {
+        navItems = config.map(item => ({
+          name: item.name || '',
+          href: item.href || '',
+          icon: item.icon || 'Circle',
+        }));
+      }
+    }
+  } catch (e) {
+    console.error('Failed to parse navbar config:', e);
+    navItems = [{ name: '主页', href: '/', icon: 'Home' }];
+  }
 
   // 当前上传字段
   let currentUploadField = null;
@@ -1942,7 +2286,23 @@ const isDev = import.meta.env.DEV;
     initNavList();
     initFileUpload();
     bindButtonEvents();
+    initRadioInlineInputs();
   });
+
+  // 初始化 radio 内联输入框
+  function initRadioInlineInputs() {
+    document.querySelectorAll('.radio-inline-input').forEach(input => {
+      input.addEventListener('focus', () => {
+        const radioCard = input.closest('.radio-card');
+        const radioInput = radioCard?.querySelector('.radio-input');
+        if (radioInput && !radioInput.checked) {
+          radioInput.checked = true;
+          // 触发 change 事件以更新样式
+          radioInput.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+      });
+    });
+  }
 
   // 初始化文件上传
   function initFileUpload() {
@@ -1974,7 +2334,8 @@ const isDev = import.meta.env.DEV;
         'logo': 'site.logo.image',
         'darkLogo': 'site.logo.darkImage',
         'bannerBg': 'widget.banner.backgroundImage',
-        'avatar': 'widget.author.avatar'
+        'avatar': 'widget.author.avatar',
+        'heroBg': 'hero.backgroundImage'
       };
 
       const inputName = fieldMap[currentUploadField];
@@ -2228,6 +2589,9 @@ const isDev = import.meta.env.DEV;
         const targetSection = document.getElementById(targetId);
         if (targetSection) {
           targetSection.classList.add('active');
+          if (targetId === 'navbar') {
+            renderNavItems();
+          }
         }
       });
     });
@@ -2315,38 +2679,109 @@ const isDev = import.meta.env.DEV;
 
   function renderNavItems() {
     const container = document.getElementById('nav-list');
+    const emptyHint = document.getElementById('nav-empty-hint');
     if (!container) return;
 
+    if (navItems.length === 0) {
+      container.innerHTML = '';
+      if (emptyHint) emptyHint.style.display = 'block';
+      return;
+    }
+
+    if (emptyHint) emptyHint.style.display = 'none';
+
     container.innerHTML = navItems.map((item, index) => `
-      <div class="category-item" data-index="${index}">
-        <div class="category-inputs" style="grid-template-columns: 1fr 1fr 1fr;">
-          <div class="input-wrapper">
-            <label class="input-label">导航名称</label>
-            <input type="text" class="field-input-sm" value="${item.name}" placeholder="如：首页" data-field="name" />
+      <div class="nav-item-card" data-index="${index}">
+        <div class="nav-item-header" data-action="toggle-nav">
+          <div class="nav-item-icon-wrap">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              ${getIconSvg(item.icon || 'Circle')}
+            </svg>
           </div>
-          <div class="input-wrapper">
-            <label class="input-label">链接地址</label>
-            <input type="text" class="field-input-sm" value="${item.href}" placeholder="如：/ 或 https://" data-field="href" />
+          <div class="nav-item-info">
+            <span class="nav-item-name">${item.name || '未命名导航'}</span>
+            <span class="nav-item-href">${item.href || '#'}</span>
           </div>
-          <div class="input-wrapper">
-            <label class="input-label">图标</label>
-            <input type="text" class="field-input-sm" value="${item.icon}" placeholder="如：Home" data-field="icon" />
+          <div class="nav-item-actions">
+            <button class="btn-icon-danger" type="button" data-action="remove-nav" data-index="${index}" title="删除">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            </button>
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-item-arrow"><path d="m6 9 6 6 6-6"/></svg>
           </div>
         </div>
-        <button class="btn-icon-danger" type="button" data-action="remove-nav" data-index="${index}">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-        </button>
+        <div class="nav-item-details" style="display: none;">
+          <div class="nav-item-form">
+            <div class="nav-form-row">
+              <div class="nav-form-group">
+                <label class="nav-form-label">导航名称</label>
+                <input type="text" class="field-input-sm" value="${item.name}" placeholder="如：首页" data-field="name" />
+              </div>
+              <div class="nav-form-group">
+                <label class="nav-form-label">链接地址</label>
+                <input type="text" class="field-input-sm" value="${item.href}" placeholder="如：/ 或 https://" data-field="href" />
+              </div>
+              <div class="nav-form-group">
+                <label class="nav-form-label">图标名称</label>
+                <input type="text" class="field-input-sm" value="${item.icon}" placeholder="如：Home" data-field="icon" />
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     `).join('');
 
-    // 绑定删除事件
+    container.querySelectorAll('[data-action="toggle-nav"]').forEach(header => {
+      header.addEventListener('click', () => {
+        const card = header.closest('.nav-item-card');
+        const details = card.querySelector('.nav-item-details');
+        const arrow = card.querySelector('.nav-item-arrow');
+        if (details) {
+          details.style.display = details.style.display === 'none' ? 'block' : 'none';
+        }
+        if (arrow) {
+          arrow.style.transform = details.style.display === 'none' ? 'rotate(0deg)' : 'rotate(180deg)';
+        }
+      });
+    });
+
     container.querySelectorAll('[data-action="remove-nav"]').forEach(btn => {
-      btn.addEventListener('click', () => {
+      btn.addEventListener('click', (e) => {
+        e.stopPropagation();
         const index = parseInt(btn.dataset.index);
         navItems.splice(index, 1);
         renderNavItems();
       });
     });
+
+    container.querySelectorAll('.nav-item-card').forEach((card, index) => {
+      card.querySelectorAll('[data-field]').forEach(input => {
+        input.addEventListener('input', () => {
+          const field = input.dataset.field;
+          navItems[index][field] = input.value;
+          const header = card.querySelector('.nav-item-header');
+          if (header) {
+            const nameEl = header.querySelector('.nav-item-name');
+            const hrefEl = header.querySelector('.nav-item-href');
+            if (nameEl) nameEl.textContent = navItems[index].name || '未命名导航';
+            if (hrefEl) hrefEl.textContent = navItems[index].href || '#';
+          }
+        });
+      });
+    });
+  }
+
+  function getIconSvg(iconName) {
+    const iconMap = {
+      'Home': '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
+      'Book': '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+      'Code': '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
+      'Lock': '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
+      'Database': '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>',
+      'User': '<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
+      'Settings': '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
+      'HelpCircle': '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/>',
+    };
+    return iconMap[iconName] || '<circle cx="12" cy="12" r="10"/>';
   }
 
   // 绑定按钮事件
@@ -2440,6 +2875,33 @@ const isDev = import.meta.env.DEV;
     });
 
     return {
+      hero: {
+        enabled: formData.get('hero.enabled') === 'true',
+        backgroundImage: formData.get('hero.backgroundImage'),
+        title: {
+          mode: formData.get('hero.title.mode'),
+          content: formData.get('hero.title.content'),
+        },
+        effect: {
+          gradient: {
+            enabled: formData.get('hero.effect.gradient.enabled') === 'true',
+            colors: [
+              formData.get('hero.effect.gradient.colors[0]'),
+              formData.get('hero.effect.gradient.colors[1]'),
+              formData.get('hero.effect.gradient.colors[2]'),
+            ].filter(Boolean),
+          },
+          typing: {
+            enabled: formData.get('hero.effect.typing.enabled') === 'true',
+            repeat: formData.get('hero.effect.typing.repeat') === 'true',
+            cursor: formData.get('hero.effect.typing.cursor') === 'true',
+            cursorStyle: formData.get('hero.effect.typing.cursorStyle'),
+          },
+          particles: {
+            enabled: formData.get('hero.effect.particles.enabled') === 'true',
+          },
+        },
+      },
       site: {
         title: formData.get('site.title'),
         favicon: formData.get('site.favicon'),
@@ -2507,7 +2969,7 @@ const isDev = import.meta.env.DEV;
 
   function collectNavbarConfig() {
     const items = [];
-    document.querySelectorAll('#nav-list .category-item').forEach(el => {
+    document.querySelectorAll('#nav-list .nav-item-card').forEach(el => {
       const name = el.querySelector('[data-field="name"]')?.value;
       const href = el.querySelector('[data-field="href"]')?.value;
       const icon = el.querySelector('[data-field="icon"]')?.value;
@@ -2515,7 +2977,7 @@ const isDev = import.meta.env.DEV;
         items.push({ name, href: href || '/', icon: icon || 'Home' });
       }
     });
-    return items.length > 0 ? items : [{ name: '主页', href: '/', icon: 'Home' }];
+    return items;
   }
 
   function collectSidebarConfig(containerId) {
