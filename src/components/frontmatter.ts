@@ -14,9 +14,9 @@ export interface EntryData {
   categories?: string[];
   tags?: string[];
   views?: number;
-  permalink?: string;
+  id?: string;
+  lang?: string;
   description?: string;
-  slug?: string;
 }
 
 interface ProcessedAuthor {
@@ -28,6 +28,7 @@ export interface ProcessedEntry {
   data: EntryData;
   body: string;
   _collection: string;
+  id: string;
   processed?: {
     date: string;
     cover: string;
@@ -36,7 +37,7 @@ export interface ProcessedEntry {
     category: string;
     tags: string[];
     views: number;
-    permalink: string;
+    id: string;
   };
 }
 
@@ -44,15 +45,15 @@ export interface AdjacentEntry {
   title: string;
   cover: string;
   date: string;
-  permalink: string;
+  id: string;
 }
 
-export async function getAdjacentEntries(currentPermalink: string, collection: 'articles' | 'notes'): Promise<{ prev: AdjacentEntry | null; next: AdjacentEntry | null }> {
+export async function getAdjacentEntries(currentId: string, collection: 'docs'): Promise<{ prev: AdjacentEntry | null; next: AdjacentEntry | null }> {
   try {
     const entries = await getCollection(collection);
     const sortedEntries = sortEntriesByDate(entries);
     
-    const currentIndex = sortedEntries.findIndex(entry => entry.data.permalink === currentPermalink);
+    const currentIndex = sortedEntries.findIndex(entry => entry.id === currentId);
     
     if (currentIndex === -1) {
       return { prev: null, next: null };
@@ -62,12 +63,12 @@ export async function getAdjacentEntries(currentPermalink: string, collection: '
     const next = currentIndex > 0 ? sortedEntries[currentIndex - 1] : null;
     
     const formatAdjacentEntry = (entry: typeof sortedEntries[0] | null): AdjacentEntry | null => {
-      if (!entry?.data?.permalink) return null;
+      if (!entry?.id) return null;
       return {
         title: entry.data.title || 'Untitled',
         cover: getCoverImage(entry.data.cover),
         date: formatDate(entry.data.date),
-        permalink: entry.data.permalink
+        id: entry.id
       };
     };
     
@@ -148,7 +149,7 @@ export function sortEntriesByDate<T extends { data: { date?: string | Date } }>(
   });
 }
 
-export function processEntryData(entries: Array<{ data: EntryData; body: string; _collection: string }>, collection: string): ProcessedEntry[] {
+export function processEntryData(entries: Array<{ data: EntryData; body: string; _collection: string; id: string }>, collection: string): ProcessedEntry[] {
   return entries.map(entry => ({
     ...entry,
     processed: {
@@ -159,7 +160,7 @@ export function processEntryData(entries: Array<{ data: EntryData; body: string;
       category: entry.data.categories?.[0] || '未分类',
       tags: Array.isArray(entry.data.tags) ? entry.data.tags : [],
       views: typeof entry.data.views === 'number' ? entry.data.views : 0,
-      permalink: entry.data.permalink || ''
+      id: entry.id
     }
   }));
 }
@@ -172,18 +173,18 @@ export function countWords(text: string): number {
   return chineseChars + englishWords;
 }
 
-export async function generateStaticPaths(collection: 'articles' | 'notes') {
+export async function generateStaticPaths(collection: 'docs') {
   try {
     const entries = await getCollection(collection);
     const sortedEntries = [...sortEntriesByDate(entries)].reverse();
     
     return sortedEntries.map((entry, index) => {
-      const prev = index > 0 ? sortedEntries[index - 1].data.permalink : null;
-      const next = index < sortedEntries.length - 1 ? sortedEntries[index + 1].data.permalink : null;
-      const permalink = entry.data.permalink || '';
+      const prev = index > 0 ? sortedEntries[index - 1].id : null;
+      const next = index < sortedEntries.length - 1 ? sortedEntries[index + 1].id : null;
+      const id = entry.id;
       
       return {
-        params: { permalink: permalink.replace(/^\//, '').replace(/\/$/, '') },
+        params: { id: id.replace(/^\//, '').replace(/\/$/, '') },
         props: { 
           entry,
           prev,

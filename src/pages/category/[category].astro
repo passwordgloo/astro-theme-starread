@@ -4,45 +4,33 @@ import CategoryLayout from '../../layouts/category.astro';
 
 export const prerender = true;
 
-// 生成所有分类页面的静态路径
 export async function getStaticPaths() {
-  const articles = await getCollection('articles');
-  const notes = await getCollection('notes');
-  const allContent = [...articles, ...notes];
+  const docs = await getCollection('docs');
   
-  // 收集所有分类
   const allCategories = new Set<string>();
-  allContent.forEach(item => {
-    item.data.categories?.forEach(category => allCategories.add(category));
+  docs.forEach(doc => {
+    doc.data.categories?.forEach(category => allCategories.add(category));
   });
   
-  // 为每个分类生成静态路径
   return Array.from(allCategories).map(category => ({
     params: { category },
     props: { category },
   }));
 }
 
-// 获取当前分类和相关文章
 const { category } = Astro.props;
-const articles = await getCollection('articles', ({ data }) =>
+const docsWithCategory = await getCollection('docs', ({ data }) =>
   data.categories?.includes(category) ?? false
 );
-const notes = await getCollection('notes', ({ data }) =>
-  data.categories?.includes(category) ?? false
-);
-// 合并并按日期排序
-const allContent = [...articles, ...notes].sort((a, b) =>
+
+const allContent = [...docsWithCategory].sort((a, b) =>
   new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 
-// 获取所有分类及其计数
-const allArticles = await getCollection('articles');
-const allNotes = await getCollection('notes');
-const allItems = [...allArticles, ...allNotes];
+const allDocs = await getCollection('docs');
 const categoryCounts: Record<string, number> = {};
-allItems.forEach(item => {
-  item.data.categories?.forEach(cat => {
+allDocs.forEach(doc => {
+  doc.data.categories?.forEach(cat => {
     categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
   });
 });

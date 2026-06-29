@@ -6,10 +6,12 @@ import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-const articlesDir = path.join(process.cwd(), 'src/content/articles');
-const notesDir = path.join(process.cwd(), 'src/content/notes');
+const contentDir = path.join(process.cwd(), 'src/content');
 const outputPath = path.join(process.cwd(), 'public/data.json');
 const astroConfigPath = path.join(process.cwd(), 'astro.config.mjs');
+
+const SUPPORTED_LANGS = ['zh', 'en', 'ja', 'ko', 'ru'];
+const DEFAULT_LANG = 'zh';
 
 let siteUrl = '';
 try {
@@ -122,7 +124,7 @@ function showProgress(current, total, status = '') {
   process.stdout.write(`\r${status} [${bar}] ${percentage}% (${current}/${total})`);
 }
 
-function countMarkdownFiles(dirs) {
+function countMarkdownFiles(dir) {
   let count = 0;
   function countInDir(dir) {
     if (!fs.existsSync(dir)) return;
@@ -137,30 +139,41 @@ function countMarkdownFiles(dirs) {
       }
     }
   }
-  for (const dir of dirs) {
-    countInDir(dir);
-  }
+  countInDir(dir);
   return count;
 }
 
-function generatePermalink(collection, itemPath, data, baseDir) {
-  if (data.permalink) {
-    return data.permalink;
+function getPathInfo(filePath) {
+  // 新结构: 
+  // 默认语言: src/content/theme.md -> topic: theme, lang: zh, id: theme
+  // 其他语言: src/content/en/theme.md -> topic: theme, lang: en, id: en/theme
+  const pathParts = filePath.split(path.sep);
+  const contentIndex = pathParts.indexOf('content');
+  
+  if (contentIndex === -1) {
+    return { topic: '', lang: DEFAULT_LANG, id: '' };
   }
-  const fileName = path.basename(itemPath, '.md');
-  if (collection === 'notes') {
-    const relativePath = path.relative(baseDir, itemPath);
-    const pathParts = relativePath.split(path.sep);
-    if (pathParts.length > 1) {
-      return `/notes/${pathParts[0]}/${fileName}/`;
-    }
+  
+  const fileName = path.basename(filePath);
+  const fileBase = fileName.replace(/\.(md|mdx)$/, '');
+  
+  const nextPart = pathParts[contentIndex + 1];
+  
+  if (SUPPORTED_LANGS.includes(nextPart)) {
+    const lang = nextPart;
+    const remainingParts = pathParts.slice(contentIndex + 2);
+    const topic = remainingParts.join('/').replace(/\.(md|mdx)$/, '');
+    const id = `${lang}/${topic}`;
+    return { topic, lang, id };
+  } else {
+    const topic = pathParts.slice(contentIndex + 1).join('/').replace(/\.(md|mdx)$/, '');
+    return { topic, lang: DEFAULT_LANG, id: topic };
   }
-  return `/${collection}/${fileName}/`;
 }
 
-function processDirectory(dir, collection, index, progress) {
-  if (!fs.existsSync(dir)) {
-    console.log(`⚠️  ${dir} 目录不存在，跳过处理`);
+function processContent(contentDir, index, progress) {
+  if (!fs.existsSync(contentDir)) {
+    console.log(`⚠️  ${contentDir} 目录不存在，跳过处理`);
     return;
   }
   
@@ -183,6 +196,15 @@ function processDirectory(dir, collection, index, progress) {
             coverPath = siteUrl + coverPath;
           }
           
+          const { topic, lang, id } = getPathInfo(itemPath);
+          
+          let route;
+          if (lang === DEFAULT_LANG) {
+            route = `/${topic}`;
+          } else {
+            route = `/${lang}/${topic}`;
+          }
+          
           index.push({
             title: data.title || 'Untitled',
             description: data.description || '',
@@ -191,13 +213,14 @@ function processDirectory(dir, collection, index, progress) {
             tags: Array.isArray(data.tags) ? data.tags : (data.tags ? [data.tags] : []),
             date: data.date || '',
             content: content.trim(),
-            permalink: generatePermalink(collection, itemPath, data, dir),
-            collection: collection
+            id: id,
+            topic: topic,
+            lang: lang,
+            route: route
           });
           
           progress.processed++;
-          const statusText = collection === 'articles' ? '📝 正在处理文章' : '📋 正在处理笔记';
-          showProgress(progress.processed, progress.total, statusText);
+          showProgress(progress.processed, progress.total, '📄 正在处理内容');
         } catch (error) {
           console.error(`处理文件 ${itemPath} 失败:`, error.message);
         }
@@ -205,13 +228,13 @@ function processDirectory(dir, collection, index, progress) {
     }
   }
   
-  processRecursive(dir);
-  console.log(`\n✅ 处理完成 ${dir} 目录`);
+  processRecursive(contentDir);
+  console.log(`\n✅ 处理完成 ${contentDir} 目录`);
 }
 
 export function generateIndex() {
   const index = [];
-  const totalFiles = countMarkdownFiles([articlesDir, notesDir]);
+  const totalFiles = countMarkdownFiles(contentDir);
   
   if (totalFiles === 0) {
     console.log('未找到 markdown 文件');
@@ -220,8 +243,7 @@ export function generateIndex() {
   
   const progress = { processed: 0, total: totalFiles };
   
-  processDirectory(articlesDir, 'articles', index, progress);
-  processDirectory(notesDir, 'notes', index, progress);
+  processContent(contentDir, index, progress);
   
   fs.writeFileSync(outputPath, JSON.stringify(index, null, 2));
   console.log(`📝 索引生成成功: ${outputPath}`);

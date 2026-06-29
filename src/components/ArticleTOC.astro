@@ -1,12 +1,15 @@
 ---
-// ArticleTOC.astro
 import { ListTree } from "@lucide/astro";
+import { themeConfig } from '../../starread.config';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 interface Props {
   isSticky?: boolean;
 }
 
 const { isSticky = true } = Astro.props;
+const lang = getLangFromUrl(Astro.url.pathname);
+const t = useTranslations(lang);
 ---
 
 <div 
@@ -20,7 +23,7 @@ const { isSticky = true } = Astro.props;
 >
   <div class="flex items-center space-x-2 mb-4">
     <ListTree class="w-5 h-5 text-accent" />
-    <span class="text-accent font-bold text-lg">文章目录</span>
+    <span class="text-accent font-bold text-lg">{t.sidebar.toc}</span>
   </div>
 
   <!-- 无目录占位符 -->
@@ -28,7 +31,9 @@ const { isSticky = true } = Astro.props;
     <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-gray-100 dark:bg-slate-800 mb-3">
       <ListTree class="w-5 h-5 transition-colors duration-300" />
     </div>
-    <p class="text-gray-500 dark:text-slate-400 italic">暂无目录</p>
+    <p class="text-gray-500 dark:text-slate-400 italic">
+      {lang === 'en' ? 'No table of contents' : lang === 'ja' ? '目次がありません' : lang === 'ko' ? '목차가 없습니다' : lang === 'ru' ? 'Нет оглавления' : '暂无目录'}
+    </p>
   </div>
   
   <!-- 目录导航 -->

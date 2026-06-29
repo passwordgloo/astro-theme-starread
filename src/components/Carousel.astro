@@ -1,9 +1,13 @@
 ---
 import { themeConfig } from '../../starread.config';
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 import { formatDate, getCoverImage, getAuthorInfo } from '../components/frontmatter';
 import PostCover from '../layouts/postcover.astro';
 import PostCover2 from '../layouts/postcover2.astro';
 import { LayoutGrid, ChevronLeft, ChevronRight } from "@lucide/astro";
+
+const currentLang = getLangFromUrl(Astro.url.pathname);
+const t = useTranslations(currentLang);
 
 // 轮播卡片文章组件
 const { articles = [] } = Astro.props;
@@ -13,8 +17,14 @@ const [widthRatio, heightRatio] = LatestArticle.defaultAspectRatio.split(':').ma
 const imageHeight = Math.round(200 * heightRatio / widthRatio);
 import { Image } from 'astro:assets';
 
+const supportedLangs = ['zh', 'en', 'ja', 'ko', 'ru'];
+const defaultLangArticles = articles.filter(article => {
+  const firstSegment = article.id.split('/')[0];
+  return !supportedLangs.includes(firstSegment);
+});
+
 // 处理文章数据
-const processedArticles = articles.map(article => ({
+const processedArticles = defaultLangArticles.map(article => ({
   ...article,
   processed: {
     date: formatDate(article.data.date),
@@ -29,7 +39,7 @@ const processedArticles = articles.map(article => ({
   <div class="px-4 py-3 border-b border-gray-200 dark:border-white/10 flex justify-between items-center">
     <div class="flex items-center space-x-2">
       <LayoutGrid class="w-5 h-5" />
-      <h2 class="font-bold text-lg text-dark">{themeConfig.widget.carousel.title}</h2>
+      <h2 class="font-bold text-lg text-dark">{t.widget.carousel.title}</h2>
     </div>
     <div class="flex space-x-2">
       <button id="prev-btn" class="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-white/15" aria-label="上一张">
@@ -70,7 +80,7 @@ const processedArticles = articles.map(article => ({
         )
       ) : (
         <div class="flex-1 text-center py-12 text-gray-500">
-          暂无文章数据
+          {currentLang === 'zh' ? '暂无文章数据' : currentLang === 'en' ? 'No articles' : currentLang === 'ja' ? '記事がありません' : currentLang === 'ko' ? '기사가 없습니다' : 'Нет статей'}
         </div>
       )}
     </div>

@@ -1,7 +1,6 @@
 ---
 title: 创建Algolia应用
 categories: [帮助]
-permalink: /articles/6be587/
 date: 2025-10-07 21:33:22
 ---
 

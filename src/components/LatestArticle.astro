@@ -7,21 +7,27 @@ import PostCover2 from '../layouts/postcover2.astro';
 import { Newspaper } from "@lucide/astro";
 
 interface Props {
-  articles?: CollectionEntry<'articles'>[];
-  notes?: CollectionEntry<'notes'>[];
+  articles?: CollectionEntry<'docs'>[];
+  lang?: string;
 }
 
-const { articles = [], notes = [] } = Astro.props;
-const allContent = [...articles, ...notes];
+const { articles = [], lang = 'zh' } = Astro.props;
 const latestArticleConfig = themeConfig.site.LatestArticle;
 const { type: loadType, layout = 'vertical', initialLoad, loadMore, defaultLimit, columns = 2 } = latestArticleConfig;
 
-const processedArticles = processEntryData(allContent, 'articles');
+const supportedLangs = ['zh', 'en', 'ja', 'ko', 'ru'];
+const defaultLangArticles = articles.filter(article => {
+  const firstSegment = article.id.split('/')[0];
+  return !supportedLangs.includes(firstSegment);
+});
+
+const processedArticles = processEntryData(defaultLangArticles, 'docs');
 const sortedArticles = sortEntriesByDate(processedArticles).slice(0, defaultLimit);
 
 const articlesForClient = sortedArticles.map(article => ({
   title: article.data.title,
-  permalink: article.processed?.permalink || '',
+  id: article.id,
+  collection: 'docs',
   cover: article.processed?.cover || '/defaultCover.jpg',
   date: article.processed?.date || '',
   categories: article.processed?.categories || [],
@@ -31,166 +37,27 @@ const articlesForClient = sortedArticles.map(article => ({
 
 <div class="relative">
   <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4 mb-6">
-    <div class="flex items-center space-x-2">
+    <div class="flex items-center space-x-2 mb-4">
       <Newspaper class="w-5 h-5" />
-      <h2 class="text-accent font-bold text-lg">最新文章</h2>
-    </div>
-    <div id="articles-container" class={`grid grid-cols-1 md:grid-cols-1 lg:grid-cols-${columns} gap-8 mt-4`}>
-      {sortedArticles.slice(0, initialLoad).map((article) => (
-        <div key={article.data.permalink}>
-          {layout === 'horizontal' ? (
-            <PostCover2 article={article} />
-          ) : (
-            <PostCover article={article} />
-          )}
-        </div>
-      ))}
+      <h2 class="font-bold text-lg text-dark">最新文章</h2>
     </div>
     
-    {loadType === 'button' && sortedArticles.length > initialLoad && (
-      <div class="flex justify-center mt-8">
-        <button
-          id="load-more-btn"
-          class="px-6 py-2 bg-primary text-white rounded-md hover:bg-primary/90 transition-colors"
-          data-loaded={initialLoad}
-          data-total={sortedArticles.length}
-          data-load-more={loadMore}
-          data-default-limit={defaultLimit}
-          data-layout={layout}
-        >
-          加载更多
-        </button>
+    {layout === 'horizontal' ? (
+      <div class="flex overflow-x-auto space-x-4 pb-2">
+        {sortedArticles.map((article) => (
+          <div key={article.id} class="flex-shrink-0 w-64">
+            <PostCover article={article} />
+          </div>
+        ))}
       </div>
-    )}
-
-    {loadType === 'auto' && (
-      <div
-        id="load-trigger"
-        class="h-10 w-full"
-        data-loaded={initialLoad}
-        data-total={sortedArticles.length}
-        data-load-more={loadMore}
-        data-default-limit={defaultLimit}
-        data-layout={layout}
-      ></div>
+    ) : (
+      <div class={`grid gap-4 ${columns > 1 ? `grid-cols-${columns}` : 'grid-cols-1'}`}>
+        {sortedArticles.map((article) => (
+          <div key={article.id}>
+            <PostCover2 article={article} />
+          </div>
+        ))}
+      </div>
     )}
   </div>
 </div>
-
-<script client:idle define:vars={{ articlesForClient }}>
-  const articlesData = articlesForClient;
-  const container = document.getElementById('articles-container');
-  const loadType = articlesData.length > 0 ? 'button' : 'none';
-  const trigger = document.getElementById('load-more-btn') || document.getElementById('load-trigger');
-
-  function renderVerticalCard(article) {
-    const category = article.categories?.[0] || '未分类';
-    
-    const articleCard = document.createElement('a');
-    articleCard.href = article.permalink;
-    articleCard.className = 'min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline';
-    
-    articleCard.innerHTML = `
-      <div class="h-40 bg-gray-200 overflow-hidden">
-        <img src="${article.cover}" alt="${article.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="200" height="150" loading="lazy" />
-      </div>
-      <div class="p-3 flex-1 flex flex-col">
-        <div class="mb-2">
-          <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full transform group-hover:scale-105 transition-transform duration-200">${category}</span>
-        </div>
-        <h3 class="font-medium mb-2 line-clamp-2 h-12 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">${article.title}</h3>
-        <div class="mt-auto flex items-center text-xs text-gray-500">
-          <span>${article.author}</span>
-          <span class="mx-1">·</span>
-          <span>${article.date}</span>
-        </div>
-      </div>
-    `;
-    
-    return articleCard;
-  }
-
-  function renderHorizontalCard(article) {
-    const category = article.categories?.[0] || '未分类';
-    
-    const articleCard = document.createElement('a');
-    articleCard.href = article.permalink;
-    articleCard.className = 'flex flex-row bg-white/70 dark:bg-cyan-950/30 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group';
-    
-    articleCard.innerHTML = `
-      <div class="w-1/3 bg-gray-200 overflow-hidden">
-        <img src="${article.cover}" alt="${article.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" width="120" height="90" loading="lazy" />
-      </div>
-      <div class="w-2/3 p-4 flex flex-col justify-between">
-        <div class="mb-2">
-          <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full transform group-hover:scale-105 transition-transform duration-200">${category}</span>
-        </div>
-        <h3 class="font-medium line-clamp-2 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">${article.title}</h3>
-        <div class="mt-4 flex items-center text-xs text-gray-500 dark:text-gray-400">
-          <span>${article.author}</span>
-          <span class="mx-1">·</span>
-          <span>${article.date}</span>
-        </div>
-      </div>
-    `;
-    
-    return articleCard;
-  }
-
-  function renderArticles(startIndex, endIndex) {
-    const fragment = document.createDocumentFragment();
-    const layout = trigger?.dataset.layout || 'vertical';
-    
-    articlesData.slice(startIndex, endIndex).forEach(article => {
-      const cardWrapper = document.createElement('div');
-      cardWrapper.className = 'min-w-[200px]';
-      
-      const articleCard = layout === 'horizontal' ? renderHorizontalCard(article) : renderVerticalCard(article);
-      
-      cardWrapper.appendChild(articleCard);
-      fragment.appendChild(cardWrapper);
-    });
-    
-    container.appendChild(fragment);
-  }
-
-  function loadMoreArticles() {
-    if (!trigger) return;
-    
-    const loaded = parseInt(trigger.dataset.loaded);
-    const total = parseInt(trigger.dataset.total);
-    const loadMore = parseInt(trigger.dataset.loadMore);
-    const defaultLimit = parseInt(trigger.dataset.defaultLimit);
-    const newLoaded = Math.min(loaded + loadMore, total, defaultLimit);
-
-    if (newLoaded > loaded) {
-      renderArticles(loaded, newLoaded);
-      trigger.dataset.loaded = newLoaded;
-
-      if (newLoaded >= total || newLoaded >= defaultLimit) {
-        trigger.style.display = 'none';
-      }
-    }
-  }
-
-  if (trigger) {
-    const loaded = parseInt(trigger.dataset.loaded);
-    const total = parseInt(trigger.dataset.total);
-    const defaultLimit = parseInt(trigger.dataset.defaultLimit);
-    
-    if (loaded >= total || loaded >= defaultLimit) {
-      trigger.style.display = 'none';
-    }
-
-    if (trigger.id === 'load-more-btn') {
-      trigger.addEventListener('click', loadMoreArticles);
-    } else if (trigger.id === 'load-trigger') {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          loadMoreArticles();
-        }
-      }, { threshold: 0.1 });
-      observer.observe(trigger);
-    }
-  }
-</script>

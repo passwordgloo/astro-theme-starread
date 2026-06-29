@@ -5,11 +5,10 @@ tags: [主题安装]
 description: Star Read是一个出色、简洁且精致的Astro博客主题，提供多种安装方式，项目结构清晰，具备现代UI、搜索支持、响应式设计、主题切换等功能，还提供搜索、主题定制和评论系统的详细配置。
 date: 2025-10-07 21:33:22
 cover: /cover/eRq5UHTwBSmoSguZBTPjB.jpg
-permalink: /theme/f0d2f4/
 ---
 
 <div align="center">
-  <img src="https://origin.picgo.net/2025/09/20/starread9dd6dc8d9d8dc4eb.png" alt="starread" border="0">
+  <img src="/logo.svg" alt="starread" border="0">
   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
   🇨🇳 中文文档 | 
   🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 

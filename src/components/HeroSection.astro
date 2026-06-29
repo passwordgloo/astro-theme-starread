@@ -6,6 +6,7 @@ const heroEnabled = heroConfig?.enabled !== false;
 const bgImage = heroConfig?.backgroundImage || '/cover/NyYehQHfww_67cNm35rPO.jpg';
 const titleConfig = heroConfig?.title;
 const effectConfig = heroConfig?.effect;
+const navbarTransparent = heroConfig?.navbarTransparent !== false;
 
 const isJinrishiciMode = titleConfig?.mode === 'jinrishici';
 const customContent = titleConfig?.content || 'Starread';
@@ -23,6 +24,12 @@ const particlesEnabled = effectConfig?.particles?.enabled !== false;
 const titleStyle = gradientEnabled 
   ? `background: linear-gradient(90deg, ${gradientColors.join(', ')}); background-size: 200% 200%; -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; animation: gradient-flow 4s ease infinite;`
   : 'color: rgb(17 24 39);';
+
+// Hero 区域显示时设置导航栏透明
+if (heroEnabled && navbarTransparent) {
+  // 设置一个全局标志，告诉导航栏需要透明
+  globalThis.heroNavbarTransparent = true;
+}
 ---
 
 {heroEnabled && (
@@ -156,7 +163,7 @@ const titleStyle = gradientEnabled
         .then(data => {
           if (data && data.data) {
             const poemContent = data.data.content;
-            const displayText = `"${poemContent}"`;
+            const displayText = poemContent.replace(/[「」""]/g, '');
             if (animate) {
               typeText(displayText);
             } else {
@@ -166,7 +173,7 @@ const titleStyle = gradientEnabled
           }
         })
         .catch(() => {
-          const fallback = '"行到水穷处，坐看云起时"';
+          const fallback = '行到水穷处，坐看云起时';
           if (animate) {
             typeText(fallback);
           } else {

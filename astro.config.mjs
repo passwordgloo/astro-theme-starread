@@ -15,4 +15,11 @@ export default defineConfig({
 		plugins: [tailwindcss()]
 	},
 	integrations: [mdx(), sitemap(), autoIndex(), autoUpdatePermalink()],
+	i18n: {
+		defaultLocale: 'zh',
+		locales: ['zh', 'en', 'ja', 'ko', 'ru'],
+		routing: {
+			prefixDefaultLocale: false,
+		},
+	},
 });

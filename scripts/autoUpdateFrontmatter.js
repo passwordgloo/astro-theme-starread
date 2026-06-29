@@ -16,6 +16,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+
+
 function showProgress(current, total, status = '') {
   if (total === 0) return;
   const barLength = 30;
@@ -23,28 +25,6 @@ function showProgress(current, total, status = '') {
   const bar = '█'.repeat(progress) + '░'.repeat(barLength - progress);
   const percentage = Math.floor((current / total) * 100);
   process.stdout.write(`\r${status} [${bar}] ${percentage}% (${current}/${total})`);
-}
-
-function generateHexString(length = 6) {
-  const safeLength = Math.max(2, Math.min(32, length));
-  const chars = '0123456789abcdef';
-  let result = '';
-  for (let i = 0; i < safeLength; i++) {
-    result += chars.charAt(Math.floor(Math.random() * chars.length));
-  }
-  return result;
-}
-
-function generatePermalink(collection, slug, filePath) {
-  if (collection === 'notes' && filePath) {
-    const pathParts = filePath.split(path.sep);
-    const notesIndex = pathParts.indexOf('notes');
-    if (notesIndex !== -1 && notesIndex < pathParts.length - 2) {
-      const folderName = pathParts[notesIndex + 1];
-      return `/${folderName}/${generateHexString(6)}/`;
-    }
-  }
-  return `/${collection}/${generateHexString(6)}/`;
 }
 
 function getCurrentDate() {
@@ -60,7 +40,7 @@ function getCurrentDate() {
   }).format(date).replace(/\//g, '-');
 }
 
-function updateFrontmatter(filePath, collection, fullPath) {
+function updateFrontmatter(filePath) {
   try {
     const content = fs.readFileSync(filePath, 'utf8');
     const lines = content.split('\n');
@@ -84,34 +64,23 @@ function updateFrontmatter(filePath, collection, fullPath) {
     }
     
     const frontmatterLines = lines.slice(frontmatterStart + 1, frontmatterEnd);
-    let hasPermalink = false;
     let hasDate = false;
-    let slug = path.basename(filePath, path.extname(filePath));
     
     for (const line of frontmatterLines) {
       const trimmed = line.trim();
-      if (trimmed.startsWith('permalink:')) {
-        hasPermalink = true;
-      } else if (trimmed.startsWith('date:')) {
+      if (trimmed.startsWith('date:')) {
         hasDate = true;
-      } else if (trimmed.startsWith('slug:')) {
-        slug = trimmed.split(':')[1].trim().replace(/['"]/g, '');
+        break;
       }
     }
     
-    if (hasPermalink && hasDate) {
+    if (hasDate) {
       return false;
     }
     
     const updatedFrontmatterLines = [...frontmatterLines];
     
-    if (!hasPermalink) {
-      updatedFrontmatterLines.push(`permalink: ${generatePermalink(collection, slug, fullPath)}`);
-    }
-    
-    if (!hasDate) {
-      updatedFrontmatterLines.push(`date: ${getCurrentDate()}`);
-    }
+    updatedFrontmatterLines.push(`date: ${getCurrentDate()}`);
     
     const updatedLines = [
       ...lines.slice(0, frontmatterStart + 1),
@@ -144,7 +113,7 @@ function countMarkdownFiles(dir) {
   return count;
 }
 
-function processDirectoryWithProgress(dir, collection, totalFiles, progress) {
+function processDirectoryWithProgress(dir, totalFiles, progress) {
   let updatedCount = 0;
   const items = fs.readdirSync(dir);
   
@@ -153,21 +122,20 @@ function processDirectoryWithProgress(dir, collection, totalFiles, progress) {
     const stats = fs.statSync(itemPath);
     
     if (stats.isDirectory()) {
-      updatedCount += processDirectoryWithProgress(itemPath, collection, totalFiles, progress);
+      updatedCount += processDirectoryWithProgress(itemPath, totalFiles, progress);
     } else if (path.extname(item).toLowerCase() === '.md') {
-      const updated = updateFrontmatter(itemPath, collection, itemPath);
+      const updated = updateFrontmatter(itemPath);
       if (updated) {
         updatedCount++;
       }
       progress.processed++;
-      const status = collection === 'articles' ? '📝 正在处理文章' : '📋 正在处理笔记';
-      showProgress(progress.processed, totalFiles, status);
+      showProgress(progress.processed, totalFiles, '📄 正在处理内容');
     }
   }
   return updatedCount;
 }
 
-function processDirectory(directory, collection) {
+function processDirectory(directory) {
   try {
     if (!fs.existsSync(directory)) {
       return 0;
@@ -179,7 +147,7 @@ function processDirectory(directory, collection) {
     }
     
     const progress = { processed: 0 };
-    const updatedCount = processDirectoryWithProgress(directory, collection, totalFiles, progress);
+    const updatedCount = processDirectoryWithProgress(directory, totalFiles, progress);
     process.stdout.write('\n');
     return updatedCount;
     
@@ -191,30 +159,15 @@ function processDirectory(directory, collection) {
 
 function main() {
   const contentDir = path.join(process.cwd(), 'src', 'content');
-  const articlesDir = path.join(contentDir, 'articles');
-  const notesDir = path.join(contentDir, 'notes');
   
   console.log('🔍 开始检查和更新frontmatter...\n');
+  console.log('📌 文件结构: src/content/{topic}/{lang}/{file}.md');
   
-  let totalUpdated = 0;
+  const updatedCount = processDirectory(contentDir);
   
-  if (fs.existsSync(articlesDir)) {
-    console.log('📝 处理articles目录...');
-    const articlesUpdated = processDirectory(articlesDir, 'articles');
-    totalUpdated += articlesUpdated;
-    console.log(`✅ articles目录更新了 ${articlesUpdated} 个文件\n`);
-  }
+  console.log(`✅ 共更新了 ${updatedCount} 个文件`);
   
-  if (fs.existsSync(notesDir)) {
-    console.log('📋 处理notes目录...');
-    const notesUpdated = processDirectory(notesDir, 'notes');
-    totalUpdated += notesUpdated;
-    console.log(`✅ notes目录更新了 ${notesUpdated} 个文件\n`);
-  }
-  
-  console.log(`📊 总计更新了 ${totalUpdated} 个文件`);
-  
-  if (totalUpdated > 0) {
+  if (updatedCount > 0) {
     console.log('\n🔄 注意：已更新frontmatter文件。请重新启动开发服务器以应用更改。');
   }
 }
@@ -223,17 +176,17 @@ if (import.meta.url === new URL(process.argv[1], import.meta.url).href) {
   main();
 }
 
-export default function autoUpdatePermalink() {
+export default function autoUpdateFrontmatter() {
   return {
-    name: 'auto-update-permalink',
+    name: 'auto-update-frontmatter',
     hooks: {
       'astro:config:setup': async () => {
-        console.log('✨ 自动更新永久链接...');
+        console.log('✨ 自动更新frontmatter...');
         try {
           main();
-          console.log('🎉 永久链接更新完成');
+          console.log('🎉 frontmatter更新完成');
         } catch (error) {
-          console.error(`❌ 更新永久链接失败: ${error.message}`);
+          console.error(`❌ 更新frontmatter失败: ${error.message}`);
           throw error;
         }
       },

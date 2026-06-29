@@ -2,7 +2,6 @@
 title: Twikoo 评论系统
 cover: https://imgapi.xl0408.top/index.php
 categories: [帮助]
-permalink: /articles/d90553/
 date: 2025-10-07 21:33:22
 ---
 

@@ -3,7 +3,7 @@ import ConfigLayout from "../../layouts/ConfigLayout.astro";
 import {
   Settings, Home, FileText, Palette, Target, Image, User, Megaphone,
   FolderOpen, Menu, LayoutGrid, Plus, Trash2, GripVertical, Download,
-  RotateCcw, Copy, Check, X, ChevronRight, Upload
+  RotateCcw, Copy, Check, X, ChevronRight, Upload, Languages
 } from "@lucide/astro";
 import { themeConfig } from "../../../starread.config";
 
@@ -72,6 +72,10 @@ const navbarConfig = themeConfig.navbar || [];
             <FolderOpen class="nav-icon" />
             <span>文章分类</span>
           </a>
+          <a href="#i18n" class="nav-item" data-section="i18n">
+            <Languages class="nav-icon" />
+            <span>多语言配置</span>
+          </a>
           <a href="#navbar" class="nav-item" data-section="navbar">
             <Menu class="nav-icon" />
             <span>导航菜单</span>
@@ -132,6 +136,17 @@ const navbarConfig = themeConfig.navbar || [];
                   <span class="switch-slider"></span>
                   <span class="switch-label">
                     <span class="switch-title">显示 Hero 区域</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="form-field col-span-2">
+                <label class="switch-card">
+                  <input type="checkbox" name="hero.navbarTransparent" checked class="switch-input" />
+                  <span class="switch-slider"></span>
+                  <span class="switch-label">
+                    <span class="switch-title">导航栏透明效果</span>
+                    <span class="switch-desc">在 Hero 区域上显示时导航栏变为透明</span>
                   </span>
                 </label>
               </div>
@@ -692,8 +707,8 @@ const navbarConfig = themeConfig.navbar || [];
                     <input type="text" class="field-input-sm" value="主题说明" placeholder="如：科技资讯、生活随笔" data-field="title" />
                   </div>
                 </div>
-                <button class="btn-icon-danger" type="button">
-                  <Trash2 class="w-4 h-4" />
+                <button class="btn-icon-danger" type="button" aria-label="删除分类">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                 </button>
               </div>
               <div class="category-item">
@@ -707,8 +722,172 @@ const navbarConfig = themeConfig.navbar || [];
                     <input type="text" class="field-input-sm" value="帮助" placeholder="如：科技资讯、生活随笔" data-field="title" />
                   </div>
                 </div>
-                <button class="btn-icon-danger" type="button">
-                  <Trash2 class="w-4 h-4" />
+                <button class="btn-icon-danger" type="button" aria-label="删除分类">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- 多语言配置 -->
+        <section id="i18n" class="form-section">
+          <div class="section-header">
+            <span class="section-badge">10</span>
+            <div>
+              <h3 class="section-title">多语言配置</h3>
+              <p class="section-subtitle">配置网站的多语言支持</p>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="form-grid">
+              <div class="form-field col-span-2">
+                <label class="switch-card">
+                  <input type="checkbox" name="i18n.enabled" checked class="switch-input" />
+                  <span class="switch-slider"></span>
+                  <span class="switch-label">
+                    <span class="switch-title">启用多语言支持</span>
+                    <span class="switch-desc">开启后自动为每种语言生成路由</span>
+                  </span>
+                </label>
+              </div>
+
+              <div class="form-field">
+                <label class="field-label">默认语言</label>
+                <input type="text" name="i18n.defaultLang" value="zh" class="field-input" placeholder="如：zh" />
+                <span class="field-hint">默认显示的语言代码</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-card">
+            <div class="category-help">
+              <p class="help-text">
+                <strong>说明：</strong>添加支持的语言。语言代码用于路由路径（如 /zh/notes），文件夹名对应 src/content/notes/ 下的子目录。
+              </p>
+            </div>
+            <div class="list-header">
+              <span class="list-title">语言列表</span>
+              <button class="btn-add" type="button" id="btn-add-lang">
+                <Plus class="w-4 h-4" />
+                添加语言
+              </button>
+            </div>
+            <div class="category-list" id="i18n-lang-list">
+              <div class="category-item">
+                <div class="category-inputs">
+                  <div class="input-wrapper">
+                    <label class="input-label">语言代码</label>
+                    <input type="text" class="field-input-sm" value="zh" placeholder="如：zh、en" data-field="code" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">语言名称</label>
+                    <input type="text" class="field-input-sm" value="简体中文" placeholder="如：简体中文、English" data-field="name" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">国旗</label>
+                    <input type="text" class="field-input-sm" value="🇨🇳" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">内容文件夹</label>
+                    <input type="text" class="field-input-sm" value="theme" placeholder="如：theme" data-field="folder" />
+                  </div>
+                </div>
+                <button class="btn-icon-danger" type="button" aria-label="删除语言">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                </button>
+              </div>
+              <div class="category-item">
+                <div class="category-inputs">
+                  <div class="input-wrapper">
+                    <label class="input-label">语言代码</label>
+                    <input type="text" class="field-input-sm" value="en" placeholder="如：zh、en" data-field="code" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">语言名称</label>
+                    <input type="text" class="field-input-sm" value="English" placeholder="如：简体中文、English" data-field="name" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">国旗</label>
+                    <input type="text" class="field-input-sm" value="🇺🇸" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">内容文件夹</label>
+                    <input type="text" class="field-input-sm" value="theme" placeholder="如：theme" data-field="folder" />
+                  </div>
+                </div>
+                <button class="btn-icon-danger" type="button" aria-label="删除语言">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                </button>
+              </div>
+              <div class="category-item">
+                <div class="category-inputs">
+                  <div class="input-wrapper">
+                    <label class="input-label">语言代码</label>
+                    <input type="text" class="field-input-sm" value="ja" placeholder="如：zh、en" data-field="code" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">语言名称</label>
+                    <input type="text" class="field-input-sm" value="日本語" placeholder="如：简体中文、English" data-field="name" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">国旗</label>
+                    <input type="text" class="field-input-sm" value="🇯🇵" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">内容文件夹</label>
+                    <input type="text" class="field-input-sm" value="theme" placeholder="如：theme" data-field="folder" />
+                  </div>
+                </div>
+                <button class="btn-icon-danger" type="button" aria-label="删除语言">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                </button>
+              </div>
+              <div class="category-item">
+                <div class="category-inputs">
+                  <div class="input-wrapper">
+                    <label class="input-label">语言代码</label>
+                    <input type="text" class="field-input-sm" value="ko" placeholder="如：zh、en" data-field="code" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">语言名称</label>
+                    <input type="text" class="field-input-sm" value="한국어" placeholder="如：简体中文、English" data-field="name" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">国旗</label>
+                    <input type="text" class="field-input-sm" value="🇰🇷" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">内容文件夹</label>
+                    <input type="text" class="field-input-sm" value="theme" placeholder="如：theme" data-field="folder" />
+                  </div>
+                </div>
+                <button class="btn-icon-danger" type="button" aria-label="删除语言">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                </button>
+              </div>
+              <div class="category-item">
+                <div class="category-inputs">
+                  <div class="input-wrapper">
+                    <label class="input-label">语言代码</label>
+                    <input type="text" class="field-input-sm" value="ru" placeholder="如：zh、en" data-field="code" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">语言名称</label>
+                    <input type="text" class="field-input-sm" value="Русский" placeholder="如：简体中文、English" data-field="name" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">国旗</label>
+                    <input type="text" class="field-input-sm" value="🇷🇺" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">内容文件夹</label>
+                    <input type="text" class="field-input-sm" value="theme" placeholder="如：theme" data-field="folder" />
+                  </div>
+                </div>
+                <button class="btn-icon-danger" type="button" aria-label="删除语言">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                 </button>
               </div>
             </div>
@@ -729,22 +908,42 @@ const navbarConfig = themeConfig.navbar || [];
             <div class="category-help">
               <p class="help-text">
                 <strong>提示：</strong>导航名称显示在菜单上，链接地址可以是相对路径（如：/about）或绝对URL（如：https://example.com）。
-                图标名称参考 Lucide 图标库，如：Home、Book、User、Settings 等。点击导航项可展开编辑详情。
               </p>
             </div>
             <div class="list-header">
               <span class="list-title">导航项列表</span>
-              <button class="btn-add" type="button" id="btn-add-nav">
-                <Plus class="w-4 h-4" />
-                添加导航
-              </button>
             </div>
-            <div class="nav-list" id="nav-list">
-              <!-- 导航项将通过 JS 渲染 -->
-            </div>
-            <div id="nav-empty-hint" class="empty-hint" style="display: none;">
-              <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="mx-auto mb-3 opacity-50"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              <p>暂无导航项，点击上方"添加导航"按钮开始配置</p>
+            <div class="category-list" id="nav-list">
+              <div class="category-item">
+                <div class="category-inputs">
+                  <div class="input-wrapper">
+                    <label class="input-label">导航名称</label>
+                    <input type="text" class="field-input-sm" value="首页" placeholder="如：首页、关于" data-field="name" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">链接地址</label>
+                    <input type="text" class="field-input-sm" value="/" placeholder="如：/about" data-field="href" />
+                  </div>
+                </div>
+                <button class="btn-icon-danger" type="button" data-action="remove-nav" data-index="0" aria-label="删除导航">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                </button>
+              </div>
+              <div class="category-item">
+                <div class="category-inputs">
+                  <div class="input-wrapper">
+                    <label class="input-label">导航名称</label>
+                    <input type="text" class="field-input-sm" value="配置" placeholder="如：首页、关于" data-field="name" />
+                  </div>
+                  <div class="input-wrapper">
+                    <label class="input-label">链接地址</label>
+                    <input type="text" class="field-input-sm" value="/config" placeholder="如：/about" data-field="href" />
+                  </div>
+                </div>
+                <button class="btn-icon-danger" type="button" data-action="remove-nav" data-index="1" aria-label="删除导航">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                </button>
+              </div>
             </div>
           </div>
         </section>
@@ -804,135 +1003,10 @@ const navbarConfig = themeConfig.navbar || [];
 </ConfigLayout>
 
 <style is:global>
-  .category-list,
-  .nav-list {
+  .category-list {
     display: flex;
     flex-direction: column;
     gap: 12px;
-  }
-
-  .nav-item-card {
-    background: rgba(255, 255, 255, 0.5);
-    border: 1px solid var(--glass-border);
-    border-radius: 12px;
-    overflow: hidden;
-    transition: all 0.2s ease;
-  }
-
-  .dark .nav-item-card {
-    background: rgba(30, 41, 59, 0.8);
-    border-color: #4b5563;
-  }
-
-  .nav-item-card:hover {
-    border-color: var(--primary-light);
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
-  }
-
-  .nav-item-header {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 14px 16px;
-    cursor: pointer;
-    transition: background 0.2s ease;
-  }
-
-  .nav-item-header:hover {
-    background: rgba(79, 70, 229, 0.05);
-  }
-
-  .dark .nav-item-header:hover {
-    background: rgba(99, 102, 241, 0.1);
-  }
-
-  .nav-item-icon-wrap {
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    flex-shrink: 0;
-  }
-
-  .nav-item-info {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .nav-item-name {
-    display: block;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--text-main);
-  }
-
-  .dark .nav-item-name {
-    color: #f3f4f6;
-  }
-
-  .nav-item-href {
-    display: block;
-    font-size: 12px;
-    color: var(--text-muted);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    margin-top: 2px;
-  }
-
-  .dark .nav-item-href {
-    color: #9ca3af;
-  }
-
-  .nav-item-actions {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .nav-item-arrow {
-    color: var(--text-muted);
-    transition: transform 0.2s ease;
-  }
-
-  .nav-item-details {
-    padding: 0 16px 16px;
-  }
-
-  .nav-item-form {
-    background: rgba(0, 0, 0, 0.02);
-    border-radius: 8px;
-    padding: 12px;
-  }
-
-  .dark .nav-item-form {
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .nav-form-row {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-  }
-
-  .nav-form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-  }
-
-  .nav-form-label {
-    font-size: 11px;
-    font-weight: 500;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-
-  .dark .nav-form-label {
-    color: #9ca3af;
   }
 
   .empty-hint {
@@ -2252,24 +2326,7 @@ const navbarConfig = themeConfig.navbar || [];
     { key: 'toc', label: '文章目录', enabled: true },
   ];
 
-  // 导航项数据 - 从配置文件读取
-  let navItems = [];
-  try {
-    const configData = document.getElementById('navbar-config-data');
-    if (configData) {
-      const config = JSON.parse(configData.textContent);
-      if (Array.isArray(config)) {
-        navItems = config.map(item => ({
-          name: item.name || '',
-          href: item.href || '',
-          icon: item.icon || 'Circle',
-        }));
-      }
-    }
-  } catch (e) {
-    console.error('Failed to parse navbar config:', e);
-    navItems = [{ name: '主页', href: '/', icon: 'Home' }];
-  }
+  // 导航项数据 - 从静态 HTML 读取
 
   // 当前上传字段
   let currentUploadField = null;
@@ -2589,9 +2646,6 @@ const navbarConfig = themeConfig.navbar || [];
         const targetSection = document.getElementById(targetId);
         if (targetSection) {
           targetSection.classList.add('active');
-          if (targetId === 'navbar') {
-            renderNavItems();
-          }
         }
       });
     });
@@ -2660,129 +2714,22 @@ const navbarConfig = themeConfig.navbar || [];
 
   // 分类列表功能
   function initCategoryList() {
-    const container = document.getElementById('categories-list');
-    if (!container) return;
+    const containers = ['categories-list', 'i18n-lang-list'];
+    
+    containers.forEach(id => {
+      const container = document.getElementById(id);
+      if (!container) return;
 
-    // 绑定删除按钮
-    container.addEventListener('click', (e) => {
-      const btn = e.target.closest('.btn-icon-danger');
-      if (btn) {
-        btn.closest('.category-item').remove();
-      }
-    });
-  }
-
-  // 导航列表功能
-  function initNavList() {
-    renderNavItems();
-  }
-
-  function renderNavItems() {
-    const container = document.getElementById('nav-list');
-    const emptyHint = document.getElementById('nav-empty-hint');
-    if (!container) return;
-
-    if (navItems.length === 0) {
-      container.innerHTML = '';
-      if (emptyHint) emptyHint.style.display = 'block';
-      return;
-    }
-
-    if (emptyHint) emptyHint.style.display = 'none';
-
-    container.innerHTML = navItems.map((item, index) => `
-      <div class="nav-item-card" data-index="${index}">
-        <div class="nav-item-header" data-action="toggle-nav">
-          <div class="nav-item-icon-wrap">
-            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              ${getIconSvg(item.icon || 'Circle')}
-            </svg>
-          </div>
-          <div class="nav-item-info">
-            <span class="nav-item-name">${item.name || '未命名导航'}</span>
-            <span class="nav-item-href">${item.href || '#'}</span>
-          </div>
-          <div class="nav-item-actions">
-            <button class="btn-icon-danger" type="button" data-action="remove-nav" data-index="${index}" title="删除">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-            </button>
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="nav-item-arrow"><path d="m6 9 6 6 6-6"/></svg>
-          </div>
-        </div>
-        <div class="nav-item-details" style="display: none;">
-          <div class="nav-item-form">
-            <div class="nav-form-row">
-              <div class="nav-form-group">
-                <label class="nav-form-label">导航名称</label>
-                <input type="text" class="field-input-sm" value="${item.name}" placeholder="如：首页" data-field="name" />
-              </div>
-              <div class="nav-form-group">
-                <label class="nav-form-label">链接地址</label>
-                <input type="text" class="field-input-sm" value="${item.href}" placeholder="如：/ 或 https://" data-field="href" />
-              </div>
-              <div class="nav-form-group">
-                <label class="nav-form-label">图标名称</label>
-                <input type="text" class="field-input-sm" value="${item.icon}" placeholder="如：Home" data-field="icon" />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    `).join('');
-
-    container.querySelectorAll('[data-action="toggle-nav"]').forEach(header => {
-      header.addEventListener('click', () => {
-        const card = header.closest('.nav-item-card');
-        const details = card.querySelector('.nav-item-details');
-        const arrow = card.querySelector('.nav-item-arrow');
-        if (details) {
-          details.style.display = details.style.display === 'none' ? 'block' : 'none';
-        }
-        if (arrow) {
-          arrow.style.transform = details.style.display === 'none' ? 'rotate(0deg)' : 'rotate(180deg)';
+      container.addEventListener('click', (e) => {
+        const btn = e.target.closest('.btn-icon-danger');
+        if (btn) {
+          btn.closest('.category-item').remove();
         }
       });
     });
-
-    container.querySelectorAll('[data-action="remove-nav"]').forEach(btn => {
-      btn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const index = parseInt(btn.dataset.index);
-        navItems.splice(index, 1);
-        renderNavItems();
-      });
-    });
-
-    container.querySelectorAll('.nav-item-card').forEach((card, index) => {
-      card.querySelectorAll('[data-field]').forEach(input => {
-        input.addEventListener('input', () => {
-          const field = input.dataset.field;
-          navItems[index][field] = input.value;
-          const header = card.querySelector('.nav-item-header');
-          if (header) {
-            const nameEl = header.querySelector('.nav-item-name');
-            const hrefEl = header.querySelector('.nav-item-href');
-            if (nameEl) nameEl.textContent = navItems[index].name || '未命名导航';
-            if (hrefEl) hrefEl.textContent = navItems[index].href || '#';
-          }
-        });
-      });
-    });
   }
 
-  function getIconSvg(iconName) {
-    const iconMap = {
-      'Home': '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>',
-      'Book': '<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
-      'Code': '<polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>',
-      'Lock': '<rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
-      'Database': '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>',
-      'User': '<path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/>',
-      'Settings': '<path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/>',
-      'HelpCircle': '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" x2="12.01" y1="17" y2="17"/>',
-    };
-    return iconMap[iconName] || '<circle cx="12" cy="12" r="10"/>';
-  }
+  
 
   // 绑定按钮事件
   function bindButtonEvents() {
@@ -2816,14 +2763,12 @@ const navbarConfig = themeConfig.navbar || [];
       btnAddCategory.addEventListener('click', addCategory);
     }
 
-    // 添加导航按钮
-    const btnAddNav = document.getElementById('btn-add-nav');
-    if (btnAddNav) {
-      btnAddNav.addEventListener('click', () => {
-        navItems.push({ name: '', href: '', icon: '' });
-        renderNavItems();
-      });
+    // 添加语言按钮
+    const btnAddLang = document.getElementById('btn-add-lang');
+    if (btnAddLang) {
+      btnAddLang.addEventListener('click', addLang);
     }
+    
   }
 
   // 添加分类
@@ -2845,6 +2790,39 @@ const navbarConfig = themeConfig.navbar || [];
         </div>
       </div>
       <button class="btn-icon-danger" type="button" aria-label="删除分类">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+      </button>
+    `;
+    container.appendChild(div);
+  }
+
+  // 添加语言
+  function addLang() {
+    const container = document.getElementById('i18n-lang-list');
+    if (!container) return;
+
+    const div = document.createElement('div');
+    div.className = 'category-item';
+    div.innerHTML = `
+      <div class="category-inputs">
+        <div class="input-wrapper">
+          <label class="input-label">语言代码</label>
+          <input type="text" class="field-input-sm" placeholder="如：zh、en" data-field="code" />
+        </div>
+        <div class="input-wrapper">
+          <label class="input-label">语言名称</label>
+          <input type="text" class="field-input-sm" placeholder="如：简体中文、English" data-field="name" />
+        </div>
+        <div class="input-wrapper">
+          <label class="input-label">国旗</label>
+          <input type="text" class="field-input-sm" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+        </div>
+        <div class="input-wrapper">
+          <label class="input-label">内容文件夹</label>
+          <input type="text" class="field-input-sm" placeholder="如：theme" data-field="folder" />
+        </div>
+      </div>
+      <button class="btn-icon-danger" type="button" aria-label="删除语言">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
       </button>
     `;
@@ -2877,6 +2855,7 @@ const navbarConfig = themeConfig.navbar || [];
     return {
       hero: {
         enabled: formData.get('hero.enabled') === 'true',
+        navbarTransparent: formData.get('hero.navbarTransparent') === 'true',
         backgroundImage: formData.get('hero.backgroundImage'),
         title: {
           mode: formData.get('hero.title.mode'),
@@ -2959,25 +2938,25 @@ const navbarConfig = themeConfig.navbar || [];
           title: item.querySelector('[data-field="title"]')?.value,
         })).filter(c => c.name && c.title),
       },
-      navbar: collectNavbarConfig(),
+      navbar: Array.from(document.querySelectorAll('#nav-list .category-item')).map(el => ({
+        name: el.querySelector('[data-field="name"]')?.value,
+        href: el.querySelector('[data-field="href"]')?.value,
+      })).filter(item => item.name && item.href),
+      i18n: {
+        enabled: formData.get('i18n.enabled') === 'true',
+        defaultLang: formData.get('i18n.defaultLang'),
+        languages: Array.from(document.querySelectorAll('#i18n-lang-list .category-item')).map(item => ({
+          code: item.querySelector('[data-field="code"]')?.value,
+          name: item.querySelector('[data-field="name"]')?.value,
+          flag: item.querySelector('[data-field="flag"]')?.value,
+          folder: item.querySelector('[data-field="folder"]')?.value,
+        })).filter(l => l.code && l.name),
+      },
       sidebar: {
         home: collectSidebarConfig('sidebar-home'),
         article: collectSidebarConfig('sidebar-article'),
       },
     };
-  }
-
-  function collectNavbarConfig() {
-    const items = [];
-    document.querySelectorAll('#nav-list .nav-item-card').forEach(el => {
-      const name = el.querySelector('[data-field="name"]')?.value;
-      const href = el.querySelector('[data-field="href"]')?.value;
-      const icon = el.querySelector('[data-field="icon"]')?.value;
-      if (name) {
-        items.push({ name, href: href || '/', icon: icon || 'Home' });
-      }
-    });
-    return items;
   }
 
   function collectSidebarConfig(containerId) {

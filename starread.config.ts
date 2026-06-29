@@ -65,6 +65,252 @@ export const themeConfig: StarreadThemeConfig = {
   // en: 一周从周日开始
   language: 'zh',
 
+  // 多语言(i18n)配置
+  i18n: {
+    enabled: true,
+    defaultLang: 'zh',
+    languages: [
+      { code: 'zh', name: '简体中文', flag: '🇨🇳' },
+      { code: 'en', name: 'English', flag: '🇺🇸' },
+      { code: 'ja', name: '日本語', flag: '🇯🇵' },
+      { code: 'ko', name: '한국어', flag: '🇰🇷' },
+      { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+    ],
+  },
+
+  // 站点多语言配置（类似 VuePress 的 locales）
+  locales: {
+    '/': {
+      label: '简体中文',
+      selectText: '选择语言',
+      site: {
+        title: '星阅主题',
+        footer: {
+          text: '© 2025 风雅中华 - 阳光明媚，微笑前行',
+        },
+      },
+      widget: {
+        author: {
+          name: '风雅中华',
+          description: '阳光明媚，微笑前行',
+        },
+        ad: {
+          title: '黑曜石博客',
+          description: '支持评论弹幕、粒子动画效果、分类',
+          buttonText: '了解详情',
+        },
+        categories: [
+          { name: '主题说明', title: '主题说明' },
+          { name: '帮助', title: '帮助' },
+        ],
+        carousel: {
+          title: '轮播',
+        },
+        banner: {
+          title: 'Star read 星阅主题',
+          tags: ['基于Vite+Tailwindcss', '支持深色模式', '模块化组件'],
+        },
+      },
+      navbar: [
+        { name: '主页' },
+        { name: '软件资源' },
+        { name: '教程指南' },
+        { name: '代码编程' },
+        { name: '汇编逆向' },
+      ],
+      sidebar: {
+        progress: '字数统计',
+        author: '作者',
+        ad: '广告',
+        tagcloud: '标签云',
+        statistic: '站点统计',
+        toc: '文章目录',
+      },
+      search: {
+        placeholder: '搜索文档 (⌘K)',
+        noResults: '没有找到与 "{query}" 相关的内容，请尝试其他关键词',
+        loading: '正在搜索...',
+        initialTip: '支持使用键盘进行导航，Windows用户请用Ctrl 替换 ⌘',
+        clear: '清除搜索',
+        viewDetails: '查看详情',
+        shortcuts: {
+          open: '打开搜索',
+          browse: '浏览',
+          select: '选择',
+          close: '关闭',
+        },
+      },
+    },
+    '/en/': {
+      label: 'English',
+      selectText: 'Select Language',
+      site: {
+        title: 'StarRead Theme',
+        footer: {
+          text: '© 2025 StarRead - Keep smiling and moving forward',
+        },
+      },
+      widget: {
+        author: {
+          name: 'StarRead',
+          description: 'Keep smiling and moving forward',
+        },
+        ad: {
+          title: 'Obsidian Blog',
+          description: 'Supports comments, particle effects, categories',
+          buttonText: 'Learn More',
+        },
+        categories: [
+          { name: 'Theme Guide', title: 'Theme Guide' },
+          { name: 'Help', title: 'Help' },
+        ],
+        carousel: {
+          title: 'Carousel',
+        },
+        banner: {
+          title: 'StarRead Theme',
+          tags: ['Based on Vite+Tailwindcss', 'Dark Mode Support', 'Modular Components'],
+        },
+      },
+      navbar: [
+        { name: 'Home' },
+        { name: 'Software' },
+        { name: 'Tutorials' },
+        { name: 'Coding' },
+        { name: 'Reverse' },
+      ],
+      sidebar: {
+        progress: 'Word Count',
+        author: 'Author',
+        ad: 'Advertisement',
+        tagcloud: 'Tag Cloud',
+        statistic: 'Statistics',
+        toc: 'Table of Contents',
+      },
+      search: {
+        placeholder: 'Search docs (⌘K)',
+        noResults: 'No results found for "{query}", try other keywords',
+        loading: 'Searching...',
+        initialTip: 'Keyboard navigation supported. Windows users use Ctrl instead of ⌘',
+        clear: 'Clear Search',
+        viewDetails: 'View Details',
+        shortcuts: {
+          open: 'Open Search',
+          browse: 'Browse',
+          select: 'Select',
+          close: 'Close',
+        },
+      },
+    },
+    '/ja/': {
+      label: '日本語',
+      selectText: '言語を選択',
+      site: {
+        title: 'スターリードテーマ',
+        footer: {
+          text: '© 2025 スターリード - 前進し続ける',
+        },
+      },
+      widget: {
+        author: {
+          name: 'スターリード',
+          description: '前進し続ける',
+        },
+        ad: {
+          title: 'オブシディアンブログ',
+          description: 'コメント、パーティクル効果、カテゴリに対応',
+          buttonText: '詳細を見る',
+        },
+      },
+      sidebar: {
+        progress: '文字数',
+        author: '作者',
+        ad: '広告',
+        tagcloud: 'タグクラウド',
+        statistic: '統計',
+        toc: '目次',
+      },
+      search: {
+        placeholder: 'ドキュメントを検索 (⌘K)',
+        noResults: '"{query}" に関する結果が見つかりません。他のキーワードを試してください',
+        loading: '検索中...',
+        initialTip: 'キーボード操作が可能です。Windowsユーザーは ⌘ の代わりに Ctrl を使用してください',
+        clear: '検索をクリア',
+        viewDetails: '詳細を見る',
+        shortcuts: {
+          open: '検索を開く',
+          browse: '閲覧',
+          select: '選択',
+          close: '閉じる',
+        },
+      },
+    },
+    '/ko/': {
+      label: '한국어',
+      selectText: '언어 선택',
+      site: {
+        title: 'StarRead 테마',
+        footer: {
+          text: '© 2025 StarRead - 계속 나아가기',
+        },
+      },
+      sidebar: {
+        progress: '단어 수',
+        author: '저자',
+        ad: '광고',
+        tagcloud: '태그 클라우드',
+        statistic: '통계',
+        toc: '목차',
+      },
+      search: {
+        placeholder: '문서 검색 (⌘K)',
+        noResults: '"{query}"와 관련된 결과를 찾을 수 없습니다. 다른 키워드를 시도하세요',
+        loading: '검색 중...',
+        initialTip: '키보드 탐색을 지원합니다. Windows 사용자는 ⌘ 대신 Ctrl을 사용하세요',
+        clear: '검색 지우기',
+        viewDetails: '자세히 보기',
+        shortcuts: {
+          open: '검색 열기',
+          browse: '탐색',
+          select: '선택',
+          close: '닫기',
+        },
+      },
+    },
+    '/ru/': {
+      label: 'Русский',
+      selectText: 'Выберите язык',
+      site: {
+        title: 'Тема StarRead',
+        footer: {
+          text: '© 2025 StarRead - Продолжайте двигаться вперед',
+        },
+      },
+      sidebar: {
+        progress: 'Количество слов',
+        author: 'Автор',
+        ad: 'Реклама',
+        tagcloud: 'Облако тегов',
+        statistic: 'Статистика',
+        toc: 'Оглавление',
+      },
+      search: {
+        placeholder: 'Поиск документов (⌘K)',
+        noResults: 'Ничего не найдено по запросу "{query}", попробуйте другие ключевые слова',
+        loading: 'Идет поиск...',
+        initialTip: 'Поддерживается навигация с клавиатуры. Пользователи Windows используйте Ctrl вместо ⌘',
+        clear: 'Очистить поиск',
+        viewDetails: 'Подробнее',
+        shortcuts: {
+          open: 'Открыть поиск',
+          browse: 'Обзор',
+          select: 'Выбрать',
+          close: 'Закрыть',
+        },
+      },
+    },
+  },
+
   // 动态效果配置
   dynamicEffect: {
     postTopWave: true

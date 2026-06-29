@@ -1,15 +1,18 @@
 ---
 import { themeConfig } from '../../starread.config';
-import { ChartBar, Files, FileText, Pen, CalendarDays, Eye, Users } from "@lucide/astro";
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { ChartBar, FileText, Folder, Tag, CalendarDays, Eye, Users } from "@lucide/astro";
 
 interface Props {
-  totalFileCount: number;
   articleCount: number;
-  noteCount: number;
-  totalWords: number;
+  categoryCount: number;
+  tagCount: number;
 }
 
-const { totalFileCount, articleCount, noteCount, totalWords } = Astro.props;
+const { articleCount, categoryCount, tagCount } = Astro.props;
+
+const currentLang = getLangFromUrl(Astro.url.pathname);
+const t = useTranslations(currentLang);
 
 function getSiteDays() {
   if (!themeConfig.site.foundedDate) return 0;
@@ -27,71 +30,62 @@ const siteDays = getSiteDays();
 <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-4">
   <div class="flex items-center space-x-2 mb-4">
     <ChartBar class="w-5 h-5 text-accent" />
-    <span class="text-accent font-bold text-lg">站点统计</span>
+    <span class="text-accent font-bold text-lg">{t.sidebar.statistic}</span>
   </div>
 
   <div class="space-y-3 text-sm">
-    <!-- 总文件数 -->
-    <div class="flex items-center justify-between">
-      <div class="flex items-center space-x-2">
-        <Files class="w-4 h-4 text-gray-500 dark:text-slate-400" />
-        <span class="text-gray-600 dark:text-slate-400">总文件数</span>
-      </div>
-      <span class="font-medium text-primary dark:text-secondary">{totalFileCount} 个</span>
-    </div>
-
     <!-- 文章总数 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
         <FileText class="w-4 h-4 text-gray-500 dark:text-slate-400" />
-        <span class="text-gray-600 dark:text-slate-400">文章总数</span>
+        <span class="text-gray-600 dark:text-slate-400">{currentLang === 'zh' ? '文章总数' : currentLang === 'en' ? 'Articles' : currentLang === 'ja' ? '記事数' : currentLang === 'ko' ? '기사 수' : 'Статей'}</span>
       </div>
-      <span class="font-medium text-primary dark:text-secondary">{articleCount} 篇</span>
+      <span class="font-medium text-primary dark:text-secondary">{articleCount} {currentLang === 'zh' ? '篇' : currentLang === 'ja' ? '編' : ''}</span>
     </div>
 
-    <!-- 笔记总数 -->
+    <!-- 分类数量 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <FileText class="w-4 h-4 text-gray-500 dark:text-slate-400" />
-        <span class="text-gray-600 dark:text-slate-400">笔记总数</span>
+        <Folder class="w-4 h-4 text-gray-500 dark:text-slate-400" />
+        <span class="text-gray-600 dark:text-slate-400">{currentLang === 'zh' ? '分类数量' : currentLang === 'en' ? 'Categories' : currentLang === 'ja' ? 'カテゴリ数' : currentLang === 'ko' ? '카테고리 수' : 'Категорий'}</span>
       </div>
-      <span class="font-medium text-primary dark:text-secondary">{noteCount} 篇</span>
+      <span class="font-medium text-primary dark:text-secondary">{categoryCount} {currentLang === 'zh' ? '个' : currentLang === 'ja' ? '個' : ''}</span>
     </div>
 
-    <!-- 全站字数 -->
+    <!-- 标签数量 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
-        <Pen class="w-4 h-4 text-gray-500 dark:text-slate-400" />
-        <span class="text-gray-600 dark:text-slate-400">全站字数</span>
+        <Tag class="w-4 h-4 text-gray-500 dark:text-slate-400" />
+        <span class="text-gray-600 dark:text-slate-400">{currentLang === 'zh' ? '标签数量' : currentLang === 'en' ? 'Tags' : currentLang === 'ja' ? 'タグ数' : currentLang === 'ko' ? '태그 수' : 'Тегов'}</span>
       </div>
-      <span class="font-medium text-primary dark:text-secondary">{totalWords} 字</span>
+      <span class="font-medium text-primary dark:text-secondary">{tagCount} {currentLang === 'zh' ? '个' : currentLang === 'ja' ? '個' : ''}</span>
     </div>
 
     <!-- 建站天数 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
         <CalendarDays class="w-4 h-4 text-gray-500 dark:text-slate-400" />
-        <span class="text-gray-600 dark:text-slate-400">建站天数</span>
+        <span class="text-gray-600 dark:text-slate-400">{currentLang === 'zh' ? '建站天数' : currentLang === 'en' ? 'Days Online' : currentLang === 'ja' ? '運営日数' : currentLang === 'ko' ? '운영 일수' : 'Дней онлайн'}</span>
       </div>
-      <span class="font-medium text-primary dark:text-secondary">{siteDays} 天</span>
+      <span class="font-medium text-primary dark:text-secondary">{siteDays} {currentLang === 'zh' ? '天' : currentLang === 'ja' ? '日' : 'days'}</span>
     </div>
 
     <!-- 总访问量 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
         <Eye class="w-4 h-4 text-gray-500 dark:text-slate-400" />
-        <span class="text-gray-600 dark:text-slate-400">总访问量</span>
+        <span class="text-gray-600 dark:text-slate-400">{currentLang === 'zh' ? '总访问量' : currentLang === 'en' ? 'Total Views' : currentLang === 'ja' ? '総アクセス数' : currentLang === 'ko' ? '총 방문 수' : 'Всего просмотров'}</span>
       </div>
-      <span id="busuanzi_site_pv" class="font-medium text-primary dark:text-secondary">加载中...</span>
+      <span id="busuanzi_site_pv" class="font-medium text-primary dark:text-secondary">{currentLang === 'zh' ? '加载中...' : 'Loading...'}</span>
     </div>
 
     <!-- 总访客数 -->
     <div class="flex items-center justify-between">
       <div class="flex items-center space-x-2">
         <Users class="w-4 h-4 text-gray-500 dark:text-slate-400" />
-        <span class="text-gray-600 dark:text-slate-400">总访客数</span>
+        <span class="text-gray-600 dark:text-slate-400">{currentLang === 'zh' ? '总访客数' : currentLang === 'en' ? 'Total Visitors' : currentLang === 'ja' ? '総訪問者数' : currentLang === 'ko' ? '총 방문자 수' : 'Всего посетителей'}</span>
       </div>
-      <span id="busuanzi_site_uv" class="font-medium text-primary dark:text-secondary">加载中...</span>
+      <span id="busuanzi_site_uv" class="font-medium text-primary dark:text-secondary">{currentLang === 'zh' ? '加载中...' : 'Loading...'}</span>
     </div>
   </div>
 </div>

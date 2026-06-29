@@ -16,15 +16,9 @@ import { countWords } from '../components/frontmatter';
 
 const sidebarConfig = themeConfig.sidebar.home;
 
-const articles = await getCollection('articles', {
-  filter: () => true,
-  projection: {
-    data: { title: true, date: true, categories: true, tags: true, cover: true, permalink: true },
-    collection: true,
-    slug: true
-  }
-});
-const notes = await getCollection('notes', {
+const supportedLangs = ['zh', 'en', 'ja', 'ko', 'ru'];
+
+const docs = await getCollection('docs', {
   filter: () => true,
   projection: {
     data: { title: true, date: true, categories: true, tags: true, cover: true, permalink: true },
@@ -33,31 +27,33 @@ const notes = await getCollection('notes', {
   }
 });
 
-const articlesWithBody = await getCollection('articles');
-const notesWithBody = await getCollection('notes', ({ data }) => data.published !== false);
+const defaultLangDocs = docs.filter(doc => {
+  const firstSegment = doc.id.split('/')[0];
+  return !supportedLangs.includes(firstSegment);
+});
+
+const docsWithBody = await getCollection('docs', ({ data }) => data.published !== false);
 
 let totalWords = 0;
-for (const article of articlesWithBody) {
-  totalWords += countWords(article.body);
+for (const doc of docsWithBody) {
+  totalWords += countWords(doc.body);
 }
-for (const note of notesWithBody) {
-  totalWords += countWords(note.body);
-}
-
-const totalFileCount = articles.length + notes.length;
-const articleCount = articles.length;
-const noteCount = notes.length;
 
 const tagCounts: Record<string, number> = {};
-[...articles, ...notes].forEach(item => {
+defaultLangDocs.forEach(item => {
   item.data.tags?.forEach(tag => {
     tagCounts[tag] = (tagCounts[tag] || 0) + 1;
   });
 });
 
-const allContent = [...articles, ...notes];
+const categoryCounts: Record<string, number> = {};
+defaultLangDocs.forEach(item => {
+  item.data.categories?.forEach(category => {
+    categoryCounts[category] = (categoryCounts[category] || 0) + 1;
+  });
+});
 
-const contentWithDates = allContent.map(item => ({
+const contentWithDates = defaultLangDocs.map(item => ({
   ...item,
   _sortDate: new Date(item.data.date || 0).getTime()
 }));
@@ -86,48 +82,29 @@ const carouselArticles = contentWithDates
     <HeroSection />
   </Fragment>
 
-  <!-- 左侧内容区域 -->
   <div class="space-y-6">
     <Banner />
     <Carousel articles={carouselArticles.length > 0 ? carouselArticles : []} />
 
-    <!-- 文章分类区域 -->
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
       {themeConfig.widget.categories.map((category) => (
         <ArticleSection
           title={category.title}
-          articles={categoryArticles[category.name]?.length > 0 ? categoryArticles[category.name] : []}
+          articles={categoryArticles[category.name] || []}
           category={category.name}
-          key={category.name}
         />
       ))}
     </div>
-    <LatestArticle articles={articles} notes={notes} />
+
+    <LatestArticle articles={docs} />
   </div>
 
-  <!-- 右侧边栏 -->
   <Fragment slot="sidebar">
-    {sidebarConfig.progress && <Progress />}
-    {sidebarConfig.authorWidget && <AuthorWidget />}
-    {sidebarConfig.adWidget && <AdWidget />}
-    {sidebarConfig.tag && <TagCloud tagCounts={tagCounts} />}
-    {sidebarConfig.statistic && <Statistic totalFileCount={totalFileCount} articleCount={articleCount} noteCount={noteCount} totalWords={totalWords} />}
+    {sidebarConfig.progress && <Progress totalWords={totalWords} />}
+    {sidebarConfig.author && <AuthorWidget />}
+    {sidebarConfig.ad && <AdWidget />}
+    {sidebarConfig.tagcloud && <TagCloud tags={tagCounts} />}
+    {sidebarConfig.statistic && <Statistic articleCount={defaultLangDocs.length} categoryCount={Object.keys(categoryCounts).length} tagCount={Object.keys(tagCounts).length} />}
   </Fragment>
 
-  <!-- 移动端底部Tab栏 -->
-  <Fragment slot="mobile-bottom-tab">
-    <div id="mobile-bottom-tab" class="md:hidden fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 border-t dark:border-gray-700 px-2 py-2 z-40">
-      <div class="flex items-center justify-around">
-        {themeConfig.navbar.map((item) => (
-          item.href && (
-            <a href={item.href} class="flex flex-col items-center space-y-1 text-xs text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors flex-1 py-2" data-astro-prefetch>
-              {item.icon && <span class={`${item.icon} h-5 w-5`}></span>}
-              <span>{item.name}</span>
-            </a>
-          )
-        ))}
-      </div>
-    </div>
-  </Fragment>
 </Base>
-

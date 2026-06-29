@@ -3,12 +3,14 @@ import { Image } from 'astro:assets';
 
 interface Props {
   article: any;
+  lang?: string;
 }
 
-const { article } = Astro.props;
+const { article, lang = 'zh' } = Astro.props;
+const href = `/${article.id}`;
 ---
 
-<a href={article.data.permalink} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
+<a href={href} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
   <div class="h-40 bg-gray-200 overflow-hidden">
     <Image 
       src={article.processed.cover} 

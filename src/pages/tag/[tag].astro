@@ -4,45 +4,33 @@ import TagLayout from '../../layouts/tag.astro';
 
 export const prerender = true;
 
-// 生成所有标签页的静态路径
 export async function getStaticPaths() {
-  const articles = await getCollection('articles');
-  const notes = await getCollection('notes');
-  const allContent = [...articles, ...notes];
+  const docs = await getCollection('docs');
   
-  // 收集所有标签
   const allTags = new Set<string>();
-  allContent.forEach(item => {
-    item.data.tags?.forEach(tag => allTags.add(tag));
+  docs.forEach(doc => {
+    doc.data.tags?.forEach(tag => allTags.add(tag));
   });
   
-  // 为每个标签生成一个静态路径
   return Array.from(allTags).map(tag => ({
     params: { tag },
     props: { tag },
   }));
 }
 
-// 获取当前页面的标签和相关文章
 const { tag } = Astro.props;
-const articles = await getCollection('articles', ({ data }) =>
+const docsWithTag = await getCollection('docs', ({ data }) =>
   data.tags?.includes(tag) ?? false
 );
-const notes = await getCollection('notes', ({ data }) =>
-  data.tags?.includes(tag) ?? false
-);
-// 合并并按日期排序
-const allContent = [...articles, ...notes].sort((a, b) => 
+
+const allContent = [...docsWithTag].sort((a, b) => 
   new Date(b.data.date).getTime() - new Date(a.data.date).getTime()
 );
 
-// 获取所有标签及其计数
-const allArticles = await getCollection('articles');
-const allNotes = await getCollection('notes');
-const allItems = [...allArticles, ...allNotes];
+const allDocs = await getCollection('docs');
 const tagCounts: Record<string, number> = {};
-allItems.forEach(item => {
-  item.data.tags?.forEach(tag => {
+allDocs.forEach(doc => {
+  doc.data.tags?.forEach(tag => {
     tagCounts[tag] = (tagCounts[tag] || 0) + 1;
   });
 });

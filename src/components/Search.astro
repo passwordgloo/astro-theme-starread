@@ -1,6 +1,7 @@
 ---
 import { themeConfig } from '../../starread.config';
 import { Search, X, ChevronLeft, ChevronRight, CircleQuestionMark } from "@lucide/astro";
+import { getLangFromUrl, useTranslations } from '../i18n/utils';
 
 const algoliaConfig = {
   appId: import.meta.env.PUBLIC_ALGOLIA_APP_ID || '',
@@ -13,19 +14,21 @@ const hasCompleteConfig = Boolean(
   algoliaConfig.apiKey &&
   algoliaConfig.indexName
 );
+
+const lang = getLangFromUrl(Astro.url.pathname);
+const t = useTranslations(lang);
 ---
 
 <div class="docsearch-container">
   <button
     id="search-toggle"
     class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors focus:outline-none"
-    aria-label="搜索"
+    aria-label={lang === 'en' ? 'Search' : lang === 'ja' ? '検索' : lang === 'ko' ? '검색' : lang === 'ru' ? 'Поиск' : '搜索'}
   >
     <Search class="h-5 w-5 text-gray-700 dark:text-gray-300" />
   </button>
 </div>
 
-<!-- 搜索模态框使用 Astro 5 的 View Transitions 支持 -->
 <div 
   id="search-modal" 
   class="fixed inset-0 z-[9999] flex items-start justify-center pt-16 px-4 hidden bg-black/50 dark:bg-black/70 backdrop-blur-sm view-transition-name:search-modal"
@@ -41,14 +44,14 @@ const hasCompleteConfig = Boolean(
           <input
             id="search-input"
             type="text"
-            placeholder="搜索文档 (⌘K)"
+            placeholder={t.search.placeholder}
             class="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border-0 rounded-md text-gray-900 dark:text-white text-base focus:ring-2 focus:ring-blue-500 outline-none"
           />
         </div>
         <button
           id="search-close"
           class="ml-2 p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
-          aria-label="关闭"
+          aria-label={lang === 'en' ? 'Close' : lang === 'ja' ? '閉じる' : lang === 'ko' ? '닫기' : lang === 'ru' ? 'Закрыть' : '关闭'}
         >
           <X class="h-5 w-5" />
         </button>
@@ -61,7 +64,7 @@ const hasCompleteConfig = Boolean(
               <Search class="h-8 w-8 text-blue-600 dark:text-blue-400" />
             </div>
             <p class="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
-              支持使用键盘进行导航，Windows用户请用Ctrl 替换 ⌘
+              {t.search.initialTip}
             </p>
           </div>
         </div>
@@ -69,13 +72,15 @@ const hasCompleteConfig = Boolean(
         <div id="search-loading" class="search-loading-state hidden">
           <div class="text-center py-10">
             <div class="inline-block animate-spin rounded-full h-8 w-8 border-4 border-gray-200 dark:border-gray-700 border-t-blue-500 mb-4"></div>
-            <p class="text-gray-500 dark:text-gray-400">正在搜索...</p>
+            <p class="text-gray-500 dark:text-gray-400">{t.search.loading}</p>
           </div>
         </div>
 
         <div id="search-results" class="search-results-state hidden">
           <div class="search-results-header border-b dark:border-gray-800 px-4 py-2 flex justify-between items-center text-xs text-gray-500 dark:text-gray-400">
-            <span id="search-results-count">找到 0 个结果</span>
+            <span id="search-results-count">
+              {lang === 'en' ? 'Found 0 results' : lang === 'ja' ? '結果 0 件' : lang === 'ko' ? '결과 0 개' : lang === 'ru' ? 'Найдено 0 результатов' : '找到 0 个结果'}
+            </span>
             <span class="text-xs" id="search-query"></span>
           </div>
           <div class="p-2 space-y-1" id="search-results-list"></div>
@@ -97,14 +102,14 @@ const hasCompleteConfig = Boolean(
               <CircleQuestionMark class="h-8 w-8 text-gray-500 dark:text-gray-400" />
             </div>
             <p class="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
-              没有找到与 "<span id="search-no-results-query" class="font-medium"></span>" 相关的内容，请尝试其他关键词
+              {t.search.noResults.replace('{query}', '<span id="search-no-results-query" class="font-medium"></span>')}
             </p>
             <div class="mt-4">
               <button 
                 id="search-clear"
                 class="px-3 py-1.5 text-sm bg-gray-100 hover:bg-gray-200 dark:bg-gray-800 dark:hover:bg-gray-700 rounded-md text-gray-700 dark:text-gray-300 transition-colors"
               >
-                清除搜索
+                {t.search.clear}
               </button>
             </div>
           </div>
@@ -116,20 +121,20 @@ const hasCompleteConfig = Boolean(
           <div class="flex items-center gap-1">
             <kbd class="px-2 py-1 bg-primary dark:bg-secondary rounded text-gray-700 dark:text-gray-300">⌘</kbd>
              <kbd class="px-2 py-1 bg-primary dark:bg-secondary rounded text-gray-700 dark:text-gray-300">K</kbd>
-            <span>打开搜索</span>
+            <span>{t.search.shortcuts.open}</span>
           </div>
           <div class="flex items-center gap-1">
             <kbd class="px-2 py-1 bg-primary dark:bg-secondary rounded text-gray-700 dark:text-gray-300">↓</kbd>
             <kbd class="px-2 py-1 bg-primary dark:bg-secondary rounded text-gray-700 dark:text-gray-300">↑</kbd>
-            <span>浏览</span>
+            <span>{t.search.shortcuts.browse}</span>
           </div>
           <div class="flex items-center gap-1">
             <kbd class="px-2 py-1 bg-primary dark:bg-secondary rounded text-gray-700 dark:text-gray-300">Enter</kbd>
-            <span>选择</span>
+            <span>{t.search.shortcuts.select}</span>
           </div>
           <div class="flex items-center gap-1">
             <kbd class="px-2 py-1 bg-primary dark:bg-secondary rounded text-gray-700 dark:text-gray-300">Esc</kbd>
-            <span>关闭</span>
+            <span>{t.search.shortcuts.close}</span>
           </div>
         </div>
         <div id="search-provider" class="flex items-center gap-1.5"></div>
@@ -402,7 +407,7 @@ const hasCompleteConfig = Boolean(
             <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2 mb-1">${content}</p>
             ${hit.url ? `
               <span class="text-xs text-blue-500 hover:text-blue-600 inline-flex items-center gap-1">
-                查看详情
+                ${t.search.viewDetails}
                 <svg class="h-3 w-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </span>
             ` : ''}
@@ -547,7 +552,7 @@ const hasCompleteConfig = Boolean(
     loadingState.classList.add('hidden');
     resultsState.classList.remove('hidden');
     noResultsState.classList.add('hidden');
-    resultsCount.textContent = `找到 ${totalHits} 个结果`;
+    resultsCount.textContent = `${totalHits} ${lang === 'en' ? 'results found' : lang === 'ja' ? '件の結果' : lang === 'ko' ? '개의 결과' : lang === 'ru' ? 'результатов' : '个结果'}`;
     searchQueryDisplay.textContent = `"${query}"`;
     renderResults(hits);
     renderPagination();

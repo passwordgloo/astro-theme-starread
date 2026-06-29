@@ -81,10 +81,18 @@ function validateConfig() {
 function prepareRecords(data, siteUrl) {
   return data.map((item, i) => {
     const truncatedContent = item.content ? item.content.substring(0, 1000) : '';
-    const fullUrl = item.permalink ? `${siteUrl}${item.permalink}` : '';
+    
+    let url, route;
+    if (item.lang === 'zh') {
+      url = `${siteUrl}/${item.topic}`;
+      route = `/${item.topic}`;
+    } else {
+      url = `${siteUrl}/${item.lang}/${item.topic}`;
+      route = `/${item.lang}/${item.topic}`;
+    }
 
     return {
-      objectID: item.objectID || `${i + 1}_${item.collection || 'articles'}`,
+      objectID: item.objectID || `${i + 1}_${item.topic || 'content'}`,
       title: item.title || 'Untitled',
       description: item.description || '',
       cover: item.cover,
@@ -92,10 +100,11 @@ function prepareRecords(data, siteUrl) {
       tags: Array.isArray(item.tags) ? item.tags : (item.tags ? [item.tags] : []),
       date: item.date || '',
       content: truncatedContent,
-      url: fullUrl,
-      route: item.permalink,
-      permalink: item.permalink,
-      collection: item.collection || 'articles'
+      url: url,
+      route: route,
+      id: item.id,
+      topic: item.topic || 'content',
+      lang: item.lang || 'zh'
     };
   });
 }
@@ -118,7 +127,7 @@ async function pushToAlgolia(config, records) {
       searchableAttributes: ['title', 'content', 'description', 'categories', 'tags', 'url'],
       attributesToSnippet: ['content:100'],
       customRanking: ['desc(date)'],
-      attributesForFaceting: ['categories', 'tags', 'collection']
+      attributesForFaceting: ['categories', 'tags', 'topic', 'lang']
     },
   });
 

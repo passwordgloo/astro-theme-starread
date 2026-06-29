@@ -3,13 +3,26 @@ import type { CollectionEntry } from 'astro:content';
 import { themeConfig } from '../../starread.config';
 import { FileText } from "@lucide/astro";
 const categories = themeConfig.widget.categories;
+
 interface Props {
   title: string;
-  articles: Array<CollectionEntry<'articles'> | CollectionEntry<'notes'>>;
+  articles: CollectionEntry<'docs'>[];
   category: string;
+  lang?: string;
 }
 
-const { title, articles, category } = Astro.props;
+const { title, articles, category, lang = 'zh' } = Astro.props;
+
+const supportedLangs = ['zh', 'en', 'ja', 'ko', 'ru'];
+
+const defaultLangArticles = articles.filter(article => {
+  const firstSegment = article.id.split('/')[0];
+  return !supportedLangs.includes(firstSegment);
+});
+
+const getArticleHref = (article: CollectionEntry<'docs'>) => {
+  return `/${article.id}`;
+};
 ---
 
 <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
@@ -22,26 +35,36 @@ const { title, articles, category } = Astro.props;
   </div>
   
   <div class="p-4 space-y-4">
-    {articles.length > 0 ? (
-      articles.slice(0, 3).map((article, index) => (
-        <div key={article.slug} class="flex items-start space-x-3 p-2 hover:bg-gray-50 dark:hover:bg-white/5 rounded-md transition-colors">
-          <div class="flex-shrink-0 w-8 h-8 bg-primary text-white hover:bg-primary/80 dark:bg-secondary dark:text-slate-950 dark:hover:bg-sky-400 rounded-full flex items-center justify-center text-gray-500 text-sm font-medium">
-            {index + 1}
-          </div>
+    {defaultLangArticles.length > 0 ? (
+      defaultLangArticles.slice(0, 5).map((article) => (
+        <article key={article.id} class="flex items-center space-x-3">
+          {article.data.cover && (
+            <img src={article.data.cover} alt={article.data.title} class="w-16 h-16 object-cover rounded-lg" />
+          )}
           <div class="flex-1 min-w-0">
-            <a href={article.data.permalink} class="hover:text-primary dark:hover:text-secondary transition-colors line-clamp-1" data-astro-prefetch>{article.data.title}</a>
-            <div class="flex items-center mt-1 text-xs text-gray-500 space-x-2">
-              <span>{article.data.author || themeConfig.widget.author.name}</span>
-              <span>·</span>
-              <span>{typeof article.data.date === 'string' ? article.data.date.split(' ')[0] : article.data.date?.toISOString().split('T')[0]}</span>
+            <h3 class="font-semibold text-sm truncate">
+              <a href={getArticleHref(article)} class="hover:text-primary dark:hover:text-secondary transition-colors">
+                {article.data.title}
+              </a>
+            </h3>
+            <p class="text-xs text-gray-500 truncate mt-1">
+              {article.data.description}
+            </p>
+            <div class="flex items-center space-x-2 mt-1">
+              <span class="text-xs text-gray-400">
+                {article.data.date ? new Date(article.data.date).toLocaleDateString() : ''}
+              </span>
+              {article.data.tags && article.data.tags.length > 0 && (
+                <span class="text-xs bg-gray-100 dark:bg-gray-700 px-2 py-0.5 rounded">
+                  {article.data.tags[0]}
+                </span>
+              )}
             </div>
           </div>
-        </div>
+        </article>
       ))
     ) : (
-      <div class="text-center py-8 text-gray-500">
-        暂无文章数据
-      </div>
+      <p class="text-gray-500 text-sm text-center py-4">暂无内容</p>
     )}
   </div>
 </div>

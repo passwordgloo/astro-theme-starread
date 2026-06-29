@@ -10,132 +10,104 @@ import {
 
 export const prerender = true;
 
-// 导出静态路径生成函数
 export async function getStaticPaths() {
-  // 获取所有文章和笔记
-  const articles = await getCollection('articles');
-  const notes = await getCollection('notes', ({ data }) => {
+  const supportedLangs = ['zh', 'en', 'ja', 'ko', 'ru'];
+  const defaultLang = 'zh';
+  
+  const docs = await getCollection('docs', ({ data }) => {
     return data.published !== false;
   });
   
-  // 定义保留的路由名称，这些路由由其他文件处理，不应被catch-all路由生成
-  const reservedRoutes = ['search', 'category', 'tag', 'notes'];
+  const reservedRoutes = ['search', 'category', 'tag', 'notes', 'articles', 'zh', 'en', 'ja', 'ko', 'ru', 'config'];
   
-  // 检查路径是否是保留路由
-  const isReservedRoute = (path) => {
-    // 确保 path 是字符串
-    if (!path || typeof path !== 'string') {
-      return false;
-    }
-    // 检查是否以保留路由开头或完全匹配保留路由
-    return reservedRoutes.some(route =>
-      path === route || path.startsWith(`${route}/`));
-  };
-
-  // 验证路径是否有效
   const isValidPath = (path) => {
     if (!path || typeof path !== 'string') {
       return false;
     }
-    // 移除首尾斜杠后不能为空
     const trimmed = path.replace(/^\/|\/$/g, '');
     if (!trimmed || trimmed.length === 0) {
       return false;
     }
-    // 不能包含 undefined 或 null
     if (trimmed.includes('undefined') || trimmed.includes('null')) {
       return false;
     }
     return true;
   };
 
+  function parseEntryId(entryId) {
+    const parts = entryId.split('/');
+    if (supportedLangs.includes(parts[0])) {
+      return {
+        lang: parts[0],
+        topic: parts.slice(1).join('/'),
+        id: entryId
+      };
+    }
+    return {
+      lang: defaultLang,
+      topic: entryId,
+      id: entryId
+    };
+  }
+
   const paths = [];
 
-  // 处理文章条目
-  const sortedArticles = [...articles].sort((a, b) =>
-    new Date(a.data.date || 0).getTime() - new Date(b.data.date || 0).getTime()
+  const sortedEntries = [...docs].sort((a, b) =>
+    new Date(b.data.date || 0).getTime() - new Date(a.data.date || 0).getTime()
   );
 
-  sortedArticles.forEach((entry, index) => {
-    // 只使用 permalink 作为路径
-    if (entry.data.permalink) {
-      let permalink = entry.data.permalink.replace(/^\/|\/$/g, '');
-
-      if (isValidPath(permalink) && !isReservedRoute(permalink)) {
-        paths.push({
-          params: { slug: permalink },
-          props: {
-            entry,
-            prev: index > 0 ? sortedArticles[index - 1] : null,
-            next: index < sortedArticles.length - 1 ? sortedArticles[index + 1] : null,
-            basePath: '/articles'
-          },
-        });
-      }
+  sortedEntries.forEach((entry, index) => {
+    const { lang, topic, id } = parseEntryId(entry.id);
+    
+    let slug;
+    if (lang === defaultLang) {
+      slug = topic;
+    } else {
+      slug = `${lang}/${topic}`;
     }
-  });
 
-  // 处理笔记条目
-  const sortedNotes = [...notes].sort((a, b) =>
-    new Date(a.data.date || 0).getTime() - new Date(b.data.date || 0).getTime()
-  );
-
-  sortedNotes.forEach((entry, index) => {
-    // 只使用 permalink 作为路径
-    if (entry.data.permalink) {
-      let permalink = entry.data.permalink.replace(/^\/|\/$/g, '');
-
-      if (isValidPath(permalink) && !isReservedRoute(permalink)) {
-        paths.push({
-          params: { slug: permalink },
-          props: {
-            entry,
-            prev: index > 0 ? sortedNotes[index - 1] : null,
-            next: index < sortedNotes.length - 1 ? sortedNotes[index + 1] : null,
-            basePath: '/notes'
-          },
-        });
-      }
+    if (isValidPath(slug)) {
+      paths.push({
+        params: { slug },
+        props: {
+          entry,
+          lang,
+          topic,
+          prev: index < sortedEntries.length - 1 ? sortedEntries[index + 1] : null,
+          next: index > 0 ? sortedEntries[index - 1] : null,
+        },
+      });
     }
   });
   
   return paths;
 }
 
-const { entry, prev, next, basePath } = Astro.props;
-// 从URL参数中获取slug数组（嵌套路径）
+const { entry, prev, next, lang, topic } = Astro.props;
 const { slug } = Astro.params;
 
-// 使用entry的permalink或直接使用slug
-const permalink = entry.data.permalink || entry.slug;
-
-// 先渲染获取内容用于字数统计
+// 渲染内容
 const rendered = await render(entry);
 const wordCount = countWords(rendered.code);
-
-// 再解构获取Content组件
 const { Content } = rendered;
 
-// 使用从props传递的相邻文章信息
+// 相邻文章信息
 const adjacentArticles = {
   prev: prev ? {
-    slug: prev.slug,
+    id: prev.id,
     title: prev.data.title,
     cover: getCoverImage(prev.data.cover),
     date: formatDate(prev.data.date),
-    permalink: prev.data.permalink || prev.slug
+    collection: prev.id.split('/')[0] || ''
   } : null,
   next: next ? {
-    slug: next.slug,
+    id: next.id,
     title: next.data.title,
     cover: getCoverImage(next.data.cover),
     date: formatDate(next.data.date),
-    permalink: next.data.permalink || next.slug
+    collection: next.id.split('/')[0] || ''
   } : null
 };
-
-// 在开发模式下，如果没有date或permalink，应该写入到文件中
-// 注意：这部分逻辑需要在构建脚本中实现，因为Astro组件无法直接写入文件
 ---
 
 <BaseLayout 
@@ -147,7 +119,7 @@ const adjacentArticles = {
   tags={entry.data.tags || []}
   categories={entry.data.categories || []}
   cover={getCoverImage(entry.data.cover)}
-  permalink={permalink}
+  permalink={`/${entry.id}`}
 >
 
   <article id="article-content" class="prose max-w-none dark:prose-invert p-4 rounded-lg shadow-sm bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)]">
@@ -158,7 +130,8 @@ const adjacentArticles = {
     <ArticleNav 
       prev={adjacentArticles.prev}
       next={adjacentArticles.next}
-      basePath={basePath}
+      lang={lang}
+      basePath={`/${topic}`}
     />
   </div>
 
