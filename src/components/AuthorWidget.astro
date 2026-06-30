@@ -1,7 +1,7 @@
 ---
 import { Image } from 'astro:assets';
 import { themeConfig } from '../../starread.config';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../utils';
 import { User } from "@lucide/astro";
 
 const currentLang = getLangFromUrl(Astro.url.pathname);

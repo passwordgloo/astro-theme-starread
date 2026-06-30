@@ -1,13 +1,10 @@
 ---
 import { themeConfig } from '../../starread.config';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../utils';
 import { ChartBar, FileText, Folder, Tag, CalendarDays, Eye, Users } from "@lucide/astro";
+import type { StatisticProps } from '../../scripts/type/components';
 
-interface Props {
-  articleCount: number;
-  categoryCount: number;
-  tagCount: number;
-}
+interface Props extends StatisticProps {}
 
 const { articleCount, categoryCount, tagCount } = Astro.props;
 

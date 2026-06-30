@@ -1,11 +1,10 @@
 ---
 import { ListTree } from "@lucide/astro";
 import { themeConfig } from '../../starread.config';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../utils';
+import type { ArticleTOCProps } from '../../scripts/type/components';
 
-interface Props {
-  isSticky?: boolean;
-}
+interface Props extends ArticleTOCProps {}
 
 const { isSticky = true } = Astro.props;
 const lang = getLangFromUrl(Astro.url.pathname);

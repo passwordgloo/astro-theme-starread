@@ -1,6 +1,6 @@
 ---
 import { themeConfig } from '../../starread.config.ts';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../utils';
 
 const currentLang = getLangFromUrl(Astro.url.pathname);
 const t = useTranslations(currentLang);

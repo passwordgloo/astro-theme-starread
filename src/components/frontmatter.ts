@@ -1,52 +1,20 @@
 import { getCollection } from 'astro:content';
 import { themeConfig } from '../../starread.config';
+import type { 
+  Author, 
+  EntryData, 
+  ProcessedAuthor, 
+  ProcessedEntry, 
+  AdjacentEntry 
+} from '../../scripts/type/frontmatter';
 
-interface Author {
-  name?: string;
-  avatar?: string;
-}
-
-export interface EntryData {
-  title: string;
-  date?: string | Date;
-  cover?: string;
-  author?: Author;
-  categories?: string[];
-  tags?: string[];
-  views?: number;
-  id?: string;
-  lang?: string;
-  description?: string;
-}
-
-interface ProcessedAuthor {
-  name: string;
-  avatar: string;
-}
-
-export interface ProcessedEntry {
-  data: EntryData;
-  body: string;
-  _collection: string;
-  id: string;
-  processed?: {
-    date: string;
-    cover: string;
-    author: ProcessedAuthor;
-    categories: string[];
-    category: string;
-    tags: string[];
-    views: number;
-    id: string;
-  };
-}
-
-export interface AdjacentEntry {
-  title: string;
-  cover: string;
-  date: string;
-  id: string;
-}
+export type { 
+  Author, 
+  EntryData, 
+  ProcessedAuthor, 
+  ProcessedEntry, 
+  AdjacentEntry 
+};
 
 export async function getAdjacentEntries(currentId: string, collection: 'docs'): Promise<{ prev: AdjacentEntry | null; next: AdjacentEntry | null }> {
   try {

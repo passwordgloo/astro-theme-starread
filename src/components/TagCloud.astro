@@ -1,10 +1,9 @@
 ---
 import { Tag } from "@lucide/astro";
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../utils';
+import type { TagCloudProps } from '../../scripts/type/components';
 
-interface Props {
-  tagCounts: Record<string, number>;
-}
+interface Props extends TagCloudProps {}
 
 const { tagCounts } = Astro.props;
 

@@ -1,15 +1,17 @@
 ---
 import { themeConfig } from '../../starread.config';
-import { getLangFromUrl, useTranslations } from '../i18n/utils';
+import { getLangFromUrl, useTranslations } from '../utils';
 import { formatDate, getCoverImage, getAuthorInfo } from '../components/frontmatter';
 import PostCover from '../layouts/postcover.astro';
 import PostCover2 from '../layouts/postcover2.astro';
 import { LayoutGrid, ChevronLeft, ChevronRight } from "@lucide/astro";
+import type { CarouselProps } from '../../scripts/type/components';
+
+interface Props extends CarouselProps {}
 
 const currentLang = getLangFromUrl(Astro.url.pathname);
 const t = useTranslations(currentLang);
 
-// 轮播卡片文章组件
 const { articles = [] } = Astro.props;
 const { LatestArticle } = themeConfig.site;
 const { layout = 'vertical' } = themeConfig.widget.carousel;

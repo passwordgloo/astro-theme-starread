@@ -1,4 +1,4 @@
-import type { StarreadThemeConfig } from './scripts/config';
+import type { StarreadThemeConfig } from './scripts/type/config';
 
 export const themeConfig: StarreadThemeConfig = {
 
