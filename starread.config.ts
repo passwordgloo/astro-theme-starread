@@ -356,8 +356,8 @@ export const themeConfig: StarreadThemeConfig = {
     
     // 文章分类配置
     categories: [
-      { name: '主题说明', title: '主题说明' },
-      { name: '帮助', title: '帮助' },
+      { name: '主题介绍', title: '主题介绍' },
+      { name: '帮助文档', title: '帮助文档' },
     ]
   },
 

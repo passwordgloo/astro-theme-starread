@@ -8,7 +8,6 @@ import {
 import { themeConfig } from "../../../starread.config";
 
 const isDev = import.meta.env.DEV;
-const navbarConfig = themeConfig.navbar || [];
 ---
 
 <ConfigLayout title="主题配置生成器">
@@ -136,17 +135,6 @@ const navbarConfig = themeConfig.navbar || [];
                   <span class="switch-slider"></span>
                   <span class="switch-label">
                     <span class="switch-title">显示 Hero 区域</span>
-                  </span>
-                </label>
-              </div>
-
-              <div class="form-field col-span-2">
-                <label class="switch-card">
-                  <input type="checkbox" name="hero.navbarTransparent" checked class="switch-input" />
-                  <span class="switch-slider"></span>
-                  <span class="switch-label">
-                    <span class="switch-title">导航栏透明效果</span>
-                    <span class="switch-desc">在 Hero 区域上显示时导航栏变为透明</span>
                   </span>
                 </label>
               </div>
@@ -894,56 +882,48 @@ const navbarConfig = themeConfig.navbar || [];
           </div>
         </section>
 
+
         <!-- 导航菜单 -->
         <section id="navbar" class="form-section">
           <div class="section-header">
             <span class="section-badge">10</span>
             <div>
               <h3 class="section-title">导航菜单</h3>
-              <p class="section-subtitle">配置顶部导航栏菜单项</p>
+              <p class="section-subtitle">配置网站顶部导航菜单</p>
             </div>
           </div>
 
           <div class="form-card">
+            <div class="list-header">
+              <span class="list-title">菜单项列表</span>
+              <button class="btn-add" type="button" id="btn-add-nav">
+                <Plus class="w-4 h-4" />
+                添加菜单项
+              </button>
+            </div>
             <div class="category-help">
               <p class="help-text">
-                <strong>提示：</strong>导航名称显示在菜单上，链接地址可以是相对路径（如：/about）或绝对URL（如：https://example.com）。
+                <strong>提示：</strong>导航菜单的名称支持多语言配置，在多语言配置中设置不同语言的显示名称。
               </p>
             </div>
-            <div class="list-header">
-              <span class="list-title">导航项列表</span>
-            </div>
             <div class="category-list" id="nav-list">
-              <div class="category-item">
-                <div class="category-inputs">
-                  <div class="input-wrapper">
-                    <label class="input-label">导航名称</label>
-                    <input type="text" class="field-input-sm" value="首页" placeholder="如：首页、关于" data-field="name" />
+              {themeConfig.navbar.map((item) => (
+                <div class="category-item" key={item.name}>
+                  <div class="category-inputs">
+                    <div class="input-wrapper">
+                      <label class="input-label">菜单名称</label>
+                      <input type="text" class="field-input-sm" value={item.name} data-field="name" />
+                    </div>
+                    <div class="input-wrapper">
+                      <label class="input-label">链接地址</label>
+                      <input type="text" class="field-input-sm" value={item.href} data-field="href" />
+                    </div>
                   </div>
-                  <div class="input-wrapper">
-                    <label class="input-label">链接地址</label>
-                    <input type="text" class="field-input-sm" value="/" placeholder="如：/about" data-field="href" />
-                  </div>
+                  <button class="btn-icon-danger" type="button" aria-label="删除菜单">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                  </button>
                 </div>
-                <button class="btn-icon-danger" type="button" data-action="remove-nav" data-index="0" aria-label="删除导航">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                </button>
-              </div>
-              <div class="category-item">
-                <div class="category-inputs">
-                  <div class="input-wrapper">
-                    <label class="input-label">导航名称</label>
-                    <input type="text" class="field-input-sm" value="配置" placeholder="如：首页、关于" data-field="name" />
-                  </div>
-                  <div class="input-wrapper">
-                    <label class="input-label">链接地址</label>
-                    <input type="text" class="field-input-sm" value="/config" placeholder="如：/about" data-field="href" />
-                  </div>
-                </div>
-                <button class="btn-icon-danger" type="button" data-action="remove-nav" data-index="1" aria-label="删除导航">
-                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                </button>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -995,11 +975,6 @@ const navbarConfig = themeConfig.navbar || [];
 
   <!-- 隐藏的文件输入 -->
   <input type="file" id="file-input" class="hidden" accept="image/*" />
-  
-  <!-- 传递 navbar 配置给客户端脚本 -->
-  <script id="navbar-config-data" type="application/json">
-    {JSON.stringify(navbarConfig)}
-  </script>
 </ConfigLayout>
 
 <style is:global>
@@ -2340,7 +2315,6 @@ const navbarConfig = themeConfig.navbar || [];
     initNavigation();
     initTagInput();
     initCategoryList();
-    initNavList();
     initFileUpload();
     bindButtonEvents();
     initRadioInlineInputs();
@@ -2714,7 +2688,7 @@ const navbarConfig = themeConfig.navbar || [];
 
   // 分类列表功能
   function initCategoryList() {
-    const containers = ['categories-list', 'i18n-lang-list'];
+    const containers = ['categories-list', 'i18n-lang-list', 'nav-list'];
     
     containers.forEach(id => {
       const container = document.getElementById(id);
@@ -2767,6 +2741,12 @@ const navbarConfig = themeConfig.navbar || [];
     const btnAddLang = document.getElementById('btn-add-lang');
     if (btnAddLang) {
       btnAddLang.addEventListener('click', addLang);
+    }
+
+    // 添加菜单项按钮
+    const btnAddNav = document.getElementById('btn-add-nav');
+    if (btnAddNav) {
+      btnAddNav.addEventListener('click', addNavItem);
     }
     
   }
@@ -2829,6 +2809,31 @@ const navbarConfig = themeConfig.navbar || [];
     container.appendChild(div);
   }
 
+  // 添加菜单项
+  function addNavItem() {
+    const container = document.getElementById('nav-list');
+    if (!container) return;
+
+    const div = document.createElement('div');
+    div.className = 'category-item';
+    div.innerHTML = `
+      <div class="category-inputs">
+        <div class="input-wrapper">
+          <label class="input-label">菜单名称</label>
+          <input type="text" class="field-input-sm" placeholder="如：首页、关于" data-field="name" />
+        </div>
+        <div class="input-wrapper">
+          <label class="input-label">链接地址</label>
+          <input type="text" class="field-input-sm" placeholder="如：/、/about" data-field="href" />
+        </div>
+      </div>
+      <button class="btn-icon-danger" type="button" aria-label="删除菜单">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+      </button>
+    `;
+    container.appendChild(div);
+  }
+
   // 生成配置
   function generateConfig() {
     const config = collectConfigData();
@@ -2855,7 +2860,6 @@ const navbarConfig = themeConfig.navbar || [];
     return {
       hero: {
         enabled: formData.get('hero.enabled') === 'true',
-        navbarTransparent: formData.get('hero.navbarTransparent') === 'true',
         backgroundImage: formData.get('hero.backgroundImage'),
         title: {
           mode: formData.get('hero.title.mode'),

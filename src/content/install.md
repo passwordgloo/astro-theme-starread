@@ -1,22 +1,19 @@
 ---
-title: Star Read Astro博客主题
-categories: [主题说明]
-tags: [主题安装]
+title: 主题安装说明
+categories: [主题介绍]
 description: Star Read是一个出色、简洁且精致的Astro博客主题，提供多种安装方式，项目结构清晰，具备现代UI、搜索支持、响应式设计、主题切换等功能，还提供搜索、主题定制和评论系统的详细配置。
-date: 2025-10-07 21:33:22
 cover: /cover/eRq5UHTwBSmoSguZBTPjB.jpg
+date: 2026-06-30 12:58:33
 ---
 
 <div align="center">
-  <img src="/logo.svg" alt="starread" border="0">
+  <img src="/logo.png" alt="starread" border="0">
   🏴󠁧󠁢󠁥󠁮󠁧󠁿 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/README.md">English Document</a> | 
   🇨🇳 中文文档 | 
   🇯🇵 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEJA.md">日本語ドキュメント</a> | 
   🇰🇷 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMEKO.md">한국어 문서</a> | 
   🇷🇺 <a href="https://github.com/passwordgloo/astro-theme-starread/blob/master/READMERU.md">Русская документация</a>
 </div>
-
->既有星光般的璀璨，又不失简洁和高端感的Astro主题
 
 # Star Read - Astro博客主题
 
@@ -212,71 +209,19 @@ export const content = {
 | `pnpm algolia`           | 推送数据到Algolia搜索                          |
 | `pnpm release`           | 版本管理（更新版本号、生成提交等）             |
 
-
-
 ## 🔍 搜索
 
-### 本地搜索
-
-默认使用本地搜索，适合本地端离线使用，无需用户配置。
-
-### Algolia搜索
-
->[!important]
->生产环境中建议使用环境变量方式配置，避免敏感信息暴露在代码中。
-
-1. 编辑`starread.config.ts` 选择Algolia搜索
-```ts
-export const themeConfig: starreadthemeconfig = {
-  search: {
-    // 搜索服务提供商: 'local', 'algolia'
-      provider: 'algolia',
-    }
-}
-```
-
-2. 根目录创建并编辑 `.env`文件
-
->[!note]
->Algolia搜索需要您的Algolia应用ID、搜索密钥、索引名称和管理员API密钥。
-
->[!tip]
->如果您没有Algolia账号，需要先注册并创建一个应用。
-
-```txt
-PUBLIC_ALGOLIA_APP_ID=您的Algolia应用ID
-PUBLIC_ALGOLIA_SEARCH_KEY=您的Algolia搜索密钥
-PUBLIC_ALGOLIA_INDEX_NAME=您的索引名称
-ALGOLIA_WRITE_API_KEY=您的写入API密钥（用于索引上传）
-```
-
-3. 推送索引到Algolia
-
-运行`pnpm algolia` 推送本地索引到Algolia
+跳转到[搜索](/search)
 
 ## ⚙️ 自定义配置
 
-您可以通过修改根目录下的 `starread.config.ts` 文件来自定义主题配置，包括网站标题、导航菜单、作者信息、侧边栏组件显示等。
+跳转到[自定义配置](/config)
 
-示例配置项：
-```typescript
-// 修改网站标题
-site: {
-  title: '我的博客',
-  // ...其他配置
-}
 
-// 自定义导航菜单
-nav: [
-  { name: '首页', href: '/' },
-  { name: '关于', href: '/about' },
-  // ...其他菜单项
-]
-```
 ## 🔧 Twikoo 评论
 
 >[!tip]
->如需启用twikoo，请修改`src/compponents/Comment.astros`中的第13行`envId`为您的[twikoo环境地址](https://twikoo.js.org/backend.html)。
+>如需启用twikoo，请修改`src/compponents/Comment.astro`中的第13行`envId`为您的[twikoo环境地址](https://twikoo.js.org/backend.html)。
 
 ```js
 <script>

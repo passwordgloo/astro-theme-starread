@@ -1,49 +1,50 @@
 ---
-title: 创建Algolia应用
-categories: [帮助]
-date: 2025-10-07 21:33:22
+title: 搜索功能
+categories: [帮助文档]
+date: 2026-06-30 12:58:33
 ---
 
 >本文节选自我的[Vuepress 2从0-1保姆级进阶教程——全文搜索篇（含Algolia、meilisearch）](https://blog.csdn.net/passwordgloo/article/details/134687291)
 
-# Algolia
 
-## 1.注册Algolia账号
 
-使用Github账号登录[Algolia 官网](https://www.algolia.com/)，如果你会魔法，请大胆用google账号
+# 搜索
 
-![](/img/b00ffd826909d6963db185d09ae52102.png)
+### 本地搜索
 
-![](/img/2256c4860b3d6be29e7044728d371b33.png)
+默认使用本地搜索，适合本地端离线使用，无需用户配置。
 
-## 2.创建应用
+### Algolia搜索
 
-新版网页界面简化创建流程，点击`+ Create Application` 新建
+>[!important]
+>生产环境中建议使用环境变量方式配置，避免敏感信息暴露在代码中。
 
-![](/img/62c8b8c88751e0b0421fdf086c601dba.png)
+1. 编辑 `starread.config.ts` 选择Algolia搜索
 
-![](/img/e7bc201a4979717d5a923ae770ad66d9.png)
+```ts
+export const themeConfig: starreadthemeconfig = {
+  search: {
+    // 搜索服务提供商: 'local', 'algolia'
+      provider: 'algolia',
+    }
+}
+```
 
-稍等片刻，自动创建完毕
+2. 根目录创建并编辑 `.env`文件，请勿提交敏感信息到服务器
 
-【可选】修改名称，不影响后续操作
+>[!note]
+>Algolia搜索需要您的Algolia应用ID、搜索密钥、索引名称和管理员API密钥。
 
-![](/img/7e4cfb390941057b8c8f2a0efc6c1df8.png)
+>[!tip]
+>如果您没有Algolia账号，需要先注册并创建一个应用，教程见[Vuepress 2从0-1保姆级进阶教程——全文搜索篇（含Algolia、meilisearch）](https://blog.csdn.net/passwordgloo/article/details/134687291)
 
-☑️ 要修改的项目，点击重命名
+```txt
+PUBLIC_ALGOLIA_APP_ID=您的Algolia应用ID
+PUBLIC_ALGOLIA_SEARCH_KEY=您的Algolia搜索密钥
+PUBLIC_ALGOLIA_INDEX_NAME=您的索引名称
+ALGOLIA_WRITE_API_KEY=您的写入API密钥（用于索引上传）
+```
 
-## 3.查看必要信息
+3. 推送索引到Algolia
 
-### 方法1 点击首页Overview
-
-![](/img/837b5940f82495a1f5a561bf21210cb6.png)
-
-### 方法2 API Keys页面
-
-♦️点击设置进入`API Keys`
-
-![](/img/a60ed301cdd73cf73fc4982a3788cdbf.png)
-
-♦️复制紫色框内信息
-
-![](/img/53572c2df05e6520f767e46301990504.png)
+运行 `pnpm algolia` 推送本地索引到Algolia

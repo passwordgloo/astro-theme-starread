@@ -1,8 +1,8 @@
 ---
-title: Twikoo 评论系统
+title: Twikoo评论系统
 cover: https://imgapi.xl0408.top/index.php
-categories: [帮助]
-date: 2025-10-07 21:33:22
+categories: [帮助文档]
+date: 2026-06-30 12:58:33
 ---
 
 ## 云函数部署 

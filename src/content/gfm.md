@@ -1,10 +1,12 @@
 ---
 title: GFM语法
-categories: [帮助]
+categories: [主题介绍]
 cover: https://www.dmoe.cc/random.php
-description: 这是一篇示例文章，展示了如何使用frontmatter配置文章属性。
-date: 2025-10-07 21:33:22
+description: Markdown语法
+date: 2026-06-30 12:58:33
 ---
+
+Astro 原生支持Markdown基本用法，具体如下：
 
 ## 列表
 
@@ -15,17 +17,15 @@ date: 2025-10-07 21:33:22
 
 ### 有序列表
 
-- 有序列表项 1
-- 有序列表项 2
-- 有序列表项 3
+1. 有序列表项 1
+2. 有序列表项 2
+3. 有序列表项 3
 
 ### 无序列表
 
 - 无序列表项 1
 - 无序列表项 2
 - 无序列表项 3
-
-
 
 ## 表格
 
@@ -42,26 +42,8 @@ date: 2025-10-07 21:33:22
 
 这里有脚注[^1]。
 
-## GFM风格引用块
-
->[!note]
-> 📒 这是一个注意事项
-
->[!warning]
-> ⚠️ 这是一个警告事项
-
->[!caution]
-> 🙅 这是一个危险事项
-
->[!tip]
-> 🔔 这是一个提示事项
-
->[!important]
-> ‼️ 这是一个重要事项
-
-
 ## 代码
 
-```js
+```javascript
 console.log(' fenced code 支持高亮按你的主题来 ');
 ```

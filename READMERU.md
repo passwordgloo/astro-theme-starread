@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://origin.picgo.net/2025/11/15/starread5c2f382da65ddf2c.png" alt="starread" border="0">
+ <img src="/public/logo.png" alt="starread" border="0">
   <p>
      <img src="https://img.shields.io/npm/v/astro-theme-starread?logo=npm" alt="NPM Version">
     <img src="https://img.shields.io/npm/dy/astro-theme-starread?logo=npm&link=https%3A%2F%2Fwww.npmjs.com%2Fpackage%2Fastro-theme-starread

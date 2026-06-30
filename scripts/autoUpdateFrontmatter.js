@@ -161,7 +161,6 @@ function main() {
   const contentDir = path.join(process.cwd(), 'src', 'content');
   
   console.log('🔍 开始检查和更新frontmatter...\n');
-  console.log('📌 文件结构: src/content/{topic}/{lang}/{file}.md');
   
   const updatedCount = processDirectory(contentDir);
   
