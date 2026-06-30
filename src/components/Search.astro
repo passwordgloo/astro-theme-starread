@@ -102,7 +102,7 @@ const t = useTranslations(lang);
               <CircleQuestionMark class="h-8 w-8 text-gray-500 dark:text-gray-400" />
             </div>
             <p class="text-gray-500 dark:text-gray-400 max-w-md mx-auto">
-              {t.search.noResults.replace('{query}', '<span id="search-no-results-query" class="font-medium"></span>')}
+              {t.search.noResults.split('{query}')[0]}<span id="search-no-results-query" class="font-medium"></span>{t.search.noResults.split('{query}')[1] || ''}
             </p>
             <div class="mt-4">
               <button 
@@ -144,7 +144,7 @@ const t = useTranslations(lang);
 
 <script src="https://cdn.jsdelivr.net/npm/algoliasearch@4/dist/algoliasearch-lite.umd.js"></script>
 
-<script define:vars={{ algoliaConfig }} client:idle>
+<script define:vars={{ algoliaConfig, lang }} client:idle>
 (function() {
   // 移除全局初始化检查，允许在页面切换时重新初始化
   // 但保留模态框移动逻辑
@@ -170,6 +170,25 @@ const t = useTranslations(lang);
   
   // 重置初始化状态，允许重新初始化
   window.__searchInitialized = false;
+
+  let currentLang = lang;
+
+  function getLangFromUrl(url) {
+    const path = url.replace(/^\/|\/$/g, '');
+    const firstSegment = path.split('/')[0];
+    const supportedLangs = ['zh', 'en', 'ja', 'ko', 'ru'];
+    if (supportedLangs.includes(firstSegment)) {
+      return firstSegment;
+    }
+    return 'zh';
+  }
+
+  function updateLang() {
+    currentLang = getLangFromUrl(window.location.pathname);
+  }
+
+  document.addEventListener('astro:page-load', updateLang);
+  document.addEventListener('astro:after-swap', updateLang);
 
   const searchToggle = document.getElementById('search-toggle');
   const searchModal = document.getElementById('search-modal');
@@ -287,17 +306,20 @@ const t = useTranslations(lang);
   }
 
   function localSearch(query, page = 0) {
-    if (!localSearchData || !query.trim()) {
+    if (!query.trim()) {
       return { hits: [], nbHits: 0, nbPages: 0, page: 0 };
     }
+    if (!localSearchData) {
+      console.error('❌ localSearchData is null/undefined');
+      return { hits: [], nbHits: 0, nbPages: 0, page: 0 };
+    }
+    console.log('🔍 本地搜索:', { query, dataCount: localSearchData.length });
 
-    // 优化搜索词处理，移除空词
     const searchTerms = query.toLowerCase().split(/\s+/).filter(term => term.length > 0);
     if (searchTerms.length === 0) {
       return { hits: [], nbHits: 0, nbPages: 0, page: 0 };
     }
 
-    // 优化搜索算法，使用更高效的匹配和评分
     const results = localSearchData
       .map(item => {
         let score = 0;
@@ -305,18 +327,13 @@ const t = useTranslations(lang);
         const content = (item.content || '').toLowerCase();
         
         searchTerms.forEach(term => {
-          // 标题匹配权重更高
           if (title.includes(term)) {
             score += 10;
-            // 完全匹配权重最高
             if (title === term) score += 20;
-            // 前缀匹配权重次之
             else if (title.startsWith(term)) score += 15;
           }
-          // 内容匹配权重较低
           if (content.includes(term)) {
             score += 1;
-            // 内容中多次出现权重累加
             const occurrences = (content.match(new RegExp(escapeRegex(term), 'g')) || []).length;
             score += occurrences * 0.5;
           }
@@ -328,10 +345,12 @@ const t = useTranslations(lang);
       .sort((a, b) => b._score - a._score);
 
     const nbHits = results.length;
+    console.log('📊 搜索结果:', { nbHits, searchTerms });
+    
     const nbPages = Math.ceil(nbHits / hitsPerPage);
     const start = page * hitsPerPage;
     const hits = results.slice(start, start + hitsPerPage).map(item => {
-      const highlightedTitle = highlightLocalText(item.title, searchTerms);
+      const highlightedTitle = highlightLocalText(item.title || '', searchTerms);
       const highlightedContent = highlightLocalText(
         item.content ? item.content.substring(0, 200) : '',
         searchTerms
@@ -372,7 +391,7 @@ const t = useTranslations(lang);
         const div = document.createElement('div');
         div.className = 'search-result-item p-3 rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 cursor-pointer transition-colors border-l-2 border-transparent';
         div.dataset.index = index;
-        div.dataset.url = hit.url || hit.objectID;
+        div.dataset.url = hit.url || hit.route || hit.objectID;
         
         // 关键修复：处理 Algolia 的 <em> 标签高亮
         const title = (hit._highlightResult?.title?.value || hit.title || '无标题')
@@ -415,7 +434,7 @@ const t = useTranslations(lang);
         </div>
       `;
       
-      div.addEventListener('click', () => { if (hit.url) window.location.href = hit.url; });
+      div.addEventListener('click', () => { const targetUrl = hit.url || hit.route; if (targetUrl) window.location.href = targetUrl; });
       div.addEventListener('mouseenter', () => setActiveResult(index));
       resultsList.appendChild(div);
     });
@@ -502,6 +521,10 @@ const t = useTranslations(lang);
           snippetEllipsisText: '...',
         });
       } else {
+        if (!localSearchData) {
+          console.log('📥 本地搜索数据未加载，正在加载...');
+          await loadLocalSearchData();
+        }
         result = localSearch(query, currentPage);
       }
 
@@ -552,7 +575,7 @@ const t = useTranslations(lang);
     loadingState.classList.add('hidden');
     resultsState.classList.remove('hidden');
     noResultsState.classList.add('hidden');
-    resultsCount.textContent = `${totalHits} ${lang === 'en' ? 'results found' : lang === 'ja' ? '件の結果' : lang === 'ko' ? '개의 결과' : lang === 'ru' ? 'результатов' : '个结果'}`;
+    resultsCount.textContent = `${totalHits} ${currentLang === 'en' ? 'results found' : currentLang === 'ja' ? '件の結果' : currentLang === 'ko' ? '개의 결과' : currentLang === 'ru' ? 'результатов' : '个结果'}`;
     searchQueryDisplay.textContent = `"${query}"`;
     renderResults(hits);
     renderPagination();
@@ -654,11 +677,11 @@ const t = useTranslations(lang);
     }
   });
 
-  // 初始化 - 使用懒加载策略，允许在页面切换时重新初始化
+  // 初始化 - 在页面加载时立即初始化
   let searchInitialized = false;
   
   async function initializeSearch() {
-    // 允许重新初始化，确保在页面切换后能正常工作
+    if (searchInitialized) return;
     searchInitialized = true;
     
     const algoliaOk = await initializeAlgolia();
@@ -668,47 +691,15 @@ const t = useTranslations(lang);
     }
   }
   
-  // 只在打开搜索时初始化
-  searchToggle?.addEventListener('click', () => {
+  // 页面加载完成后立即初始化
+  document.addEventListener('DOMContentLoaded', initializeSearch);
+  document.addEventListener('astro:page-load', () => {
+    searchInitialized = false;
     initializeSearch();
-    openSearch();
   });
   
-  // 键盘快捷键也触发初始化
-  document.addEventListener('keydown', (e) => {
-    if ((e.ctrlKey || e.metaKey) && e.key === 'k' && !isOpen) {
-      e.preventDefault();
-      initializeSearch();
-    }
-  });
-  
-  // 移除原有的初始化调用
-  
-  // 优化 Astro 页面切换事件处理 - 使用更简洁的方式
-  function handlePageTransition() {
-    console.log('Astro 页面切换，重新初始化搜索功能');
-    // 重置搜索状态，但保留搜索数据缓存
-    const newToggle = document.getElementById('search-toggle');
-    if (newToggle) {
-      // 移除可能存在的旧事件监听器（避免重复绑定）
-      const clonedToggle = newToggle.cloneNode(true);
-      newToggle.parentNode.replaceChild(clonedToggle, newToggle);
-      
-      // 重新绑定事件
-      clonedToggle.addEventListener('click', () => {
-        if (!searchInitialized) {
-          initializeSearch();
-        }
-        openSearch();
-      });
-    }
-  }
-  
-  // 使用 Astro 5 的 View Transitions 事件
-  document.addEventListener('astro:page-load', handlePageTransition);
-  document.addEventListener('astro:after-swap', handlePageTransition);
-  // 新增 Astro 5 的 view transitions 完成事件
-  document.addEventListener('astro:after-view-transitions', handlePageTransition);
+  // 点击搜索按钮打开搜索
+  searchToggle?.addEventListener('click', openSearch);
 })();
 </script>
 
