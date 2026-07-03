@@ -34,7 +34,7 @@ const getHref = (item: any) => {
 ---
 
 {(isDefaultLangArticle(prev) || isDefaultLangArticle(next)) && (
-  <nav class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+  <nav class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
     {isDefaultLangArticle(prev) && (
       <a 
         href={getHref(prev)}

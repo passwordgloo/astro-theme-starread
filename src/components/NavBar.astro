@@ -4,7 +4,7 @@ import { themeConfig } from '../../starread.config';
 import { getLangFromUrl, switchLangPath, useTranslations } from '../utils';
 import Search from "./Search.astro";
 import { 
-  ChevronDown, Menu, X, Home, Database, Book, Code, Server, HelpCircle, Lock 
+  ChevronDown, Menu, X, Home, Database, Book, Code, Server, HelpCircle, Lock, Languages 
 } from "@lucide/astro";
 
 const currentUrl = Astro.url.pathname;
@@ -20,7 +20,7 @@ const iconMap: Record<string, any> = {
   Server,
   HelpCircle,
   Lock,
-  Languages: { default: () => `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"/><path d="m4 14 6-6 2-3"/><path d="M2 5h12"/><path d="M7 2h1"/><path d="m22 22-5-10-5 10"/><path d="M14 18h6"/></svg>` },
+  Languages,
 };
 
 function getIcon(iconName: string | undefined) {
@@ -154,7 +154,7 @@ function getNavbarSubSubItemName(subSubItem: typeof themeConfig.navbar[0]['items
       <!-- 多语言切换器 -->
       <div class="relative group" id="lang-switcher">
         <button class="p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors flex items-center space-x-1" aria-label="切换语言">
-          <span class="text-sm">🌐</span>
+          <Languages class="w-5 h-5" />
           <ChevronDown class="w-4 h-4" />
         </button>
         <div class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-900 shadow-lg rounded-lg z-10 invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-200 origin-top-right">

@@ -88,7 +88,7 @@ const { slug } = Astro.params;
 
 // 渲染内容
 const rendered = await render(entry);
-const wordCount = countWords(rendered.code);
+const wordCount = countWords(entry.body);
 const { Content } = rendered;
 
 // 相邻文章信息

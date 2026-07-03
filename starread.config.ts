@@ -45,7 +45,7 @@ export const themeConfig: StarreadThemeConfig = {
     // 最新文章组件配置
     LatestArticle: {
       type: 'button', // 'button' 或 'auto'
-      layout: 'vertical', // 'horizontal' 或 'vertical'
+      layout: 'horizontal', // 'horizontal' 或 'vertical'
       defaultLimit: 20, // 默认最大加载数量
       initialLoad: 4, // 初始加载数量
       loadMore: 4, // 每次加载数量

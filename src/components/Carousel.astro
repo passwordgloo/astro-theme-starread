@@ -2,8 +2,7 @@
 import { themeConfig } from '../../starread.config';
 import { getLangFromUrl, useTranslations } from '../utils';
 import { formatDate, getCoverImage, getAuthorInfo } from '../components/frontmatter';
-import PostCover from '../layouts/postcover.astro';
-import PostCover2 from '../layouts/postcover2.astro';
+import PostCard from './PostCard.astro';
 import { LayoutGrid, ChevronLeft, ChevronRight } from "@lucide/astro";
 import type { CarouselProps } from '../../scripts/type/components';
 
@@ -62,9 +61,9 @@ const processedArticles = defaultLangArticles.map(article => ({
           [...processedArticles.slice(-1), ...processedArticles, ...processedArticles.slice(0, 1)].map((article, index) => (
             <div class="min-w-[200px]">
               {layout === 'horizontal' ? (
-                <PostCover2 article={article} />
+                <PostCard article={article} layout="horizontal" />
               ) : (
-                <PostCover article={article} />
+                <PostCard article={article} layout="vertical" />
               )}
             </div>
           ))
@@ -73,9 +72,9 @@ const processedArticles = defaultLangArticles.map(article => ({
           processedArticles.map((article) => (
             <div class="min-w-[200px]">
               {layout === 'horizontal' ? (
-                <PostCover2 article={article} />
+                <PostCard article={article} layout="horizontal" />
               ) : (
-                <PostCover article={article} />
+                <PostCard article={article} layout="vertical" />
               )}
             </div>
           ))

@@ -2,8 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import { themeConfig } from '../../starread.config';
 import { sortEntriesByDate, processEntryData } from '../components/frontmatter';
-import PostCover from '../layouts/postcover.astro';
-import PostCover2 from '../layouts/postcover2.astro';
+import PostCard from './PostCard.astro';
 import { Newspaper } from "@lucide/astro";
 
 interface Props {
@@ -42,22 +41,12 @@ const articlesForClient = sortedArticles.map(article => ({
       <h2 class="font-bold text-lg text-dark">最新文章</h2>
     </div>
     
-    {layout === 'horizontal' ? (
-      <div class="flex overflow-x-auto space-x-4 pb-2">
-        {sortedArticles.map((article) => (
-          <div key={article.id} class="flex-shrink-0 w-64">
-            <PostCover article={article} />
-          </div>
-        ))}
-      </div>
-    ) : (
-      <div class={`grid gap-4 ${columns > 1 ? `grid-cols-${columns}` : 'grid-cols-1'}`}>
-        {sortedArticles.map((article) => (
-          <div key={article.id}>
-            <PostCover2 article={article} />
-          </div>
-        ))}
-      </div>
-    )}
+    <div class={`grid gap-4 ${columns > 1 ? `grid-cols-${columns}` : 'grid-cols-1'}`}>
+      {sortedArticles.map((article) => (
+        <div key={article.id}>
+          <PostCard article={article} layout={layout} />
+        </div>
+      ))}
+    </div>
   </div>
 </div>
