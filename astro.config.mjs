@@ -12,7 +12,21 @@ export default defineConfig({
 	site: 'https://star.iglooblog.top',
 	output: 'static',
 	vite: {
-		plugins: [tailwindcss()]
+		plugins: [tailwindcss()],
+		resolve: {
+			alias: {
+				'@theme': '/src/index.ts',
+				'@theme/': '/src/',
+				'@': '/src/',
+				'@layouts': '/src/layouts/',
+				'@components': '/src/components/',
+				'@pages': '/src/pages/',
+				'@scripts': '/scripts/',
+				'@styles': '/src/styles/',
+				'@utils': '/src/utils/',
+				'@config': '/starread.config.ts'
+			}
+		}
 	},
 	integrations: [mdx(), sitemap(), autoIndex(), autoUpdatePermalink()],
 	i18n: {

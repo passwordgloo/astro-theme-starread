@@ -6,12 +6,15 @@
     "strictNullChecks": true,
     "baseUrl": ".",
     "paths": {
+      "@theme": ["./src/index.ts"],
+      "@theme/*": ["./src/*"],
       "@/*": ["./src/*"],
       "@layouts/*": ["./src/layouts/*"],
       "@components/*": ["./src/components/*"],
       "@pages/*": ["./src/pages/*"],
       "@scripts/*": ["./scripts/*"],
       "@styles/*": ["./src/styles/*"],
+      "@utils/*": ["./src/utils/*"],
       "@config": ["./starread.config.ts"]
     }
   }

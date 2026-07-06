@@ -2,12 +2,15 @@
 import "../styles/global.css";
 import { themeConfig } from '../../starread.config';
 import NavBar from "../components/NavBar.astro";
+import { getLangFromUrl, useTranslations } from '../utils';
 
 interface Props {
   title?: string;
 }
 
 const { title } = Astro.props;
+const currentLang = getLangFromUrl(Astro.url.pathname);
+const t = useTranslations(currentLang);
 ---
 
 <html lang="zh-CN" class="min-h-full antialiased">
@@ -16,7 +19,7 @@ const { title } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href={themeConfig.site.favicon} />
     <meta name="generator" content={Astro.generator} />
-    <title>{ title || themeConfig.site.title }</title>
+    <title>{ title || t.site.title }</title>
     <slot name="head"></slot>
   </head>
   <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-gray-950 dark:text-neutral-100 transition-colors">
