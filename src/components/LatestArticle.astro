@@ -11,7 +11,7 @@ interface Props {
 }
 
 const { articles = [], lang = 'zh' } = Astro.props;
-const latestArticleConfig = themeConfig.site.LatestArticle;
+const latestArticleConfig = themeConfig.widget.LatestArticle;
 const { type: loadType, layout = 'vertical', initialLoad, loadMore, defaultLimit, columns = 2 } = latestArticleConfig;
 
 const supportedLangs = ['zh', 'en', 'ja', 'ko', 'ru'];

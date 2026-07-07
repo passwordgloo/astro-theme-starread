@@ -2,7 +2,7 @@
 title: テーマインストールガイド
 categories: [テーマ紹介]
 description: Star Readは優れていて、シンプルで洗練されたAstroブログテーマです。複数のインストール方法を提供し、プロジェクト構造が明確で、モダンなUI、検索サポート、レスポンシブデザイン、テーマ切り替えなどの機能を備えています。また、検索、テーマカスタマイズ、コメントシステムの詳細な設定も提供します。
-cover: /cover/eRq5UHTwBSmoSguZBTPjB.jpg
+cover: /cover/2c614caca4dd46a2.avif
 date: 2026-06-30 12:58:33
 ---
 

@@ -2,6 +2,7 @@
 title: Функция поиска
 categories: [Справочная документация]
 date: 2026-06-30 12:58:33
+cover: /cover/2d4cf471f4882dc2.avif
 ---
 
 >Эта статья взята из моего [Vuepress 2 От 0 до 1 Продвинутый учебник для новичков — Глава полнотекстового поиска (включая Algolia, meilisearch)](https://blog.csdn.net/passwordgloo/article/details/134687291)

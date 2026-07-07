@@ -2,7 +2,7 @@
 title: Theme Installation Guide
 categories: [Theme Introduction]
 description: Star Read is an excellent, concise and elegant Astro blog theme that provides multiple installation methods, has a clear project structure, and features modern UI, search support, responsive design, theme switching, etc. It also provides detailed configuration for search, theme customization and comment systems.
-cover: /cover/eRq5UHTwBSmoSguZBTPjB.jpg
+cover: /cover/2c614caca4dd46a2.avif
 date: 2026-06-30 12:58:33
 ---
 

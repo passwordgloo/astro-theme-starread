@@ -2,6 +2,7 @@
 title: 搜索功能
 categories: [帮助文档]
 date: 2026-06-30 12:58:33
+cover: /cover/2d4cf471f4882dc2.avif
 ---
 
 >本文节选自我的[Vuepress 2从0-1保姆级进阶教程——全文搜索篇（含Algolia、meilisearch）](https://blog.csdn.net/passwordgloo/article/details/134687291)

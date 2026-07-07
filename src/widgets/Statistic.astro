@@ -12,9 +12,9 @@ const currentLang = getLangFromUrl(Astro.url.pathname);
 const t = useTranslations(currentLang);
 
 function getSiteDays() {
-  if (!themeConfig.site.foundedDate) return 0;
+  if (!themeConfig.foundedDate) return 0;
   
-  const founded = new Date(themeConfig.site.foundedDate);
+  const founded = new Date(themeConfig.foundedDate);
   const today = new Date();
   const diffTime = Math.abs(today.getTime() - founded.getTime());
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));

@@ -1,7 +1,7 @@
 ---
 title: Пользовательская конфигурация
 categories: [Введение в тему]
-cover: https://www.dmoe.cc/random.php
+cover: /cover/2171616932c20231.avif
 date: 2026-06-30 12:58:33
 ---
 

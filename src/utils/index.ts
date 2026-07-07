@@ -173,7 +173,7 @@ export function formatDate(dateString?: string | Date): string {
 }
 
 export function getCoverImage(cover?: string): string {
-  return cover || themeConfig.site.defaultCover || '/defaultCover.jpg';
+  return cover || themeConfig.defaultCover || '/defaultCover.jpg';
 }
 
 export function getAuthorInfo(author?: Author): ProcessedAuthor {

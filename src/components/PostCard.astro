@@ -9,7 +9,7 @@ interface Props {
 }
 
 const { article, lang = 'zh', layout = 'vertical' } = Astro.props;
-const { horizontalHeight } = themeConfig.site.LatestArticle;
+const { horizontalHeight } = themeConfig.widget.LatestArticle;
 const href = `/${article.id}`;
 ---
 

@@ -8,15 +8,21 @@
  * - Theme-level locales for navbar, sidebar texts, etc.
  * - Top-level themeConfig for global settings
  * 
- * @see {@link https://vuepress.github.io/guide/i18n.html} VuePress I18n Guide
+ * Configuration Structure:
+ * 1. Global settings (lang, favicon, logo, etc.)
+ * 2. Navigation bar configuration
+ * 3. Sidebar configuration
+ * 4. Widget configurations
+ * 5. Dynamic effects
+ * 6. Multi-language configurations (locales, themeLocales)
+ * 
+ * @see {@link https://star.iglooblog.top/configure.html} I18n Guide
  */
 
 /**
  * Site-level locale configuration
  * 
  * 站点级语言环境配置
- * 
- * Used for site-wide settings like title, description
  */
 export interface SiteLocale {
   /** Language code (BCP47 format) / 语言代码（BCP47格式） */
@@ -38,8 +44,6 @@ export interface SiteLocale {
  * Theme-level locale configuration
  * 
  * 主题级语言环境配置
- * 
- * Used for theme-specific UI texts like navbar, sidebar, search
  */
 export interface ThemeLocale {
   /** Language label displayed in selector / 语言选择器中显示的标签 */
@@ -47,14 +51,6 @@ export interface ThemeLocale {
 
   /** Language flag emoji / 语言国旗表情符号 */
   flag?: string;
-
-  /** Site-specific text / 站点文本 */
-  site?: {
-    title?: string;
-    footer?: {
-      text?: string;
-    };
-  };
 
   /** Widget-specific text / 小部件文本 */
   widget?: {
@@ -80,7 +76,7 @@ export interface ThemeLocale {
     };
   };
 
-  /** Navigation bar items (overrides global navbar) / 导航栏项目（覆盖全局导航栏） */
+  /** Navigation bar items (overrides global navbar) / 导航栏项目 */
   navbar?: Array<{
     name?: string;
     text?: string;
@@ -127,6 +123,11 @@ export interface ThemeLocale {
  * Theme configuration interface
  * 
  * 主题配置接口
+ * 
+ * Flat structure following VuePress 2 pattern:
+ * - No nested site object
+ * - Global settings at top level
+ * - Multi-language settings at the end
  */
 export interface StarreadThemeConfig {
   /**
@@ -139,14 +140,44 @@ export interface StarreadThemeConfig {
   lang?: string;
 
   /**
-   * Site-level locales configuration
+   * Site favicon URL
    * 
-   * 站点级语言环境配置
-   * 
-   * Key format: '/' for default language, '/en/' for English, etc.
-   * Each locale contains site-wide settings like title, description
+   * 站点图标 URL
    */
-  locales?: Record<string, SiteLocale>;
+  favicon: string;
+
+  /**
+   * Default cover image URL
+   * 
+   * 默认封面图片 URL
+   */
+  defaultCover: string;
+
+  /**
+   * Site founded date (for statistics)
+   * 
+   * 站点建立日期（用于统计）
+   */
+  foundedDate?: string;
+
+  /**
+   * Login page URL
+   * 
+   * 登录页面 URL
+   */
+  loginUrl?: string;
+
+  /**
+   * Logo configuration
+   * 
+   * Logo 配置
+   */
+  logo: {
+    image: string;
+    darkImage: string;
+    text: string;
+    alt: string;
+  };
 
   /**
    * Hero section configuration
@@ -156,44 +187,34 @@ export interface StarreadThemeConfig {
   hero?: HeroConfig;
 
   /**
-   * Site-wide configuration
-   * 
-   * 站点全局配置
-   * 
-   * Includes logo, favicon, URLs, etc.
-   * Text content should be configured in locales
-   */
-  site: SiteConfig;
-
-  /**
-   * Widget configurations
-   * 
-   * 小部件配置（全局）
-   * 
-   * Includes author, ad, categories, carousel, banner
-   * Text content should be configured in theme.locales
-   */
-  widget: WidgetConfig;
-
-  /**
    * Navigation bar configuration
    * 
-   * 导航栏配置（全局）
+   * 导航栏配置
    * 
    * Defines the navigation structure (links, icons, hierarchy)
-   * Can be overridden in theme.locales for each language
+   * Can be overridden in themeLocales for each language
    */
   navbar: NavItem[];
 
   /**
-   * Theme-level locales configuration
+   * Sidebar component visibility configuration
    * 
-   * 主题级语言环境配置
+   * 侧边栏组件显示控制配置
    * 
-   * Key format: '/' for default language, '/en/' for English, etc.
-   * Each locale contains language-specific UI texts
+   * Controls which widgets are shown on sidebar
+   * Text labels should be configured in themeLocales
    */
-  themeLocales?: Record<string, ThemeLocale>;
+  sidebar: SidebarConfig;
+
+  /**
+   * Widget configurations
+   * 
+   * 小部件配置
+   * 
+   * Includes author, ad, categories, carousel, banner, LatestArticle
+   * Text content should be configured in themeLocales
+   */
+  widget: WidgetConfig;
 
   /**
    * Dynamic effects configuration
@@ -203,14 +224,24 @@ export interface StarreadThemeConfig {
   dynamicEffect?: DynamicEffectConfig;
 
   /**
-   * Sidebar component visibility configuration
+   * Site-level locales configuration
    * 
-   * 侧边栏组件显示控制配置（全局）
+   * 站点级语言环境配置
    * 
-   * Controls which widgets are shown on sidebar
-   * Text labels should be configured in themeLocales
+   * Key format: '/' for default language, '/en/' for English, etc.
+   * Contains site-wide settings like title, description
    */
-  sidebar: SidebarConfig;
+  locales?: Record<string, SiteLocale>;
+
+  /**
+   * Theme-level locales configuration
+   * 
+   * 主题级语言环境配置
+   * 
+   * Key format: '/' for default language, '/en/' for English, etc.
+   * Contains language-specific UI texts for widgets, sidebar, search, etc.
+   */
+  themeLocales?: Record<string, ThemeLocale>;
 }
 
 /**
@@ -242,19 +273,10 @@ export interface HeroConfig {
 }
 
 /**
- * Site configuration interface
+ * Widget configuration interface
  */
-export interface SiteConfig {
-  favicon: string;
-  defaultCover: string;
-  foundedDate?: string;
-  loginUrl?: string;
-  logo: {
-    image: string;
-    darkImage: string;
-    text: string;
-    alt: string;
-  };
+export interface WidgetConfig {
+  /** Latest article widget configuration / 最新文章组件配置 */
   LatestArticle: {
     type: 'button' | 'auto';
     layout: 'horizontal' | 'vertical';
@@ -265,25 +287,29 @@ export interface SiteConfig {
     defaultAspectRatio: string;
     horizontalHeight: string;
   };
-}
 
-/**
- * Widget configuration interface
- */
-export interface WidgetConfig {
+  /** Author widget configuration / 作者信息配置 */
   author: {
     avatar: string;
     social: Record<string, string>;
   };
+
+  /** Ad widget configuration / 广告配置 */
   ad: {
     link: string;
   };
+
+  /** Categories configuration / 分类配置 */
   categories: Array<{
     name: string;
   }>;
+
+  /** Carousel configuration / 轮播图配置 */
   carousel: {
     layout: 'horizontal' | 'vertical';
   };
+
+  /** Banner configuration / 横幅配置 */
   banner: {
     backgroundImage: string;
   };

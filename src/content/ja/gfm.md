@@ -1,7 +1,7 @@
 ---
 title: GFM構文
 categories: [テーマ紹介]
-cover: https://www.dmoe.cc/random.php
+cover: /cover/20e6c8ef356dd961.avif
 description: マークダウン構文
 date: 2026-06-30 12:58:33
 ---

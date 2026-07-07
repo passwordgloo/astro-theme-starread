@@ -2,6 +2,7 @@
 title: Search Function
 categories: [Help Documentation]
 date: 2026-06-30 12:58:33
+cover: /cover/2d4cf471f4882dc2.avif
 ---
 
 >This article is excerpted from my [Vuepress 2 From 0 to 1 Nanny-level Advanced Tutorial — Full-text Search Chapter (including Algolia, meilisearch)](https://blog.csdn.net/passwordgloo/article/details/134687291)

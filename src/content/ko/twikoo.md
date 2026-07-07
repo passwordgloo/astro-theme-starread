@@ -1,6 +1,6 @@
 ---
 title: Twikoo 댓글 시스템
-cover: https://imgapi.xl0408.top/index.php
+cover: /cover/2ca3dc68e9893bd1.avif
 categories: [도움말 문서]
 date: 2026-06-30 12:58:33
 ---

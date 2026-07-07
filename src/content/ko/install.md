@@ -2,7 +2,7 @@
 title: 테마 설치 가이드
 categories: [테마 소개]
 description: Star Read는 뛰어나고 간결하며 정교한 Astro 블로그 테마로, 다양한 설치 방식을 제공하고 프로젝트 구조가 명확하며 현대적인 UI, 검색 지원, 반응형 디자인, 테마 전환 등의 기능을 갖추고 있습니다. 또한 검색, 테마 커스터마이징 및 댓글 시스템에 대한 상세한 설정을 제공합니다.
-cover: /cover/eRq5UHTwBSmoSguZBTPjB.jpg
+cover: /cover/2c614caca4dd46a2.avif
 date: 2026-06-30 12:58:33
 ---
 

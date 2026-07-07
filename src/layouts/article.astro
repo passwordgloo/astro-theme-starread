@@ -25,7 +25,7 @@ entry?.data?.tags?.forEach(tag => {
   <Fragment slot="header">
     <ArticleInfo 
       title={entry?.data?.title || Astro.props.title}
-      cover={entry?.data?.cover || Astro.props.cover || themeConfig.site.defaultCover}
+      cover={entry?.data?.cover || Astro.props.cover || themeConfig.defaultCover}
       date={formatDate?.(entry?.data?.date) || Astro.props.date}
       tags={entry?.data?.tags || Astro.props.tags || []}
       categories={entry?.data?.categories || Astro.props.categories || []}

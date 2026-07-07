@@ -3,26 +3,17 @@
  * 
  * 星阅主题配置文件
  * 
- * Following VuePress 2's i18n pattern:
- * - `lang`: Default language code
- * - `locales`: Site-level locale settings (title, description, footer)
- * - `navbar`: Global navigation bar (includes language selector)
- * - `themeLocales`: Theme-level locale settings (widget texts, sidebar labels)
- * 
- * Configuration Structure:
- * - lang: Global default language
- * - locales: Site-level multi-language settings
- * - hero: Global Hero visual effects
- * - site: Global site settings (logo, favicon, URLs)
- * - widget: Global widget settings (images, links)
- * - navbar: Global navigation bar (structure + language selector)
- * - themeLocales: Theme-level multi-language text settings
- * - sidebar: Global sidebar visibility controls
- * - dynamicEffect: Global dynamic effects
  */
 import type { StarreadThemeConfig } from './scripts/type/config';
 
 export const themeConfig: StarreadThemeConfig = {
+  /**
+   * ====================
+   * Global Settings
+   * 全局配置
+   * ====================
+   */
+
   /**
    * Default language code
    * 
@@ -32,14 +23,198 @@ export const themeConfig: StarreadThemeConfig = {
    */
   lang: 'zh',
 
+  /** Site favicon URL / 站点图标 URL */
+  favicon: '/favicon.png',
+
+  /** Default cover image URL / 默认封面图片 URL */
+  defaultCover: '/defaultCover.jpg',
+
+  /** Site founded date (for statistics) / 站点建立日期 */
+  foundedDate: '2025-10-01',
+
+  /** Login page URL / 登录页面 URL */
+  loginUrl: '/config',
+
   /**
-   * Site-level locales configuration
-   * 
-   * 站点级语言环境配置
-   * 
-   * Key format: '/' for default language, '/en/' for English, etc.
-   * Contains site-wide settings like title, description, footer text
+   * Logo configuration
+   * Logo 配置
    */
+  logo: {
+    image: '/logo.svg',
+    darkImage: '/logo-dark.svg',
+    text: '星阅主题',
+    alt: '星阅主题 Logo',
+  },
+
+  /**
+   * Hero section configuration
+   * 
+   * Hero 区域配置
+   */
+  hero: {
+    enabled: true,
+    backgroundImage: '/cover/2f0bcf8fe63c00af.avif',
+    title: {
+      mode: 'jinrishici',
+      content: 'Starread',
+    },
+    effect: {
+      gradient: {
+        enabled: true,
+        colors: ['#2563eb', '#9333ea', '#ec4899'],
+      },
+      typing: {
+        enabled: true,
+        repeat: true,
+        cursor: true,
+        cursorStyle: 'line',
+      },
+      particles: {
+        enabled: true,
+      },
+    },
+  },
+
+  /**
+   * ====================
+   * Navigation Bar Configuration
+   * 导航栏配置
+   * ====================
+   */
+
+  navbar: [
+    { name: '主页', href: '/', icon: 'Home' },
+    {
+      name: '软件资源',
+      icon: 'Database',
+      items: [
+        {
+          items: [
+            { text: 'Windows工具', link: '#', icon: 'Database' },
+            { text: 'Mac工具', link: '#', icon: 'Database' },
+            { text: 'Linux工具', link: '#', icon: 'Database' },
+            { text: '移动工具', link: '#', icon: 'Database' },
+          ],
+        },
+      ],
+    },
+    {
+      name: '教程指南',
+      icon: 'Book',
+      items: [
+        {
+          text: '开发教程',
+          items: [
+            { text: '前端开发', link: '#', icon: 'Code' },
+            { text: '后端开发', link: '#', icon: 'Server' },
+          ],
+        },
+        {
+          text: '技巧分享',
+          items: [
+            { text: '效率工具', link: '#', icon: 'HelpCircle' },
+            { text: '实用脚本', link: '#', icon: 'Code' },
+          ],
+        },
+      ],
+    },
+    { name: '代码编程', href: '#', icon: 'Code' },
+    { name: '汇编逆向', href: '#', icon: 'Lock' },
+  ],
+
+  /**
+   * ====================
+   * Sidebar Configuration
+   * 侧边栏配置
+   * ====================
+   */
+
+  sidebar: {
+    home: {
+      progress: true,
+      statsWidget: true,
+      authorWidget: true,
+      adWidget: true,
+      tag: true,
+      recommendedArticles: true,
+      statistic: true,
+    },
+    article: {
+      authorWidget: true,
+      tag: true,
+      toc: true,
+    },
+  },
+
+  /**
+   * ====================
+   * Widget Configurations
+   * 小部件配置
+   * ====================
+   */
+
+  widget: {
+    /** Latest article widget configuration / 最新文章组件配置 */
+    LatestArticle: {
+      type: 'button',
+      layout: 'horizontal',
+      defaultLimit: 20,
+      initialLoad: 4,
+      loadMore: 4,
+      columns: 2,
+      defaultAspectRatio: '16:9',
+      horizontalHeight: '160px',
+    },
+
+    /** Author widget configuration / 作者信息配置 */
+    author: {
+      avatar: 'https://picsum.photos/40/40?random=4',
+      social: {
+        bilibili: 'XXXXXX',
+        qq: 'XXXXXXX',
+      },
+    },
+
+    /** Ad widget configuration / 广告配置 */
+    ad: {
+      link: 'https://example.com',
+    },
+
+    /** Categories configuration / 分类配置 */
+    categories: [
+      { name: '主题介绍' },
+      { name: '帮助文档' },
+    ],
+
+    /** Carousel configuration / 轮播图配置 */
+    carousel: {
+      layout: 'vertical',
+    },
+
+    /** Banner configuration / 横幅配置 */
+    banner: {
+      backgroundImage: 'https://picsum.photos/1200/300',
+    },
+  },
+
+  /**
+   * ====================
+   * Dynamic Effects
+   * 动态效果
+   * ====================
+   */
+
+  dynamicEffect: {
+    postTopWave: true,
+  },
+
+  /**
+   * ====================
+   * Multi-language Configurations
+   * 多语言配置
+   * ====================
+   */
+
   locales: {
     '/': {
       lang: 'zh-CN',
@@ -84,147 +259,12 @@ export const themeConfig: StarreadThemeConfig = {
   },
 
   /**
-   * Hero section configuration
-   * 
-   * Hero 区域配置（全局）
-   */
-  hero: {
-    enabled: true,
-    backgroundImage: '/cover/eRq5UHTwBSmoSguZBTPjB.jpg',
-    title: {
-      mode: 'jinrishici',
-      content: 'Starread',
-    },
-    effect: {
-      gradient: {
-        enabled: true,
-        colors: ['#2563eb', '#933ea', '#ec4899'],
-      },
-      typing: {
-        enabled: true,
-        repeat: true,
-        cursor: true,
-        cursorStyle: 'line',
-      },
-      particles: {
-        enabled: true,
-      },
-    },
-  },
-
-  /**
-   * Site-wide configuration
-   * 
-   * 站点全局配置（全局）
-   */
-  site: {
-    favicon: '/favicon.png',
-    defaultCover: '/defaultCover.jpg',
-    foundedDate: '2025-10-01',
-    loginUrl: '/config',
-    logo: {
-      image: '/logo.svg',
-      darkImage: '/logo-dark.svg',
-      text: '星阅主题',
-      alt: '星阅主题 Logo',
-    },
-    LatestArticle: {
-      type: 'button',
-      layout: 'horizontal',
-      defaultLimit: 20,
-      initialLoad: 4,
-      loadMore: 4,
-      columns: 2,
-      defaultAspectRatio: '16:9',
-      horizontalHeight: '160px',
-    },
-  },
-
-  /**
-   * Widget configurations
-   * 
-   * 小部件配置（全局）
-   * 
-   * Text content is configured in themeLocales
-   */
-  widget: {
-    author: {
-      avatar: 'https://picsum.photos/40/40?random=4',
-      social: {
-        bilibili: 'XXXXXX',
-        qq: 'XXXXXXX',
-      },
-    },
-    ad: {
-      link: 'https://example.com',
-    },
-    categories: [
-      { name: '主题介绍' },
-      { name: '帮助文档' },
-    ],
-    carousel: {
-      layout: 'vertical',
-    },
-    banner: {
-      backgroundImage: 'https://picsum.photos/1200/300',
-    },
-  },
-
-  /**
-   * Navigation bar configuration
-   * 
-   * 导航栏配置（全局）
-   * 
-   * Includes navigation items and language selector
-   */
-  navbar: [
-    { name: '主页', href: '/', icon: 'Home' },
-    {
-      name: '软件资源',
-      icon: 'Database',
-      items: [
-        {
-          items: [
-            { text: 'Windows工具', link: '#', icon: 'Database' },
-            { text: 'Mac工具', link: '#', icon: 'Database' },
-            { text: 'Linux工具', link: '#', icon: 'Database' },
-            { text: '移动工具', link: '#', icon: 'Database' },
-          ],
-        },
-      ],
-    },
-    {
-      name: '教程指南',
-      icon: 'Book',
-      items: [
-        {
-          text: '开发教程',
-          items: [
-            { text: '前端开发', link: '#', icon: 'Code' },
-            { text: '后端开发', link: '#', icon: 'Server' },
-          ],
-        },
-        {
-          text: '技巧分享',
-          items: [
-            { text: '效率工具', link: '#', icon: 'HelpCircle' },
-            { text: '实用脚本', link: '#', icon: 'Code' },
-          ],
-        },
-      ],
-    },
-    { name: '代码编程', href: '#', icon: 'Code' },
-    { name: '汇编逆向', href: '#', icon: 'Lock' },
-  ],
-
-  /**
    * Theme-level locales configuration
    * 
    * 主题级语言环境配置
    * 
    * Key format: '/' for default language, '/en/' for English, etc.
    * Contains language-specific UI texts for widgets, sidebar, search, etc.
-   * Can override global navbar for each language
    */
   themeLocales: {
     '/': {
@@ -478,39 +518,6 @@ export const themeConfig: StarreadThemeConfig = {
           close: 'Закрыть',
         },
       },
-    },
-  },
-
-  /**
-   * Dynamic effects configuration
-   * 
-   * 动态效果配置（全局）
-   */
-  dynamicEffect: {
-    postTopWave: true,
-  },
-
-  /**
-   * Sidebar component visibility configuration
-   * 
-   * 侧边栏组件显示控制配置（全局）
-   * 
-   * Text labels are configured in themeLocales.sidebar
-   */
-  sidebar: {
-    home: {
-      progress: true,
-      statsWidget: true,
-      authorWidget: true,
-      adWidget: true,
-      tag: true,
-      recommendedArticles: true,
-      statistic: true,
-    },
-    article: {
-      authorWidget: true,
-      tag: true,
-      toc: true,
     },
   },
 };

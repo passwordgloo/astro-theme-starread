@@ -1,7 +1,7 @@
 ---
 title: GFM Syntax
 categories: [Theme Introduction]
-cover: https://www.dmoe.cc/random.php
+cover: /cover/20e6c8ef356dd961.avif
 description: Markdown Syntax
 date: 2026-06-30 12:58:33
 ---

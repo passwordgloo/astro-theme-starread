@@ -1,7 +1,7 @@
 ---
 title: GFM 문법
 categories: [테마 소개]
-cover: https://www.dmoe.cc/random.php
+cover: /cover/20e6c8ef356dd961.avif
 description: 마크다운 문법
 date: 2026-06-30 12:58:33
 ---

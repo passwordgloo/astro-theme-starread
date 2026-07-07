@@ -36,16 +36,16 @@ const languages = getAvailableLanguages();
     <div class="flex items-center space-x-2 nav-content">
       <div id="logo-container">
         <a href="/" class="block">
-          {themeConfig.site.logo.image ? (
+          {themeConfig.logo.image ? (
             <img 
-              src={themeConfig.site.logo.image} 
-              alt={themeConfig.site.logo.alt} 
+              src={themeConfig.logo.image} 
+              alt={themeConfig.logo.alt} 
               class="h-8 w-auto logo-image" 
-              data-light-src={themeConfig.site.logo.image} 
-              data-dark-src={themeConfig.site.logo.darkImage} 
+              data-light-src={themeConfig.logo.image} 
+              data-dark-src={themeConfig.logo.darkImage} 
             /> 
           ) : (
-            <span class="font-bold text-xl nav-logo-text">{themeConfig.site.logo.text}</span>
+            <span class="font-bold text-xl nav-logo-text">{themeConfig.logo.text}</span>
           )}
         </a>
       </div>
@@ -142,7 +142,7 @@ const languages = getAvailableLanguages();
         </div>
       </div>
       <Search />
-      <a href={themeConfig.site.loginUrl || '/config'} class="hidden md:block rounded-lg bg-primary text-white hover:bg-primary/70 active:bg-primary/80
+      <a href={themeConfig.loginUrl || '/config'} class="hidden md:block rounded-lg bg-primary text-white hover:bg-primary/70 active:bg-primary/80
                    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-sky-400/60 dark:bg-secondary dark:text-slate-950 dark:hover:bg-secondary/70 dark:active:bg-secondary/60
                    dark:focus-visible:ring-sky-300/50 px-4 py-2 rounded-md transition-colors">配置</a>
       <button id="mobile-menu-toggle" class="md:hidden p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors">

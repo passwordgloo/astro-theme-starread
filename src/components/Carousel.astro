@@ -12,7 +12,7 @@ const currentLang = getLangFromUrl(Astro.url.pathname);
 const t = useTranslations(currentLang);
 
 const { articles = [] } = Astro.props;
-const { LatestArticle } = themeConfig.site;
+const { LatestArticle } = themeConfig.widget;
 const { layout = 'vertical' } = themeConfig.widget.carousel;
 const [widthRatio, heightRatio] = LatestArticle.defaultAspectRatio.split(':').map(Number);
 const imageHeight = Math.round(200 * heightRatio / widthRatio);

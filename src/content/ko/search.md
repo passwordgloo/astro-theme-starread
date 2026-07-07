@@ -2,6 +2,7 @@
 title: 검색 기능
 categories: [도움말 문서]
 date: 2026-06-30 12:58:33
+cover: /cover/2d4cf471f4882dc2.avif
 ---
 
 >이 글은 제 [Vuepress 2 0부터 1까지 보모급 고급 튜토리얼 — 전문 검색 편 (Algolia, meilisearch 포함)](https://blog.csdn.net/passwordgloo/article/details/134687291)에서 발췌한 것입니다

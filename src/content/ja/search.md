@@ -2,6 +2,7 @@
 title: 検索機能
 categories: [ヘルプドキュメント]
 date: 2026-06-30 12:58:33
+cover: /cover/2d4cf471f4882dc2.avif
 ---
 
 >この記事は私の[Vuepress 2 0から1までのナニー級上級チュートリアル — 全文検索編（Algolia、meilisearch含む）](https://blog.csdn.net/passwordgloo/article/details/134687291)から抜粋したものです

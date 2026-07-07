@@ -1,7 +1,7 @@
 ---
 title: GFM语法
 categories: [主题介绍]
-cover: https://www.dmoe.cc/random.php
+cover: /cover/20e6c8ef356dd961.avif
 description: Markdown语法
 date: 2026-06-30 12:58:33
 ---

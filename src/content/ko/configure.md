@@ -1,7 +1,7 @@
 ---
 title: 커스텀 설정
 categories: [테마 소개]
-cover: https://www.dmoe.cc/random.php
+cover: /cover/2171616932c20231.avif
 date: 2026-06-30 12:58:33
 ---
 

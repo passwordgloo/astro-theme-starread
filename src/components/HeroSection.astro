@@ -3,7 +3,7 @@ import { themeConfig } from '../../starread.config';
 
 const heroConfig = themeConfig.hero;
 const heroEnabled = heroConfig?.enabled !== false;
-const bgImage = heroConfig?.backgroundImage || '/cover/NyYehQHfww_67cNm35rPO.jpg';
+const bgImage = heroConfig?.backgroundImage || '/cover/2f0bcf8fe63c00af.avif';
 const titleConfig = heroConfig?.title;
 const effectConfig = heroConfig?.effect;
 const navbarTransparent = heroConfig?.navbarTransparent !== false;
@@ -22,7 +22,7 @@ const cursorStyle = effectConfig?.typing?.cursorStyle || 'line';
 const particlesEnabled = effectConfig?.particles?.enabled !== false;
 
 const titleStyle = gradientEnabled 
-  ? `background: linear-gradient(90deg, ${gradientColors.join(', ')}); background-size: 200% 200%; -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; animation: gradient-flow 4s ease infinite;`
+  ? `color: #2563eb; background: linear-gradient(90deg, ${gradientColors.join(', ')}); background-size: 200% 200%; -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; animation: gradient-flow 4s ease infinite;`
   : 'color: rgb(17 24 39);';
 
 // Hero 区域显示时设置导航栏透明

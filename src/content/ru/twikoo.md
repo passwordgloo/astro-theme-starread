@@ -1,6 +1,6 @@
 ---
 title: Система комментариев Twikoo
-cover: https://imgapi.xl0408.top/index.php
+cover: /cover/2ca3dc68e9893bd1.avif
 categories: [Справочная документация]
 date: 2026-06-30 12:58:33
 ---

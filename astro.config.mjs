@@ -11,6 +11,15 @@ import autoIndex from './scripts/autoindex.js';
 export default defineConfig({
 	site: 'https://star.iglooblog.top',
 	output: 'static',
+	image: {
+		service: {
+			entrypoint: 'astro/assets/services/sharp'
+		}
+	},
+	compressHTML: true,
+	build: {
+		inlineStylesheets: 'auto'
+	},
 	vite: {
 		plugins: [tailwindcss()],
 		resolve: {

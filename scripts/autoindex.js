@@ -20,6 +20,15 @@ const astroConfigPath = path.join(process.cwd(), 'astro.config.mjs');
 const SUPPORTED_LANGS = ['zh', 'en', 'ja', 'ko', 'ru'];
 const DEFAULT_LANG = 'zh';
 
+function stripImages(text) {
+  if (!text) return '';
+  let result = text;
+  result = result.replace(/!\[[^\]]*\]\([^)]*\)/g, '');
+  result = result.replace(/<img\s[^>]*>/gi, '');
+  result = result.replace(/<!--[\s\S]*?-->/g, '');
+  return result;
+}
+
 let siteUrl = '';
 try {
   const configContent = fs.readFileSync(astroConfigPath, 'utf8');
@@ -72,7 +81,7 @@ function processContent(contentDir, index, progress) {
             categories: Array.isArray(data.categories) ? data.categories : (data.categories ? [data.categories] : []),
             tags: Array.isArray(data.tags) ? data.tags : (data.tags ? [data.tags] : []),
             date: data.date || '',
-            content: content.trim(),
+            content: stripImages(content).trim(),
             id: id,
             topic: topic,
             lang: lang,
