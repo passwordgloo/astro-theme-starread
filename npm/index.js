@@ -20,8 +20,20 @@ console.log(`
 `);
 
 // ========== 工具函数 ==========
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-const ask = (q) => new Promise((res) => rl.question(q, (a) => res(a)));
+let rl = null;
+function getRl() {
+  if (!rl) {
+    rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+  }
+  return rl;
+}
+const ask = (q) => new Promise((res) => getRl().question(q, (a) => res(a)));
+function closeRl() {
+  if (rl) {
+    rl.close();
+    rl = null;
+  }
+}
 
 function copyRecursive(src, dest, mode = "overwrite") {
   const stats = fs.statSync(src);
@@ -63,12 +75,13 @@ function resolveTemplateDir() {
 // 交互式依赖安装 - 使用键盘上下键选择
 function selectOption(question, options, defaultIndex = 0) {
   return new Promise((resolve) => {
-    const rl = readline.createInterface({
-      input: process.stdin,
-      output: process.stdout
-    });
+    if (!process.stdin.isTTY) {
+      resolve(defaultIndex);
+      return;
+    }
 
-    // 启用原始模式以便捕获方向键
+    const rlInstance = getRl();
+    readline.emitKeypressEvents(process.stdin, rlInstance);
     process.stdin.setRawMode(true);
     
     let selectedIndex = defaultIndex;
@@ -112,14 +125,15 @@ function selectOption(question, options, defaultIndex = 0) {
       console.log('\x1b[33m按 Enter 确认选择，使用 ↑ ↓ 键切换选项\x1b[0m');
     }
     
+    function cleanup() {
+      process.stdin.setRawMode(false);
+      process.stdin.removeListener('keypress', onKeypress);
+    }
+    
     // 处理键盘输入
-    process.stdin.on('keypress', (chunk, key) => {
+    function onKeypress(chunk, key) {
       // 处理Enter键
       if (key && key.name === 'return') {
-        process.stdin.setRawMode(false);
-        rl.close();
-        
-        // 清除提示信息
         const totalLines = options.length + 2; // 选项行数 + 问题行 + 提示行
         for (let i = 0; i < totalLines; i++) {
           readline.cursorTo(process.stdout, 0);
@@ -127,6 +141,7 @@ function selectOption(question, options, defaultIndex = 0) {
           readline.clearLine(process.stdout, 0);
         }
         
+        cleanup();
         resolve(selectedIndex);
         return;
       }
@@ -144,7 +159,16 @@ function selectOption(question, options, defaultIndex = 0) {
         displayOptions();
         return;
       }
-    });
+      
+      // 处理 Ctrl+C
+      if (key && key.ctrl && key.name === 'c') {
+        cleanup();
+        closeRl();
+        process.exit(0);
+      }
+    }
+    
+    process.stdin.on('keypress', onKeypress);
     
     displayOptions();
   });
@@ -167,7 +191,7 @@ function selectOption(question, options, defaultIndex = 0) {
       else if (ans === "s") copyMode = "skip";
       else {
         console.log("❌ 操作已取消。");
-        rl.close();
+        closeRl();
         process.exit(0);
       }
     }
@@ -180,32 +204,33 @@ function selectOption(question, options, defaultIndex = 0) {
   console.log('✅ 所有文件已复制到你的项目目录！');
 
   // 询问是否安装依赖
-  selectOption('👉 是否要立即安装依赖？', ['是 (默认)', '否'])
-    .then(async (installChoice) => {
-      const installNow = installChoice === 0;
-      
-      if (!installNow) {
-        console.log('\nℹ️  你选择了不安装依赖。稍后可以手动运行以下命令安装依赖：');
-        console.log(`   cd ${targetDirInput}`);
-        console.log('   npm install 或者 pnpm install / yarn install / cnpm install\n');
-        process.exit(0);
-      }
-      
-      // 选择包管理器
-      const pmOptions = ['npm (默认)', 'pnpm', 'yarn', 'cnpm'];
-      const pmChoice = await selectOption('👉 请选择包管理器：', pmOptions);
-      
-      const pmMap = ['npm', 'pnpm', 'yarn', 'cnpm'];
-      const pm = pmMap[pmChoice];
-      
-      console.log(`\n📦 使用 ${pm} 安装依赖中...\n`);
-      try {
-        execSync(`${pm} install`, { cwd: targetPath, stdio: 'inherit' });
-        console.log('\n🎉 初始化完成！你可以运行以下命令启动项目：');
-        console.log(`   cd ${targetDirInput}`);
-        console.log(`   ${pm} run dev 🚀\n`);
-      } catch (err) {
-        console.error('\n❌ 依赖安装失败，请手动运行 install\n');
-      }
-    });
+  const installChoice = await selectOption('👉 是否要立即安装依赖？', ['是 (默认)', '否']);
+  const installNow = installChoice === 0;
+  
+  if (!installNow) {
+    console.log('\nℹ️  你选择了不安装依赖。稍后可以手动运行以下命令安装依赖：');
+    console.log(`   cd ${targetDirInput}`);
+    console.log('   npm install 或者 pnpm install / yarn install / cnpm install\n');
+    closeRl();
+    process.exit(0);
+  }
+  
+  // 选择包管理器
+  const pmOptions = ['npm (默认)', 'pnpm', 'yarn', 'cnpm'];
+  const pmChoice = await selectOption('👉 请选择包管理器：', pmOptions);
+  
+  const pmMap = ['npm', 'pnpm', 'yarn', 'cnpm'];
+  const pm = pmMap[pmChoice];
+  
+  console.log(`\n📦 使用 ${pm} 安装依赖中...\n`);
+  try {
+    execSync(`${pm} install`, { cwd: targetPath, stdio: 'inherit' });
+    console.log('\n🎉 初始化完成！你可以运行以下命令启动项目：');
+    console.log(`   cd ${targetDirInput}`);
+    console.log(`   ${pm} run dev 🚀\n`);
+  } catch (err) {
+    console.error('\n❌ 依赖安装失败，请手动运行 install\n');
+  } finally {
+    closeRl();
+  }
 })();

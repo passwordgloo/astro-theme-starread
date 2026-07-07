@@ -57,12 +57,17 @@ function copyRecursive(src, dest) {
   // 交互式依赖安装 - 使用键盘上下键选择
   function selectOption(question, options, defaultIndex = 0) {
     return new Promise((resolve) => {
+      if (!process.stdin.isTTY) {
+        resolve(defaultIndex);
+        return;
+      }
+
       const rl = readline.createInterface({
         input: process.stdin,
         output: process.stdout
       });
 
-      // 启用原始模式以便捕获方向键
+      readline.emitKeypressEvents(process.stdin, rl);
       process.stdin.setRawMode(true);
       
       let selectedIndex = defaultIndex;
@@ -106,14 +111,15 @@ function copyRecursive(src, dest) {
         console.log('\x1b[33m按 Enter 确认选择，使用 ↑ ↓ 键切换选项\x1b[0m');
       }
       
+      function cleanup() {
+        process.stdin.setRawMode(false);
+        rl.close();
+      }
+      
       // 处理键盘输入
-      process.stdin.on('keypress', (chunk, key) => {
+      function onKeypress(chunk, key) {
         // 处理Enter键
         if (key && key.name === 'return') {
-          process.stdin.setRawMode(false);
-          rl.close();
-          
-          // 清除提示信息
           const totalLines = options.length + 2; // 选项行数 + 问题行 + 提示行
           for (let i = 0; i < totalLines; i++) {
             readline.cursorTo(process.stdout, 0);
@@ -121,6 +127,8 @@ function copyRecursive(src, dest) {
             readline.clearLine(process.stdout, 0);
           }
           
+          cleanup();
+          process.stdin.removeListener('keypress', onKeypress);
           resolve(selectedIndex);
           return;
         }
@@ -138,7 +146,15 @@ function copyRecursive(src, dest) {
           displayOptions();
           return;
         }
-      });
+        
+        // 处理 Ctrl+C
+        if (key && key.ctrl && key.name === 'c') {
+          cleanup();
+          process.exit(0);
+        }
+      }
+      
+      process.stdin.on('keypress', onKeypress);
       
       displayOptions();
     });
