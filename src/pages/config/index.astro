@@ -915,163 +915,103 @@ const isDev = import.meta.env.DEV;
                 添加菜单
               </button>
             </div>
-            <div class="nav-table-wrapper">
-              <table class="nav-table" id="nav-table">
-                <thead>
+            <div class="overflow-x-auto rounded-xl border border-glass-border">
+              <table class="w-full border-collapse" id="nav-table">
+                <thead class="bg-gradient-to-r from-primary/8 to-primary-light/8 border-b-2 border-primary-light dark:from-primary/15 dark:to-primary-light/15">
                   <tr>
-                    <th class="nav-col-icon">图标</th>
-                    <th class="nav-col-name">导航名称</th>
-                    <th class="nav-col-href">链接地址</th>
-                    <th class="nav-col-level">层级</th>
-                    <th class="nav-col-actions">操作</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-primary uppercase tracking-wider whitespace-nowrap">图标</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-primary uppercase tracking-wider whitespace-nowrap">导航名称</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-primary uppercase tracking-wider whitespace-nowrap">链接地址</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-primary uppercase tracking-wider whitespace-nowrap">层级</th>
+                    <th class="px-4 py-3 text-left text-xs font-semibold text-primary uppercase tracking-wider whitespace-nowrap">操作</th>
                   </tr>
                 </thead>
-                <tbody id="nav-table-body">
-                  <tr class="nav-row" data-index="0">
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-icon" value="Home" placeholder="Home" data-field="icon" />
+                <tbody class="bg-white/30 dark:bg-black/10" id="nav-table-body">
+                  <tr class="nav-row border-b border-glass-border hover:bg-primary/5 dark:hover:bg-primary/10 transition-all" data-index="0">
+                    <td class="px-4 py-3">
+                      <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" value="Home" placeholder="Home" data-field="icon" />
                     </td>
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-name" value="主页" placeholder="导航名称" data-field="name" />
+                    <td class="px-4 py-3">
+                      <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" value="主页" placeholder="导航名称" data-field="name" />
                     </td>
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-href" value="/" placeholder="/" data-field="href" />
+                    <td class="px-4 py-3">
+                      <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" value="/" placeholder="/" data-field="href" />
                     </td>
-                    <td class="nav-cell">
-                      <select class="nav-select" data-field="indent">
+                    <td class="px-4 py-3">
+                      <select class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 cursor-pointer transition-all" data-field="indent">
                         <option value="0" selected>一级菜单</option>
                         <option value="1">二级菜单</option>
                       </select>
                     </td>
-                    <td class="nav-cell nav-cell-actions">
-                      <div class="nav-actions">
-                        <button class="nav-btn nav-btn-up" title="提升层级">
+                    <td class="px-4 py-3">
+                      <div class="flex items-center gap-2">
+                        <button class="nav-btn nav-btn-up p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-primary/10 hover:text-primary hover:border-primary-light disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="提升层级">
                           <ChevronUp class="w-4 h-4" />
                         </button>
-                        <button class="nav-btn nav-btn-down" title="降低层级">
+                        <button class="nav-btn nav-btn-down p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-primary/10 hover:text-primary hover:border-primary-light disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="降低层级">
                           <ChevronDown class="w-4 h-4" />
                         </button>
-                        <button class="nav-btn nav-btn-delete" title="删除">
+                        <button class="nav-btn nav-btn-delete p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-error/10 hover:text-error hover:border-error/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="删除">
                           <Trash2 class="w-4 h-4" />
                         </button>
                       </div>
                     </td>
                   </tr>
-                  <tr class="nav-row" data-index="1">
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-icon" value="Database" placeholder="Database" data-field="icon" />
+                  <tr class="nav-row border-b border-glass-border hover:bg-primary/5 dark:hover:bg-primary/10 transition-all" data-index="1">
+                    <td class="px-4 py-3">
+                      <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" value="Database" placeholder="Database" data-field="icon" />
                     </td>
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-name" value="软件资源" placeholder="导航名称" data-field="name" />
+                    <td class="px-4 py-3">
+                      <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" value="软件资源" placeholder="导航名称" data-field="name" />
                     </td>
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-href" value="" placeholder="/" data-field="href" />
+                    <td class="px-4 py-3">
+                      <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" value="" placeholder="/" data-field="href" />
                     </td>
-                    <td class="nav-cell">
-                      <select class="nav-select" data-field="indent">
+                    <td class="px-4 py-3">
+                      <select class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 cursor-pointer transition-all" data-field="indent">
                         <option value="0" selected>一级菜单</option>
                         <option value="1">二级菜单</option>
                       </select>
                     </td>
-                    <td class="nav-cell nav-cell-actions">
-                      <div class="nav-actions">
-                        <button class="nav-btn nav-btn-up" title="提升层级">
+                    <td class="px-4 py-3">
+                      <div class="flex items-center gap-2">
+                        <button class="nav-btn nav-btn-up p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-primary/10 hover:text-primary hover:border-primary-light disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="提升层级">
                           <ChevronUp class="w-4 h-4" />
                         </button>
-                        <button class="nav-btn nav-btn-down" title="降低层级">
+                        <button class="nav-btn nav-btn-down p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-primary/10 hover:text-primary hover:border-primary-light disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="降低层级">
                           <ChevronDown class="w-4 h-4" />
                         </button>
-                        <button class="nav-btn nav-btn-delete" title="删除">
+                        <button class="nav-btn nav-btn-delete p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-error/10 hover:text-error hover:border-error/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="删除">
                           <Trash2 class="w-4 h-4" />
                         </button>
                       </div>
                     </td>
                   </tr>
-                  <tr class="nav-row" data-index="2">
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-icon" value="Database" placeholder="Database" data-field="icon" />
+                  <tr class="nav-row border-b border-glass-border hover:bg-primary/5 dark:hover:bg-primary/10 transition-all" data-index="2">
+                    <td class="px-4 py-3">
+                      <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" value="Database" placeholder="Database" data-field="icon" />
                     </td>
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-name" value="Windows工具" placeholder="导航名称" data-field="name" />
+                    <td class="px-4 py-3">
+                      <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" value="Windows工具" placeholder="导航名称" data-field="name" />
                     </td>
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-href" value="#" placeholder="/" data-field="href" />
+                    <td class="px-4 py-3">
+                      <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" value="#" placeholder="/" data-field="href" />
                     </td>
-                    <td class="nav-cell">
-                      <select class="nav-select" data-field="indent">
+                    <td class="px-4 py-3">
+                      <select class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 cursor-pointer transition-all" data-field="indent">
                         <option value="0">一级菜单</option>
                         <option value="1" selected>二级菜单</option>
                       </select>
                     </td>
-                    <td class="nav-cell nav-cell-actions">
-                      <div class="nav-actions">
-                        <button class="nav-btn nav-btn-up" title="提升层级">
+                    <td class="px-4 py-3">
+                      <div class="flex items-center gap-2">
+                        <button class="nav-btn nav-btn-up p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-primary/10 hover:text-primary hover:border-primary-light disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="提升层级">
                           <ChevronUp class="w-4 h-4" />
                         </button>
-                        <button class="nav-btn nav-btn-down" title="降低层级">
+                        <button class="nav-btn nav-btn-down p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-primary/10 hover:text-primary hover:border-primary-light disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="降低层级">
                           <ChevronDown class="w-4 h-4" />
                         </button>
-                        <button class="nav-btn nav-btn-delete" title="删除">
-                          <Trash2 class="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="nav-row" data-index="3">
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-icon" value="Database" placeholder="Database" data-field="icon" />
-                    </td>
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-name" value="Mac工具" placeholder="导航名称" data-field="name" />
-                    </td>
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-href" value="#" placeholder="/" data-field="href" />
-                    </td>
-                    <td class="nav-cell">
-                      <select class="nav-select" data-field="indent">
-                        <option value="0">一级菜单</option>
-                        <option value="1" selected>二级菜单</option>
-                      </select>
-                    </td>
-                    <td class="nav-cell nav-cell-actions">
-                      <div class="nav-actions">
-                        <button class="nav-btn nav-btn-up" title="提升层级">
-                          <ChevronUp class="w-4 h-4" />
-                        </button>
-                        <button class="nav-btn nav-btn-down" title="降低层级">
-                          <ChevronDown class="w-4 h-4" />
-                        </button>
-                        <button class="nav-btn nav-btn-delete" title="删除">
-                          <Trash2 class="w-4 h-4" />
-                        </button>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr class="nav-row" data-index="4">
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-icon" value="Book" placeholder="Book" data-field="icon" />
-                    </td>
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-name" value="教程指南" placeholder="导航名称" data-field="name" />
-                    </td>
-                    <td class="nav-cell">
-                      <input type="text" class="nav-input nav-input-href" value="" placeholder="/" data-field="href" />
-                    </td>
-                    <td class="nav-cell">
-                      <select class="nav-select" data-field="indent">
-                        <option value="0" selected>一级菜单</option>
-                        <option value="1">二级菜单</option>
-                      </select>
-                    </td>
-                    <td class="nav-cell nav-cell-actions">
-                      <div class="nav-actions">
-                        <button class="nav-btn nav-btn-up" title="提升层级">
-                          <ChevronUp class="w-4 h-4" />
-                        </button>
-                        <button class="nav-btn nav-btn-down" title="降低层级">
-                          <ChevronDown class="w-4 h-4" />
-                        </button>
-                        <button class="nav-btn nav-btn-delete" title="删除">
+                        <button class="nav-btn nav-btn-delete p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-error/10 hover:text-error hover:border-error/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="删除">
                           <Trash2 class="w-4 h-4" />
                         </button>
                       </div>
@@ -1525,6 +1465,9 @@ const isDev = import.meta.env.DEV;
     padding: 0;
     min-width: 0; /* 允许flex子项收缩 */
     overflow-x: hidden;
+    overflow-y: auto;
+    max-height: calc(100vh - 64px - 2rem);
+    padding-right: 1rem;
   }
 
   /* 顶部标题栏 */
@@ -1600,12 +1543,9 @@ const isDev = import.meta.env.DEV;
 
   /* ===== 表单区域 ===== */
   .form-section {
-    display: none;
-    animation: fadeIn 0.3s ease;
-  }
-
-  .form-section.active {
     display: block;
+    animation: fadeIn 0.3s ease;
+    scroll-margin-top: 90px;
   }
 
   @keyframes fadeIn {
@@ -2193,7 +2133,9 @@ const isDev = import.meta.env.DEV;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 4px;
+    width: 24px;
+    height: 24px;
+    padding: 0;
     border-radius: 4px;
     transition: all 0.2s ease;
     flex-shrink: 0;
@@ -2394,154 +2336,6 @@ const isDev = import.meta.env.DEV;
   /* 隐藏元素 */
   .hidden {
     display: none !important;
-  }
-
-  /* 导航表格样式 */
-  .nav-table-wrapper {
-    overflow-x: auto;
-    border-radius: 12px;
-    border: 1px solid var(--glass-border);
-  }
-
-  :global(.dark) .nav-table-wrapper {
-    border-color: rgba(75, 85, 99, 0.5);
-  }
-
-  .nav-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-
-  .nav-table thead {
-    background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
-    border-bottom: 2px solid var(--primary-light);
-  }
-
-  :global(.dark) .nav-table thead {
-    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(129, 140, 248, 0.15) 100%);
-  }
-
-  .nav-table th {
-    padding: 12px 16px;
-    text-align: left;
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--primary);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    white-space: nowrap;
-  }
-
-  .nav-table tbody {
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  :global(.dark) .nav-table tbody {
-    background: rgba(0, 0, 0, 0.1);
-  }
-
-  .nav-row {
-    border-bottom: 1px solid var(--glass-border);
-    transition: all 0.2s ease;
-  }
-
-  :global(.dark) .nav-row {
-    border-color: rgba(75, 85, 99, 0.3);
-  }
-
-  .nav-row:hover {
-    background: rgba(79, 70, 229, 0.05);
-  }
-
-  :global(.dark) .nav-row:hover {
-    background: rgba(99, 102, 241, 0.1);
-  }
-
-  .nav-cell {
-    padding: 12px 16px;
-  }
-
-  .nav-input {
-    width: 100%;
-    padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid var(--glass-border);
-    border-radius: 8px;
-    font-size: 14px;
-    color: var(--text-main);
-    outline: none;
-    transition: all 0.2s ease;
-  }
-
-  :global(.dark) .nav-input {
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  .nav-input:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-  }
-
-  .nav-select {
-    width: 100%;
-    padding: 8px 12px;
-    background: rgba(255, 255, 255, 0.6);
-    border: 1px solid var(--glass-border);
-    border-radius: 8px;
-    font-size: 14px;
-    color: var(--text-main);
-    outline: none;
-    cursor: pointer;
-    transition: all 0.2s ease;
-  }
-
-  :global(.dark) .nav-select {
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  .nav-select:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
-  }
-
-  .nav-actions {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-  }
-
-  .nav-btn {
-    padding: 8px;
-    background: transparent;
-    border: 1px solid var(--glass-border);
-    border-radius: 8px;
-    color: var(--text-secondary);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-  }
-
-  :global(.dark) .nav-btn {
-    border-color: rgba(75, 85, 99, 0.5);
-  }
-
-  .nav-btn:hover:not(:disabled) {
-    background: rgba(79, 70, 229, 0.1);
-    color: var(--primary);
-    border-color: var(--primary-light);
-  }
-
-  .nav-btn:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
-  }
-
-  .nav-btn-delete:hover:not(:disabled) {
-    background: rgba(239, 68, 68, 0.1);
-    color: var(--danger);
-    border-color: rgba(239, 68, 68, 0.3);
   }
 
   /* i18n列表样式 */
@@ -2939,6 +2733,28 @@ const isDev = import.meta.env.DEV;
     }, { offset: Number.NEGATIVE_INFINITY }).element;
   }
 
+  // 平滑滚动函数
+  function smoothScrollTo(element, targetScroll, duration) {
+    const startScroll = element.scrollTop;
+    const scrollDiff = targetScroll - startScroll;
+    const startTime = performance.now();
+
+    function animate(currentTime) {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      const easeProgress = 1 - Math.pow(1 - progress, 3);
+
+      element.scrollTop = startScroll + scrollDiff * easeProgress;
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }
+
   // 导航功能
   function initNavigation() {
     const navItems = document.querySelectorAll('.nav-item');
@@ -2953,11 +2769,21 @@ const isDev = import.meta.env.DEV;
         navItems.forEach(n => n.classList.remove('active'));
         item.classList.add('active');
 
-        // 显示对应区域
-        sections.forEach(s => s.classList.remove('active'));
+        // 平滑滚动到目标区域
         const targetSection = document.getElementById(targetId);
-        if (targetSection) {
-          targetSection.classList.add('active');
+        const scrollContainer = document.querySelector('.config-main');
+        if (targetSection && scrollContainer) {
+          const formContent = document.querySelector('.form-content');
+          if (formContent) {
+            const sectionIndex = Array.from(formContent.children).indexOf(targetSection);
+            let targetScroll = 0;
+            
+            for (let i = 0; i < sectionIndex; i++) {
+              targetScroll += formContent.children[i].offsetHeight;
+            }
+            
+            smoothScrollTo(scrollContainer, Math.max(0, targetScroll), 500);
+          }
         }
       });
     });
@@ -3049,6 +2875,17 @@ const isDev = import.meta.env.DEV;
         }
       });
     }
+
+    const navContainer = document.getElementById('nav-table-body');
+    if (navContainer) {
+      navContainer.addEventListener('click', (e) => {
+        const btn = e.target.closest('.nav-btn-delete');
+        if (btn) {
+          btn.closest('.nav-row').remove();
+          updateNavIndexes();
+        }
+      });
+    }
   }
 
   
@@ -3091,6 +2928,11 @@ const isDev = import.meta.env.DEV;
       btnAddLang.addEventListener('click', addLang);
     }
 
+    // 添加菜单项按钮
+    const btnAddNav = document.getElementById('btn-add-nav');
+    if (btnAddNav) {
+      btnAddNav.addEventListener('click', addNavItem);
+    }
   }
 
   // 添加分类
@@ -3151,6 +2993,56 @@ const isDev = import.meta.env.DEV;
     container.appendChild(div);
   }
 
+  // 添加菜单项
+  function addNavItem() {
+    const container = document.getElementById('nav-table-body');
+    if (!container) return;
+
+    const rowCount = container.querySelectorAll('.nav-row').length;
+    const tr = document.createElement('tr');
+    tr.className = 'nav-row border-b border-glass-border hover:bg-primary/5 dark:hover:bg-primary/10 transition-all';
+    tr.dataset.index = rowCount;
+    tr.innerHTML = `
+      <td class="px-4 py-3">
+        <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" placeholder="Home" data-field="icon" />
+      </td>
+      <td class="px-4 py-3">
+        <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" placeholder="导航名称" data-field="name" />
+      </td>
+      <td class="px-4 py-3">
+        <input type="text" class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 transition-all" placeholder="/" data-field="href" />
+      </td>
+      <td class="px-4 py-3">
+        <select class="w-full px-3 py-2 bg-white/60 border border-glass-border rounded-lg text-sm text-text-main outline-none focus:border-primary focus:ring-2 focus:ring-primary/10 dark:bg-black/30 cursor-pointer transition-all" data-field="indent">
+          <option value="0" selected>一级菜单</option>
+          <option value="1">二级菜单</option>
+        </select>
+      </td>
+      <td class="px-4 py-3">
+        <div class="flex items-center gap-2">
+          <button class="nav-btn nav-btn-up p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-primary/10 hover:text-primary hover:border-primary-light disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="提升层级">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="m12 19 7-7-7-7"/><path d="M19 12H5"/></svg>
+          </button>
+          <button class="nav-btn nav-btn-down p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-primary/10 hover:text-primary hover:border-primary-light disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="降低层级">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="m12 5 7 7-7 7"/><path d="M5 12h14"/></svg>
+          </button>
+          <button class="nav-btn nav-btn-delete p-2 bg-transparent border border-glass-border rounded-lg text-text-secondary hover:bg-error/10 hover:text-error hover:border-error/30 disabled:opacity-50 disabled:cursor-not-allowed transition-all" title="删除">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+          </button>
+        </div>
+      </td>
+    `;
+    container.appendChild(tr);
+  }
+
+  // 更新导航索引
+  function updateNavIndexes() {
+    const rows = document.querySelectorAll('#nav-table-body .nav-row');
+    rows.forEach((row, index) => {
+      row.dataset.index = index;
+    });
+  }
+
   // 生成配置
   function generateConfig() {
     const config = collectConfigData();
@@ -3183,12 +3075,16 @@ export const themeConfig: StarreadThemeConfig = ${JSON.stringify(config, null, 2
       }
     });
 
-    const navbarItems = Array.from(document.querySelectorAll('#nav-table-body .nav-row')).map(row => ({
-      icon: row.querySelector('[data-field="icon"]')?.value || 'Home',
-      name: row.querySelector('[data-field="name"]')?.value,
-      href: row.querySelector('[data-field="href"]')?.value,
-      indent: parseInt(row.querySelector('[data-field="indent"]')?.value || '0'),
-    })).filter(item => item.name);
+    const navbarItems = Array.from(document.querySelectorAll('#nav-table-body .nav-row')).map(row => {
+      const icon = row.querySelector('[data-field="icon"]')?.value || 'Home';
+      const name = row.querySelector('[data-field="name"]')?.value;
+      const href = row.querySelector('[data-field="href"]')?.value;
+      const indent = parseInt(row.querySelector('[data-field="indent"]')?.value || '0');
+      if (href) {
+        return { icon, name, href, indent };
+      }
+      return { icon, name, indent };
+    }).filter(item => item.name);
 
     const i18nLanguages = Array.from(document.querySelectorAll('#i18n-lang-list .i18n-item')).map(item => ({
       code: item.querySelector('[data-field="code"]')?.value,
