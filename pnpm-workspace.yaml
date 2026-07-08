@@ -1,3 +1,10 @@
+packages:
+  - '.'
+  - 'npm'
+
 allowBuilds:
   esbuild: false
   sharp: false
+
+minimumReleaseAgeExclude:
+  - astro-theme-starread@1.11.5

@@ -1,11 +1,11 @@
 ---
-import Base from './Base.astro';
-import ArticleInfo from '../components/ArticleInfo.astro';
-import AuthorWidget from '../widgets/AuthorWidget.astro';
-import TagCloud from '../widgets/TagCloud.astro';
-import ArticleTOC from '../components/ArticleTOC.astro';
-import Comment from '../components/Comment.astro';
-import { themeConfig } from '../../starread.config';
+import Base from '@theme/layouts/Base.astro';
+import ArticleInfo from '@theme/components/ArticleInfo.astro';
+import AuthorWidget from '@theme/widgets/AuthorWidget.astro';
+import TagCloud from '@theme/widgets/TagCloud.astro';
+import ArticleTOC from '@theme/components/ArticleTOC.astro';
+import Comment from '@theme/components/Comment.astro';
+import { themeConfig } from '@theme/config';
 
 const { entry, wordCount, formatDate } = Astro.props;
 const sidebarConfig = themeConfig.sidebar.article;

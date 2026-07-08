@@ -206,3 +206,59 @@ export function countWords(text: string): number {
 export interface WidgetConfig {
   [key: string]: boolean;
 }
+
+/**
+ * 将扁平化的导航配置转换为嵌套结构
+ * 
+ * @param flatNavbar 扁平化的导航数组，包含 indent 字段
+ * @returns 嵌套结构的导航数组，兼容原有 NavBar 组件
+ */
+export function flattenNavbarToNested(flatNavbar: Array<{ icon?: string; name: string; href?: string; indent?: number }>) {
+  const result: Array<{ name?: string; text?: string; href?: string; icon?: string; items?: any[] }> = [];
+  const stack: any[] = [];
+
+  flatNavbar.forEach((item) => {
+    const indent = item.indent || 0;
+    const navItem: any = {
+      name: item.name,
+      text: item.name,
+      icon: item.icon,
+      href: item.href,
+    };
+
+    while (stack.length > indent) {
+      stack.pop();
+    }
+
+    if (stack.length === 0) {
+      result.push(navItem);
+    } else {
+      const parent = stack[stack.length - 1];
+      if (!parent.items) {
+        parent.items = [];
+      }
+      
+      if (indent === stack.length) {
+        parent.items.push({
+          text: item.name,
+          items: []
+        });
+        stack.push(parent.items[parent.items.length - 1]);
+      } else {
+        const lastItem = parent.items[parent.items.length - 1];
+        if (!lastItem.items) lastItem.items = [];
+        lastItem.items.push({
+          text: item.name,
+          link: item.href,
+          icon: item.icon
+        });
+      }
+    }
+
+    if (!item.href) {
+      stack.push(navItem);
+    }
+  });
+
+  return result;
+}

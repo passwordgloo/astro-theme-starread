@@ -1,8 +1,8 @@
 ---
-import "../styles/global.css";
-import { themeConfig } from '../../starread.config';
-import NavBar from "../components/NavBar.astro";
-import { getLangFromUrl, useTranslations } from '../utils';
+import '@theme/styles/global.css';
+import { themeConfig } from '@theme/config';
+import NavBar from '@theme/components/NavBar.astro';
+import { getLangFromUrl, useTranslations } from '@theme/utils';
 
 interface Props {
   title?: string;

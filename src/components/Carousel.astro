@@ -1,10 +1,10 @@
 ---
-import { themeConfig } from '../../starread.config';
-import { getLangFromUrl, useTranslations } from '../utils';
-import { formatDate, getCoverImage, getAuthorInfo } from '../components/frontmatter';
-import PostCard from './PostCard.astro';
+import { themeConfig } from '@theme/config';
+import { getLangFromUrl, useTranslations } from '@theme/utils';
+import { formatDate, getCoverImage, getAuthorInfo } from '@theme/components/Frontmatter';
+import PostCard from '@theme/components/PostCard.astro';
 import { LayoutGrid, ChevronLeft, ChevronRight } from "@lucide/astro";
-import type { CarouselProps } from '../../scripts/type/components';
+import type { CarouselProps } from '@theme/scripts/type/components';
 
 interface Props extends CarouselProps {}
 

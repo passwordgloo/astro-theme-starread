@@ -1,7 +1,7 @@
 ---
-import { themeConfig } from '../../starread.config';
+import { themeConfig } from '@theme/config';
 import { Search, X, ChevronLeft, ChevronRight, CircleQuestionMark } from "@lucide/astro";
-import { getLangFromUrl, useTranslations } from '../utils';
+import { getLangFromUrl, useTranslations } from '@theme/utils';
 
 const algoliaConfig = {
   appId: import.meta.env.PUBLIC_ALGOLIA_APP_ID || '',

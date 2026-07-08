@@ -11,4 +11,4 @@ export { default as NavBar } from './NavBar.astro';
 export { default as PostCard } from './PostCard.astro';
 export { default as Search } from './Search.astro';
 
-export * from './frontmatter';
+export * from './Frontmatter';

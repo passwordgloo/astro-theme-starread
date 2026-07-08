@@ -1,8 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { themeConfig } from '../../starread.config';
-import { sortEntriesByDate, processEntryData } from '../components/frontmatter';
-import PostCard from './PostCard.astro';
+import { themeConfig } from '@theme/config';
+import { sortEntriesByDate, processEntryData } from '@theme/components/Frontmatter';
+import PostCard from '@theme/components/PostCard.astro';
 import { Newspaper } from "@lucide/astro";
 
 interface Props {

@@ -80,46 +80,32 @@ export const themeConfig: StarreadThemeConfig = {
    * Navigation Bar Configuration
    * 导航栏配置
    * ====================
+   * 
+   * 使用 Markdown 多级列表方式配置导航菜单：
+   * - indent: 0 = 一级菜单（顶级导航）
+   * - indent: 1 = 二级菜单（子菜单分组）
+   * - indent: 2 = 三级菜单（可点击的链接）
+   * 
+   * 图标支持 @lucide/astro 图标名或 unicode 字符
+   * 示例：icon: 'Home' 或 icon: '🏠'
+   * 
+   * 当没有 href 时为父菜单（展开子菜单），有 href 时为可点击的链接
    */
 
   navbar: [
-    { name: '主页', href: '/', icon: 'Home' },
-    {
-      name: '软件资源',
-      icon: 'Database',
-      items: [
-        {
-          items: [
-            { text: 'Windows工具', link: '#', icon: 'Database' },
-            { text: 'Mac工具', link: '#', icon: 'Database' },
-            { text: 'Linux工具', link: '#', icon: 'Database' },
-            { text: '移动工具', link: '#', icon: 'Database' },
-          ],
-        },
-      ],
-    },
-    {
-      name: '教程指南',
-      icon: 'Book',
-      items: [
-        {
-          text: '开发教程',
-          items: [
-            { text: '前端开发', link: '#', icon: 'Code' },
-            { text: '后端开发', link: '#', icon: 'Server' },
-          ],
-        },
-        {
-          text: '技巧分享',
-          items: [
-            { text: '效率工具', link: '#', icon: 'HelpCircle' },
-            { text: '实用脚本', link: '#', icon: 'Code' },
-          ],
-        },
-      ],
-    },
-    { name: '代码编程', href: '#', icon: 'Code' },
-    { name: '汇编逆向', href: '#', icon: 'Lock' },
+    { icon: 'Home', name: '主页', href: '/', indent: 0 },
+    { icon: 'Database', name: '软件资源', indent: 0 },
+    { icon: 'Database', name: 'Windows工具', href: '#', indent: 1 },
+    { icon: 'Database', name: 'Mac工具', href: '#', indent: 1 },
+    { icon: 'Database', name: 'Linux工具', href: '#', indent: 1 },
+    { icon: 'Database', name: '移动工具', href: '#', indent: 1 },
+    { icon: 'Book', name: '教程指南', indent: 0 },
+    { icon: 'Code', name: '前端开发', href: '#', indent: 1 },
+    { icon: 'Server', name: '后端开发', href: '#', indent: 1 },
+    { icon: 'HelpCircle', name: '效率工具', href: '#', indent: 1 },
+    { icon: 'Code', name: '实用脚本', href: '#', indent: 1 },
+    { icon: 'Code', name: '代码编程', href: '#', indent: 0 },
+    { icon: 'Lock', name: '汇编逆向', href: '#', indent: 0 },
   ],
 
   /**
@@ -293,43 +279,19 @@ export const themeConfig: StarreadThemeConfig = {
         },
       },
       navbar: [
-        { name: '主页', href: '/', icon: 'Home' },
-        {
-          name: '软件资源',
-          icon: 'Database',
-          items: [
-            {
-              items: [
-                { text: 'Windows工具', link: '#', icon: 'Database' },
-                { text: 'Mac工具', link: '#', icon: 'Database' },
-                { text: 'Linux工具', link: '#', icon: 'Database' },
-                { text: '移动工具', link: '#', icon: 'Database' },
-              ],
-            },
-          ],
-        },
-        {
-          name: '教程指南',
-          icon: 'Book',
-          items: [
-            {
-              text: '开发教程',
-              items: [
-                { text: '前端开发', link: '#', icon: 'Code' },
-                { text: '后端开发', link: '#', icon: 'Server' },
-              ],
-            },
-            {
-              text: '技巧分享',
-              items: [
-                { text: '效率工具', link: '#', icon: 'HelpCircle' },
-                { text: '实用脚本', link: '#', icon: 'Code' },
-              ],
-            },
-          ],
-        },
-        { name: '代码编程', href: '#', icon: 'Code' },
-        { name: '汇编逆向', href: '#', icon: 'Lock' },
+        { icon: 'Home', name: '主页', href: '/', indent: 0 },
+        { icon: 'Database', name: '软件资源', indent: 0 },
+        { icon: 'Database', name: 'Windows工具', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Mac工具', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Linux工具', href: '#', indent: 1 },
+        { icon: 'Database', name: '移动工具', href: '#', indent: 1 },
+        { icon: 'Book', name: '教程指南', indent: 0 },
+        { icon: 'Code', name: '前端开发', href: '#', indent: 1 },
+        { icon: 'Server', name: '后端开发', href: '#', indent: 1 },
+        { icon: 'HelpCircle', name: '效率工具', href: '#', indent: 1 },
+        { icon: 'Code', name: '实用脚本', href: '#', indent: 1 },
+        { icon: 'Code', name: '代码编程', href: '#', indent: 0 },
+        { icon: 'Lock', name: '汇编逆向', href: '#', indent: 0 },
       ],
       sidebar: {
         progress: '字数统计',
@@ -380,43 +342,19 @@ export const themeConfig: StarreadThemeConfig = {
         },
       },
       navbar: [
-        { name: 'Home', href: '/en/', icon: 'Home' },
-        {
-          name: 'Software',
-          icon: 'Database',
-          items: [
-            {
-              items: [
-                { text: 'Windows Tools', link: '#', icon: 'Database' },
-                { text: 'Mac Tools', link: '#', icon: 'Database' },
-                { text: 'Linux Tools', link: '#', icon: 'Database' },
-                { text: 'Mobile Tools', link: '#', icon: 'Database' },
-              ],
-            },
-          ],
-        },
-        {
-          name: 'Tutorials',
-          icon: 'Book',
-          items: [
-            {
-              text: 'Development',
-              items: [
-                { text: 'Frontend', link: '#', icon: 'Code' },
-                { text: 'Backend', link: '#', icon: 'Server' },
-              ],
-            },
-            {
-              text: 'Tips',
-              items: [
-                { text: 'Productivity', link: '#', icon: 'HelpCircle' },
-                { text: 'Scripts', link: '#', icon: 'Code' },
-              ],
-            },
-          ],
-        },
-        { name: 'Coding', href: '#', icon: 'Code' },
-        { name: 'Reverse', href: '#', icon: 'Lock' },
+        { icon: 'Home', name: 'Home', href: '/en/', indent: 0 },
+        { icon: 'Database', name: 'Software', indent: 0 },
+        { icon: 'Database', name: 'Windows Tools', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Mac Tools', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Linux Tools', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Mobile Tools', href: '#', indent: 1 },
+        { icon: 'Book', name: 'Tutorials', indent: 0 },
+        { icon: 'Code', name: 'Frontend', href: '#', indent: 1 },
+        { icon: 'Server', name: 'Backend', href: '#', indent: 1 },
+        { icon: 'HelpCircle', name: 'Productivity', href: '#', indent: 1 },
+        { icon: 'Code', name: 'Scripts', href: '#', indent: 1 },
+        { icon: 'Code', name: 'Coding', href: '#', indent: 0 },
+        { icon: 'Lock', name: 'Reverse', href: '#', indent: 0 },
       ],
       sidebar: {
         progress: 'Word Count',
@@ -444,6 +382,43 @@ export const themeConfig: StarreadThemeConfig = {
     '/ja/': {
       selectLanguageName: '日本語',
       flag: '🇯🇵',
+      widget: {
+        author: {
+          name: 'StarRead',
+          description: '前進し続ける',
+        },
+        ad: {
+          title: 'オブシディアンブログ',
+          description: 'コメント、パーティクル効果、カテゴリをサポート',
+          buttonText: '詳細を見る',
+        },
+        categories: [
+          { name: 'Theme Guide', title: 'テーマガイド' },
+          { name: 'Help', title: 'ヘルプ' },
+        ],
+        carousel: {
+          title: 'カルーセル',
+        },
+        banner: {
+          title: 'スターリードテーマ',
+          tags: ['Vite+Tailwindcss ベース', 'ダークモードサポート', 'モジュール式コンポーネント'],
+        },
+      },
+      navbar: [
+        { icon: 'Home', name: 'ホーム', href: '/ja/', indent: 0 },
+        { icon: 'Database', name: 'ソフトウェア', indent: 0 },
+        { icon: 'Database', name: 'Windowsツール', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Macツール', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Linuxツール', href: '#', indent: 1 },
+        { icon: 'Database', name: 'モバイルツール', href: '#', indent: 1 },
+        { icon: 'Book', name: 'チュートリアル', indent: 0 },
+        { icon: 'Code', name: 'フロントエンド', href: '#', indent: 1 },
+        { icon: 'Server', name: 'バックエンド', href: '#', indent: 1 },
+        { icon: 'HelpCircle', name: '生産性', href: '#', indent: 1 },
+        { icon: 'Code', name: 'スクリプト', href: '#', indent: 1 },
+        { icon: 'Code', name: 'コーディング', href: '#', indent: 0 },
+        { icon: 'Lock', name: 'リバース', href: '#', indent: 0 },
+      ],
       sidebar: {
         progress: '文字数',
         author: '作者',
@@ -470,6 +445,43 @@ export const themeConfig: StarreadThemeConfig = {
     '/ko/': {
       selectLanguageName: '한국어',
       flag: '🇰🇷',
+      widget: {
+        author: {
+          name: 'StarRead',
+          description: '계속 나아가기',
+        },
+        ad: {
+          title: '옵시디언 블로그',
+          description: '댓글, 입자 효과, 카테고리 지원',
+          buttonText: '자세히 보기',
+        },
+        categories: [
+          { name: 'Theme Guide', title: '테마 가이드' },
+          { name: 'Help', title: '도움말' },
+        ],
+        carousel: {
+          title: '캐러셀',
+        },
+        banner: {
+          title: 'StarRead 테마',
+          tags: ['Vite+Tailwindcss 기반', '다크 모드 지원', '모듈식 컴포넌트'],
+        },
+      },
+      navbar: [
+        { icon: 'Home', name: '홈', href: '/ko/', indent: 0 },
+        { icon: 'Database', name: '소프트웨어', indent: 0 },
+        { icon: 'Database', name: 'Windows 도구', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Mac 도구', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Linux 도구', href: '#', indent: 1 },
+        { icon: 'Database', name: '모바일 도구', href: '#', indent: 1 },
+        { icon: 'Book', name: '튜토리얼', indent: 0 },
+        { icon: 'Code', name: '프론트엔드', href: '#', indent: 1 },
+        { icon: 'Server', name: '백엔드', href: '#', indent: 1 },
+        { icon: 'HelpCircle', name: '생산성', href: '#', indent: 1 },
+        { icon: 'Code', name: '스크립트', href: '#', indent: 1 },
+        { icon: 'Code', name: '코딩', href: '#', indent: 0 },
+        { icon: 'Lock', name: '리버스', href: '#', indent: 0 },
+      ],
       sidebar: {
         progress: '단어 수',
         author: '저자',
@@ -496,6 +508,43 @@ export const themeConfig: StarreadThemeConfig = {
     '/ru/': {
       selectLanguageName: 'Русский',
       flag: '🇷🇺',
+      widget: {
+        author: {
+          name: 'StarRead',
+          description: 'Продолжайте двигаться вперед',
+        },
+        ad: {
+          title: 'Obsidian Blog',
+          description: 'Поддерживает комментарии, частицы, категории',
+          buttonText: 'Узнать больше',
+        },
+        categories: [
+          { name: 'Theme Guide', title: 'Руководство темы' },
+          { name: 'Help', title: 'Помощь' },
+        ],
+        carousel: {
+          title: 'Карусель',
+        },
+        banner: {
+          title: 'Тема StarRead',
+          tags: ['Основана на Vite+Tailwindcss', 'Темный режим', 'Модульные компоненты'],
+        },
+      },
+      navbar: [
+        { icon: 'Home', name: 'Главная', href: '/ru/', indent: 0 },
+        { icon: 'Database', name: 'Программное обеспечение', indent: 0 },
+        { icon: 'Database', name: 'Windows Tools', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Mac Tools', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Linux Tools', href: '#', indent: 1 },
+        { icon: 'Database', name: 'Mobile Tools', href: '#', indent: 1 },
+        { icon: 'Book', name: 'Учебники', indent: 0 },
+        { icon: 'Code', name: 'Фронтенд', href: '#', indent: 1 },
+        { icon: 'Server', name: 'Бэкенд', href: '#', indent: 1 },
+        { icon: 'HelpCircle', name: 'Производительность', href: '#', indent: 1 },
+        { icon: 'Code', name: 'Скрипты', href: '#', indent: 1 },
+        { icon: 'Code', name: 'Кодирование', href: '#', indent: 0 },
+        { icon: 'Lock', name: 'Реверс', href: '#', indent: 0 },
+      ],
       sidebar: {
         progress: 'Количество слов',
         author: 'Автор',

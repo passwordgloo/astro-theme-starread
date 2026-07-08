@@ -1,8 +1,8 @@
 ---
 const { title } = Astro.props;
-import { themeConfig } from '../../starread.config';
-import { getLangFromUrl, switchLangPath, useTranslations, getAvailableLanguages } from '../utils';
-import Search from "./Search.astro";
+import { themeConfig } from '@theme/config';
+import { getLangFromUrl, switchLangPath, useTranslations, getAvailableLanguages, flattenNavbarToNested } from '@theme/utils';
+import Search from '@theme/components/Search.astro';
 import { 
   ChevronDown, Menu, X, Home, Database, Book, Code, Server, HelpCircle, Lock, Languages 
 } from "@lucide/astro";
@@ -56,7 +56,7 @@ const languages = getAvailableLanguages();
 
     <!-- 导航菜单 -->
     <nav class="hidden md:flex items-center space-x-6">
-      {t.navbar.map((item) => {
+      {flattenNavbarToNested(t.navbar).map((item) => {
         const ItemIcon = getIcon(item.icon);
         return (
           <div class="relative group" key={item.name || item.text}>
@@ -169,7 +169,7 @@ const languages = getAvailableLanguages();
       <div class="p-3">
         <Search />
       </div>
-      {t.navbar.map((item) => {
+      {flattenNavbarToNested(t.navbar).map((item) => {
         const MobileIcon = getIcon(item.icon);
         return (
           <div key={item.name || item.text}>

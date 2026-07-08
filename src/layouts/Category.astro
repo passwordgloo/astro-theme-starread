@@ -1,9 +1,9 @@
 ---
-import Base from './Base.astro';
-import AuthorWidget from '../widgets/AuthorWidget.astro';
-import AdWidget from '../widgets/AdWidget.astro';
-import TagCloud from '../widgets/TagCloud.astro';
-import { themeConfig } from '../../starread.config';
+import Base from '@theme/layouts/Base.astro';
+import AuthorWidget from '@theme/widgets/AuthorWidget.astro';
+import AdWidget from '@theme/widgets/AdWidget.astro';
+import TagCloud from '@theme/widgets/TagCloud.astro';
+import { themeConfig } from '@theme/config';
 
 interface Props {
   title: string;
@@ -52,7 +52,6 @@ articles.forEach(item => {
       <!-- 文章列表 -->
       {articles.length > 0 ? (
         <div class="space-y-4">
-          <h2 class="text-xl font-bold mb-4">{currentCategory}</h2>
           <div class="space-y-1">
             {articles.map((article) => (
               <div key={article.slug} class="flex justify-between items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">

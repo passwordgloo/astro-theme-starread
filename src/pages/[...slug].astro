@@ -1,12 +1,12 @@
 ---
 import { getCollection, render } from 'astro:content';
-import BaseLayout from '../layouts/article.astro';
-import ArticleNav from '../components/ArticleNav.astro';
+import BaseLayout from '@theme/layouts/Article.astro';
+import ArticleNav from '@theme/components/ArticleNav.astro';
 import {
   formatDate,
   getCoverImage,
   countWords
-} from '../components/frontmatter.ts';
+} from '@theme/components/Frontmatter';
 
 export const prerender = true;
 

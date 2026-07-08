@@ -43,6 +43,12 @@ importers:
         specifier: ^4.2.2
         version: 4.2.2
 
+  npm:
+    dependencies:
+      astro-theme-starread:
+        specifier: ^1.11.5
+        version: 1.11.5(@astrojs/markdown-remark@7.2.0)(@astrojs/markdown-satteri@0.3.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@24.12.0)(jiti@2.6.1)(rollup@4.60.0)(yaml@2.9.0)
+
 packages:
 
   '@algolia/abtesting@1.16.0':
@@ -1119,6 +1125,10 @@ packages:
 
   astring@1.9.0:
     resolution: {integrity: sha512-LElXdjswlqjWrPpJFg1Fx4wpkOCxj1TDHlSV4PlaRxHGWko024xICaa97ZkMfs6DRKlCguiAI+rbXv5GWwXIkg==}
+    hasBin: true
+
+  astro-theme-starread@1.11.5:
+    resolution: {integrity: sha512-ngvcpnB+9ASEB8cA8T64XMw791krZ9+cjou/jOpqmBRqXy/O/nvnDNEjdrfYgBZaW2yAdfuLlYZqKRfNSQ9Hhg==}
     hasBin: true
 
   astro@7.0.3:
@@ -3219,6 +3229,53 @@ snapshots:
   array-iterate@2.0.1: {}
 
   astring@1.9.0: {}
+
+  astro-theme-starread@1.11.5(@astrojs/markdown-remark@7.2.0)(@astrojs/markdown-satteri@0.3.2)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@24.12.0)(jiti@2.6.1)(rollup@4.60.0)(yaml@2.9.0):
+    dependencies:
+      '@astrojs/mdx': 7.0.0(@astrojs/markdown-satteri@0.3.2)(astro@7.0.3(@astrojs/markdown-remark@7.2.0)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@24.12.0)(jiti@2.6.1)(rollup@4.60.0)(yaml@2.9.0))
+      '@astrojs/node': 11.0.0(astro@7.0.3(@astrojs/markdown-remark@7.2.0)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@24.12.0)(jiti@2.6.1)(rollup@4.60.0)(yaml@2.9.0))
+      '@astrojs/rss': 4.0.18
+      '@astrojs/sitemap': 3.7.3
+      '@lucide/astro': 1.7.0(astro@7.0.3(@astrojs/markdown-remark@7.2.0)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@24.12.0)(jiti@2.6.1)(rollup@4.60.0)(yaml@2.9.0))
+      astro: 7.0.3(@astrojs/markdown-remark@7.2.0)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@24.12.0)(jiti@2.6.1)(rollup@4.60.0)(yaml@2.9.0)
+      sharp: 0.34.5
+    transitivePeerDependencies:
+      - '@astrojs/markdown-remark'
+      - '@astrojs/markdown-satteri'
+      - '@azure/app-configuration'
+      - '@azure/cosmos'
+      - '@azure/data-tables'
+      - '@azure/identity'
+      - '@azure/keyvault-secrets'
+      - '@azure/storage-blob'
+      - '@capacitor/preferences'
+      - '@deno/kv'
+      - '@emnapi/core'
+      - '@emnapi/runtime'
+      - '@netlify/blobs'
+      - '@planetscale/database'
+      - '@types/node'
+      - '@upstash/redis'
+      - '@vercel/blob'
+      - '@vercel/functions'
+      - '@vercel/kv'
+      - '@vitejs/devtools'
+      - aws4fetch
+      - db0
+      - idb-keyval
+      - ioredis
+      - jiti
+      - less
+      - rollup
+      - sass
+      - sass-embedded
+      - stylus
+      - sugarss
+      - supports-color
+      - terser
+      - tsx
+      - uploadthing
+      - yaml
 
   astro@7.0.3(@astrojs/markdown-remark@7.2.0)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@24.12.0)(jiti@2.6.1)(rollup@4.60.0)(yaml@2.9.0):
     dependencies:

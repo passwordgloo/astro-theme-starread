@@ -78,18 +78,14 @@ export interface ThemeLocale {
 
   /** Navigation bar items (overrides global navbar) / 导航栏项目 */
   navbar?: Array<{
-    name?: string;
-    text?: string;
-    href?: string;
+    /** 图标名称（@lucide/astro 图标名）或 unicode 字符 */
     icon?: string;
-    items?: Array<{
-      text?: string;
-      items?: Array<{
-        text: string;
-        link?: string;
-        icon?: string;
-      }>;
-    }>;
+    /** 菜单显示名称 */
+    name: string;
+    /** 链接地址（href），如果没有则为父菜单 */
+    href?: string;
+    /** 缩进层级，0=一级菜单，1=二级菜单，2=三级菜单 */
+    indent?: number;
   }>;
 
   /** Sidebar widget text labels / 侧边栏组件文本标签 */
@@ -131,142 +127,105 @@ export interface ThemeLocale {
  */
 export interface StarreadThemeConfig {
   /**
-   * Default language code
-   * 
-   * 默认语言代码
+   * 默认语言代码（BCP47格式）
    * 
    * @default 'zh'
    */
   lang?: string;
 
-  /**
-   * Site favicon URL
-   * 
-   * 站点图标 URL
-   */
+  /** 站点图标 URL */
   favicon: string;
 
-  /**
-   * Default cover image URL
-   * 
-   * 默认封面图片 URL
-   */
+  /** 默认封面图片 URL */
   defaultCover: string;
 
-  /**
-   * Site founded date (for statistics)
-   * 
-   * 站点建立日期（用于统计）
-   */
+  /** 站点建立日期（用于统计建站天数） */
   foundedDate?: string;
 
-  /**
-   * Login page URL
-   * 
-   * 登录页面 URL
-   */
+  /** 登录页面 URL */
   loginUrl?: string;
 
-  /**
-   * Logo configuration
-   * 
-   * Logo 配置
-   */
+  /** Logo 配置 */
   logo: {
+    /** 浅色模式 Logo 图片 URL */
     image: string;
+    /** 深色模式 Logo 图片 URL */
     darkImage: string;
+    /** Logo 文字 */
     text: string;
+    /** Logo 替代文本 */
     alt: string;
   };
 
-  /**
-   * Hero section configuration
-   * 
-   * Hero 区域配置
-   */
+  /** Hero 区域配置（首页全屏展示区域） */
   hero?: HeroConfig;
 
-  /**
-   * Navigation bar configuration
-   * 
-   * 导航栏配置
-   * 
-   * Defines the navigation structure (links, icons, hierarchy)
-   * Can be overridden in themeLocales for each language
-   */
+  /** 导航栏配置 */
   navbar: NavItem[];
 
-  /**
-   * Sidebar component visibility configuration
-   * 
-   * 侧边栏组件显示控制配置
-   * 
-   * Controls which widgets are shown on sidebar
-   * Text labels should be configured in themeLocales
-   */
+  /** 侧边栏组件显示控制配置 */
   sidebar: SidebarConfig;
 
-  /**
-   * Widget configurations
-   * 
-   * 小部件配置
-   * 
-   * Includes author, ad, categories, carousel, banner, LatestArticle
-   * Text content should be configured in themeLocales
-   */
+  /** 小部件配置 */
   widget: WidgetConfig;
 
-  /**
-   * Dynamic effects configuration
-   * 
-   * 动态效果配置
-   */
+  /** 动态效果配置 */
   dynamicEffect?: DynamicEffectConfig;
 
   /**
-   * Site-level locales configuration
-   * 
    * 站点级语言环境配置
    * 
-   * Key format: '/' for default language, '/en/' for English, etc.
-   * Contains site-wide settings like title, description
+   * Key格式: '/' 表示默认语言，'/en/' 表示英语等
+   * 包含站点级设置如标题、描述等
    */
   locales?: Record<string, SiteLocale>;
 
   /**
-   * Theme-level locales configuration
-   * 
    * 主题级语言环境配置
    * 
-   * Key format: '/' for default language, '/en/' for English, etc.
-   * Contains language-specific UI texts for widgets, sidebar, search, etc.
+   * Key格式: '/' 表示默认语言，'/en/' 表示英语等
+   * 包含各语言的UI文本如小部件、侧边栏、搜索等
    */
   themeLocales?: Record<string, ThemeLocale>;
 }
 
 /**
  * Hero section configuration interface
+ * 
+ * Hero 区域配置接口（首页全屏展示区域）
  */
 export interface HeroConfig {
+  /** 是否显示 Hero 区域 */
   enabled?: boolean;
+  /** 导航栏是否透明 */
   navbarTransparent?: boolean;
+  /** 背景图片URL */
   backgroundImage?: string;
   title?: {
+    /** 显示模式：text 自定义文字，jinrishici 自动加载每日诗词 */
     mode?: 'text' | 'jinrishici';
+    /** 自定义文字内容 */
     content?: string;
   };
   effect?: {
     gradient?: {
+      /** 是否启用渐变效果 */
       enabled?: boolean;
+      /** 渐变颜色数组 */
       colors?: string[];
     };
     typing?: {
+      /** 是否启用打字动画 */
       enabled?: boolean;
+      /** 是否重复播放 */
       repeat?: boolean;
+      /** 是否显示光标 */
       cursor?: boolean;
+      /** 光标样式：line 竖线，block 方块 */
       cursorStyle?: 'line' | 'block';
     };
     particles?: {
+      /** 是否启用粒子特效 */
       enabled?: boolean;
     };
   };
@@ -274,88 +233,134 @@ export interface HeroConfig {
 
 /**
  * Widget configuration interface
+ * 
+ * 小部件配置接口
  */
 export interface WidgetConfig {
-  /** Latest article widget configuration / 最新文章组件配置 */
+  /** 最新文章组件配置 */
   LatestArticle: {
+    /** 加载类型：button 点击按钮加载，auto 自动滚动加载 */
     type: 'button' | 'auto';
+    /** 布局类型：horizontal 水平布局，vertical 垂直布局 */
     layout: 'horizontal' | 'vertical';
+    /** 默认最大加载数量 */
     defaultLimit: number;
+    /** 初始加载数量 */
     initialLoad: number;
+    /** 每次加载更多的数量 */
     loadMore: number;
+    /** 分栏数 */
     columns: number;
+    /** 默认封面图片宽高比 */
     defaultAspectRatio: string;
+    /** 横版封面高度 */
     horizontalHeight: string;
   };
 
-  /** Author widget configuration / 作者信息配置 */
+  /** 作者信息配置 */
   author: {
+    /** 头像图片URL */
     avatar: string;
+    /** 社交平台链接 */
     social: Record<string, string>;
   };
 
-  /** Ad widget configuration / 广告配置 */
+  /** 广告配置 */
   ad: {
+    /** 广告链接地址 */
     link: string;
   };
 
-  /** Categories configuration / 分类配置 */
+  /** 分类配置 */
   categories: Array<{
+    /** 分类标识（用于URL路径） */
     name: string;
   }>;
 
-  /** Carousel configuration / 轮播图配置 */
+  /** 轮播图配置 */
   carousel: {
+    /** 布局方向：horizontal 水平，vertical 垂直 */
     layout: 'horizontal' | 'vertical';
   };
 
-  /** Banner configuration / 横幅配置 */
+  /** 横幅配置 */
   banner: {
+    /** 背景图片URL */
     backgroundImage: string;
   };
 }
 
 /**
  * Navigation item interface
+ * 
+ * 导航菜单项配置接口
+ * 
+ * 支持 Markdown 多级列表方式配置，通过 indent 字段控制层级：
+ * - indent: 0 = 一级菜单（顶级导航）
+ * - indent: 1 = 二级菜单（子菜单）
+ * - indent: 2 = 三级菜单（孙子菜单）
+ * 
+ * 示例：
+ * ```typescript
+ * navbar: [
+ *   { icon: 'Home', name: '首页', href: '/', indent: 0 },
+ *   { icon: 'Database', name: '软件资源', indent: 0 },
+ *   { icon: 'Database', name: 'Windows工具', href: '/software/windows', indent: 1 },
+ *   { icon: 'Database', name: 'Mac工具', href: '/software/mac', indent: 1 },
+ *   { icon: 'Book', name: '教程指南', indent: 0 },
+ *   { icon: 'Code', name: '前端开发', href: '/tutorial/frontend', indent: 1 },
+ * ]
+ * ```
  */
 export interface NavItem {
-  name?: string;
-  text?: string;
-  href?: string;
+  /** 图标名称（@lucide/astro 图标名）或 unicode 字符 */
   icon?: string;
-  items?: Array<{
-    text?: string;
-    items?: Array<{
-      text: string;
-      link?: string;
-      icon?: string;
-    }>;
-  }>;
+  /** 菜单显示名称 */
+  name: string;
+  /** 链接地址（href），如果没有则为父菜单 */
+  href?: string;
+  /** 缩进层级，0=一级菜单，1=二级菜单，2=三级菜单 */
+  indent?: number;
 }
 
 /**
  * Dynamic effect configuration interface
+ * 
+ * 动态效果配置接口
  */
 export interface DynamicEffectConfig {
+  /** 是否在文章页面顶部显示波浪动画效果 */
   postTopWave: boolean;
 }
 
 /**
  * Sidebar configuration interface
+ * 
+ * 侧边栏组件显示控制配置接口
  */
 export interface SidebarConfig {
   home: {
+    /** 是否显示字数统计进度条 */
     progress: boolean;
+    /** 是否显示统计小部件 */
     statsWidget: boolean;
+    /** 是否显示作者信息卡片 */
     authorWidget: boolean;
+    /** 是否显示广告小部件 */
     adWidget: boolean;
+    /** 是否显示标签云 */
     tag: boolean;
+    /** 是否显示推荐文章 */
     recommendedArticles: boolean;
+    /** 是否显示站点统计 */
     statistic: boolean;
   };
   article: {
+    /** 是否显示作者信息卡片 */
     authorWidget: boolean;
+    /** 是否显示标签云 */
     tag: boolean;
+    /** 是否显示文章目录 */
     toc: boolean;
   };
 }
