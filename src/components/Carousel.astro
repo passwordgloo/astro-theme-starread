@@ -36,12 +36,12 @@ const processedArticles = defaultLangArticles.map(article => ({
 }));
 ---
 
-<div class="relative bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
+<div class="relative bg-white/70 backdrop-blur-xl border border-gray-200/50 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-gray-900/70 dark:backdrop-blur-xl dark:border-gray-700/50 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm overflow-hidden">
   <div class="px-4 py-3 border-b border-gray-200 dark:border-white/10 flex justify-between items-center">
     <div class="flex items-center space-x-2">
-      <LayoutGrid class="w-5 h-5" />
-      <h2 class="font-bold text-lg text-dark">{t.widget.carousel.title}</h2>
-    </div>
+          <LayoutGrid class="w-5 h-5 text-primary dark:text-secondary" />
+          <h2 class="font-bold text-lg text-gray-900 dark:text-white">{t.widget.carousel.title}</h2>
+        </div>
     <div class="flex space-x-2">
       <button id="prev-btn" class="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-white/15" aria-label="上一张">
         <ChevronLeft class="h-5 w-5 text-gray-500" />

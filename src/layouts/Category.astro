@@ -27,7 +27,7 @@ articles.forEach(item => {
 <Base title={title}>
   <!-- 左侧内容区域 -->
   <div class="space-y-6">
-    <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-6">
+    <div class="bg-bg-card backdrop-blur-xl border border-glass-border shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-6">
       <h1 class="text-2xl font-bold mb-6">{categoryName || "所有分类"}</h1>
 
       <!-- 分类筛选标签 -->
@@ -39,8 +39,8 @@ articles.forEach(item => {
               href={`/category/${encodeURIComponent(category)}`} 
               class={`px-3 py-1 rounded-full text-sm transition-colors hover:opacity-90 ${ 
                 category === currentCategory 
-                  ? 'bg-primary dark:bg-secondary text-white' 
-                  : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200' 
+                  ? 'bg-primary text-white' 
+                  : 'bg-bg-hover text-text-secondary' 
               }`}
             >
               {category} ({count})
@@ -54,15 +54,15 @@ articles.forEach(item => {
         <div class="space-y-4">
           <div class="space-y-1">
             {articles.map((article) => (
-              <div key={article.slug} class="flex justify-between items-center p-3 rounded-lg hover:bg-gray-50 dark:hover:bg-white/5 transition-colors">
-                <h3 class="font-medium text-base"><a href={article.data.permalink} class="hover:text-primary dark:hover:text-secondary transition-colors">{article.data.title}</a></h3>
-                <span class="text-sm text-gray-500 dark:text-gray-400">{typeof article.data.date === 'string' ? article.data.date.split(' ')[0] : article.data.date?.toISOString().split('T')[0]}</span>
+              <div key={article.slug} class="flex justify-between items-center p-3 rounded-lg hover:bg-bg-hover transition-colors">
+                <h3 class="font-medium text-base"><a href={`/${article.id}`} class="hover:text-primary transition-colors">{article.data.title}</a></h3>
+                <span class="text-sm text-text-secondary">{typeof article.data.date === 'string' ? article.data.date.split(' ')[0] : article.data.date?.toISOString().split('T')[0]}</span>
               </div>
             ))}
           </div>
         </div>
       ) : (
-        <div class="text-center py-8 text-gray-500">
+        <div class="text-center py-8 text-text-secondary">
           暂无该分类下的内容
         </div>
       )}

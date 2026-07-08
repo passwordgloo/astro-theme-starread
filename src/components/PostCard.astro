@@ -14,7 +14,7 @@ const href = `/${article.id}`;
 ---
 
 {layout === 'horizontal' ? (
-  <a href={href} class="flex flex-row bg-white/70 dark:bg-cyan-950/30 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group">
+  <a href={href} class="flex flex-row bg-bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 group">
     <div class="w-1/3 bg-gray-200 overflow-hidden" style={{ height: horizontalHeight }}>
       <Image 
         src={article.processed.cover} 
@@ -47,7 +47,7 @@ const href = `/${article.id}`;
     </div>
   </a>
 ) : (
-  <a href={href} class="min-w-[200px] bg-gray-50 dark:bg-white/5 rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
+  <a href={href} class="min-w-[200px] bg-bg-card rounded-lg overflow-hidden shadow-sm flex flex-col group no-underline">
     <div class="h-40 bg-gray-200 overflow-hidden">
       <Image 
         src={article.processed.cover} 
@@ -62,10 +62,10 @@ const href = `/${article.id}`;
     </div>
     <div class="p-3 flex-1 flex flex-col">
       <div class="mb-2">
-        <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 rounded-full transform group-hover:scale-105 transition-transform duration-200">{article.processed.category}</span>
+        <span class="inline-block px-2 py-1 text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200 rounded-full transform group-hover:scale-105 transition-transform duration-200">{article.processed.category}</span>
       </div>
       <h3 class="font-medium mb-2 line-clamp-2 h-12 group-hover:text-primary dark:group-hover:text-secondary transition-colors duration-200">{article.data.title}</h3>
-      <div class="mt-auto flex items-center text-xs text-gray-500">
+      <div class="mt-auto flex items-center text-xs text-gray-500 dark:text-gray-400">
         <span>{article.processed.author.name}</span>
         <span class="mx-1">·</span>
         <span>{article.processed.date}</span>

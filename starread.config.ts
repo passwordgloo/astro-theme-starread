@@ -195,6 +195,18 @@ export const themeConfig: StarreadThemeConfig = {
   },
 
   /**
+   * Theme Auto-switch Configuration
+   * 主题自动切换配置
+   * ====================
+   */
+
+  themeAutoSwitch: {
+    enabled: true,
+    dayStart: 6,
+    dayEnd: 18,
+  },
+
+  /**
    * ====================
    * Multi-language Configurations
    * 多语言配置

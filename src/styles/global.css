@@ -1,44 +1,48 @@
 @import "tailwindcss";
- 
+
 @plugin "@tailwindcss/typography";
 
-:root {
-  --rawblock-edit-panel-bd: #ffffff; /* 浅色模式背景 */
-}
+@custom-variant dark (&:where(.dark, .dark *));
+@custom-variant navbar-scrolled (&.navbar-scrolled);
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --rawblock-edit-panel-bd: rgb(29,42,60) /* 深色模式背景 */
-  }
-}
+
+
 
 @theme {
-  /* 主题色
-  文本  text-primary
-  背景  bg-primary
-  */
   --color-primary: #4f46e5;
-  --color-secondary: orange;
+  --color-primary-light: #6366f1;
+  --color-primary-dark: #4338ca;
+  
+  --color-secondary: #f59e0b;
+  --color-secondary-light: #fbbf24;
+  --color-secondary-dark: #d97706;
+  
+  --color-accent: #ec4899;
+  
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #3b82f6;
 }
 
 @layer base {
-  code, kbd, samp, pre {
+  code:not(.expressive-code *), kbd, samp {
     font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
     font-feature-settings: var(--default-mono-font-feature-settings, normal);
     font-variation-settings: var(--default-mono-font-variation-settings, normal);
-    color:#fff !important;
-    background-color: var(--color-primary);
+    color: var(--color-primary);
+    background-color: rgba(79, 70, 229, 0.1);
     padding: 0.2em 0.4em;
     border-radius: 0.25rem;
   }
 
-  .dark code, 
-  .dark samp, 
-  .dark pre {
-    background-color: var(--color-secondary);
+  .dark code:not(.expressive-code *), 
+  .dark kbd, 
+  .dark samp {
+    color: var(--color-secondary);
+    background-color: rgba(251, 191, 36, 0.15);
   }
 
-    /* 隐藏代码块自动添加的反引号 */
   :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before,
   :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
     content: "" !important;
@@ -75,14 +79,12 @@
   margin-bottom: 0.5rem;
 }
 
-/* SVG 图标样式 */
 .markdown-alert-title svg.octicon {
   flex-shrink: 0;
 }
 
-/* Note - 蓝色渐变 */
 .markdown-alert-note {
-  background-image: linear-gradient(to right, var(--rawblock-edit-panel-bd), var(--rawblock-edit-panel-bd)), 
+  background-image: linear-gradient(to right, #ffffff, #ffffff), 
                     linear-gradient(0deg, #005bea, #007bf9, #0097ff, #00affe, #00c6fb);
   color: #00bfff;
 }
@@ -95,9 +97,8 @@
   fill: #00bfff;
 }
 
-/* Warning - 橙色渐变 */
 .markdown-alert-warning {
-  background-image: linear-gradient(to right, var(--rawblock-edit-panel-bd), var(--rawblock-edit-panel-bd)), 
+  background-image: linear-gradient(to right, #ffffff, #ffffff), 
                     linear-gradient(0deg, #e9a11a, #eab211, #e8c40a, #e5d50f, #dee71d);
   color: #ff8c00;
 }
@@ -110,9 +111,8 @@
   fill: #ff8c00;
 }
 
-/* Important - 紫色渐变 */
 .markdown-alert-important {
-  background-image: linear-gradient(to right, var(--rawblock-edit-panel-bd), var(--rawblock-edit-panel-bd)), 
+  background-image: linear-gradient(to right, #ffffff, #ffffff), 
                     linear-gradient(0deg, #c471f5, #d66feb, #e46fe1, #f06fd7, #fa71cd);
   color: #f0f;
 }
@@ -125,9 +125,8 @@
   fill: #f0f;
 }
 
-/* Tip - 绿色渐变 */
 .markdown-alert-tip {
-  background-image: linear-gradient(to right, var(--rawblock-edit-panel-bd), var(--rawblock-edit-panel-bd)), 
+  background-image: linear-gradient(to right, #ffffff, #ffffff), 
                     linear-gradient(0deg, #0ba360, #39b05d, #57bc5a, #72c856, #8ed451);
   color: #00cd66;
 }
@@ -140,9 +139,8 @@
   fill: #00cd66;
 }
 
-/* Caution - 红色渐变 */
 .markdown-alert-caution {
-  background-image: linear-gradient(to right, var(--rawblock-edit-panel-bd), var(--rawblock-edit-panel-bd)), 
+  background-image: linear-gradient(to right, #ffffff, #ffffff), 
                     linear-gradient(0deg, #ed2842, #f33d58, #f7506d, #fa6181, #fb7294);
   color: #f14669;
 }
@@ -155,7 +153,6 @@
   fill: #f14669;
 }
 
-/* 如果 alerts 中包含其他图标(img) */
 .markdown-alert img {
   position: relative;
   transform: translateY(26.8px);
@@ -183,11 +180,24 @@
   filter: drop-shadow(#f14669 0px -28px);
 }
 
-/* 修复普通 blockquote 样式(非 alert) */
+.dark .markdown-alert-note,
+.dark .markdown-alert-warning,
+.dark .markdown-alert-important,
+.dark .markdown-alert-tip,
+.dark .markdown-alert-caution {
+  background-image: linear-gradient(to right, #0f172a, #0f172a), 
+                    var(--tw-gradient-stops);
+}
+
 .prose blockquote:not(.markdown-alert) {
   font-style: italic;
   border-left: 4px solid #e5e7eb;
   padding-left: 1rem;
   color: #6b7280;
   background: none;
+}
+
+.dark .prose blockquote:not(.markdown-alert) {
+  border-left-color: #475569;
+  color: #94a3b8;
 }

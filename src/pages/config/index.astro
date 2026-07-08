@@ -3,7 +3,7 @@ import ConfigLayout from '@theme/layouts/ConfigLayout.astro';
 import {
   Settings, Home, FileText, Palette, Target, Image, User, Megaphone,
   FolderOpen, Menu, LayoutGrid, Plus, Trash2, GripVertical, Download,
-  RotateCcw, Copy, Check, X, ChevronRight, Upload, Languages
+  RotateCcw, Copy, Check, X, ChevronRight, ChevronUp, ChevronDown, Upload, Languages
 } from "@lucide/astro";
 import { themeConfig } from '@theme/config';
 
@@ -752,7 +752,9 @@ const isDev = import.meta.env.DEV;
           <div class="form-card">
             <div class="category-help">
               <p class="help-text">
-                <strong>说明：</strong>添加支持的语言。语言代码用于路由路径（如 /zh/notes），文件夹名对应 src/content/notes/ 下的子目录。
+                <strong>说明：</strong>添加支持的语言。语言代码用于路由路径（如 /en/），文件夹对应 src/content/ 下的子目录。
+                <br/>
+                默认值示例：zh（中文）、en（英文）、jp（日文）、ko（韩文）、ru（俄文）
               </p>
             </div>
             <div class="list-header">
@@ -762,116 +764,116 @@ const isDev = import.meta.env.DEV;
                 添加语言
               </button>
             </div>
-            <div class="category-list" id="i18n-lang-list">
-              <div class="category-item">
-                <div class="category-inputs">
+            <div class="i18n-list" id="i18n-lang-list">
+              <div class="i18n-item">
+                <div class="i18n-inputs">
                   <div class="input-wrapper">
                     <label class="input-label">语言代码</label>
-                    <input type="text" class="field-input-sm" value="zh" placeholder="如：zh、en" data-field="code" />
+                    <input type="text" class="field-input-sm" value="zh" placeholder="zh" data-field="code" />
                   </div>
                   <div class="input-wrapper">
                     <label class="input-label">语言名称</label>
-                    <input type="text" class="field-input-sm" value="简体中文" placeholder="如：简体中文、English" data-field="name" />
+                    <input type="text" class="field-input-sm" value="简体中文" placeholder="简体中文" data-field="name" />
                   </div>
                   <div class="input-wrapper">
                     <label class="input-label">国旗</label>
-                    <input type="text" class="field-input-sm" value="🇨🇳" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+                    <input type="text" class="field-input-sm" value="🇨🇳" placeholder="🇨🇳" data-field="flag" />
                   </div>
                   <div class="input-wrapper">
-                    <label class="input-label">内容文件夹</label>
-                    <input type="text" class="field-input-sm" value="theme" placeholder="如：theme" data-field="folder" />
+                    <label class="input-label">文件夹</label>
+                    <input type="text" class="field-input-sm" value="zh" placeholder="zh" data-field="folder" />
                   </div>
                 </div>
                 <button class="btn-icon-danger" type="button" aria-label="删除语言">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                 </button>
               </div>
-              <div class="category-item">
-                <div class="category-inputs">
+              <div class="i18n-item">
+                <div class="i18n-inputs">
                   <div class="input-wrapper">
                     <label class="input-label">语言代码</label>
-                    <input type="text" class="field-input-sm" value="en" placeholder="如：zh、en" data-field="code" />
+                    <input type="text" class="field-input-sm" value="en" placeholder="en" data-field="code" />
                   </div>
                   <div class="input-wrapper">
                     <label class="input-label">语言名称</label>
-                    <input type="text" class="field-input-sm" value="English" placeholder="如：简体中文、English" data-field="name" />
+                    <input type="text" class="field-input-sm" value="English" placeholder="English" data-field="name" />
                   </div>
                   <div class="input-wrapper">
                     <label class="input-label">国旗</label>
-                    <input type="text" class="field-input-sm" value="🇺🇸" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+                    <input type="text" class="field-input-sm" value="🇺🇸" placeholder="🇺🇸" data-field="flag" />
                   </div>
                   <div class="input-wrapper">
-                    <label class="input-label">内容文件夹</label>
-                    <input type="text" class="field-input-sm" value="theme" placeholder="如：theme" data-field="folder" />
+                    <label class="input-label">文件夹</label>
+                    <input type="text" class="field-input-sm" value="en" placeholder="en" data-field="folder" />
                   </div>
                 </div>
                 <button class="btn-icon-danger" type="button" aria-label="删除语言">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                 </button>
               </div>
-              <div class="category-item">
-                <div class="category-inputs">
+              <div class="i18n-item">
+                <div class="i18n-inputs">
                   <div class="input-wrapper">
                     <label class="input-label">语言代码</label>
-                    <input type="text" class="field-input-sm" value="ja" placeholder="如：zh、en" data-field="code" />
+                    <input type="text" class="field-input-sm" value="jp" placeholder="jp" data-field="code" />
                   </div>
                   <div class="input-wrapper">
                     <label class="input-label">语言名称</label>
-                    <input type="text" class="field-input-sm" value="日本語" placeholder="如：简体中文、English" data-field="name" />
+                    <input type="text" class="field-input-sm" value="日本語" placeholder="日本語" data-field="name" />
                   </div>
                   <div class="input-wrapper">
                     <label class="input-label">国旗</label>
-                    <input type="text" class="field-input-sm" value="🇯🇵" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+                    <input type="text" class="field-input-sm" value="🇯🇵" placeholder="🇯🇵" data-field="flag" />
                   </div>
                   <div class="input-wrapper">
-                    <label class="input-label">内容文件夹</label>
-                    <input type="text" class="field-input-sm" value="theme" placeholder="如：theme" data-field="folder" />
+                    <label class="input-label">文件夹</label>
+                    <input type="text" class="field-input-sm" value="jp" placeholder="jp" data-field="folder" />
                   </div>
                 </div>
                 <button class="btn-icon-danger" type="button" aria-label="删除语言">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                 </button>
               </div>
-              <div class="category-item">
-                <div class="category-inputs">
+              <div class="i18n-item">
+                <div class="i18n-inputs">
                   <div class="input-wrapper">
                     <label class="input-label">语言代码</label>
-                    <input type="text" class="field-input-sm" value="ko" placeholder="如：zh、en" data-field="code" />
+                    <input type="text" class="field-input-sm" value="ko" placeholder="ko" data-field="code" />
                   </div>
                   <div class="input-wrapper">
                     <label class="input-label">语言名称</label>
-                    <input type="text" class="field-input-sm" value="한국어" placeholder="如：简体中文、English" data-field="name" />
+                    <input type="text" class="field-input-sm" value="한국어" placeholder="한국어" data-field="name" />
                   </div>
                   <div class="input-wrapper">
                     <label class="input-label">国旗</label>
-                    <input type="text" class="field-input-sm" value="🇰🇷" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+                    <input type="text" class="field-input-sm" value="🇰🇷" placeholder="🇰🇷" data-field="flag" />
                   </div>
                   <div class="input-wrapper">
-                    <label class="input-label">内容文件夹</label>
-                    <input type="text" class="field-input-sm" value="theme" placeholder="如：theme" data-field="folder" />
+                    <label class="input-label">文件夹</label>
+                    <input type="text" class="field-input-sm" value="ko" placeholder="ko" data-field="folder" />
                   </div>
                 </div>
                 <button class="btn-icon-danger" type="button" aria-label="删除语言">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
                 </button>
               </div>
-              <div class="category-item">
-                <div class="category-inputs">
+              <div class="i18n-item">
+                <div class="i18n-inputs">
                   <div class="input-wrapper">
                     <label class="input-label">语言代码</label>
-                    <input type="text" class="field-input-sm" value="ru" placeholder="如：zh、en" data-field="code" />
+                    <input type="text" class="field-input-sm" value="ru" placeholder="ru" data-field="code" />
                   </div>
                   <div class="input-wrapper">
                     <label class="input-label">语言名称</label>
-                    <input type="text" class="field-input-sm" value="Русский" placeholder="如：简体中文、English" data-field="name" />
+                    <input type="text" class="field-input-sm" value="Русский" placeholder="Русский" data-field="name" />
                   </div>
                   <div class="input-wrapper">
                     <label class="input-label">国旗</label>
-                    <input type="text" class="field-input-sm" value="🇷🇺" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+                    <input type="text" class="field-input-sm" value="🇷🇺" placeholder="🇷🇺" data-field="flag" />
                   </div>
                   <div class="input-wrapper">
-                    <label class="input-label">内容文件夹</label>
-                    <input type="text" class="field-input-sm" value="theme" placeholder="如：theme" data-field="folder" />
+                    <label class="input-label">文件夹</label>
+                    <input type="text" class="field-input-sm" value="ru" placeholder="ru" data-field="folder" />
                   </div>
                 </div>
                 <button class="btn-icon-danger" type="button" aria-label="删除语言">
@@ -882,48 +884,201 @@ const isDev = import.meta.env.DEV;
           </div>
         </section>
 
-
-        <!-- 导航菜单 -->
+<!-- 导航菜单 -->
         <section id="navbar" class="form-section">
           <div class="section-header">
-            <span class="section-badge">10</span>
+            <span class="section-badge">11</span>
             <div>
               <h3 class="section-title">导航菜单</h3>
-              <p class="section-subtitle">配置网站顶部导航菜单</p>
+              <p class="section-subtitle">配置导航栏菜单，支持多级菜单</p>
             </div>
           </div>
 
           <div class="form-card">
-            <div class="list-header">
-              <span class="list-title">菜单项列表</span>
-              <button class="btn-add" type="button" id="btn-add-nav">
-                <Plus class="w-4 h-4" />
-                添加菜单项
-              </button>
-            </div>
             <div class="category-help">
               <p class="help-text">
-                <strong>提示：</strong>导航菜单的名称支持多语言配置，在多语言配置中设置不同语言的显示名称。
+                <strong>说明：</strong>使用 Markdown 多级列表方式配置导航菜单。通过缩进控制层级（一级/二级），每行前面提供图标（默认 @lucide/astro 图标名，可使用 unicode 字符）。
+                <br/>
+                示例：
+                <br/>
+                1. [首页](/ ) - 一级菜单，可点击链接
+                <br/>
+                2. 软件资源 - 一级菜单，展开子菜单
+                <br/>
+                &nbsp;&nbsp;- [软件测试](/software) - 二级菜单
               </p>
             </div>
-            <div class="category-list" id="nav-list">
-              {themeConfig.navbar.map((item) => (
-                <div class="category-item" key={item.name}>
-                  <div class="category-inputs">
-                    <div class="input-wrapper">
-                      <label class="input-label">菜单名称</label>
-                      <input type="text" class="field-input-sm" value={item.name} data-field="name" />
-                    </div>
-                    <div class="input-wrapper">
-                      <label class="input-label">链接地址</label>
-                      <input type="text" class="field-input-sm" value={item.href} data-field="href" />
-                    </div>
-                  </div>
-                  <button class="btn-icon-danger" type="button" aria-label="删除菜单">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-                  </button>
-                </div>
-              ))}
+            <div class="list-header">
+              <span class="list-title">导航菜单项</span>
+              <button class="btn-add" type="button" id="btn-add-nav">
+                <Plus class="w-4 h-4" />
+                添加菜单
+              </button>
+            </div>
+            <div class="nav-table-wrapper">
+              <table class="nav-table" id="nav-table">
+                <thead>
+                  <tr>
+                    <th class="nav-col-icon">图标</th>
+                    <th class="nav-col-name">导航名称</th>
+                    <th class="nav-col-href">链接地址</th>
+                    <th class="nav-col-level">层级</th>
+                    <th class="nav-col-actions">操作</th>
+                  </tr>
+                </thead>
+                <tbody id="nav-table-body">
+                  <tr class="nav-row" data-index="0">
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-icon" value="Home" placeholder="Home" data-field="icon" />
+                    </td>
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-name" value="主页" placeholder="导航名称" data-field="name" />
+                    </td>
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-href" value="/" placeholder="/" data-field="href" />
+                    </td>
+                    <td class="nav-cell">
+                      <select class="nav-select" data-field="indent">
+                        <option value="0" selected>一级菜单</option>
+                        <option value="1">二级菜单</option>
+                      </select>
+                    </td>
+                    <td class="nav-cell nav-cell-actions">
+                      <div class="nav-actions">
+                        <button class="nav-btn nav-btn-up" title="提升层级">
+                          <ChevronUp class="w-4 h-4" />
+                        </button>
+                        <button class="nav-btn nav-btn-down" title="降低层级">
+                          <ChevronDown class="w-4 h-4" />
+                        </button>
+                        <button class="nav-btn nav-btn-delete" title="删除">
+                          <Trash2 class="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="nav-row" data-index="1">
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-icon" value="Database" placeholder="Database" data-field="icon" />
+                    </td>
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-name" value="软件资源" placeholder="导航名称" data-field="name" />
+                    </td>
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-href" value="" placeholder="/" data-field="href" />
+                    </td>
+                    <td class="nav-cell">
+                      <select class="nav-select" data-field="indent">
+                        <option value="0" selected>一级菜单</option>
+                        <option value="1">二级菜单</option>
+                      </select>
+                    </td>
+                    <td class="nav-cell nav-cell-actions">
+                      <div class="nav-actions">
+                        <button class="nav-btn nav-btn-up" title="提升层级">
+                          <ChevronUp class="w-4 h-4" />
+                        </button>
+                        <button class="nav-btn nav-btn-down" title="降低层级">
+                          <ChevronDown class="w-4 h-4" />
+                        </button>
+                        <button class="nav-btn nav-btn-delete" title="删除">
+                          <Trash2 class="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="nav-row" data-index="2">
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-icon" value="Database" placeholder="Database" data-field="icon" />
+                    </td>
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-name" value="Windows工具" placeholder="导航名称" data-field="name" />
+                    </td>
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-href" value="#" placeholder="/" data-field="href" />
+                    </td>
+                    <td class="nav-cell">
+                      <select class="nav-select" data-field="indent">
+                        <option value="0">一级菜单</option>
+                        <option value="1" selected>二级菜单</option>
+                      </select>
+                    </td>
+                    <td class="nav-cell nav-cell-actions">
+                      <div class="nav-actions">
+                        <button class="nav-btn nav-btn-up" title="提升层级">
+                          <ChevronUp class="w-4 h-4" />
+                        </button>
+                        <button class="nav-btn nav-btn-down" title="降低层级">
+                          <ChevronDown class="w-4 h-4" />
+                        </button>
+                        <button class="nav-btn nav-btn-delete" title="删除">
+                          <Trash2 class="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="nav-row" data-index="3">
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-icon" value="Database" placeholder="Database" data-field="icon" />
+                    </td>
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-name" value="Mac工具" placeholder="导航名称" data-field="name" />
+                    </td>
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-href" value="#" placeholder="/" data-field="href" />
+                    </td>
+                    <td class="nav-cell">
+                      <select class="nav-select" data-field="indent">
+                        <option value="0">一级菜单</option>
+                        <option value="1" selected>二级菜单</option>
+                      </select>
+                    </td>
+                    <td class="nav-cell nav-cell-actions">
+                      <div class="nav-actions">
+                        <button class="nav-btn nav-btn-up" title="提升层级">
+                          <ChevronUp class="w-4 h-4" />
+                        </button>
+                        <button class="nav-btn nav-btn-down" title="降低层级">
+                          <ChevronDown class="w-4 h-4" />
+                        </button>
+                        <button class="nav-btn nav-btn-delete" title="删除">
+                          <Trash2 class="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr class="nav-row" data-index="4">
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-icon" value="Book" placeholder="Book" data-field="icon" />
+                    </td>
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-name" value="教程指南" placeholder="导航名称" data-field="name" />
+                    </td>
+                    <td class="nav-cell">
+                      <input type="text" class="nav-input nav-input-href" value="" placeholder="/" data-field="href" />
+                    </td>
+                    <td class="nav-cell">
+                      <select class="nav-select" data-field="indent">
+                        <option value="0" selected>一级菜单</option>
+                        <option value="1">二级菜单</option>
+                      </select>
+                    </td>
+                    <td class="nav-cell nav-cell-actions">
+                      <div class="nav-actions">
+                        <button class="nav-btn nav-btn-up" title="提升层级">
+                          <ChevronUp class="w-4 h-4" />
+                        </button>
+                        <button class="nav-btn nav-btn-down" title="降低层级">
+                          <ChevronDown class="w-4 h-4" />
+                        </button>
+                        <button class="nav-btn nav-btn-delete" title="删除">
+                          <Trash2 class="w-4 h-4" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </section>
@@ -931,7 +1086,7 @@ const isDev = import.meta.env.DEV;
         <!-- 侧边栏组件 -->
         <section id="sidebar" class="form-section">
           <div class="section-header">
-            <span class="section-badge">11</span>
+            <span class="section-badge">12</span>
             <div>
               <h3 class="section-title">侧边栏组件</h3>
               <p class="section-subtitle">拖拽排序并启用/禁用组件</p>
@@ -2241,6 +2396,189 @@ const isDev = import.meta.env.DEV;
     display: none !important;
   }
 
+  /* 导航表格样式 */
+  .nav-table-wrapper {
+    overflow-x: auto;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+  }
+
+  :global(.dark) .nav-table-wrapper {
+    border-color: rgba(75, 85, 99, 0.5);
+  }
+
+  .nav-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .nav-table thead {
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.08) 0%, rgba(99, 102, 241, 0.08) 100%);
+    border-bottom: 2px solid var(--primary-light);
+  }
+
+  :global(.dark) .nav-table thead {
+    background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(129, 140, 248, 0.15) 100%);
+  }
+
+  .nav-table th {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    white-space: nowrap;
+  }
+
+  .nav-table tbody {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  :global(.dark) .nav-table tbody {
+    background: rgba(0, 0, 0, 0.1);
+  }
+
+  .nav-row {
+    border-bottom: 1px solid var(--glass-border);
+    transition: all 0.2s ease;
+  }
+
+  :global(.dark) .nav-row {
+    border-color: rgba(75, 85, 99, 0.3);
+  }
+
+  .nav-row:hover {
+    background: rgba(79, 70, 229, 0.05);
+  }
+
+  :global(.dark) .nav-row:hover {
+    background: rgba(99, 102, 241, 0.1);
+  }
+
+  .nav-cell {
+    padding: 12px 16px;
+  }
+
+  .nav-input {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-main);
+    outline: none;
+    transition: all 0.2s ease;
+  }
+
+  :global(.dark) .nav-input {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  }
+
+  .nav-select {
+    width: 100%;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    font-size: 14px;
+    color: var(--text-main);
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  :global(.dark) .nav-select {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .nav-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+  }
+
+  .nav-actions {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .nav-btn {
+    padding: 8px;
+    background: transparent;
+    border: 1px solid var(--glass-border);
+    border-radius: 8px;
+    color: var(--text-secondary);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  :global(.dark) .nav-btn {
+    border-color: rgba(75, 85, 99, 0.5);
+  }
+
+  .nav-btn:hover:not(:disabled) {
+    background: rgba(79, 70, 229, 0.1);
+    color: var(--primary);
+    border-color: var(--primary-light);
+  }
+
+  .nav-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .nav-btn-delete:hover:not(:disabled) {
+    background: rgba(239, 68, 68, 0.1);
+    color: var(--danger);
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+
+  /* i18n列表样式 */
+  .i18n-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .i18n-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    transition: all 0.2s ease;
+  }
+
+  :global(.dark) .i18n-item {
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  .i18n-item:hover {
+    border-color: var(--primary-light);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+  }
+
+  .i18n-inputs {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    min-width: 0;
+  }
+
   /* 响应式 - 平板及以下 */
   @media (max-width: 1024px) {
     .config-page-wrapper {
@@ -2688,7 +3026,7 @@ const isDev = import.meta.env.DEV;
 
   // 分类列表功能
   function initCategoryList() {
-    const containers = ['categories-list', 'i18n-lang-list', 'nav-list'];
+    const containers = ['categories-list', 'i18n-lang-list'];
     
     containers.forEach(id => {
       const container = document.getElementById(id);
@@ -2701,6 +3039,16 @@ const isDev = import.meta.env.DEV;
         }
       });
     });
+
+    const i18nContainer = document.getElementById('i18n-lang-list');
+    if (i18nContainer) {
+      i18nContainer.addEventListener('click', (e) => {
+        const btn = e.target.closest('.btn-icon-danger');
+        if (btn) {
+          btn.closest('.i18n-item').remove();
+        }
+      });
+    }
   }
 
   
@@ -2743,12 +3091,6 @@ const isDev = import.meta.env.DEV;
       btnAddLang.addEventListener('click', addLang);
     }
 
-    // 添加菜单项按钮
-    const btnAddNav = document.getElementById('btn-add-nav');
-    if (btnAddNav) {
-      btnAddNav.addEventListener('click', addNavItem);
-    }
-    
   }
 
   // 添加分类
@@ -2782,24 +3124,24 @@ const isDev = import.meta.env.DEV;
     if (!container) return;
 
     const div = document.createElement('div');
-    div.className = 'category-item';
+    div.className = 'i18n-item';
     div.innerHTML = `
-      <div class="category-inputs">
+      <div class="i18n-inputs">
         <div class="input-wrapper">
           <label class="input-label">语言代码</label>
-          <input type="text" class="field-input-sm" placeholder="如：zh、en" data-field="code" />
+          <input type="text" class="field-input-sm" placeholder="zh" data-field="code" />
         </div>
         <div class="input-wrapper">
           <label class="input-label">语言名称</label>
-          <input type="text" class="field-input-sm" placeholder="如：简体中文、English" data-field="name" />
+          <input type="text" class="field-input-sm" placeholder="简体中文" data-field="name" />
         </div>
         <div class="input-wrapper">
           <label class="input-label">国旗</label>
-          <input type="text" class="field-input-sm" placeholder="如：🇨🇳、🇺🇸" data-field="flag" />
+          <input type="text" class="field-input-sm" placeholder="🇨🇳" data-field="flag" />
         </div>
         <div class="input-wrapper">
-          <label class="input-label">内容文件夹</label>
-          <input type="text" class="field-input-sm" placeholder="如：theme" data-field="folder" />
+          <label class="input-label">文件夹</label>
+          <input type="text" class="field-input-sm" placeholder="zh" data-field="folder" />
         </div>
       </div>
       <button class="btn-icon-danger" type="button" aria-label="删除语言">
@@ -2809,39 +3151,23 @@ const isDev = import.meta.env.DEV;
     container.appendChild(div);
   }
 
-  // 添加菜单项
-  function addNavItem() {
-    const container = document.getElementById('nav-list');
-    if (!container) return;
-
-    const div = document.createElement('div');
-    div.className = 'category-item';
-    div.innerHTML = `
-      <div class="category-inputs">
-        <div class="input-wrapper">
-          <label class="input-label">菜单名称</label>
-          <input type="text" class="field-input-sm" placeholder="如：首页、关于" data-field="name" />
-        </div>
-        <div class="input-wrapper">
-          <label class="input-label">链接地址</label>
-          <input type="text" class="field-input-sm" placeholder="如：/、/about" data-field="href" />
-        </div>
-      </div>
-      <button class="btn-icon-danger" type="button" aria-label="删除菜单">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display: block;"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
-      </button>
-    `;
-    container.appendChild(div);
-  }
-
   // 生成配置
   function generateConfig() {
     const config = collectConfigData();
-    const configCode = `import type { starreadthemeconfig } from './scripts/config';\n\nexport const themeConfig: starreadthemeconfig = ${JSON.stringify(config, null, 2).replace(/"([^"]+)":/g, '$1:').replace(/true/g, 'true').replace(/false/g, 'false')};\n`;
+    let configCode = `/**
+ * Starread Theme Configuration
+ * 
+ * 星阅主题配置文件
+ * 
+ */
+import type { StarreadThemeConfig } from './scripts/type/config';
+
+export const themeConfig: StarreadThemeConfig = ${JSON.stringify(config, null, 2)};`;
+
+    configCode = configCode.replace(/"([^"]+)":/g, '$1:');
 
     const output = document.getElementById('config-output');
     if (output) {
-      // 直接显示代码文本（不使用高亮）
       output.textContent = configCode;
     }
     return configCode;
@@ -2857,7 +3183,103 @@ const isDev = import.meta.env.DEV;
       }
     });
 
+    const navbarItems = Array.from(document.querySelectorAll('#nav-table-body .nav-row')).map(row => ({
+      icon: row.querySelector('[data-field="icon"]')?.value || 'Home',
+      name: row.querySelector('[data-field="name"]')?.value,
+      href: row.querySelector('[data-field="href"]')?.value,
+      indent: parseInt(row.querySelector('[data-field="indent"]')?.value || '0'),
+    })).filter(item => item.name);
+
+    const i18nLanguages = Array.from(document.querySelectorAll('#i18n-lang-list .i18n-item')).map(item => ({
+      code: item.querySelector('[data-field="code"]')?.value,
+      name: item.querySelector('[data-field="name"]')?.value,
+      flag: item.querySelector('[data-field="flag"]')?.value,
+      folder: item.querySelector('[data-field="folder"]')?.value,
+    })).filter(l => l.code && l.name);
+
+    const categories = Array.from(document.querySelectorAll('#categories-list .category-item')).map(item => ({
+      name: item.querySelector('[data-field="name"]')?.value,
+      title: item.querySelector('[data-field="title"]')?.value,
+    })).filter(c => c.name && c.title);
+
+    const sidebarHome = collectSidebarConfig('sidebar-home');
+    const sidebarArticle = collectSidebarConfig('sidebar-article');
+
+    const locales = {};
+    const themeLocales = {};
+    i18nLanguages.forEach(lang => {
+      const prefix = lang.code === 'zh' ? '/' : `/${lang.code}/`;
+      locales[prefix] = {
+        lang: lang.code === 'zh' ? 'zh-CN' : `${lang.code}-${lang.code.toUpperCase()}`,
+        title: lang.code === 'zh' ? '星阅主题' : 'StarRead Theme',
+        description: lang.code === 'zh' ? '基于 Astro 的现代化博客主题' : 'Modern blog theme based on Astro',
+        footer: {
+          text: lang.code === 'zh' ? '© 2025 风雅中华 - 阳光明媚，微笑前行' : `© 2025 StarRead - Keep smiling and moving forward`,
+        },
+      };
+      themeLocales[prefix] = {
+        selectLanguageName: lang.name,
+        flag: lang.flag,
+        widget: {
+          author: {
+            name: lang.code === 'zh' ? '风雅中华' : 'StarRead',
+            description: lang.code === 'zh' ? '阳光明媚，微笑前行' : 'Keep smiling and moving forward',
+          },
+          ad: {
+            title: lang.code === 'zh' ? '黑曜石博客' : 'Obsidian Blog',
+            description: lang.code === 'zh' ? '支持评论弹幕、粒子动画效果、分类' : 'Supports comments, particle effects, categories',
+            buttonText: lang.code === 'zh' ? '了解详情' : 'Learn More',
+          },
+          categories: categories.map(c => ({ name: c.name, title: c.title })),
+          carousel: {
+            title: lang.code === 'zh' ? '轮播' : 'Carousel',
+          },
+          banner: {
+            title: lang.code === 'zh' ? 'Star read 星阅主题' : 'StarRead Theme',
+            tags: ['基于Vite+Tailwindcss', '支持深色模式', '模块化组件'],
+          },
+        },
+        navbar: navbarItems.map(item => ({
+          ...item,
+          href: item.href ? (item.href.startsWith('/') ? item.href : prefix + item.href) : undefined,
+        })),
+        sidebar: {
+          progress: lang.code === 'zh' ? '字数统计' : 'Word Count',
+          author: lang.code === 'zh' ? '作者' : 'Author',
+          ad: lang.code === 'zh' ? '广告' : 'Advertisement',
+          tagcloud: lang.code === 'zh' ? '标签云' : 'Tag Cloud',
+          statistic: lang.code === 'zh' ? '站点统计' : 'Statistics',
+          toc: lang.code === 'zh' ? '文章目录' : 'Table of Contents',
+        },
+        search: {
+          placeholder: lang.code === 'zh' ? '搜索文档 (⌘K)' : 'Search docs (⌘K)',
+          noResults: lang.code === 'zh' ? '没有找到与 "{query}" 相关的内容，请尝试其他关键词' : 'No results found for "{query}", try other keywords',
+          loading: lang.code === 'zh' ? '正在搜索...' : 'Searching...',
+          initialTip: lang.code === 'zh' ? '支持使用键盘进行导航，Windows用户请用Ctrl 替换 ⌘' : 'Keyboard navigation supported. Windows users use Ctrl instead of ⌘',
+          clear: lang.code === 'zh' ? '清除搜索' : 'Clear Search',
+          viewDetails: lang.code === 'zh' ? '查看详情' : 'View Details',
+          shortcuts: {
+            open: lang.code === 'zh' ? '打开搜索' : 'Open Search',
+            browse: lang.code === 'zh' ? '浏览' : 'Browse',
+            select: lang.code === 'zh' ? '选择' : 'Select',
+            close: lang.code === 'zh' ? '关闭' : 'Close',
+          },
+        },
+      };
+    });
+
     return {
+      lang: formData.get('i18n.defaultLang') || 'zh',
+      favicon: formData.get('site.favicon'),
+      defaultCover: formData.get('site.defaultCover'),
+      foundedDate: formData.get('site.foundedDate'),
+      loginUrl: formData.get('site.loginUrl') || '/config',
+      logo: {
+        image: formData.get('site.logo.image'),
+        darkImage: formData.get('site.logo.darkImage'),
+        text: formData.get('site.logo.text'),
+        alt: formData.get('site.logo.alt'),
+      },
       hero: {
         enabled: formData.get('hero.enabled') === 'true',
         backgroundImage: formData.get('hero.backgroundImage'),
@@ -2885,18 +3307,12 @@ const isDev = import.meta.env.DEV;
           },
         },
       },
-      site: {
-        title: formData.get('site.title'),
-        favicon: formData.get('site.favicon'),
-        defaultCover: formData.get('site.defaultCover'),
-        foundedDate: formData.get('site.foundedDate'),
-        loginUrl: '/config',
-        logo: {
-          image: formData.get('site.logo.image'),
-          darkImage: formData.get('site.logo.darkImage'),
-          text: formData.get('site.logo.text'),
-          alt: formData.get('site.logo.alt'),
-        },
+      navbar: navbarItems,
+      sidebar: {
+        home: sidebarHome,
+        article: sidebarArticle,
+      },
+      widget: {
         LatestArticle: {
           type: formData.get('site.LatestArticle.type'),
           layout: formData.get('site.LatestArticle.layout'),
@@ -2906,24 +3322,6 @@ const isDev = import.meta.env.DEV;
           columns: parseInt(formData.get('site.LatestArticle.columns')),
           defaultAspectRatio: formData.get('site.LatestArticle.defaultAspectRatio'),
           horizontalHeight: formData.get('site.LatestArticle.horizontalHeight'),
-        },
-        footer: {
-          text: formData.get('site.footer.text'),
-        }
-      },
-      language: formData.get('language'),
-      dynamicEffect: {
-        postTopWave: formData.get('dynamicEffect.postTopWave') === 'true',
-      },
-      widget: {
-        banner: {
-          title: formData.get('widget.banner.title'),
-          backgroundImage: formData.get('widget.banner.backgroundImage'),
-          tags: formData.get('widget.banner.tags').split('\n').filter(t => t.trim()),
-        },
-        carousel: {
-          title: formData.get('widget.carousel.title'),
-          layout: formData.get('widget.carousel.layout'),
         },
         author: {
           name: formData.get('widget.author.name'),
@@ -2937,29 +3335,27 @@ const isDev = import.meta.env.DEV;
           buttonText: formData.get('widget.ad.buttonText'),
           link: formData.get('widget.ad.link'),
         },
-        categories: Array.from(document.querySelectorAll('#categories-list .category-item')).map(item => ({
-          name: item.querySelector('[data-field="name"]')?.value,
-          title: item.querySelector('[data-field="title"]')?.value,
-        })).filter(c => c.name && c.title),
+        categories: categories,
+        carousel: {
+          title: formData.get('widget.carousel.title'),
+          layout: formData.get('widget.carousel.layout'),
+        },
+        banner: {
+          title: formData.get('widget.banner.title'),
+          backgroundImage: formData.get('widget.banner.backgroundImage'),
+          tags: formData.get('widget.banner.tags')?.split('\n').filter(t => t.trim()) || [],
+        },
       },
-      navbar: Array.from(document.querySelectorAll('#nav-list .category-item')).map(el => ({
-        name: el.querySelector('[data-field="name"]')?.value,
-        href: el.querySelector('[data-field="href"]')?.value,
-      })).filter(item => item.name && item.href),
-      i18n: {
-        enabled: formData.get('i18n.enabled') === 'true',
-        defaultLang: formData.get('i18n.defaultLang'),
-        languages: Array.from(document.querySelectorAll('#i18n-lang-list .category-item')).map(item => ({
-          code: item.querySelector('[data-field="code"]')?.value,
-          name: item.querySelector('[data-field="name"]')?.value,
-          flag: item.querySelector('[data-field="flag"]')?.value,
-          folder: item.querySelector('[data-field="folder"]')?.value,
-        })).filter(l => l.code && l.name),
+      dynamicEffect: {
+        postTopWave: formData.get('dynamicEffect.postTopWave') === 'true',
       },
-      sidebar: {
-        home: collectSidebarConfig('sidebar-home'),
-        article: collectSidebarConfig('sidebar-article'),
+      themeAutoSwitch: {
+        enabled: formData.get('themeAutoSwitch.enabled') === 'true',
+        dayStart: parseInt(formData.get('themeAutoSwitch.dayStart') || '6'),
+        dayEnd: parseInt(formData.get('themeAutoSwitch.dayEnd') || '18'),
       },
+      locales: locales,
+      themeLocales: themeLocales,
     };
   }
 

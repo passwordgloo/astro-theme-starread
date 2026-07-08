@@ -22,8 +22,8 @@ const cursorStyle = effectConfig?.typing?.cursorStyle || 'line';
 const particlesEnabled = effectConfig?.particles?.enabled !== false;
 
 const titleStyle = gradientEnabled 
-  ? `color: #2563eb; background: linear-gradient(90deg, ${gradientColors.join(', ')}); background-size: 200% 200%; -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; animation: gradient-flow 4s ease infinite;`
-  : 'color: rgb(17 24 39);';
+  ? `background: linear-gradient(90deg, ${gradientColors.join(', ')}); background-size: 200% 200%; -webkit-text-fill-color: transparent; -webkit-background-clip: text; background-clip: text; animation: gradient-flow 4s ease infinite;`
+  : '';
 
 // Hero 区域显示时设置导航栏透明
 if (heroEnabled && navbarTransparent) {
@@ -41,7 +41,7 @@ if (heroEnabled && navbarTransparent) {
       class="w-full h-full object-cover"
       onerror="this.src='/img/2256c4860b3d6be29e7044728d371b33.png'"
     />
-    <div class="absolute inset-0 bg-gradient-to-t from-slate-100 dark:from-gray-950 via-slate-100/70 dark:via-gray-950/70 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-t from-gray-100 dark:from-gray-950 via-gray-50/60 dark:via-gray-900/60 to-transparent"></div>
   </div>
   
   {particlesEnabled && (
@@ -51,7 +51,7 @@ if (heroEnabled && navbarTransparent) {
   <div class="absolute inset-0 flex flex-col items-center justify-center text-center px-4">
     <h1 
       id="hero-title" 
-      class="text-4xl md:text-6xl lg:text-7xl font-bold"
+      class="text-4xl md:text-6xl lg:text-7xl font-bold text-gray-900 dark:text-white"
       data-mode={isJinrishiciMode ? 'jinrishici' : 'text'}
       data-content={customContent}
       data-animate={typingEnabled ? 'true' : 'false'}

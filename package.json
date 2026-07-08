@@ -96,9 +96,10 @@
     "@astrojs/node": "^11.0.0",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.3",
-    "/": "^1.7.0",
+    "@lucide/astro": "^1.7.0",
     "astro": "^7.0.3",
-    "sharp": "^0.34.3"
+    "sharp": "^0.34.3",
+    "astro-theme-starread": "^1.11.5"
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.19",
@@ -108,7 +109,6 @@
   },
   "bin": {
     "create-astro-theme-starread": "scripts/init.cjs",
-    "astro-theme-starread": "scripts/init.cjs",
-    "starread-update": "scripts/UpdatePackage.js"
+    "astro-theme-starread": "scripts/init.cjs"
   }
 }

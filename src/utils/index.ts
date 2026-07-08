@@ -1,5 +1,6 @@
 import { themeConfig } from '../../starread.config';
 import type { Author, ProcessedAuthor } from '../../scripts/type/frontmatter';
+export { calculateSunTimes, isDayTime, getUserLatLng, shouldUseDarkMode } from './sunTime';
 
 const defaultLang = themeConfig.lang || 'zh';
 const localeKeys = Object.keys(themeConfig.locales || {});
@@ -241,17 +242,29 @@ export function flattenNavbarToNested(flatNavbar: Array<{ icon?: string; name: s
       if (indent === stack.length) {
         parent.items.push({
           text: item.name,
+          icon: item.icon,
           items: []
         });
         stack.push(parent.items[parent.items.length - 1]);
-      } else {
+      } else if (indent === stack.length + 1) {
         const lastItem = parent.items[parent.items.length - 1];
-        if (!lastItem.items) lastItem.items = [];
-        lastItem.items.push({
-          text: item.name,
-          link: item.href,
-          icon: item.icon
-        });
+        if (!lastItem) {
+          parent.items.push({
+            text: item.name,
+            items: [{
+              text: item.name,
+              link: item.href,
+              icon: item.icon
+            }]
+          });
+        } else {
+          if (!lastItem.items) lastItem.items = [];
+          lastItem.items.push({
+            text: item.name,
+            link: item.href,
+            icon: item.icon
+          });
+        }
       }
     }
 
