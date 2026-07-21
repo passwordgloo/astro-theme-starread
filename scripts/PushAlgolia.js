@@ -4,7 +4,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import fs from 'fs';
 import { algoliasearch } from 'algoliasearch';
-import { generateIndex } from './autoindex.js';
+import { generateIndex } from './AutoIndex.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 

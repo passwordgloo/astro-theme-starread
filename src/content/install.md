@@ -215,7 +215,7 @@ export const content = {
 
 ## ⚙️ 自定义配置
 
-跳转到[自定义配置](/config)
+跳转到[自定义配置](/configure)
 
 
 ## 🔧 Twikoo 评论

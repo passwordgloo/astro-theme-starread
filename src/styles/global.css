@@ -5,9 +5,6 @@
 @custom-variant dark (&:where(.dark, .dark *));
 @custom-variant navbar-scrolled (&.navbar-scrolled);
 
-
-
-
 @theme {
   --color-primary: #4f46e5;
   --color-primary-light: #6366f1;
@@ -25,28 +22,24 @@
   --color-info: #3b82f6;
 }
 
-@layer base {
-  code:not(.expressive-code *), kbd, samp {
-    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
-    font-feature-settings: var(--default-mono-font-feature-settings, normal);
-    font-variation-settings: var(--default-mono-font-variation-settings, normal);
-    color: var(--color-primary);
-    background-color: rgba(79, 70, 229, 0.1);
-    padding: 0.2em 0.4em;
-    border-radius: 0.25rem;
-  }
 
-  .dark code:not(.expressive-code *), 
-  .dark kbd, 
-  .dark samp {
-    color: var(--color-secondary);
-    background-color: rgba(251, 191, 36, 0.15);
-  }
-
+@layer utilities {
   :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::before,
   :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))::after {
     content: "" !important;
   }
+}
+
+.prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--color-primary);
+  background-color: rgba(79, 70, 229, 0.1);
+  font-weight: 600;
+  font-size: 0.875em;
+}
+
+.dark .prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  color: var(--color-secondary);
+  background-color: rgba(251, 191, 36, 0.15);
 }
 
 /* GFM Alerts 基础样式 */

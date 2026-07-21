@@ -7,4 +7,4 @@ allowBuilds:
   sharp: false
 
 minimumReleaseAgeExclude:
-  - astro-theme-starread@1.11.5
+  - astro@7.1.3

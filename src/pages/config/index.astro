@@ -3245,11 +3245,6 @@ export const themeConfig: StarreadThemeConfig = ${JSON.stringify(config, null, 2
       dynamicEffect: {
         postTopWave: formData.get('dynamicEffect.postTopWave') === 'true',
       },
-      themeAutoSwitch: {
-        enabled: formData.get('themeAutoSwitch.enabled') === 'true',
-        dayStart: parseInt(formData.get('themeAutoSwitch.dayStart') || '6'),
-        dayEnd: parseInt(formData.get('themeAutoSwitch.dayEnd') || '18'),
-      },
       locales: locales,
       themeLocales: themeLocales,
     };

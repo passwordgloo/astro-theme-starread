@@ -215,7 +215,7 @@ export const content = {
 
 ## ⚙️ 커스텀 설정
 
-[커스텀 설정](/config)으로 이동
+[커스텀 설정](/configure)으로 이동
 
 
 ## 🔧 Twikoo 댓글

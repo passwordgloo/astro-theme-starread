@@ -215,7 +215,7 @@ Go to [Search](/search)
 
 ## ⚙️ Custom Configuration
 
-Go to [Custom Configuration](/config)
+Go to [Custom Configuration](/configure)
 
 
 ## 🔧 Twikoo Comments

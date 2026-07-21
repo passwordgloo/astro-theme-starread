@@ -1,6 +1,5 @@
 // @ts-check
 
-import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 import tailwindcss from "@tailwindcss/vite";
@@ -45,7 +44,7 @@ export default defineConfig({
 			}
 		}
 	},
-	integrations: [mdx(), sitemap(), autoIndex(), autoUpdateFrontmatter()],
+	integrations: [sitemap(), autoIndex(), autoUpdateFrontmatter()],
 	i18n: {
 		defaultLocale: 'zh',
 		locales: ['zh', 'en', 'ja', 'ko', 'ru'],

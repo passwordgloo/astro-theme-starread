@@ -172,9 +172,6 @@ export interface StarreadThemeConfig {
   /** 动态效果配置 */
   dynamicEffect?: DynamicEffectConfig;
 
-  /** 主题自动切换配置 */
-  themeAutoSwitch?: ThemeAutoSwitchConfig;
-
   /**
    * 站点级语言环境配置
    * 
@@ -334,20 +331,6 @@ export interface NavItem {
 export interface DynamicEffectConfig {
   /** 是否在文章页面顶部显示波浪动画效果 */
   postTopWave: boolean;
-}
-
-/**
- * Theme auto-switch configuration interface
- * 
- * 主题自动切换配置接口
- */
-export interface ThemeAutoSwitchConfig {
-  /** 是否启用自动切换 */
-  enabled: boolean;
-  /** 浅色模式开始时间（0-23），默认6点 */
-  dayStart: number;
-  /** 深色模式开始时间（0-23），默认18点 */
-  dayEnd: number;
 }
 
 /**

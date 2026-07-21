@@ -220,6 +220,11 @@ export function flattenNavbarToNested(flatNavbar: Array<{ icon?: string; name: s
 
   flatNavbar.forEach((item) => {
     const indent = item.indent || 0;
+
+    while (stack.length > indent) {
+      stack.pop();
+    }
+
     const navItem: any = {
       name: item.name,
       text: item.name,
@@ -227,49 +232,32 @@ export function flattenNavbarToNested(flatNavbar: Array<{ icon?: string; name: s
       href: item.href,
     };
 
-    while (stack.length > indent) {
-      stack.pop();
-    }
-
-    if (stack.length === 0) {
-      result.push(navItem);
-    } else {
-      const parent = stack[stack.length - 1];
-      if (!parent.items) {
-        parent.items = [];
-      }
-      
-      if (indent === stack.length) {
+    if (item.href) {
+      if (stack.length === 0) {
+        result.push(navItem);
+      } else {
+        const parent = stack[stack.length - 1];
+        if (!parent.items) {
+          parent.items = [];
+        }
         parent.items.push({
           text: item.name,
-          icon: item.icon,
-          items: []
+          link: item.href,
+          icon: item.icon
         });
-        stack.push(parent.items[parent.items.length - 1]);
-      } else if (indent === stack.length + 1) {
-        const lastItem = parent.items[parent.items.length - 1];
-        if (!lastItem) {
-          parent.items.push({
-            text: item.name,
-            items: [{
-              text: item.name,
-              link: item.href,
-              icon: item.icon
-            }]
-          });
-        } else {
-          if (!lastItem.items) lastItem.items = [];
-          lastItem.items.push({
-            text: item.name,
-            link: item.href,
-            icon: item.icon
-          });
-        }
       }
-    }
-
-    if (!item.href) {
-      stack.push(navItem);
+    } else {
+      if (stack.length === 0) {
+        result.push(navItem);
+        stack.push(navItem);
+      } else {
+        const parent = stack[stack.length - 1];
+        if (!parent.items) {
+          parent.items = [];
+        }
+        parent.items.push(navItem);
+        stack.push(navItem);
+      }
     }
   });
 
