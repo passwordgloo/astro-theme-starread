@@ -67,3 +67,9 @@ console.log(' fenced code 支持高亮按你的主题来 ');
 > [!CAUTION]
 > This is the caution content.
 
+>[!warning]
+> This is the warning content
+
+>[!important]
+> 这是重要的内容
+

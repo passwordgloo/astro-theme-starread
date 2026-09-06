@@ -3,7 +3,12 @@
  * 类型契约、ctx 变更约束与新增扩展的步骤见 scripts/type/markdown.d.ts。
  */
 
-const ALERT_MARKER_REGEX = /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\][ \t]*(?:\n|$)/i;
+const ALERT_MARKER_REGEX = /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\][ \t]*(?:\r?\n|$)/i;
+
+/** 统一 CRLF/CR 为 LF（部分多语言内容文件是 CRLF 行尾） */
+function normalizeEol(value) {
+  return (value ?? '').replace(/\r\n?/g, '\n');
+}
 
 /** 警告框类型定义：octicon 图标、多语言标题与 Tailwind 配色类 */
 /** @type {import('../type/markdown').AlertTypes} */
@@ -69,7 +74,7 @@ function buildTitleNode(alertConfig, label) {
       hProperties: {
         className: [
           'markdown-alert-title',
-          'flex', 'items-center', 'gap-2', 'mb-2',
+          'flex', 'items-center', 'gap-2', 'mb-1.5',
           'font-semibold', 'not-italic',
           ...alertConfig.titleClass.split(' '),
         ],
@@ -125,7 +130,7 @@ function collectSoftBreakTexts(node, excluded, out) {
  */
 function splitToParts(value) {
   const parts = [];
-  value.split('\n').forEach((segment, index) => {
+  normalizeEol(value).split('\n').forEach((segment, index) => {
     if (index > 0) parts.push({ type: 'break' });
     if (segment) parts.push({ type: 'text', value: segment });
   });
@@ -148,7 +153,7 @@ const alertPlugin = {
     const firstText = firstParagraph.children?.[0];
     if (!firstText || firstText.type !== 'text') return;
 
-    const match = ALERT_MARKER_REGEX.exec(firstText.value || '');
+    const match = ALERT_MARKER_REGEX.exec(normalizeEol(firstText.value));
     if (!match) return;
 
     const alertType = match[1].toLowerCase();
@@ -192,8 +197,8 @@ const alertPlugin = {
     const label = alertConfig.labels[lang] || alertConfig.labels.en;
     ctx.prependChild(node, buildTitleNode(alertConfig, label));
 
-    // blockquote 渲染为带 Tailwind 类的 div；[&>p]:my-0 抵消 prose
-    // 给内部段落加的上下外边距，使 alert 紧凑（标题间距由 mb-2 控制）
+    // blockquote 渲染为带 Tailwind 类的 div；[&>p]:my-0 抵消 prose 给内部
+    // 段落加的上下外边距，leading-normal 收紧行距，使 alert 紧凑不稀疏
     ctx.setProperty(node, 'data', {
       ...(node.data || {}),
       hName: 'div',
@@ -202,8 +207,8 @@ const alertPlugin = {
         className: [
           'markdown-alert',
           `markdown-alert-${alertType}`,
-          'my-5', 'rounded-lg', 'border-l-4', 'px-4', 'py-3',
-          '[&>p]:my-0',
+          'my-5', 'rounded-lg', 'border-l-4', 'px-4', 'py-2.5',
+          'leading-normal', '[&>p]:my-0',
           ...alertConfig.containerClass.split(' '),
         ],
       },
