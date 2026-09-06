@@ -34,8 +34,8 @@ const languages = getAvailableLanguages();
 ---
 
 <!-- transparent=false 时（文章/分类/标签等无 hero 页面）始终使用首页滚动后的
-     导航栏背景色，避免纯透明背景；仅改背景，边框与阴影维持原状 -->
-<header id="navbar" class={`${transparent ? 'bg-transparent backdrop-blur-0' : 'bg-white/85 backdrop-blur-xl dark:bg-slate-900/85'} border border-transparent shadow-none sticky top-0 z-50 transition-all duration-300 navbar-scrolled:bg-white/85 navbar-scrolled:backdrop-blur-xl navbar-scrolled:border-white/50 navbar-scrolled:shadow-md dark:navbar-scrolled:bg-slate-900/85 dark:navbar-scrolled:border-sky-400/30`} client:load>
+     导航栏背景色，避免纯透明背景；无边框，仅滚动后加阴影 -->
+<header id="navbar" class={`${transparent ? 'bg-transparent backdrop-blur-0' : 'bg-white/85 backdrop-blur-xl dark:bg-slate-900/85'} shadow-none sticky top-0 z-50 transition-all duration-300 navbar-scrolled:bg-white/85 navbar-scrolled:backdrop-blur-xl navbar-scrolled:shadow-md dark:navbar-scrolled:bg-slate-900/85`} client:load>
   <div class="container mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex items-center space-x-2 nav-content">
       <div id="logo-container">
@@ -54,11 +54,11 @@ const languages = getAvailableLanguages();
         </a>
       </div>
     </div>
-    <div class="article-title text-lg font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full md:w-auto text-center md:text-left">
+    <div class="article-title hidden group-[.show-title]:block text-lg font-medium overflow-hidden whitespace-nowrap text-ellipsis w-full md:w-auto text-center md:text-left">
       { title || t.site.title }
     </div>
 
-    <nav class="hidden md:flex items-center space-x-6">
+    <nav class="hidden md:flex items-center space-x-6 group-[.show-title]:hidden">
       {flattenNavbarToNested(t.navbar).map((item, index) => {
         const ItemIcon = getIcon(item.icon);
         return (
@@ -186,31 +186,6 @@ const languages = getAvailableLanguages();
     </nav>
   </div>
 </div>
-
-<style>
-  .article-title {
-    display: none;
-  }
-
-  header.show-title .nav-content, 
-  header.show-title nav {
-    display: none;
-  }
-
-  header.show-title .article-title {
-    display: block;
-  }
-
-  header.hide-nav {
-    transform: translateY(-100%);
-  }
-
-  .nav-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-</style>
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {

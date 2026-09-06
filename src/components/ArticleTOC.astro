@@ -270,12 +270,7 @@ const t = useTranslations(lang);
 </script>
 
 <style>
-  /* 平滑滚动 */
-  #table-of-contents {
-    scroll-behavior: smooth;
-  }
-  
-  /* 自定义滚动条 */
+  /* 自定义滚动条（webkit 伪元素无法用 Tailwind 工具类表达） */
   #article-toc-container::-webkit-scrollbar {
     width: 6px;
   }

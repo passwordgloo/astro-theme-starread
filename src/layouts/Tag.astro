@@ -22,10 +22,10 @@ const sidebarConfig = themeConfig.sidebar.home;
             <a 
               key={tag} 
               href={`/tag/${encodeURIComponent(tag)}`} 
-              class={`px-3 py-1 rounded-full text-sm transition-colors hover:opacity-90 font-medium ${ 
-                tag === Astro.props.currentTag 
-                  ? 'bg-cyan-500 text-white' 
-                  : 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200'
+              class={`px-3 py-1 rounded-full text-sm font-medium transition-colors ${
+                tag === Astro.props.currentTag
+                  ? 'bg-primary text-white dark:bg-secondary'
+                  : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-white/10 dark:text-gray-300 dark:hover:bg-white/20'
               }`}
             >
               {tag} <span class="ml-1 opacity-80">{count}</span>

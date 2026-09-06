@@ -48,7 +48,7 @@ There is a footnote[^1] here.
 console.log(' fenced code 支持高亮按你的主题来 ');
 ```
 
-## Test alert
+## Alert
 
 > [!NOTE]
 > This is the note alert content.
@@ -60,16 +60,8 @@ console.log(' fenced code 支持高亮按你的主题来 ');
 > This is the important content.
 > Lowercase markers should be recognized too. **Bold**
 
-
 > [!WARNING]
 > This is the warning content.
 
 > [!CAUTION]
 > This is the caution content.
-
->[!warning]
-> This is the warning content
-
->[!important]
-> 这是重要的内容
-

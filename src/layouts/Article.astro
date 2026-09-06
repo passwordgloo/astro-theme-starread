@@ -16,7 +16,7 @@ entry?.data?.tags?.forEach(tag => {
 });
 ---
 
-<Base title={Astro.props.title} navbarTransparent={false}>
+<Base title={Astro.props.title} navbarTransparent={true}>
   <Fragment slot="head">
     <!--  canonical链接，优先使用永久链接，否则使用slug -->
     <link rel="canonical" href={entry?.data?.permalink || (Astro.url.pathname)} />
