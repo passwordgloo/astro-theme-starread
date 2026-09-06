@@ -6,7 +6,7 @@ import { themeConfig } from '@theme/config';
 const sidebarConfig = themeConfig.sidebar.home;
 ---
 
-<Base title={Astro.props.title}>
+<Base title={Astro.props.title} navbarTransparent={false}>
   <!-- 左侧内容区域 - 动态显示标签 -->
   <div class="space-y-6">
     <div class="bg-white/70 backdrop-blur-xl border border-white/20 shadow-[0_1px_0_0_rgba(255,255,255,0.6)_inset,0_8px_30px_rgba(0,0,0,0.06)] dark:bg-cyan-950/30 dark:backdrop-blur-xl dark:border-white/10 dark:shadow-[0_1px_0_0_rgba(255,255,255,0.08)_inset,0_8px_30px_rgba(0,0,0,0.35)] rounded-lg shadow-sm p-6">

@@ -1,46 +1,12 @@
 /**
- * Starread Markdown 语法扩展（satteri mdast 插件，零运行时依赖）
- *
- * Astro 7 的 Markdown 管线：satteri 处理器在构建期把 Markdown 解析为 mdast，
- * 本文件以 satteri 的 mdast 访问者（visitor）形态注册自定义语法，转换后的
- * 节点通过 data.hName / data.hProperties 指示渲染目标 HTML，最终输出到页面。
- *
- * 当前已支持的扩展：
- *   - GFM 风味警告框（Alert）：
- *       > [!note]      备注
- *       > [!tip]       提示
- *       > [!important] 重要
- *       > [!warning]   警告
- *       > [!caution]   注意
- *     渲染为 <div class="markdown-alert markdown-alert-xxx ...tailwind">，
- *     样式全部由节点上的 Tailwind 工具类承载（含 dark: 深色模式色块），
- *     无需在 global.css 中维护 alert 专属 CSS。
- *
- * 扩展方式（后续新增 Markdown 语法时）：
- *   1. 在本文件编写一个 satteri mdast 插件：{ name, <节点类型>(node, ctx){...} }
- *      （ctx 提供 removeNode / replaceNode / prependChild / setProperty 等
- *           变异方法；需要渲染成自定义 HTML 时给节点设置
- *      data.hName / data.hProperties，自定义节点用 type: 'custom'）；
- *   2. 注册到下方 SYNTAX_EXTENSIONS 注册表；
- *   3. 在 starread.config.ts 的 markdown 配置段与
- *      scripts/type/config.d.ts 的 MarkdownConfig 中追加开关字段；
- *   4. 在 astro.config.mjs 给 starreadMarkdownIntegration 传入对应 options。
- *
- * 注册方式：默认导出的 Astro 集成在 `astro:config:done` 钩子中把启用的
- * 插件推入默认 satteri 处理器的 options.mdastPlugins，无需安装
- * @astrojs/markdown-remark 或任何 remark 依赖。
- *
- * 图标 path 数据采用 GitHub Octicons（MIT License，
- * 与 remark-github-blockquote-alert 一致）。
+ * Starread Markdown 语法扩展（satteri mdast 插件，零运行时依赖）。
+ * 类型契约、ctx 变更约束与新增扩展的步骤见 scripts/type/markdown.d.ts。
  */
 
 const ALERT_MARKER_REGEX = /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\][ \t]*(?:\n|$)/i;
 
-/**
- * Alert 类型定义：octicon 图标类与 path、多语言标题、Tailwind 配色类
- * （containerClass 作用于外框，titleClass 作用于标题行与图标）。
- * 注意：Tailwind 类必须以完整字符串字面量书写，扫描器才能检测生成。
- */
+/** 警告框类型定义：octicon 图标、多语言标题与 Tailwind 配色类 */
+/** @type {import('../type/markdown').AlertTypes} */
 const ALERT_TYPES = {
   note: {
     octicon: 'octicon-info',
@@ -89,9 +55,11 @@ function detectLang(fileURL) {
 }
 
 /**
- * 构造 Alert 标题段落（octicon 图标 + 类型标题）。
- * 用 hName: 'div' 输出而非 <p>：标题不受 prose 排版样式的段落
- * 外边距影响，自身用 mb-2 控制与正文的间距。
+ * 构造 Alert 标题（octicon 图标 + 类型标题）。
+ * hName: 'div' 输出使标题不受 prose 段落外边距影响，间距由 mb-2 控制。
+ * @param {import('../type/markdown').AlertTypeConfig} alertConfig
+ * @param {string} label
+ * @returns {import('../type/markdown').MdastNode}
  */
 function buildTitleNode(alertConfig, label) {
   return {
@@ -151,7 +119,10 @@ function collectSoftBreakTexts(node, excluded, out) {
   }
 }
 
-/** 把文本值按 \n 拆为 text/break 节点序列，软换行渲染为 <br>。 */
+/** 把文本值按 \n 拆为 text/break 节点序列，软换行渲染为 <br>。
+ * @param {string} value
+ * @returns {import('../type/markdown').MdastNode[]}
+ */
 function splitToParts(value) {
   const parts = [];
   value.split('\n').forEach((segment, index) => {
@@ -184,12 +155,10 @@ const alertPlugin = {
     const alertConfig = ALERT_TYPES[alertType];
     if (!alertConfig) return;
 
-    // —— 先完成全部"读取"，再统一发出"变更"（satteri 变更队列约束，
-    // 且不要对即将被移除的节点/子树再做操作，否则会被丢弃并告警）——
+    // —— 先完成全部"读取"，再统一发出"变更"（约束见 markdown.d.ts）——
 
-    // 收集除标记文本外所有含软换行的文本节点：alert 内每个源码行
-    // 渲染为 <br> 硬换行（对齐 GitHub 多行 alert 行为，默认软换行
-    // 在 HTML 中会折叠成空格导致多行挤成一行）。
+    // 收集除标记文本外所有含软换行的文本节点：框内每个源码行渲染为 <br>，
+    // 对齐 GitHub 多行 alert 行为（默认软换行会折叠成空格挤成一行）
     const softBreakTexts = [];
     collectSoftBreakTexts(node, firstText, softBreakTexts);
 
@@ -223,9 +192,8 @@ const alertPlugin = {
     const label = alertConfig.labels[lang] || alertConfig.labels.en;
     ctx.prependChild(node, buildTitleNode(alertConfig, label));
 
-    // 指示 satteri 将 blockquote 渲染为带 Tailwind 类的 div。
-    // [&>p]:my-0 抵消 prose 排版给内部段落加的上下外边距，
-    // 让 alert 紧凑（标题与正文的间距由标题的 mb-2 控制）。
+    // blockquote 渲染为带 Tailwind 类的 div；[&>p]:my-0 抵消 prose
+    // 给内部段落加的上下外边距，使 alert 紧凑（标题间距由 mb-2 控制）
     ctx.setProperty(node, 'data', {
       ...(node.data || {}),
       hName: 'div',
@@ -256,10 +224,9 @@ const SYNTAX_EXTENSIONS = [
 ];
 
 /**
- * Astro 集成：把已启用的 Markdown 语法扩展注册到默认 satteri 处理器。
- *
- * @param {object} [options]
- * @param {boolean} [options.alert=false] 是否启用 GFM 风味警告框
+ * Astro 集成：把已启用的语法插件注册到默认 satteri 处理器。
+ * @param {import('../type/markdown').StarreadMarkdownOptions} [options]
+ * @returns {import('astro').AstroIntegration}
  */
 export default function starreadMarkdownIntegration(options = {}) {
   const plugins = SYNTAX_EXTENSIONS

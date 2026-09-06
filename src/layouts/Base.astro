@@ -6,9 +6,11 @@ import { getLangFromUrl, useTranslations } from '@theme/utils';
 
 interface Props {
   title?: string;
+  /** 导航栏是否透明（首页 hero 压底时透明，文章/分类/标签等页面使用实底背景） */
+  navbarTransparent?: boolean;
 }
 
-const { title } = Astro.props;
+const { title, navbarTransparent = true } = Astro.props;
 const currentLang = getLangFromUrl(Astro.url.pathname);
 const t = useTranslations(currentLang);
 ---
@@ -32,7 +34,7 @@ const t = useTranslations(currentLang);
     <slot name="head"></slot>
   </head>
   <body class="min-h-screen bg-slate-100 text-gray-900 dark:bg-gray-950 dark:text-neutral-100 transition-colors">
-    <NavBar title={title} />
+    <NavBar title={title} transparent={navbarTransparent} />
     
     <slot name="hero"></slot>
     <slot name="header"></slot>

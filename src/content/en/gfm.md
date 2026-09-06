@@ -47,3 +47,23 @@ There is a footnote[^1] here.
 ```javascript
 console.log(' fenced code 支持高亮按你的主题来 ');
 ```
+
+## Test alert
+
+> [!NOTE]
+> This is the note alert content.
+
+> [!TIP]
+> This is the tip content.
+
+> [!IMPORTANT]
+> This is the important content.
+> Lowercase markers should be recognized too. **Bold**
+
+
+> [!WARNING]
+> This is the warning content.
+
+> [!CAUTION]
+> This is the caution content.
+

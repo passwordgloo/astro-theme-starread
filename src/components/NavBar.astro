@@ -1,5 +1,5 @@
 ---
-const { title } = Astro.props;
+const { title, transparent = true } = Astro.props;
 import { themeConfig } from '@theme/config';
 import { getLangFromUrl, switchLangPath, useTranslations, getAvailableLanguages, flattenNavbarToNested } from '@theme/utils';
 import Search from '@theme/components/Search.astro';
@@ -33,7 +33,9 @@ function getIcon(iconName: string | undefined) {
 const languages = getAvailableLanguages();
 ---
 
-<header id="navbar" class="bg-transparent backdrop-blur-0 border border-transparent shadow-none sticky top-0 z-50 transition-all duration-300 navbar-scrolled:bg-white/85 navbar-scrolled:backdrop-blur-xl navbar-scrolled:border-white/50 navbar-scrolled:shadow-md dark:navbar-scrolled:bg-slate-900/85 dark:navbar-scrolled:border-sky-400/30" client:load>
+<!-- transparent=false 时（文章/分类/标签等无 hero 页面）始终使用首页滚动后的
+     导航栏背景色，避免纯透明背景；仅改背景，边框与阴影维持原状 -->
+<header id="navbar" class={`${transparent ? 'bg-transparent backdrop-blur-0' : 'bg-white/85 backdrop-blur-xl dark:bg-slate-900/85'} border border-transparent shadow-none sticky top-0 z-50 transition-all duration-300 navbar-scrolled:bg-white/85 navbar-scrolled:backdrop-blur-xl navbar-scrolled:border-white/50 navbar-scrolled:shadow-md dark:navbar-scrolled:bg-slate-900/85 dark:navbar-scrolled:border-sky-400/30`} client:load>
   <div class="container mx-auto px-4 py-3 flex items-center justify-between">
     <div class="flex items-center space-x-2 nav-content">
       <div id="logo-container">
