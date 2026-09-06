@@ -58,13 +58,16 @@ export async function getStaticPaths() {
 
   sortedEntries.forEach((entry, index) => {
     const { lang, topic, id } = parseEntryId(entry.id);
-    
+
     let slug;
     if (lang === defaultLang) {
       slug = topic;
     } else {
       slug = `${lang}/${topic}`;
     }
+
+    const prev = index < sortedEntries.length - 1 ? sortedEntries[index + 1] : null;
+    const next = index > 0 ? sortedEntries[index - 1] : null;
 
     if (isValidPath(slug)) {
       paths.push({
@@ -73,9 +76,12 @@ export async function getStaticPaths() {
           entry,
           lang,
           topic,
-          prev: index < sortedEntries.length - 1 ? sortedEntries[index + 1] : null,
-          next: index > 0 ? sortedEntries[index - 1] : null,
+          prev,
+          next,
         },
+        // 增量构建缓存键：正文/frontmatter（含日期、封面）与前后相邻文章
+        // 任一变化都会改变该键，避免 ArticleNav 显示过期的邻居信息
+        cacheKey: [entry.digest, prev?.digest, next?.digest].join('|'),
       });
     }
   });

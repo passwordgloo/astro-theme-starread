@@ -231,18 +231,6 @@ const isDev = import.meta.env.DEV;
               </div>
 
               <div class="form-field">
-                <label class="field-label">粒子华丽效果</label>
-                <label class="switch-card">
-                  <input type="checkbox" name="hero.effect.particles.enabled" checked class="switch-input" />
-                  <span class="switch-slider"></span>
-                  <span class="switch-label">
-                    <span class="switch-title">启用粒子特效</span>
-                    <span class="switch-desc">打字时有彩色粒子飞散效果</span>
-                  </span>
-                </label>
-              </div>
-
-              <div class="form-field">
                 <label class="field-label">光标闪烁</label>
                 <label class="switch-card">
                   <input type="checkbox" name="hero.effect.typing.cursor" checked class="switch-input" />
@@ -449,6 +437,18 @@ const isDev = import.meta.env.DEV;
               <div class="form-field">
                 <label class="field-label">横版封面高度</label>
                 <input type="text" name="site.LatestArticle.horizontalHeight" value="160px" class="field-input" placeholder="160px" />
+              </div>
+
+              <div class="form-field col-span-2">
+                <label class="field-label">Markdown 语法扩展</label>
+                <label class="switch-card">
+                  <input type="checkbox" name="markdown.alert" checked class="switch-input" />
+                  <span class="switch-slider"></span>
+                  <span class="switch-label">
+                    <span class="switch-title">启用 GFM 警告框</span>
+                    <span class="switch-desc">支持 &gt; [!note] / [!tip] / [!warning] 等警告框语法</span>
+                  </span>
+                </label>
               </div>
             </div>
           </div>
@@ -3198,9 +3198,6 @@ export const themeConfig: StarreadThemeConfig = ${JSON.stringify(config, null, 2
             cursor: formData.get('hero.effect.typing.cursor') === 'true',
             cursorStyle: formData.get('hero.effect.typing.cursorStyle'),
           },
-          particles: {
-            enabled: formData.get('hero.effect.particles.enabled') === 'true',
-          },
         },
       },
       navbar: navbarItems,
@@ -3244,6 +3241,9 @@ export const themeConfig: StarreadThemeConfig = ${JSON.stringify(config, null, 2
       },
       dynamicEffect: {
         postTopWave: formData.get('dynamicEffect.postTopWave') === 'true',
+      },
+      markdown: {
+        alert: formData.get('markdown.alert') === 'true',
       },
       locales: locales,
       themeLocales: themeLocales,

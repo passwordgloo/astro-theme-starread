@@ -69,9 +69,6 @@ export const themeConfig: StarreadThemeConfig = {
         cursor: true,
         cursorStyle: 'line',
       },
-      particles: {
-        enabled: true,
-      },
     },
   },
 
@@ -192,6 +189,29 @@ export const themeConfig: StarreadThemeConfig = {
 
   dynamicEffect: {
     postTopWave: true,
+  },
+
+  /**
+   * ====================
+   * Markdown Syntax Extensions
+   * Markdown 语法扩展
+   * ====================
+   *
+   * 文章 Markdown 语法扩展开关，由 scripts/markdown/ 下的
+   * remark 转换插件统一接管，后续新增语法在此扩展开关即可。
+   */
+  markdown: {
+    /**
+     * GFM 风味警告框（Alert）
+     *
+     * 语法（写在 Markdown 引用块首行）：
+     *   > [!note]      备注
+     *   > [!tip]       提示
+     *   > [!important] 重要
+     *   > [!warning]   警告
+     *   > [!caution]   注意
+     */
+    alert: true,
   },
 
   /**

@@ -47,3 +47,22 @@ Astro 原生支持Markdown基本用法，具体如下：
 ```javascript
 console.log(' fenced code 支持高亮按你的主题来 ');
 ```
+
+## 测试alert
+
+> [!NOTE]
+> 这是备注内容，note alert。
+
+> [!TIP]
+> 这是提示内容。
+
+> [!IMPORTANT]
+> 这是重要内容。
+> 小写标记也应识别。**加醋**
+
+
+> [!WARNING]
+> 这是警告内容。
+
+> [!CAUTION]
+> 这是注意内容。

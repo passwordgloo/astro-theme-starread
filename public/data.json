@@ -98,7 +98,7 @@
     ],
     "tags": [],
     "date": "2026-06-30 12:58:33",
-    "content": "Astro 原生支持Markdown基本用法，具体如下：\n\n## 列表\n\n### 任务列表\n\n- [x] 支持 task list\n- [ ] 还没完成\n\n### 有序列表\n\n1. 有序列表项 1\n2. 有序列表项 2\n3. 有序列表项 3\n\n### 无序列表\n\n- 无序列表项 1\n- 无序列表项 2\n- 无序列表项 3\n\n## 表格\n\n| 字段 | 值 |\n| --- | --- |\n| 版本 | Tailwind v4 |\n| 插件 | @tailwindcss/typography |\n\n## 删除线\n\n~~被删除的文本~~\n\n## 脚注\n\n这里有脚注[^1]。\n\n## 代码\n\n```javascript\nconsole.log(' fenced code 支持高亮按你的主题来 ');\n```",
+    "content": "Astro 原生支持Markdown基本用法，具体如下：\n\n## 列表\n\n### 任务列表\n\n- [x] 支持 task list\n- [ ] 还没完成\n\n### 有序列表\n\n1. 有序列表项 1\n2. 有序列表项 2\n3. 有序列表项 3\n\n### 无序列表\n\n- 无序列表项 1\n- 无序列表项 2\n- 无序列表项 3\n\n## 表格\n\n| 字段 | 值 |\n| --- | --- |\n| 版本 | Tailwind v4 |\n| 插件 | @tailwindcss/typography |\n\n## 删除线\n\n~~被删除的文本~~\n\n## 脚注\n\n这里有脚注[^1]。\n\n## 代码\n\n```javascript\nconsole.log(' fenced code 支持高亮按你的主题来 ');\n```\n\n## 测试alert\n\n> [!NOTE]\n> 这是备注内容，note alert。\n\n> [!TIP]\n> 这是提示内容。\n\n> [!IMPORTANT]\n> 这是重要内容。\n> 小写标记也应识别。**加醋**\n\n\n> [!WARNING]\n> 这是警告内容。\n\n> [!CAUTION]\n> 这是注意内容。",
     "id": "gfm",
     "topic": "gfm",
     "lang": "zh",

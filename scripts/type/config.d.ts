@@ -172,6 +172,9 @@ export interface StarreadThemeConfig {
   /** 动态效果配置 */
   dynamicEffect?: DynamicEffectConfig;
 
+  /** Markdown 语法扩展配置 */
+  markdown?: MarkdownConfig;
+
   /**
    * 站点级语言环境配置
    * 
@@ -224,11 +227,20 @@ export interface HeroConfig {
       /** 光标样式：line 竖线，block 方块 */
       cursorStyle?: 'line' | 'block';
     };
-    particles?: {
-      /** 是否启用粒子特效 */
-      enabled?: boolean;
-    };
   };
+}
+
+/**
+ * Markdown syntax extension configuration interface
+ *
+ * Markdown 语法扩展配置接口
+ *
+ * 对应 scripts/markdown/ 下的 remark 转换插件，
+ * 后续新增语法扩展时在此接口追加开关字段。
+ */
+export interface MarkdownConfig {
+  /** 是否启用 GFM 风味警告框（> [!note] / [!tip] / [!important] / [!warning] / [!caution]） */
+  alert?: boolean;
 }
 
 /**

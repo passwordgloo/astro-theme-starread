@@ -179,9 +179,6 @@ export interface HeroSectionProps {
       cursor?: boolean;
       cursorStyle?: 'line' | 'block';
     };
-    particles?: {
-      enabled?: boolean;
-    };
   };
 }
 
